@@ -1,7 +1,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting;
 
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.DishPrinter;
-import eapli.ecafeteria.application.dishes.reporting.DishReportingController;
+import eapli.ecafeteria.application.reporting.dishes.DishReportingController;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractListUI;
@@ -33,11 +33,11 @@ public class ReportHighCaloriesDishesUI extends AbstractListUI<Dish> {
 
     @Override
     protected String elementName() {
-        return "Dishes per dish type";
+        return "High calories dishes";
     }
 
     @Override
     protected String listHeader() {
-        return "DISHES PER DISH TYPE";
+        return "HIGH CALORIES DISH";
     }
 }
