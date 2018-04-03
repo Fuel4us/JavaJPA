@@ -1,0 +1,3 @@
+Canteen Shift Closure - UC 04
+
+After the end of the canteen's shift (closing the POS), these can't do any more operations, the canteen will record the number of cooked meals that were not sold (for later analysis of the efficiency of the project). First, the system will show the number of cooked meals, second, it shows the number of sold meals, then it calculates (the number of cooked meals that but not sold) and asks for confirmation to the Kitchen Manager, whom have to confirm to end the use case.
