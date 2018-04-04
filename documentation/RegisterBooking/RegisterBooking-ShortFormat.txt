@@ -1,0 +1,9 @@
+Register Booking
+
+The user starts the new booking
+The systems shows the Meals for this menu.
+The user picks a meal
+The system shows the nutricional value of the dish and the weekly calorie consumption(if the
+user chooses this meal) and ask to confirm
+The user confirms
+The system refreshes the user balance and informs that the use case ended
