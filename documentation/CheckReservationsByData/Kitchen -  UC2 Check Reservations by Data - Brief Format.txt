@@ -1,0 +1,4 @@
+The user begins the use case. 
+The system asks for reservation info, such as date, type, dish or meal. 
+The user inserts the information. 
+The system searches and shows the user the reservations found with that information

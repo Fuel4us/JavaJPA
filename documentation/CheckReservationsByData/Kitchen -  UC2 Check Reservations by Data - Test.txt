@@ -1,0 +1,4 @@
+The user starts the use case. 
+The systems asks for information on the reservation. 
+The user inserts the date. 
+The system shows that reservations have that date.

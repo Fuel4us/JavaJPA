@@ -1,0 +1,18 @@
+title Check Existing Reservations
+
+
+User->CheckReservationsByDataUI: Begins "Check Existing Reservations"
+
+CheckReservationsByDataUI->CheckReservationsByDataController: create()
+
+CheckReservationsByDataController->ReservationRepository: create()
+
+CheckReservationsByDataUI-->User: Asks for information about the reservations
+
+User->CheckReservationsByDataUI:Inserts Information
+
+CheckReservationsByDataUI->CheckReservationsByDataController: getReservations(date,type,dish,meal)
+CheckReservationsByDataController->ReservationRepository:getReservations(data,type,dish,meal)
+
+CheckReservationsByDataUI-->User: Shows reservations found with that information.
+
