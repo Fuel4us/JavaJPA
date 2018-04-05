@@ -1,0 +1,7 @@
+FIND MEALS BY LOT
+
+1. The Kitchen Manager starts the use case.
+2. The program gets all used lots and shows them.
+3. The Kitchen Manager selects a lot.
+4. The program gets all meals that were cooked with that lot and shows them.
+5. The use case ends.

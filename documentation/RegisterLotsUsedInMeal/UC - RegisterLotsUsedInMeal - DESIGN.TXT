@@ -1,0 +1,35 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+
+   	Classes do domínio:  MealLot
+   	Controlador: RegisterLotsUsedInMealController
+   	Repository: MealLotRepository
+
+
+	Diagrama de Sequência - websequencediagrams.com source
+
+		title SD - RegisterLotsUsedInMeal
+
+		participant ":RegisterLotsUsedInMealUI" as rui
+		participant ":RegisterLotsUsedInMealController" as ctrl
+		participant ":PersistenceContext" as pc
+		participant ":RepositoryFactory" as rf
+		participant ":MealLotRepository" as repo
+		participant ":MealLot" as ml
+
+		rui->ctrl:create
+		ctrl->pc:repositories()
+		pc->rf:create
+		rf->repo:create
+		pc-->ctrl:MealLotRepository
+
+		rui->rui:doShow()
+		rui->ctrl:registerMealLot(lotCode, ingredientCode, quantity)
+
+		ctrl->ml:newMealLot = create(lotCode, ingredientCode, quantity)
+		ctrl->repo:save(newMealLot)

@@ -1,0 +1,4 @@
+UC17 - Rating consultation
+
+The user starts the rating consultation.
+The system provides a lsit of the user's ratings and Menu Manager´s responses.

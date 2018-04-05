@@ -1,0 +1,7 @@
+USE CASE 14 - CREATE MEAL PLAN FOR A SPECIFIC MEAL
+
+## SHORT FORMAT ##
+The user starts the use case. The system asks if the user wants to create a new meal plan or edit an existing one. 
+Option1: The user choses to create a new meal plan. The system ask what is the meal for that plan. The user selects the meal. For each dish, the system asks what is the estimate number of dishes for that meal. The user inserts the number, for each dish. The system asks for confirmation, and creates the meal plan.
+
+Option2: The user choses to edit an existing meal plan. The system asks what is the meal plan to edit. The user selects the meal plan. For each dish, the system asks what is the estimate number of dishes for that meal. The user inserts the number, for each dish. The system asks for confirmation, and saves the changes.

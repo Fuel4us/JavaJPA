@@ -1,0 +1,1 @@
+Venda de créditos para aquisição de refeições, registo de créditos adquiridos por um utente e pagas presencialmente. A política da empresa é a não utilização de dinheiro pelo que o único meio de pagamento aceite é MB (não integrado com a aplicação).

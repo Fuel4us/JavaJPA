@@ -1,0 +1,4 @@
+This use cases enables the chef to close a meal plan to get it ready for the day they eat.
+Chef gets the meal plans list and chooses one to close.
+To close there will be a verification to check if that meal plan can in fact be closed.
+After choosing 1 meal plan the program will change that meal plan state to closed.
