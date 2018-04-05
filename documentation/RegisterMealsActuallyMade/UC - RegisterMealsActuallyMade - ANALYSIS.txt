@@ -1,0 +1,29 @@
+﻿	___________
+
+	ANÁLISE 
+	____________
+
+	Reunião com o cliente  em 2017.03.31
+
+	* O registo das refeições são caracterizados pelo dia,tipo,prato e refeição e ele associados.
+
+	* Refeição: é a instanciação temporal de um Prato e um dado Tipo de Refeição
+	* Exemplos de refeição: Bacalhau à Brás do Almoço do dia 16/05/2018.
+
+	
+	* Tipo de Refeição: caracterização em função do momento do dia em que é servido o Prato: Almoço, Jantar. 
+	* Prato: uma receita de um determinado Tipo de prato
+	* Tipo de prato: Carne, Peixe, Vegetariano
+
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+	* Uma refeição deve constar do menu .
+
+
+
+
