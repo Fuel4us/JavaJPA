@@ -1,0 +1,11 @@
+
+	TEST PLAN
+
+	_______________________________
+	CASO #1: Registo das Refeições confecionadas
+	_______________________________
+
+	1. Fazer o login como chef/Password
+	2. Escolher a opção   Meal  >  Register Meal Actually Made
+	3. Introduzir informaçao relativa ao dia,tipo,prato e refeição.
+	4. Confirmar o registo efetuado através de Meal > List Meals Actually Made
