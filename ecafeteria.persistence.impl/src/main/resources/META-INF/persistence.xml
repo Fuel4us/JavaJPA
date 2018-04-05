@@ -15,7 +15,7 @@
     <class>eapli.ecafeteria.domain.dishes.Dish</class>
     <class>eapli.ecafeteria.domain.dishes.DishType</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:..\db\ecafeteria;MV_STORE=FALSE"/>
             -->
