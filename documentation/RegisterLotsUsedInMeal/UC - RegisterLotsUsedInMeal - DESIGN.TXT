@@ -29,7 +29,7 @@
 		pc-->ctrl:MealLotRepository
 
 		rui->rui:doShow()
-		rui->ctrl:registerMealLot(lotCode, materialCode)
+		rui->ctrl:registerMealLot(lotCode, ingredientCode, quantity)
 
-		ctrl->ml:newMealLot = create(lotCode, materialCode)
+		ctrl->ml:newMealLot = create(lotCode, ingredientCode, quantity)
 		ctrl->repo:save(newMealLot)

@@ -1,16 +1,16 @@
-	___________
+﻿	___________
 
 	ANÁLISE 
 	____________
 
-	Reunião com o cliente  em 2017.03.31
+	Reunião com o cliente  em 2017.04.05
 
-	* O lote utilizado numa refeição são caracterizados por um código de material e um código de lote.
+	* O lote utilizado numa refeição são caracterizados por um código de material, um código de lote e quantidade de matéria prima.
 	* O lote utilizado numa refeição é identificado pelo código do lote que deve ser único.
-	* Exemplos de lotes: (Correspondente código de material) ovos, queijo, arroz etc.
+	* Exemplos de lotes: código lote(1), código matéria prima(3-Ovos), 100(kg).
 
-	* Uma refeição pode conter 0 ou mais lotes.
-	* Um lote pertence a uma refeição.
+	* Uma refeição pode conter 1 ou mais lotes.
+	* Um lote pertence a 1 ou mais refeição.
 
 
 
@@ -19,7 +19,7 @@
 	REGRAS DE NEGÓCIO
 	_____________________
 
-	* Um lote deve estar associado a uma refeição.
+	
 
 
 
@@ -32,3 +32,5 @@
 	* O código do lote não pode ser vazio nem espaço(s)
 	* O lote tem que ter um código de material
 	* O código de material não pode ser vazio ou espaço(s)
+	* O lote tem de ter a quantidade de matéria prima
+	* A quantidade de matéria prima não pode ser vazio ou espaço(s)
