@@ -1,0 +1,1 @@
+The kitchen manager strats this use case, the system closes the POS that are open, then closes the canteen shift and then informs the sucess of the operation.
