@@ -33,6 +33,8 @@ public final class ECafeteriaPOS {
             final MainMenu menu = new MainMenu();
             menu.mainLoop();
         }
-    }
 
+        // exiting the application, closing all threads
+        System.exit(0);
+    }
 }

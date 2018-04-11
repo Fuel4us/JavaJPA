@@ -20,5 +20,8 @@ public class ECafeteriaBootstrap {
         System.out.println("======================================");
         System.out.println("Bootstrap data done.");
         System.out.println("======================================");
+
+        // exiting the application, closing all threads
+        System.exit(0);
     }
 }
