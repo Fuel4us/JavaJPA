@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.application.reservations;
+package eapli.ecafeteria.application.booking;
 
 /**
  *
  * @author Ana Mafalda Silva
  */
-public class DeliverReservationController {
+public class DeliverBookingController {
     
 }
