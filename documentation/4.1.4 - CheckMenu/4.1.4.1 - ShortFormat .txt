@@ -1,0 +1,1 @@
+The user starts the use case and the systems shows the menu for the next 7 days.
