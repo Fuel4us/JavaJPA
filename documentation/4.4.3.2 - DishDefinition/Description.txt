@@ -1,0 +1,1 @@
+ex., “bacalhau à Brás” ou “Polvo à lagareiro”. Um prato é caracterizado pelo seu tipo, nome e preço. Para cada prato deve ser indicado quais os alergénios que o compõem. O preço de venda de todos os pratos é, à partida, o mesmo mas pode haver preços diferenciados para certos pratos, ex., picanha. Os preços são tipicamente revistos anualmente
