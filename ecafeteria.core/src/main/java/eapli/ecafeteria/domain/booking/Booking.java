@@ -6,6 +6,7 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -13,7 +14,7 @@ import javax.persistence.Id;
  *
  * @author Mário Vaz
  */
-
+@Entity
 public class Booking implements AggregateRoot<String>, Serializable{
 
     @Id
@@ -29,10 +30,10 @@ public class Booking implements AggregateRoot<String>, Serializable{
         this.user = user;
         this.meal = meal;
     }
-    /*
+    
     public Date day() {
         return meal.getDate();
-    }*/
+    }
     
     @Override
     public boolean sameAs(Object other) {
