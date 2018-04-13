@@ -1,4 +1,4 @@
-package eapli.ecafetaria.domain.booking;
+package eapli.ecafeteria.domain.booking;
 
 /**
  *
