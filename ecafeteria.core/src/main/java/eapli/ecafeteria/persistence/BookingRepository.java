@@ -12,4 +12,10 @@ import java.util.Date;
 public interface BookingRepository extends DataRepository<Booking, Long> {
 
 	Iterable<Booking> checkBookingsForNextDays(CafeteriaUser currentUser, Date currentDate);
+        
+        
+        public Booking getNextBooking();
+        
+        
+        
 }
