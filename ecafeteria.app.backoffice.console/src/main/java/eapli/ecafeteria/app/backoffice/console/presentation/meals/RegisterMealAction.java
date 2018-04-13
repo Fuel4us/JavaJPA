@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.application.booking;
-
-import eapli.ecafeteria.persistence.PersistenceContext;
+package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
 /**
  *
- * @author Mário Vaz
+ * @author Pedro Alves <1150372@isep.ipp.pt>
  */
-public class CheckBookingsForNextDaysController {
-    //for next 7 days
+public class RegisterMealAction {
     
 }
