@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.application.booking;
 
+import eapli.ecafeteria.persistence.PersistenceContext;
+
 /**
  *
  * @author Mário Vaz

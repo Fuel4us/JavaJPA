@@ -5,10 +5,24 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.persistence.MealTypeRepository;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
+import java.util.Optional;
+
 /**
  *
  * @author Bernardo Carreira
  */
-public class InMemoryMealTypeRepository {
+public class InMemoryMealTypeRepository extends InMemoryRepositoryWithLongPK<MealType> implements MealTypeRepository{
     
+    @Override
+    public Iterable<MealType> activeMealTypes() {
+        return match(e -> e.isActive());
+    }
+
+    @Override
+    public Optional<MealType> findByAcronym(String acronym) {
+        return matchOne(e -> e.id().equals(acronym));
+    }
 }
