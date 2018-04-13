@@ -12,13 +12,13 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  */
 public class InMemoryDishRepository extends InMemoryRepository<Dish, Designation> implements DishRepository {
 
-	@Override
-	public Optional<Dish> findByName(Designation name) {
-		return matchOne(e -> e.name().equals(name));
-	}
+    @Override
+    public Optional<Dish> findByName(Designation name) {
+        return matchOne(e -> e.name().equals(name));
+    }
 
-	@Override
-	protected Designation newKeyFor(Dish entity) {
-		return entity.id();
-	}
+    @Override
+    protected Designation newKeyFor(Dish entity) {
+        return entity.id();
+    }
 }

@@ -11,13 +11,13 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  */
 public class InMemoryDishTypeRepository extends InMemoryRepositoryWithLongPK<DishType> implements DishTypeRepository {
 
-	@Override
-	public Iterable<DishType> activeDishTypes() {
-		return match(e -> e.isActive());
-	}
+    @Override
+    public Iterable<DishType> activeDishTypes() {
+        return match(e -> e.isActive());
+    }
 
-	@Override
-	public Optional<DishType> findByAcronym(String acronym) {
-		return matchOne(e -> e.id().equals(acronym));
-	}
+    @Override
+    public Optional<DishType> findByAcronym(String acronym) {
+        return matchOne(e -> e.id().equals(acronym));
+    }
 }
