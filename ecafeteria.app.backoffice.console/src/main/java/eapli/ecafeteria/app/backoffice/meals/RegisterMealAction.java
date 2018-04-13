@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.application.reservations;
+package eapli.ecafeteria.app.backoffice.meals;
 
 /**
  *
- * @author Ana Mafalda Silva
+ * @author Pedro Alves <1150372@isep.ipp.pt>
  */
-public class DeliverReservationController {
+public class RegisterMealAction {
     
 }
