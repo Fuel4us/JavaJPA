@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.framework.domain.Designation;
+import java.util.Date;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -29,35 +30,19 @@ public class Meal {
      */
     @ManyToOne()
     private MealType mealType;
-    //private Periode periode;                      A exclarecer
-    //private NutricionalInfo nutricionalInfo;      A exclarecer
-    //private Money price;                          A exclarecer
+    private Date mealDate;
     private boolean active;
 
-    public Meal(final MealType mealType, final Designation name/*,
-            final NutricionalInfo nutricionalInfo, Money price*/) {             // A exclarecer
-        if (mealType == null || name == null/* || nutricionalInfo == null*/) {  // A exclarecer
+    public Meal(final MealType mealType, final Date mealDate, final Designation name) {
+        if (mealType == null || name == null || mealDate == null) {
             throw new IllegalArgumentException();
         }
 
         this.mealType = mealType;
+        this.mealDate = mealDate;
         this.name = name;
-        //this.nutricionalInfo = nutricionalInfo;   A exclarecer
-        //this.setPrice(price);                     A exclarecer
         this.active = true;
     }
-
-    /*public Meal(final MealType mealType, final Designation name, Money price) {  // A exclarecer
-        if (mealType == null || name == null || price == null) {
-            throw new IllegalArgumentException();
-        }
-
-        this.mealType = mealType;
-        this.name = name;
-        //this.nutricionalInfo = null;
-        //this.price = price;
-        this.active = true;
-    }*/
 
     protected Meal() {
         // for ORM only
