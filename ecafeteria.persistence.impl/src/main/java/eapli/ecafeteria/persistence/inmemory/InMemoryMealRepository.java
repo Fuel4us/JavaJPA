@@ -5,10 +5,25 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.MealRepository;
+import eapli.framework.domain.Designation;
+import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
+import java.util.Optional;
+
 /**
  *
  * @author Bernardo Carreira
  */
-public class InMemoryMealRepository {
+public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation> implements MealRepository  {
     
+    @Override
+    public Optional<Meal> findByName(Designation name) {
+        return matchOne(e -> e.name().equals(name));
+    }
+
+    @Override
+    protected Designation newKeyFor(Meal entity) {
+        return entity.id();
+    }
 }
