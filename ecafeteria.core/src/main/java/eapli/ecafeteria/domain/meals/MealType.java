@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.ecafeteria.dto.MealTypeDTO;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
@@ -170,7 +171,7 @@ public class MealType implements AggregateRoot<String>, Serializable { //impleme
         return id().equals(other.id());
     }
 
-    public DishTypeDTO toDTO() {
-        return new DishTypeDTO(acronym, description, active);
+    public MealTypeDTO toDTO() {
+        return new MealTypeDTO(acronym, description, active);
     }
 }

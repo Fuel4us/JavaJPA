@@ -29,36 +29,37 @@ public class Meal {
      */
     @ManyToOne()
     private MealType mealType;
-    private NutricionalInfo nutricionalInfo;
-    private Money price;
+    //private Periode periode;                      A exclarecer
+    //private NutricionalInfo nutricionalInfo;      A exclarecer
+    //private Money price;                          A exclarecer
     private boolean active;
 
-    public Dish(final DishType dishType, final Designation name,
-            final NutricionalInfo nutricionalInfo, Money price) {
-        if (dishType == null || name == null || nutricionalInfo == null) {
+    public Meal(final MealType mealType, final Designation name/*,
+            final NutricionalInfo nutricionalInfo, Money price*/) {             // A exclarecer
+        if (mealType == null || name == null/* || nutricionalInfo == null*/) {  // A exclarecer
             throw new IllegalArgumentException();
         }
 
-        this.dishType = dishType;
+        this.mealType = mealType;
         this.name = name;
-        this.nutricionalInfo = nutricionalInfo;
-        this.setPrice(price);
+        //this.nutricionalInfo = nutricionalInfo;   A exclarecer
+        //this.setPrice(price);                     A exclarecer
         this.active = true;
     }
 
-    public Dish(final DishType dishType, final Designation name, Money price) {
-        if (dishType == null || name == null || price == null) {
+    /*public Meal(final MealType mealType, final Designation name, Money price) {  // A exclarecer
+        if (mealType == null || name == null || price == null) {
             throw new IllegalArgumentException();
         }
 
-        this.dishType = dishType;
+        this.mealType = mealType;
         this.name = name;
-        this.nutricionalInfo = null;
-        this.price = price;
+        //this.nutricionalInfo = null;
+        //this.price = price;
         this.active = true;
-    }
+    }*/
 
-    protected Dish() {
+    protected Meal() {
         // for ORM only
     }
 }
