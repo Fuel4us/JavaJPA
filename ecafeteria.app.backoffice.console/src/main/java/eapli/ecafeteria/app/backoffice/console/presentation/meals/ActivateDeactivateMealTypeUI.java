@@ -1,4 +1,4 @@
-package eapli.ecafeteria.app.backoffice.meals;
+package eapli.ecafeteria.app.backoffice.console.presentation.meals;
 
 /**
  *
