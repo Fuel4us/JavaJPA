@@ -6,10 +6,12 @@ import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
+import eapli.ecafeteria.persistence.LotRepository;
 
 /**
  *
@@ -77,5 +79,15 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public DishReportingRepository dishReporting() {
         return new InMemoryDishReportingRepository();
+    }
+
+    @Override
+    public MealRepository meals() {
+        return new InMemoryMealRepository();
+    }
+
+    @Override
+    public LotRepository lots() {
+        return new InMemoryLotRepository();
     }
 }
