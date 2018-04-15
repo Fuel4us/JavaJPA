@@ -78,4 +78,6 @@ public interface RepositoryFactory {
      * @return
      */
     DishReportingRepository dishReporting();
+    
+    LotRepository lots();
 }
