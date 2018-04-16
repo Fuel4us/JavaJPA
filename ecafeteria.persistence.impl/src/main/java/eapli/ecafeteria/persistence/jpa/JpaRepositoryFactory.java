@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -82,5 +83,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public JpaLotRepository lots() {
         return new JpaLotRepository();
+    }
+
+    @Override
+    public BookingRepository reservation() {
+        return new JpaBookingRepository();
     }
 }

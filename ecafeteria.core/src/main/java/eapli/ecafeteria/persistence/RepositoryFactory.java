@@ -80,4 +80,6 @@ public interface RepositoryFactory {
     DishReportingRepository dishReporting();
     
     LotRepository lots();
+    
+    BookingRepository reservation();
 }
