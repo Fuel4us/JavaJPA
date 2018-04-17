@@ -6,10 +6,10 @@ import eapli.framework.actions.Action;
  *
  * @author Pedro Alves <1150372@isep.ipp.pt>
  */
-public class RegisterMealTypeAction implements Action {
+public class ChangeMealDishAction implements Action {
 
     @Override
     public boolean execute() {
-        return new RegisterMealTypeUI().show();
+        return new ChangeMealDishUI().show();
     }
 }
