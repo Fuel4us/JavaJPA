@@ -132,8 +132,11 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
         this.active = !this.active;
         return isActive();
     }
-/*
+
     public MealDTO toDTO() {
-        return new MealDTO(mealType.id(), mealType.description(), name.toString(), active);
-    }*/
+        return new MealDTO(mealType.id(), mealType.description(), name.toString(), 
+                dish.dishType().id(), dish.dishType().description(), dish.nutricionalInfo().calories(),
+                dish.nutricionalInfo().salt(), dish.currentPrice().amount(),
+                dish.currentPrice().currency().getCurrencyCode(), active);
+    }
 }
