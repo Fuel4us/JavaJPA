@@ -21,5 +21,8 @@ public final class ECafeteriaUserApp {
         System.out.println("=====================================");
 
         new FrontMenu().show();
+
+        // exiting the application, closing all threads
+        System.exit(0);
     }
 }
