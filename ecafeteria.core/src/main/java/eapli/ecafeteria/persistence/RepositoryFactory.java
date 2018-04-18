@@ -81,5 +81,5 @@ public interface RepositoryFactory {
     
     LotRepository lots();
     
-    BookingRepository reservation();
+    BookingRepository booking();
 }
