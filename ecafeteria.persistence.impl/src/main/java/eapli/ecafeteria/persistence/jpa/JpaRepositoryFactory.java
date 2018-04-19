@@ -19,7 +19,7 @@ import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
  *
  * Created by nuno on 21/03/16.
  */
-public class JpaRepositoryFactory implements RepositoryFactory {
+public abstract class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public UserRepository users(TransactionalContext autoTx) {
