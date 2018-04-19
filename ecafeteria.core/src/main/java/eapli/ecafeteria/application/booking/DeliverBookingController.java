@@ -14,6 +14,7 @@ import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Optional;
 
 /**
@@ -33,4 +34,13 @@ public class DeliverBookingController {
         return repositoryBooking.findBookingByUserAndDate(user, mealType, rs);
     }
     
+    public boolean deliverBookingState(Booking booking) throws DataConcurrencyException, DataIntegrityViolationException {
+        if(!booking.isReserved()){
+            throw new IllegalArgumentException();
+        }
+        booking.changeState(BookingState.DELIVERED);
+        repositoryBooking.save(booking);
+        return true;
+    }
+       
 }
