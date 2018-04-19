@@ -12,6 +12,7 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.LinkedList;
 
 /**
  *

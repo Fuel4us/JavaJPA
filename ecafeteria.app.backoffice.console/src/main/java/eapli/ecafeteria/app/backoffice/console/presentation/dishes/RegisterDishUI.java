@@ -32,7 +32,11 @@ public class RegisterDishUI extends AbstractUI {
         final String name = Console.readLine("Name");
 
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
-
+        
+        final Allergens allerg = new Allergens();
+        
+        allerg.show();
+        
         nutricionalData.show();
 
         final double price = Console.readDouble("Price");
