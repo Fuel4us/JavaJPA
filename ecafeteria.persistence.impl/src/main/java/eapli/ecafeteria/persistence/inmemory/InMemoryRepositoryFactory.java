@@ -1,15 +1,19 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.bootstrapers.ECafeteriaBootstrapper;
+import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
+import eapli.ecafeteria.persistence.LotRepository;
+import eapli.ecafeteria.persistence.MealTypeRepository;
 
 /**
  *
@@ -77,5 +81,25 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     @Override
     public DishReportingRepository dishReporting() {
         return new InMemoryDishReportingRepository();
+    }
+
+    @Override
+    public MealRepository meals() {
+        return new InMemoryMealRepository();
+    }
+
+    @Override
+    public LotRepository lots() {
+        return new InMemoryLotRepository();
+    }
+
+    @Override
+    public BookingRepository booking() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public MealTypeRepository mealTypes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

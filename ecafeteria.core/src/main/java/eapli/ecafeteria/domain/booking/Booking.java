@@ -24,11 +24,13 @@ public class Booking implements AggregateRoot<String>, Serializable{
     private String id;
     private CafeteriaUser user;
     private Meal meal;
+    private BookingState bookingState;
     
     public Booking(CafeteriaUser user, Meal meal){
         this.id = user.id() + meal.toString();
         this.user = user;
         this.meal = meal;
+        this.bookingState = BookingState.RESERVED;
     }
     
     public Date day() {
@@ -43,6 +45,14 @@ public class Booking implements AggregateRoot<String>, Serializable{
     @Override
     public String id() {
         return this.id;
+    }
+    
+    public BookingState getBookingState(){
+        return this.bookingState;
+    }
+    
+    public void changeState(BookingState newState) {
+        this.bookingState = newState;
     }
 
     @Override
@@ -80,5 +90,17 @@ public class Booking implements AggregateRoot<String>, Serializable{
             return false;
         }
         return true;
+    }
+    
+    public boolean isReserved() {
+        return bookingState.equals(BookingState.RESERVED);
+    }
+    
+    public boolean isCancelled() {
+        return bookingState.equals(BookingState.CANCELED);
+    }
+    
+    public boolean isDelivered() {
+        return bookingState.equals(BookingState.DELIVERED);
     }
 }

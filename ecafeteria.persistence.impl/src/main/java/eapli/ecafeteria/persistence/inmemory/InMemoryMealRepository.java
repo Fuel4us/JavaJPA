@@ -15,8 +15,8 @@ import java.util.Optional;
  *
  * @author Bernardo Carreira
  */
-public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation> implements MealRepository  {
-    
+public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation> implements MealRepository {
+
     @Override
     public Optional<Meal> findByName(Designation name) {
         return matchOne(e -> e.name().equals(name));
@@ -25,5 +25,10 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation
     @Override
     protected Designation newKeyFor(Meal entity) {
         return entity.id();
+    }
+
+    @Override
+    public Iterable<Meal> findAllByLot(Long lotId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

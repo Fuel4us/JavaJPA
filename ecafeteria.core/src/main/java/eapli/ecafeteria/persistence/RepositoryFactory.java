@@ -34,6 +34,10 @@ public interface RepositoryFactory {
     UserRepository users();
 
     DishTypeRepository dishTypes();
+    
+    MealTypeRepository mealTypes();
+    
+    MealRepository meals();
 
     /**
      *
@@ -76,4 +80,8 @@ public interface RepositoryFactory {
      * @return
      */
     DishReportingRepository dishReporting();
+    
+    LotRepository lots();
+    
+    BookingRepository booking();
 }
