@@ -7,12 +7,8 @@ package eapli.ecafetaria.domain.finance;
 
 /**
  *
- * @author Josué Lapa
+ * @author Hernani Gil
  */
-public enum ShiftState {
-    OPEN, CLOSED;
+public class ShiftDate {
     
-    public static ShiftState[] ShiftStateValues() {
-        return new ShiftState[]{OPEN,CLOSED};
-    }
 }
