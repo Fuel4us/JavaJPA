@@ -12,8 +12,12 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import static jdk.nashorn.internal.objects.NativeString.match;
 
 /**
  *
@@ -65,8 +69,12 @@ class JpaBookingRepository implements BookingRepository {
     }
 
     @Override
-    public Iterable<Booking> findBookingByUserAndDate(CafeteriaUser user, MealType mealType, BookingState reservationState) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<Booking> findBookingByUserAndDate(CafeteriaUser user, MealType mealType, BookingState bookingState) {
+            Map<String, Object> params = new HashMap<>();
+        params.put("user", user);
+        params.put("mealType", mealType);
+        params.put("bookingState", bookingState);
+        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.reservationState =:reservationState AND e.meal.day = '" + new java.sql.Date(Calendar.getInstance().getTimeInMillis()) + "'", params);
     }
     
 }
