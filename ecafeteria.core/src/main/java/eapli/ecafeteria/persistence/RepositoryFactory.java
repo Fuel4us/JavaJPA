@@ -35,8 +35,6 @@ public interface RepositoryFactory {
 
     DishTypeRepository dishTypes();
     
-    MealTypeRepository mealTypes();
-    
     MealRepository meals();
 
     /**
@@ -46,11 +44,7 @@ public interface RepositoryFactory {
      */
     CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
 
-    /**
-     * repository will be created in auto transaction mode
-     *
-     * @return
-     */
+    
     CafeteriaUserRepository cafeteriaUsers();
 
     /**
@@ -84,4 +78,6 @@ public interface RepositoryFactory {
     LotRepository lots();
     
     BookingRepository booking();
+    
+    //CanteenRepository canteen();
 }

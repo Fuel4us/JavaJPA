@@ -16,10 +16,9 @@ import eapli.framework.dto.DTO;
 @SuppressWarnings("squid:ClassVariableVisibilityCheck")
 public class MealDTO implements DTO{
     
-    public MealDTO(String mealTypeAcronym, String mealTypeDescription, String name, String dishTypeAcronym, String dishTypeDescription,
+    public MealDTO(String mealType, String name, String dishTypeAcronym, String dishTypeDescription,
             Integer calories2, Integer salt2, double amount, String currency2, boolean active2) {
-        this.mealTypeAcronym=mealTypeAcronym;
-        this.mealTypeDescription=mealTypeDescription;
+        this.mealType=mealType;
         this.name = name;
         this.dishTypeAcronym = dishTypeAcronym;
         this.dishTypeDescription = dishTypeDescription;
@@ -30,8 +29,7 @@ public class MealDTO implements DTO{
         this.active = active2;
     }
 
-    public String mealTypeAcronym;
-    public String mealTypeDescription;
+    public String mealType;
     public String dishTypeAcronym;
     public String dishTypeDescription;
 
