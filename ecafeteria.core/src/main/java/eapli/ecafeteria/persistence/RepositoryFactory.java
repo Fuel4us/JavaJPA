@@ -47,9 +47,10 @@ public interface RepositoryFactory {
     /**
      * repository will be created in auto transaction mode
      *
+     * @param autoTx
      * @return
      */
-    CafeteriaUserRepository cafeteriaUsers();
+    CafeteriaUserRepository cafeteriaUsers(boolean autoTx);
 
     /**
      *
