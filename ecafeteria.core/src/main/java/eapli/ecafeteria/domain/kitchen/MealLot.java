@@ -39,7 +39,7 @@ public class MealLot implements AggregateRoot<Integer>, Serializable{
         //for ORM
     }
 
-    private MealLot(int lotCode, Material ingredientCode, int quantity) {
+    public MealLot(int lotCode, Material ingredientCode, int quantity) {
         this.lotCode = lotCode;
         this.ingredientCode = ingredientCode;
         this.quantity = quantity;
