@@ -10,27 +10,51 @@ package eapli.ecafeteria.domain.authz;
  * @author pedromonteiro
  */
 public class UserState {
-    
-    
-    public enum UserStates{
+
+    public enum UserType {
         STAND_BY,
         ACCEPTED,
         DEACTIVATED,
         REJECTED
     }
-    
-    private UserStates state;
+
+    private UserType state;
     private Reason reason;
 
     public UserState() {
-        this.state = UserStates.STAND_BY;
+        this.state = UserType.STAND_BY;
     }
-    
-    public void deactivateUser(Reason.ReasonType rt, String comment){
-        this.state = UserStates.DEACTIVATED;
-        this.reason = new Reason(rt, comment);
+
+    public boolean accept() {
+        if (this.state != UserType.REJECTED) {
+            this.state = UserType.ACCEPTED;
+            return true;
+        }
+
+        return false;
     }
-    
-    
-    
+
+    public boolean reject() {
+        if (this.state != UserType.STAND_BY) {
+            return false;
+        }
+
+        this.state = UserType.REJECTED;
+        return true;
+    }
+
+    public boolean deactivate(Reason.ReasonType rt, String comment) {
+        if (this.state != UserType.REJECTED) {
+            this.state = UserType.DEACTIVATED;
+            this.reason = new Reason(rt, comment);
+            return true;
+        }
+
+        return false;
+    }
+
+    public Reason deactivatedReason() {
+        return this.reason;
+    }
+
 }
