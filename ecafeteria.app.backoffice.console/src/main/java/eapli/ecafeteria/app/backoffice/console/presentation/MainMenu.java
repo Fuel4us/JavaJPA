@@ -60,6 +60,7 @@ public class MainMenu extends AbstractUI {
 
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
+    private static final int SELECT_HEURISTIC_OPTION = 2;
 
     // DISH TYPES
     private static final int DISH_TYPE_REGISTER_OPTION = 1;
@@ -175,6 +176,8 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(SET_KITCHEN_ALERT_LIMIT_OPTION, "Set kitchen alert limit",
                 new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(SELECT_HEURISTIC_OPTION, "Select Heuristic",
+                new ShowMessageAction("Under development")));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

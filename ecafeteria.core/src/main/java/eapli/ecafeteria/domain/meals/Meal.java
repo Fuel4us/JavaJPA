@@ -135,7 +135,7 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
     }
 
     public MealDTO toDTO() {
-        return new MealDTO(mealType.id(), mealType.description(), name.toString(),
+        return new MealDTO(mealType.toString(), name.toString(),
                 dish.dishType().id(), dish.dishType().description(), dish.nutricionalInfo().calories(),
                 dish.nutricionalInfo().salt(), dish.currentPrice().amount(),
                 dish.currentPrice().currency().getCurrencyCode(), active);
@@ -150,5 +150,16 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
             throw new IllegalArgumentException();
         }
         this.dish = dish;
+    }
+
+    public void changeMealTypeTo(MealType newMealType) {
+        setMealType(newMealType);
+    }
+
+    private void setMealType(MealType mealType) {
+        if (mealType == null) {
+            throw new IllegalArgumentException();
+        }
+        this.mealType = mealType;
     }
 }
