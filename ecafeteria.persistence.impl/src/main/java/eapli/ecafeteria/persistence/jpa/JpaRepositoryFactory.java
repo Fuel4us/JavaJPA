@@ -19,7 +19,7 @@ import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
  *
  * Created by nuno on 21/03/16.
  */
-public class JpaRepositoryFactory implements RepositoryFactory {
+public abstract class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public UserRepository users(TransactionalContext autoTx) {
@@ -75,11 +75,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public DishReportingRepository dishReporting() {
         return new JpaDishReportingRepository();
-    }
-
-    @Override
-    public MealTypeRepository mealTypes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

@@ -97,9 +97,4 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public BookingRepository booking() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public MealTypeRepository mealTypes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

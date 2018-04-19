@@ -15,6 +15,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -28,6 +29,10 @@ public class DeliverBookingController {
     
     public Optional<CafeteriaUser> findUserByNumber(MecanographicNumber numberUser) throws DataConcurrencyException {
         return repositoryUser.findByMecanographicNumber(numberUser);
+    }
+    
+    public Iterable<MealType> listMealTypes() {
+        return Arrays.asList(MealType.MealTypeValues());
     }
     
     public Iterable<Booking> findBookingByUserAndDate(CafeteriaUser user, MealType mealType, BookingState rs) {
