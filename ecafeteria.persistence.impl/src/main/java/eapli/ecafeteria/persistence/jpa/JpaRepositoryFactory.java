@@ -5,8 +5,10 @@ import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
+import eapli.ecafeteria.persistence.MealTypeRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
@@ -74,19 +76,24 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public DishReportingRepository dishReporting() {
         return new JpaDishReportingRepository();
     }
-    
+
+    @Override
+    public MealTypeRepository mealTypes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public MealRepository meals() {
         return new JpaMealRepository();
     }
-    
+
     @Override
-    public JpaLotRepository lots() {
+    public LotRepository lots() {
         return new JpaLotRepository();
     }
 
     @Override
-    public BookingRepository reservation() {
+    public BookingRepository booking() {
         return new JpaBookingRepository();
     }
 }
