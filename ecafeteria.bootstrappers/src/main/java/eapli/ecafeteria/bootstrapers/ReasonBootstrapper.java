@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
+import eapli.ecafeteria.domain.authz.Reason;
 import eapli.framework.actions.Action;
 
 /**
@@ -13,12 +14,17 @@ import eapli.framework.actions.Action;
  */
 public class ReasonBootstrapper implements Action{
 
-    public ReasonBootstrapper(){
-    }
-
     @Override
     public boolean execute() {
         
+        boolean r1_return, r2_return;
+        r1_return = Reason.addReason("");
+        r2_return = Reason.addReason("");
+        
+        if(r1_return && r2_return) return true;
+        
+        
+        return false;
     }
     
     
