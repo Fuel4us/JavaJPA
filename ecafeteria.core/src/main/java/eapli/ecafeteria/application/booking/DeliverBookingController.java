@@ -25,7 +25,7 @@ import java.util.Optional;
 public class DeliverBookingController {
     
     private final BookingRepository repositoryBooking = PersistenceContext.repositories().booking();
-    private final CafeteriaUserRepository repositoryUser = PersistenceContext.repositories().cafeteriaUsers(true);
+    private final CafeteriaUserRepository repositoryUser = PersistenceContext.repositories().cafeteriaUsers();
     
     public Optional<CafeteriaUser> findUserByNumber(MecanographicNumber numberUser) throws DataConcurrencyException {
         return repositoryUser.findByMecanographicNumber(numberUser);
