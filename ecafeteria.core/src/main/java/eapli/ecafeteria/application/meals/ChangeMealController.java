@@ -9,6 +9,7 @@ import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -35,6 +36,17 @@ public class ChangeMealController implements Controller{
             throw new IllegalArgumentException();
         }
         meal.changeDishTo(newDish);
+
+        return this.mealRepository.save(meal);
+    }
+    
+    public Meal changeMealType(Meal meal, MealType newMealType)
+            throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        if (meal == null) {
+            throw new IllegalArgumentException();
+        }
+        meal.changeMealTypeTo(newMealType);
 
         return this.mealRepository.save(meal);
     }
