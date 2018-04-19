@@ -28,19 +28,21 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
     protected Controller controller() {
         return this.controller;
     }
-    
+
     @Override
     protected boolean doShow() {
-        /*final int lotCode = Console.readInteger("Lot Code:");
+        final int lotCode = Console.readInteger("Lot Code:");
         final long ingredientCode = Console.readLong("Ingredient Code:");
         final int quantity = Console.readInteger("Quantity:");
 
         try {
-            Material ingredient = matRepository.findOne(ingredientCode);
-            this.controller.registerMealLot(lotCode, ingredient, quantity);
+            Optional<Material> ingredient = matRepository.findOne(ingredientCode);
+            if (ingredient.isPresent()) {
+                this.controller.registerMealLot(lotCode, ingredient.get(), quantity);
+            }
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             System.out.println("That acronym is already in use.");
-        }*/
+        }
         return false;
 
     }
