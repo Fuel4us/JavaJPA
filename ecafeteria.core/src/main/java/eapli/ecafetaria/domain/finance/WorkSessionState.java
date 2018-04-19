@@ -7,12 +7,12 @@ package eapli.ecafetaria.domain.finance;
 
 /**
  *
- * @author Josué Lapa
+ * @author Hernani Gil
  */
-public enum ShiftState {
-    OPEN, CLOSED;
+public enum WorkSessionState {
+    DELIVERYSESSION, DEPOSITSESSION;
     
-    public static ShiftState[] ShiftStateValues() {
-        return new ShiftState[]{OPEN,CLOSED};
+    public static WorkSessionState[] WorkSessionStateValues() {
+        return new WorkSessionState[]{DELIVERYSESSION,DEPOSITSESSION};
     }
 }
