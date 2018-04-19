@@ -35,6 +35,8 @@ public interface RepositoryFactory {
 
     DishTypeRepository dishTypes();
     
+    MealTypeRepository mealTypes();
+    
     MealRepository meals();
 
     /**

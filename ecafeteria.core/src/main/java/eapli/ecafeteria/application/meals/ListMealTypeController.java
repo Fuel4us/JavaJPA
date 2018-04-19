@@ -5,10 +5,18 @@
  */
 package eapli.ecafeteria.application.meals;
 
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.framework.application.Controller;
+
 /**
  *
  * @author Bernardo Carreira
  */
-public class ListMealTypeController {
+public class ListMealTypeController implements Controller {
     
+    private final ListMealTypeService svc = new ListMealTypeService();
+
+    public Iterable<MealType> listDishTypes() {
+        return this.svc.activeMealTypes();
+    }
 }
