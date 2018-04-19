@@ -24,8 +24,6 @@ import java.util.Date;
  */
 public class RegisterMealController implements Controller {
 
-    private final ListMealTypeService svc = new ListMealTypeService();
-
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish,
@@ -36,9 +34,5 @@ public class RegisterMealController implements Controller {
         final Meal newMeal = new Meal(mealType, mealDate, dish, Designation.valueOf(name));
 
         return this.mealRepository.save(newMeal);
-    }
-
-    public Iterable<MealType> mealTypes() {
-        return this.svc.activeMealTypes();
     }
 }
