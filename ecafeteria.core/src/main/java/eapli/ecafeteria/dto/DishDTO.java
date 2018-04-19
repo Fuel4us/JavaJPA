@@ -14,16 +14,16 @@ import eapli.framework.dto.DTO;
 @SuppressWarnings("squid:ClassVariableVisibilityCheck")
 public class DishDTO implements DTO {
 
-    public DishDTO(String dishTypeAcronym, String dishTypeDescription, String name2,
-            Integer calories2, Integer salt2, double amount, String currency2, boolean active2) {
+    public DishDTO(String dishTypeAcronym, String dishTypeDescription, String name,
+            Integer calories2, Integer salt, double amount, String currency, boolean active) {
         this.dishTypeAcronym = dishTypeAcronym;
         this.dishTypeDescription = dishTypeDescription;
-        name = name2;
-        calories = calories2;
-        salt = salt2;
+        this.name = name;
+        this.calories = calories;
+        this.salt = salt;
         price = amount;
-        this.currency = currency2;
-        this.active = active2;
+        this.currency = currency;
+        this.active = active;
     }
 
     public String dishTypeAcronym;

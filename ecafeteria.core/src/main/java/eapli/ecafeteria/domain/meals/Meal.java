@@ -22,6 +22,7 @@ import javax.persistence.Version;
  */
 @Entity
 public class Meal implements AggregateRoot<Designation>, Serializable { //implementa aggregatedroot?
+
     private static final long serialVersionUID = 1L;
 
     @Version
@@ -53,15 +54,15 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
     protected Meal() {
         // for ORM only
     }
-    
-    public Date getDate(){
+
+    public Date getDate() {
         return mealDate;
     }
-    
-    public Dish getDish(){
+
+    public Dish getDish() {
         return dish;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -132,8 +133,33 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
         this.active = !this.active;
         return isActive();
     }
-/*
+
     public MealDTO toDTO() {
-        return new MealDTO(mealType.id(), mealType.description(), name.toString(), active);
-    }*/
+        return new MealDTO(mealType.toString(), name.toString(),
+                dish.dishType().id(), dish.dishType().description(), dish.nutricionalInfo().calories(),
+                dish.nutricionalInfo().salt(), dish.currentPrice().amount(),
+                dish.currentPrice().currency().getCurrencyCode(), active);
+    }
+
+    public void changeDishTo(Dish newDish) {
+        setDish(newDish);
+    }
+
+    private void setDish(Dish dish) {
+        if (dish == null || !dish.isActive()) {
+            throw new IllegalArgumentException();
+        }
+        this.dish = dish;
+    }
+
+    public void changeMealTypeTo(MealType newMealType) {
+        setMealType(newMealType);
+    }
+
+    private void setMealType(MealType mealType) {
+        if (mealType == null) {
+            throw new IllegalArgumentException();
+        }
+        this.mealType = mealType;
+    }
 }

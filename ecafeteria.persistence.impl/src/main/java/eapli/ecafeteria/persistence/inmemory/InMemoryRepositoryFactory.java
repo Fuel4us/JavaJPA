@@ -13,6 +13,7 @@ import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.ecafeteria.persistence.LotRepository;
+import eapli.ecafeteria.persistence.MealTypeRepository;
 
 /**
  *
@@ -93,7 +94,12 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public BookingRepository reservation() {
+    public BookingRepository booking() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public MealTypeRepository mealTypes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

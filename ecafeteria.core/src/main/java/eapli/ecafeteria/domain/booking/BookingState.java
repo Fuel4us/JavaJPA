@@ -12,7 +12,7 @@ package eapli.ecafeteria.domain.booking;
 public enum BookingState {
     RESERVED, DELIVERED, CANCELED;
     
-     public static BookingState[] ReservationStateValues() {
+     public static BookingState[] BookingStateValues() {
         return new BookingState[]{RESERVED, DELIVERED, CANCELED};
     }
 }
