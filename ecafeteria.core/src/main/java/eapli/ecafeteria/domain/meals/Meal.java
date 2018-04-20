@@ -34,11 +34,11 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
     /**
      * cascade = CascadeType.NONE as the dishType is part of another aggregate
      */
-    @ManyToOne()
     private MealType mealType;
     private Date mealDate;
     private Dish dish;
     private boolean active;
+    
 
     public Meal(final MealType mealType, final Date mealDate, final Dish dish, final Designation name) {
         if (mealType == null || name == null || dish == null || mealDate == null) {
