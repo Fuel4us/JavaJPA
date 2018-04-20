@@ -12,6 +12,6 @@ import eapli.framework.persistence.repositories.DataRepository;
  *
  * @author pedro
  */
-//public interface CanteenRepository extends DataRepository<Canteen, Designation>{
+//public interface CanteenShiftRepository extends DataRepository<CanteenShift, Designation>{
 //    
 //}

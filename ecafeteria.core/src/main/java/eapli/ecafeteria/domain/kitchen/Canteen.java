@@ -1,25 +1,25 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package eapli.ecafeteria.domain.kitchen;
-//
-//import eapli.framework.domain.ddd.AggregateRoot;
-//import eapli.framework.util.Strings;
-//import java.io.Serializable;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.Id;
-//import javax.persistence.OneToMany;
-//import javax.persistence.OneToOne;
-//import javax.persistence.Version;
-//
-///**
-// *
-// * @author pedro
-// */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eapli.ecafeteria.domain.kitchen;
+
+import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.util.Strings;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Version;
+
+/**
+ *
+ * @author pedro
+ */
 //@Entity
 //public class Canteen implements AggregateRoot<String>, Serializable{
 //    
