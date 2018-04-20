@@ -10,12 +10,15 @@ import eapli.framework.visitor.Visitor;
  * @author ajs 13/04/2016
  *
  */
+/**
+ * Class changed by João Pereira <1150478@isep.ipp.pt>
+ */
 @SuppressWarnings("squid:S106")
 public class DishPrinter implements Visitor<Dish> {
 
     @Override
     public void visit(Dish visitee) {
         System.out.printf("%-30s%-25s%-10s%-4s", visitee.name(), visitee.dishType().description(),
-                visitee.currentPrice(), String.valueOf(visitee.isActive()));
+                visitee.currentPrice(), String.valueOf(visitee.isActive()), visitee.allergens());
     }
 }

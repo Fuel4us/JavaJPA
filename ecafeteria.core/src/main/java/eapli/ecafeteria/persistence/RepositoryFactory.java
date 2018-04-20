@@ -44,11 +44,7 @@ public interface RepositoryFactory {
      */
     CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
 
-    /**
-     * repository will be created in auto transaction mode
-     *
-     * @return
-     */
+    
     CafeteriaUserRepository cafeteriaUsers();
 
     /**
@@ -83,5 +79,8 @@ public interface RepositoryFactory {
     
     BookingRepository booking();
     
-    HeuristicRepository heuristics();
+    //HeuristicRepository heuristics();
+    
+    //CanteenRepository canteen();
+    
 }
