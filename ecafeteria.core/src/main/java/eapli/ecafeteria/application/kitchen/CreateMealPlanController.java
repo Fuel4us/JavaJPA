@@ -5,10 +5,18 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.framework.presentation.console.Menu;
+import java.util.List;
+
 /**
  *
  * @author Tiago Babo 1160760
  */
 public class CreateMealPlanController {
     
+    public List<Menu> getExistingMenus(){
+        List<Menu> resultingList = null;
+        
+        return resultingList;
+    }
 }

@@ -78,4 +78,6 @@ public interface RepositoryFactory {
     LotRepository lots();
     
     BookingRepository booking();
+    
+    //CanteenRepository canteen();
 }

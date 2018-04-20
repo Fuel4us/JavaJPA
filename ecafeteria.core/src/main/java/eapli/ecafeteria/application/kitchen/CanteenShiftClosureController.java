@@ -5,11 +5,18 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.ecafeteria.persistence.PersistenceContext;
+
 /**
  *
  * @author pedro
  */
 public class CanteenShiftClosureController {
     
+//    private final CanteenRepository canteenRepository = PersistenceContext.repositories().canteen();
+//    
+//    public boolean canteenShiftFinish() {
+//        return canteenRepository.canteenShiftFinish();
+//    }
     
 }
