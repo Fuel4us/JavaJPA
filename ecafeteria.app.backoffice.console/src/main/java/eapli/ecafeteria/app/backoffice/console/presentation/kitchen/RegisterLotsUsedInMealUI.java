@@ -34,14 +34,16 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         final int lotCode = Console.readInteger("Lot Code:");
         final long ingredientCode = Console.readLong("Ingredient Code:");
         final int quantity = Console.readInteger("Quantity:");
-
+        
         try {
             Optional<Material> ingredient = matRepository.findOne(ingredientCode);
             if (ingredient.isPresent()) {
                 this.controller.registerMealLot(lotCode, ingredient.get(), quantity);
+            } else {
+                System.out.println("The ingredient doesn't exist.");
             }
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-            System.out.println("That acronym is already in use.");
+            System.out.println("That lot code is already in use.");
         }
         return false;
 

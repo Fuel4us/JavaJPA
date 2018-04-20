@@ -79,5 +79,8 @@ public interface RepositoryFactory {
     
     BookingRepository booking();
     
+    //HeuristicRepository heuristics();
+    
     //CanteenRepository canteen();
+    
 }
