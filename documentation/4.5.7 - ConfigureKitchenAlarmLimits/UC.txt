@@ -1,0 +1,1 @@
+The user starts the configuration of the kitchen management alert limits. The system asks for a value for the yellow and red limits. The user inputs the values. The system validates them and asks for confirmation. The user confirms. The system saves the limits and informs the user of the success.
