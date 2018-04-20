@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
@@ -90,5 +91,10 @@ public abstract class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public BookingRepository booking() {
         return new JpaBookingRepository();
+    }
+
+    @Override
+    public HeuristicRepository heuristics() {
+        return new JpaHeuristicRepository(Application.settings().getPersistenceUnitName());
     }
 }
