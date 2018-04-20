@@ -1,6 +1,5 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto;
 
-import eapli.ecafeteria.app.backoffice.console.presentation.dishes.AllergensWidget;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.NutricionalInfoDataWidget;
 import eapli.ecafeteria.application.dishesviadto.RegisterDishViaDTOController;
 import eapli.ecafeteria.dto.DishDTO;
@@ -37,8 +36,6 @@ public class RegisterDishViaDTOUI extends AbstractUI {
         final String name = Console.readLine("Name");
 
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
-        
-        final AllergensWidget allergens = new AllergensWidget();
 
         nutricionalData.show();
 
@@ -46,7 +43,7 @@ public class RegisterDishViaDTOUI extends AbstractUI {
 
         try {
             final DishDTO dish = new DishDTO(theDishType.acronym, theDishType.description, name,
-                    nutricionalData.calories(), nutricionalData.salt(), price, "EUR", true, allergens.getAllergenics());
+                    nutricionalData.calories(), nutricionalData.salt(), price, "EUR", true);
             this.theController.registerDish(dish);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");

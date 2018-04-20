@@ -2,7 +2,6 @@ package eapli.ecafeteria.application.dishes;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.dishes.Allergens;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
@@ -19,10 +18,6 @@ import java.util.LinkedList;
  *
  * @author Jorge Santos ajs@isep.ipp.pt
  */
-/**
- * Class changed by João Pereira_1150478
- * @author João Pereira <1150478@isep.ipp.pt>
- */
 public class RegisterDishController implements Controller {
 
     private final ListDishTypeService svc = new ListDishTypeService();
@@ -30,12 +25,12 @@ public class RegisterDishController implements Controller {
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-            final double price, LinkedList<String> allerg) throws DataIntegrityViolationException, DataConcurrencyException {
+            final double price) throws DataIntegrityViolationException, DataConcurrencyException {
 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-                Money.euros(price), new Allergens(allerg));
+                Money.euros(price));
 
         return this.dishRepository.save(newDish);
     }
