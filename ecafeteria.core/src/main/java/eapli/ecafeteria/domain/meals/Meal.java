@@ -162,4 +162,16 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
         }
         this.mealType = mealType;
     }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "version=" + version +
+                ", name=" + name +
+                ", mealType=" + mealType +
+                ", mealDate=" + mealDate +
+                ", dish=" + dish +
+                ", active=" + active +
+                '}';
+    }
 }
