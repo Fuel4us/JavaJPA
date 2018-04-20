@@ -82,4 +82,6 @@ public interface RepositoryFactory {
     LotRepository lots();
     
     BookingRepository booking();
+    
+    HeuristicRepository heuristics();
 }
