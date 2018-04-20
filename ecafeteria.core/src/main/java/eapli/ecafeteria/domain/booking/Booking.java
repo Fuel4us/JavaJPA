@@ -54,6 +54,10 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public void changeState(BookingState newState) {
         this.bookingState = newState;
     }
+    
+    public String sumaryList() {
+        return String.format("%s", meal.toString2());
+    }
 
     @Override
     public int hashCode() {
