@@ -6,6 +6,7 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
@@ -13,7 +14,6 @@ import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.ecafeteria.persistence.LotRepository;
-import eapli.ecafeteria.persistence.MealTypeRepository;
 
 /**
  *
@@ -97,4 +97,9 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
     public BookingRepository booking() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+//    @Override
+//    public HeuristicRepository heuristics() {
+//        return new InMemoryHeuristicRepository();
+//    }
 }
