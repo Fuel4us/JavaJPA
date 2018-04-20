@@ -11,10 +11,10 @@ import eapli.framework.actions.Action;
  *
  * @author Hernani Gil
  */
-public class ChargeCardAction implements Action {
-
-    @Override
-    public boolean execute() {
-        return new ChargeCardUI().show();
-    }
-}
+//public class ChargeCardAction implements Action {
+//
+////    @Override
+////    public boolean execute() {
+////        return new ChargeCardUI().show();
+////    }
+//}
