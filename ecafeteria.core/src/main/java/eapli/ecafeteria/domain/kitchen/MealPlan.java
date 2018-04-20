@@ -1,11 +1,13 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.framework.presentation.console.Menu;
+import java.util.List;
 
 import javax.persistence.*;
 
 /**
- * @author Gonçalo Fonseca <1150503@isep.ipp.pt>
+ * @author Tiago Babo 1160760
  */
 @Entity
 public class MealPlan {
@@ -15,22 +17,13 @@ public class MealPlan {
     private int id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Meal meal;
-    private int dishNumber;
+    private Menu menu;
+    private List<Integer> numberOfDishes;
 
-    public MealPlan(Meal meal, int dishNumber) {
-        this.meal = meal;
-        this.dishNumber = dishNumber;
+    public MealPlan(Menu menu, List<Integer> numberOfDishes) {
+        this.menu = menu;
+        this.numberOfDishes = numberOfDishes;
     }
 
-    protected MealPlan() {}
-
-    @Override
-    public String toString() {
-        return "MealPlan{" +
-                "id=" + id +
-                ", meal=" + meal +
-                ", dishnumber=" + dishNumber +
-                '}';
-    }
+    protected MealPlan(){}
 }
