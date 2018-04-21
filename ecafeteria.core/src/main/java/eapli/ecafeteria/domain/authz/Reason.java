@@ -5,70 +5,49 @@
  */
 package eapli.ecafeteria.domain.authz;
 
+import eapli.framework.domain.ddd.ValueObject;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author pedromonteiro
  */
-public class Reason {
-    
-    static class ReasonType{
-        String type;
+@Entity
+public class Reason implements Serializable, ValueObject {
 
-        public ReasonType(String description) {
-            this.type = description;
-        }
-        
-        @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 97 * hash + Objects.hashCode(this.type);
-            return hash;
-        }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reasonId;
+    private String comment;
+    private ReasonType reason;
 
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final ReasonType other = (ReasonType) obj;
-            if (!Objects.equals(this.type, other.type)) {
-                return false;
-            }
-            return true;
-        }
-        
+    protected Reason() {
+        //For ORM
     }
     
-    private static List<ReasonType> reasonList = new ArrayList<>();
-    public static boolean addReason(String reasonDescription){
-        ReasonType type = new ReasonType(reasonDescription);
-        if(reasonList.contains(type)) return false;
-        reasonList.add(type);
-        return true;
-        
-    }
-    
-    String comment;
-    ReasonType reason;
 
     public Reason(ReasonType rt, String comment) {
         this.reason = rt;
         this.comment = comment;
     }
-    
-    public static List<ReasonType> reasonTypes(){
-        return reasonList;
+   
+
+    public Long id() {
+        return reasonId;
     }
+
+    @Override
+    public String toString() {
+        return "Reason:" + reason + "\nComment: " + comment;
+    }
+
     
     
     

@@ -5,10 +5,17 @@
  */
 package eapli.ecafeteria.domain.authz;
 
+import java.util.Calendar;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  *
  * @author pedromonteiro
  */
+@Entity
 public class UserState {
 
     public enum UserType {
@@ -20,13 +27,15 @@ public class UserState {
 
     private UserType state;
     private Reason reason;
+    @Temporal(TemporalType.DATE)
+    private Calendar deactivatedOn;
 
     public UserState() {
         this.state = UserType.STAND_BY;
     }
 
     public boolean accept() {
-        if (this.state != UserType.REJECTED) {
+        if (this.state == UserType.STAND_BY) {
             this.state = UserType.ACCEPTED;
             return true;
         }
@@ -35,18 +44,19 @@ public class UserState {
     }
 
     public boolean reject() {
-        if (this.state != UserType.STAND_BY) {
-            return false;
+        if (this.state == UserType.STAND_BY) {
+            this.state = UserType.REJECTED;
+            return true;
         }
 
-        this.state = UserType.REJECTED;
-        return true;
+        return false;
     }
 
-    public boolean deactivate(Reason.ReasonType rt, String comment) {
-        if (this.state != UserType.REJECTED) {
+    public boolean deactivate(Calendar deactivatedOn, ReasonType rt, String comment) {
+        if (this.state == UserType.ACCEPTED) {
             this.state = UserType.DEACTIVATED;
             this.reason = new Reason(rt, comment);
+            this.deactivatedOn = deactivatedOn;
             return true;
         }
 
@@ -55,6 +65,10 @@ public class UserState {
 
     public Reason deactivatedReason() {
         return this.reason;
+    }
+    
+    public UserType state(){
+        return this.state;
     }
 
 }
