@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
+
 import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.menus.Menu;
@@ -18,7 +19,7 @@ import java.util.Scanner;
 public class CreateMealPlanUI {
     CreateMealPlanController controller;
     Scanner input = new Scanner(System.in);
-    
+
     public void selectMenu(){
         System.out.println("Select the menu for which you wish to create the meal plan:");
         List<Menu> menuList = controller.getExistingMenus();

@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class CreateMealPlanController {
     
+
     public List<Menu> getExistingMenus(){
         List<Menu> resultingList = null;
         
@@ -37,4 +39,5 @@ public class CreateMealPlanController {
         
         return mPlan;
     }
+
 }
