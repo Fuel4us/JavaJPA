@@ -28,24 +28,13 @@ public class DishBootstrapper implements Action {
         final DishType vegie = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_VEGIE).get();
         final DishType fish = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_FISH).get();
         final DishType meat = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_MEAT).get();
-        LinkedList<String> allergens1 = new LinkedList<>();
-        LinkedList<String> allergens2 = new LinkedList<>();
-        LinkedList<String> allergens3 = new LinkedList<>();
 
-        allergens1.add(TestDataConstants.ALLERGEN_CRUSTACEOS);
-        allergens1.add(TestDataConstants.ALLERGEN_GLUTEN);
-
-        allergens2.add(TestDataConstants.ALLERGEN_PEIXES);
-        allergens2.add(TestDataConstants.ALLERGEN_CRUSTACEOS);
-
-        allergens3.add(TestDataConstants.ALLERGEN_GLUTEN);
-
-        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99, allergens1);
-        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85, allergens2);
-        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 250, 2, 3.99, allergens3);
-        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99, allergens3);
-        register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99, allergens2);
-        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99, allergens1);
+        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99);
+        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85);
+        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 250, 2, 3.99);
+        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99);
+        register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99);
+        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99);
 
         return true;
     }
@@ -53,10 +42,10 @@ public class DishBootstrapper implements Action {
     /**
      *
      */
-    private void register(DishType dishType, String description, int cal, int salt, double price, LinkedList<String> allergens) {
+    private void register(DishType dishType, String description, int cal, int salt, double price) {
         final RegisterDishController controller = new RegisterDishController();
         try {
-            controller.registerDish(dishType, description, cal, salt, price, allergens);
+            controller.registerDish(dishType, description, cal, salt, price);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user

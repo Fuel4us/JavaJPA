@@ -5,10 +5,94 @@
  */
 package eapli.ecafeteria.domain.kitchen;
 
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.util.Strings;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
+
 /**
  *
  * @author pedro
  */
-public class CanteenShift {
-    
+@Entity
+public class CanteenShift implements AggregateRoot<String>, Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    // ORM primary key
+    @Id
+    @GeneratedValue
+    private Long pk;
+    @Version
+    private Long version;
+
+    // business ID
+    @Column(unique = true)
+    private String name;
+    @OneToMany
+    private Meal mealCode;
+    private String description;
+
+    protected CanteenShift() {
+        // for ORM
+    }
+
+    public CanteenShift(String name, Meal mealCode, String description) {
+        if (Strings.isNullOrEmpty(name)) {
+            throw new IllegalArgumentException();
+        }
+        this.name = name;
+        this.mealCode = mealCode;
+        this.description = description;
+    }
+
+    public String description() {
+        return this.description;
+    }
+
+    public void changeDescriptionTo(String newDescription) {
+        this.description = newDescription;
+    }
+
+    @Override
+    public String id() {
+        return this.name;
+    }
+
+    @Override
+    public boolean is(String id) {
+        return id.equalsIgnoreCase(this.name);
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        // FIXME implement this method
+        final CanteenShift cs = (CanteenShift) other;
+        return id().equals(cs.id());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Material)) {
+            return false;
+        }
+
+        final Material other = (Material) o;
+        return id().equals(other.id());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
 }
