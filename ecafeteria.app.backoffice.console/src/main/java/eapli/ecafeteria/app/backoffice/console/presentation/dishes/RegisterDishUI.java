@@ -12,6 +12,8 @@ import eapli.framework.util.Console;
 /**
  *
  * @author Jorge Santos ajs@isep.ipp.pt
+ * 
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 public class RegisterDishUI extends AbstractUI {
 
@@ -33,7 +35,7 @@ public class RegisterDishUI extends AbstractUI {
 
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
         
-        final Allergens allerg = new Allergens();
+        final AllergensWidget allerg = new AllergensWidget();
         
         allerg.show();
         
@@ -43,7 +45,7 @@ public class RegisterDishUI extends AbstractUI {
 
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price);
+                    price, allerg.getAllergenics());
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }

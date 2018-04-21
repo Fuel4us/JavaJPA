@@ -7,7 +7,7 @@ import eapli.framework.util.Console;
  *
  * @author João Pereira <1150478@isep.ipp.pt>
  */
-public class Allergens {
+public class AllergensWidget {
     
     /**
      * LinkedList that saves the allergens.
@@ -15,9 +15,6 @@ public class Allergens {
     private LinkedList<String> allergens;
 
     public void show() {
-        for (String allergen : allergens) {
-            
-        }
     }
     
     /**
