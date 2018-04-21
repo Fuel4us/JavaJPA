@@ -1,7 +1,6 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.framework.presentation.console.Menu;
+import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
 
 import javax.persistence.*;
@@ -16,7 +15,6 @@ public class MealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
     private Menu menu;
     private List<Integer> numberOfDishes;
 

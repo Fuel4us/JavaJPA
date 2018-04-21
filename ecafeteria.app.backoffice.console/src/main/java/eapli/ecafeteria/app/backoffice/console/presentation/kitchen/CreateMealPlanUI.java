@@ -6,7 +6,8 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
-import eapli.framework.presentation.console.Menu;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,14 +22,20 @@ public class CreateMealPlanUI {
     public void selectMenu(){
         System.out.println("Select the menu for which you wish to create the meal plan:");
         List<Menu> menuList = controller.getExistingMenus();
-        int i = 0;
+        int i = 1;
         
         for(Menu menu: menuList){
-            System.out.println(i + ". " + menu.title());
+            System.out.println(i + ". " + menu);
             i++;
         }
+        System.out.printf("OPCAO: ");
         int opcao = input.nextInt();
         
-        Menu menu = menuList.get(opcao);
+        Menu selectedMenu = controller.getMenu(menuList, opcao);
+        
+        MealPlan mealPlan = controller.createMealPlan(selectedMenu);
+        
+        System.out.println("Assign the number of dishes for each of the the meals:");
+        
     }
 }
