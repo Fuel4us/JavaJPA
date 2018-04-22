@@ -35,7 +35,7 @@ public class DeliverBookingController {
         return Arrays.asList(MealType.MealTypeValues());
     }
     
-    public Iterable<Booking> findBookingByUserAndDate(CafeteriaUser user, MealType mealType, BookingState rs) {
+    public Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState rs) {
         return repositoryBooking.findBookingByUserAndDate(user, mealType, rs);
     }
     

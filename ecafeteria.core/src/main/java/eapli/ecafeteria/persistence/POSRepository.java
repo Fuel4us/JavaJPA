@@ -5,13 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.framework.domain.Designation;
+import eapli.ecafetaria.domain.finance.POS;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
- * @author pedro
+ * @author Josué Lapa
  */
-//public interface CanteenRepository extends DataRepository<Canteen, Designation>{
-//    
-//}
+public interface POSRepository extends DataRepository<POS, Long>{
+    
+}

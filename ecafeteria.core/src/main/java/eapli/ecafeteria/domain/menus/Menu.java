@@ -82,4 +82,21 @@ public class Menu {
         //if(){}
         return mealList.add(meal);
     }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "version=" + version +
+                ", id=" + id +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", mealList=" + mealList +
+                ", published=" + published +
+                '}';
+    }
+
+    public List<Meal> getMealList() {
+        return mealList;
+    }
+    
 }

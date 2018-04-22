@@ -13,8 +13,6 @@
 ///**
 // *
 // * @author AntónioRocha
-// * 
-// * changed by João Pereira <1150478@isep.ipp.pt>
 // */
 //public class DishTest {
 //

@@ -10,6 +10,7 @@ import eapli.ecafeteria.dto.MealDTO;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -61,6 +62,10 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
 
     public Dish getDish() {
         return dish;
+    }
+
+    public MealType getMealType() {
+        return mealType;
     }
 
     @Override
@@ -173,5 +178,11 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
                 ", dish=" + dish +
                 ", active=" + active +
                 '}';
+    }
+    
+    public String toString2() {
+        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
+        String data2 = data.format(mealDate.getTime());
+        return String.format("DAY: %s /PLATE: %s /TYPE: %s /MEAL: %s", data2, dish.id(), mealType.toString(), dish.dishType().id());
     }
 }

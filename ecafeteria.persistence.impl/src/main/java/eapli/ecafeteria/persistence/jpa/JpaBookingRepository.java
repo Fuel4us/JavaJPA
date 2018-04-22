@@ -69,8 +69,8 @@ class JpaBookingRepository implements BookingRepository {
     }
 
     @Override
-    public Iterable<Booking> findBookingByUserAndDate(CafeteriaUser user, MealType mealType, BookingState bookingState) {
-            Map<String, Object> params = new HashMap<>();
+    public Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState bookingState) {
+        Map<String, Object> params = new HashMap<>();
         params.put("user", user);
         params.put("mealType", mealType);
         params.put("bookingState", bookingState);
