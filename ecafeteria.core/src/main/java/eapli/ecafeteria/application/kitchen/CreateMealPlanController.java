@@ -25,9 +25,8 @@ public class CreateMealPlanController {
         return resultingList;
     }
     
-    public Menu getMenu(List<Menu> menuList, int opcao){
+    public Menu getMenu(List<Menu> menuList, Integer opcao){
         Menu menu = menuList.get(opcao);
-        
         
         return menu;
     }
@@ -38,6 +37,10 @@ public class CreateMealPlanController {
         MealPlan mPlan = new MealPlan(menu, numberDishes);
         
         return mPlan;
+    }
+    
+    public void setDishQuantity(MealPlan mealPlan, Integer numberOfDishes){
+        mealPlan.getNumberOfDishes().add(numberOfDishes);
     }
 
 }
