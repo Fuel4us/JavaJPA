@@ -81,6 +81,6 @@ public interface RepositoryFactory {
     
     //HeuristicRepository heuristics();
     
-    //CanteenRepository canteen();
+    //CanteenShiftRepository canteenShift();
     
 }

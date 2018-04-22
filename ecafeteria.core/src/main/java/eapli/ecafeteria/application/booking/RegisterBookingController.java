@@ -11,7 +11,9 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Date;
@@ -24,9 +26,20 @@ import java.util.Optional;
 public class RegisterBookingController {
     
     private final BookingRepository repBooking = PersistenceContext.repositories().booking();
+    private final MealRepository repMeal = PersistenceContext.repositories().meals();
     private final CafeteriaUserRepository repCafeteriaUser = PersistenceContext.repositories().cafeteriaUsers();
     
     private final static long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
+    
+    public Meal findMealByID(int id){
+        //Needs revision
+        Optional<Meal> OpMeal = repMeal.findOne(Designation.valueOf("" + id));
+        if(OpMeal.isPresent())
+            return OpMeal.get();
+        else{
+            return null;
+        }
+    }
     
     public CafeteriaUser findCafeteriaUser(Username username){
         Optional<CafeteriaUser> OpCU = repCafeteriaUser.findByUsername(username);

@@ -6,6 +6,9 @@
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
 import eapli.ecafeteria.application.booking.RegisterBookingController;
+import eapli.ecafeteria.application.meals.ShowAvailableMealsController;
+import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.authz.UserSession;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.Dish;
@@ -20,6 +23,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,20 +34,27 @@ import java.util.logging.Logger;
 public class RegisterBookingUI extends AbstractUI{
 
     private final RegisterBookingController controller = new RegisterBookingController();
+    private final ShowAvailableMealsController SAMController = new ShowAvailableMealsController();
+    
+    Scanner input = new Scanner(System.in);
     
     @Override
     protected boolean doShow() {
         
+        System.out.println("Escolha a Meal para reservar: \n");
         //Apresenta as meals possiveis para escolha
+        //SAMController.showMeals();
         
         //Utilizador escolhe meal para booking
+        int mealID = input.nextInt();
+        Meal meal = controller.findMealByID(mealID);
         
         //Corrigir utilizador
+        //Como é que obtenho o username?????
         CafeteriaUser cu = controller.findCafeteriaUser(new Username("900330"));
         
-        //This data is for testing
         try {
-            controller.registerBooking(cu,new Meal(MealType.LUNCH, new Date(), new Dish(new DishType("srvev", "srgbrsb"), Designation.valueOf("wegwrg"), new Money(2, Currency.getInstance(Locale.ITALY))), Designation.valueOf("ssrbdb")));
+            controller.registerBooking(cu,meal);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(RegisterBookingUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
