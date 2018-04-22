@@ -94,4 +94,9 @@ public class Menu {
                 ", published=" + published +
                 '}';
     }
+
+    public List<Meal> getMealList() {
+        return mealList;
+    }
+    
 }
