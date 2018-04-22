@@ -180,7 +180,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         setPrice(newPrice);
     }
 
-    public void setAllerg(Allergens newAllergens) {
+    public void changeAllergensTo(Allergens newAllergens) {
         if (newAllergens == null) {
             throw new IllegalArgumentException();
         }

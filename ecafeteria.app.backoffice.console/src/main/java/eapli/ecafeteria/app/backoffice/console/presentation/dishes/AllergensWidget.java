@@ -15,9 +15,6 @@ public class AllergensWidget {
     private LinkedList<String> allergens;
 
     public void show() {
-        for (String allergen : allergens) {
-            
-        }
     }
     
     /**
