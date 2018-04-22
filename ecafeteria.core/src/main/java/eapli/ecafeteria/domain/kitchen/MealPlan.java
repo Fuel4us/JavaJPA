@@ -17,6 +17,7 @@ public class MealPlan {
 
     private Menu menu;
     private List<Integer> numberOfDishes;
+    private boolean closed;
 
     public MealPlan(Menu menu, List<Integer> numberOfDishes) {
         this.menu = menu;
@@ -24,4 +25,17 @@ public class MealPlan {
     }
 
     protected MealPlan(){}
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public List<Integer> getNumberOfDishes() {
+        return numberOfDishes;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+    
 }
