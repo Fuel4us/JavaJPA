@@ -7,6 +7,7 @@ package eapli.ecafetaria.application.finance;
 
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.Username;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
@@ -15,15 +16,30 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  * @author Hernani Gil
  */
 public class ChargeCardController {
-//    private SystemUser selectUser;
-//    private CafeteriaUserRepository cafeteriaUserRepository = new CafeteriaUserRepository();
-//    
-//    public Iterable<SystemUser> activeUsers() {
-//
-//        return this.CafetariaUserRepository.findAllActive();
-//    }
-//    
-//    public boolean selectUser(Username username){
-//        this.selectUser = ;
-//    }
+    private CafeteriaUser selectedUser;
+    
+    private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
+    //private final Movement movementRepository = PersistenceContext.repositories().transactions();
+    
+    public Iterable<CafeteriaUser> activeUsers() {
+
+        return this.cafeteriaUserRepository.findAllActive();
+    }
+    
+    public void selectUser(Username username){ //boolean
+        //this.selectedUser = cafeteriaUserRepository.findByUsername(username);
+    }
+    
+    public boolean ChargeCard(double amount){  //bolean
+        if(selectedUser!=null){
+            ChargeCardMovementFactory
+        }
+        
+            Transaction transaction = new Transaction(moneyAmount, currency);
+            if (selectedUser.account().chargeCard(moneyAmount, transaction)) {
+                this.userRepository.save(selectedUser);
+            }
+        
+        return false;
+    }
 }
