@@ -64,6 +64,10 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
         return dish;
     }
 
+    public MealType getMealType() {
+        return mealType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
