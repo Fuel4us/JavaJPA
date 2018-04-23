@@ -17,8 +17,6 @@ public class FindMealsByLotUI {
     }
 
     public void getUsedLots() {
-        System.out.println("Getting lots...");
-
         for (MealLot lot : controller.getUsedLots()) {
             System.out.println(lot);
         }
@@ -27,15 +25,15 @@ public class FindMealsByLotUI {
     }
 
     public void getCookedMealsWithLot() {
-        Scanner reader = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Select a lot");
-        Long lotId = reader.nextLong();
-
-        reader.close();
+        Long lotId = scanner.nextLong();
 
         for (Meal meal : controller.getCookedMealsWithLot(lotId)) {
             System.out.println(meal);
         }
+        
+        scanner.close();
     }
 }
