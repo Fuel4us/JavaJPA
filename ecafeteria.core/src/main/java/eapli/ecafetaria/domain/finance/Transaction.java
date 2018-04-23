@@ -10,6 +10,7 @@ import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Currency;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -17,6 +18,7 @@ import javax.persistence.Id;
  *
  * @author Hernani Gil
  */
+@Entity
 public class Transaction implements Serializable{
     private Money quantity;
     private Calendar date;
