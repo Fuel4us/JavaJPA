@@ -13,22 +13,22 @@ import eapli.framework.presentation.console.AbstractUI;
  *
  * @author Hernani Gil
  */
-//public class ChargeCardUI extends AbstractUI {{
-//
-//    private final ChargeCardController theController = new ChargeCardController();
-//
-//    protected Controller controller() {
-//        return this.theController;
-//    }
-//    
-//    @Override
-//    protected boolean doShow() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public String headline() {
-//        return "Charge Card";
-//    }
-//    
-//}
+public class ChargeCardUI extends AbstractUI {{
+
+    private final ChargeCardController theController = new ChargeCardController();
+
+    protected Controller controller() {
+        return this.theController;
+    }
+    
+    @Override
+    protected boolean doShow() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String headline() {
+        return "Charge Card";
+    }
+    
+}
