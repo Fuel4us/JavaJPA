@@ -5,7 +5,6 @@
  */
 package eapli.ecafetaria.application.finance;
 
-import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
@@ -31,14 +30,14 @@ public class ChargeCardController {
     }
     
     public boolean ChargeCard(double amount){  //bolean
-        if(selectedUser!=null){
-            ChargeCardMovementFactory
-        }
+//        if(selectedUser!=null){
+//            
+//        }
         
-            Transaction transaction = new Transaction(moneyAmount, currency);
-            if (selectedUser.account().chargeCard(moneyAmount, transaction)) {
-                this.userRepository.save(selectedUser);
-            }
+//            Transaction transaction = new Transaction(moneyAmount, currency);
+//            if (selectedUser.account().chargeCard(moneyAmount, transaction)) {
+//                this.userRepository.save(selectedUser);
+//            }
         
         return false;
     }
