@@ -5,32 +5,41 @@
  */
 package eapli.ecafetaria.application.finance;
 
+import eapli.ecafetaria.domain.finance.Shift;
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.persistence.PersistenceContext;
-import java.util.List;
+import eapli.framework.application.Controller;
+import java.util.Date;
 
 /**
  *
  * @author Josué Lapa
  */
-public class OpenCanteenShiftController {
+public class OpenCanteenShiftController implements Controller{
     
    // private final CanteenShiftRepository canteenShiftRepository = new PersistenceContext.repositories().CanteenShiftRepository();
+   //private final MealTypeRepository mealTypeRepository = new PersistenceContext.repositories().MealTypeRepository();  
     
-    public void chooseShiftMealType(){
+    Shift newShift; //USAR FACTORY???
     
+    public void setUpShiftInformation(Date shiftDate, MealType mealType){
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SELECT_MEAL);
+        
+        //Fará sentido existir a classe ShiftDate?
+        newShift = new Shift(shiftDate, mealType);
+        
+        //canteenShiftRepository.
+        
     }
     
-    public void chooseShiftDay(){
-    
+    public boolean verifyShift(){
+        //verificar se o shift ja existe
+        return false;
+        
     }
     
     public void saveShift(){
-        
-    }
-    
-    public List<MealType> showMealTypes(){
-        return null;
-        
+        //guarda o shift no repositorio
     }
 }

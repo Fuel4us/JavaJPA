@@ -36,6 +36,8 @@ public interface RepositoryFactory {
     DishTypeRepository dishTypes();
     
     MealRepository meals();
+    
+    MenuRepository menus();
 
     /**
      *
@@ -76,6 +78,8 @@ public interface RepositoryFactory {
     DishReportingRepository dishReporting();
     
     LotRepository lots();
+    
+    ExecutionRepository execution();
     
     BookingRepository booking();
     

@@ -2,7 +2,6 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
-
 import javax.persistence.*;
 
 /**
@@ -19,9 +18,10 @@ public class MealPlan {
     private List<Integer> numberOfDishes;
     private boolean closed;
 
-    public MealPlan(Menu menu, List<Integer> numberOfDishes) {
+    public MealPlan(Menu menu, List<Integer> numberOfDishes, boolean closed) {
         this.menu = menu;
         this.numberOfDishes = numberOfDishes;
+        this.closed = closed;
     }
 
     protected MealPlan(){}
@@ -38,4 +38,9 @@ public class MealPlan {
         return closed;
     }
     
+    public boolean toogleState(){
+        this.closed = !this.closed;
+        
+        return isClosed();
+    }
 }

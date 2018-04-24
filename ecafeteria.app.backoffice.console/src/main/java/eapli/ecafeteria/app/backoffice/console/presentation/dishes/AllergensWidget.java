@@ -1,5 +1,6 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
+import eapli.ecafeteria.domain.dishes.Allergens;
 import java.util.LinkedList;
 import eapli.framework.util.Console;
 
@@ -23,5 +24,9 @@ public class AllergensWidget {
      */
     public LinkedList<String> getAllergenics() {
         return allergens;
+    }
+    
+    public void setAllergenicsList(LinkedList<String> allerg) {
+        allergens = allerg;
     }
 }
