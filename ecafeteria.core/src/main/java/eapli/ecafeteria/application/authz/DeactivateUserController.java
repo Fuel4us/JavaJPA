@@ -31,6 +31,11 @@ public class DeactivateUserController implements Controller {
 
         return this.userRepository.findAll();
     }
+    
+    public ReasonType[] reasons(){
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
+        return ReasonType.values();
+    }
 
     public SystemUser deactivateUser(SystemUser user, ReasonType rType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);

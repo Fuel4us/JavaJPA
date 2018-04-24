@@ -57,7 +57,7 @@ public class DeactivateUserUI extends AbstractUI {
                 System.out.println("No user selected");
             } 
             System.out.println("Reason list\n");
-            for(final ReasonType rType: ReasonType.values()){
+            for(final ReasonType rType: this.theController.reasons()){
                 reasonList.add(rType);
                 System.out.println(reasonCounter+". "+rType+"\n");
             }
