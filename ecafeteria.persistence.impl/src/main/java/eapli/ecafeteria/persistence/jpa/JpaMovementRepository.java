@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.persistence;
+package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafetaria.domain.movement.Movement;
-import eapli.framework.persistence.repositories.DataRepository;
+import eapli.ecafeteria.persistence.MovementRepository;
 
 /**
  *
  * @author Hernani Gil
  */
-public interface MovementRepository extends DataRepository<Movement, Long>{
+public class JpaMovementRepository extends CafeteriaJpaRepositoryBase<Movement, Long> implements MovementRepository{
 
+    
 }

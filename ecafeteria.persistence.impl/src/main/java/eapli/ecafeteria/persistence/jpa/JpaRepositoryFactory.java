@@ -97,4 +97,9 @@ public abstract class JpaRepositoryFactory implements RepositoryFactory {
 //    public HeuristicRepository heuristics() {
 //        return new JpaHeuristicRepository(Application.settings().getPersistenceUnitName());
 //    }
+    
+    @Override
+    public JpaMovementRepository movement(){
+        return new JpaMovementRepository();
+    }
 }

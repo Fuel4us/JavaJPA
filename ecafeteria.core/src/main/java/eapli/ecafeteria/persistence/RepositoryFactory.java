@@ -83,4 +83,13 @@ public interface RepositoryFactory {
     
     //CanteenShiftRepository canteenShift();
     
+    /*
+    * POSUserRepository
+    */
+    //POSUserRepository POSUser();
+    
+    /*
+    * Movement
+    */
+    MovementRepository movement();
 }
