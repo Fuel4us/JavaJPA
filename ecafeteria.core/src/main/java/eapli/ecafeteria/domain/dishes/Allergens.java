@@ -11,16 +11,26 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class Allergens implements Serializable {
-
+    
+    /**
+     * List that saves the allergens of an certain dish.
+     */
     private LinkedList<String> allerg;
-
+    
+    /**
+     * Constructor of the class
+     * @param allerg 
+     */
     public Allergens(LinkedList<String> allerg) {
         if (allerg == null) {
             throw new IllegalArgumentException("Allergenics can't be null!");
         }
         this.allerg = allerg;
     }
-
+    
+    /**
+     * Empty constructor of the class dish.
+     */
     public Allergens() {
         allerg = new LinkedList<>();
     }
