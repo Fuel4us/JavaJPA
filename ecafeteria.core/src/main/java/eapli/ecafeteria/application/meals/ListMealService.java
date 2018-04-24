@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.meals;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
@@ -16,12 +17,21 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  * @author Bernardo Carreira
  */
 public class ListMealService {
-    
+
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     public Iterable<Meal> allMeals() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
         return this.mealRepository.findAll();
+    }
+
+    /**
+     * @autor Pedro ALves
+     * @return
+     */
+    public Iterable<MealType> allMealTypes() {
+        //por implementar
+        return null;
     }
 }
