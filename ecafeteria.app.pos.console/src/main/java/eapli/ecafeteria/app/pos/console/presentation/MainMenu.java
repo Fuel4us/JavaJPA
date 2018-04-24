@@ -6,9 +6,11 @@
 package eapli.ecafeteria.app.pos.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
+import eapli.ecafetaria.app.pos.console.presentation.finance.ChargeCardAction;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.HorizontalMenuRenderer;
@@ -31,6 +33,12 @@ public class MainMenu extends AbstractUI {
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
+    private static final int POS_MENU = 2;
+    
+    //POS MENU
+    private static final int CHARGE_CARD_OPTION = 1;
+    private static final int SHOW_AVAILABLE_MEALS = 2;
+    private static final int DELIVER_RESERVATION = 3;
 
     @Override
     public boolean show() {
@@ -69,7 +77,8 @@ public class MainMenu extends AbstractUI {
         }
 
         if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.SALE)) {
-            // TODO
+            final Menu myPOSMenu = buildPOSMenu();
+            mainMenu.add(new SubMenu(POS_MENU, myPOSMenu, new ShowVerticalSubMenuAction(myPOSMenu)));
         }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
@@ -79,5 +88,20 @@ public class MainMenu extends AbstractUI {
         mainMenu.add(new MenuItem(EXIT_OPTION, "Exit", new ExitWithMessageAction()));
 
         return mainMenu;
+    }
+    
+    private Menu buildPOSMenu() {
+        final Menu menu = new Menu("Create Transaction >");
+
+        menu.add(new MenuItem(CHARGE_CARD_OPTION, "Charge Card",
+                new ChargeCardAction()));
+        /*menu.add(new MenuItem(SHOW_AVAILABLE_MEALS, "Show available meals",
+                new ShowAvailableMealsAction()));
+        menu.add(new MenuItem(DELIVER_RESERVATION, "Deliver reservation",
+                new DeliverReservationAction()));
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        */
+        return menu;
+
     }
 }

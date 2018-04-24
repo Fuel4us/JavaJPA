@@ -12,18 +12,18 @@ import eapli.framework.presentation.console.AbstractUI;
  *
  * @author Hernani Gil
  */
-//public class ChargeCardUI extends AbstractUI {
-//
-//    private final ChargeCardController chargeCardController = new ChargeCardController();
-//    
-//    @Override
-//    protected boolean doShow() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public String headline() {
-//        return "Charge Card";
-//    }
-//    
-//}
+public class ChargeCardUI extends AbstractUI {
+
+    private final ChargeCardController chargeCardController = new ChargeCardController();
+    
+    @Override
+    protected boolean doShow() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String headline() {
+        return "Charge Card";
+    }
+    
+}
