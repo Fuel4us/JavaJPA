@@ -8,11 +8,12 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
+import java.util.LinkedList;
 
 /**
  *
  * @author Jorge Santos ajs@isep.ipp.pt
- * 
+ *
  * changed by João Pereira <1150478@isep.ipp.pt>
  */
 public class RegisterDishUI extends AbstractUI {
@@ -31,17 +32,26 @@ public class RegisterDishUI extends AbstractUI {
         selector.show();
         final DishType theDishType = selector.selectedElement();
 
-        final String name = Console.readLine("Name");
+        final String name = Console.readLine("Name:");
 
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
+        nutricionalData.show(); 
         
         final AllergensWidget allerg = new AllergensWidget();
-        
-        allerg.show();
-        
-        nutricionalData.show();
 
-        final double price = Console.readDouble("Price");
+        final double price = Console.readDouble("Price:");
+
+        LinkedList<String> newAllergenList = new LinkedList<>();
+        final int num = Console.readInteger("Enter the number of allergens of the new list.");
+        for (int i = 0; i < num; i++) {
+            final String all = Console.readLine("Allergen:");
+            if (newAllergenList.contains(all) == false) {
+                newAllergenList.add(all);
+            } else {
+                System.out.println("The allergen inserted is already on the list!");
+            }
+        }
+        allerg.setAllergenicsList(newAllergenList);
 
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
