@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
@@ -17,16 +12,16 @@ import java.util.Scanner;
  * @author Tiago Babo 1160760
  */
 public class CreateMealPlanUI {
-    CreateMealPlanController controller;
-    Scanner input = new Scanner(System.in);
+    private final CreateMealPlanController controller = new CreateMealPlanController();
+    private final Scanner input = new Scanner(System.in);
 
     public Menu selectMenu() {
         System.out.println("Select the menu for which you wish to create the meal plan:");
         List<Menu> menuList = controller.getExistingMenus();
-        int i = 1;
+        int i = 0;
 
         for (Menu menu : menuList) {
-            System.out.println(i + ". " + menu);
+            System.out.println(i + ". Menu " + menu.id());
             i++;
         }
         System.out.printf("OPCAO: ");
@@ -44,11 +39,11 @@ public class CreateMealPlanUI {
 
         System.out.println("Assign the number of dishes for each of the meals:");
 
-        int i = 1;
+        int i = 0;
         Integer numberOfDishes;
 
         for (Meal meal : mealPlan.getMenu().getMealList()) {
-            System.out.printf(i + " --> %s | %s | %s | %s\n",
+            System.out.printf(i + " --> %s || %s || %s || %s\n",
                                                     controller.getMealDate(meal),
                                                     controller.getMealDishType(meal),
                                                     controller.getMealDishName(meal),
@@ -61,5 +56,9 @@ public class CreateMealPlanUI {
 
             i++;
         }
+        
+        controller.saveMealPlan();
+        
+        System.out.println("Meal plan saved successfully!");
     }
 }
