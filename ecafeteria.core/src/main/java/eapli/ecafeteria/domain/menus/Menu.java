@@ -49,6 +49,10 @@ public class Menu {
         this.published = false;
     }
 
+    public int id() {
+        return id;
+    }
+
     protected Menu() {
         // for ORM only
     }
