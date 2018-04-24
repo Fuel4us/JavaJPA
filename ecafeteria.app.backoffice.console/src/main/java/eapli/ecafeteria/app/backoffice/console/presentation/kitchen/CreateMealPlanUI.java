@@ -49,10 +49,10 @@ public class CreateMealPlanUI {
 
         for (Meal meal : mealPlan.getMenu().getMealList()) {
             System.out.printf(i + " --> %s | %s | %s | %s\n",
-                                                    meal.getDate(),
-                                                    meal.getDish().dishType(),
-                                                    meal.getDish().name(),
-                                                    meal.getMealType());
+                                                    controller.getMealDate(meal),
+                                                    controller.getMealDishType(meal),
+                                                    controller.getMealDishName(meal),
+                                                    controller.getMealType(meal));
             System.out.printf("Number of dishes: ");
             numberOfDishes = input.nextInt();
             System.out.printf("\n");

@@ -5,10 +5,23 @@
  */
 package eapli.ecafetaria.domain.finance;
 
+import eapli.ecafeteria.domain.meals.MealType;
+import java.util.Date;
+
 /**
  *
  * @author Josué Lapa
  */
 public class Shift {
-    
+
+    private Date shiftDate; //DATE OU SHIFTDATE?
+    private MealType mealType;
+    private ShiftState shiftState;
+
+    public Shift(Date shiftDate, MealType mealType) {
+        this.shiftDate = shiftDate;
+        this.mealType = mealType;
+        this.shiftState = ShiftState.CLOSED; 
+    }
+
 }

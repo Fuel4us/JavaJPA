@@ -8,13 +8,14 @@ package eapli.ecafetaria.application.finance;
 import eapli.ecafetaria.domain.finance.POS;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.application.Controller;
 import java.util.List;
 
 /**
  *
  * @author Josué Lapa
  */
-public class OpenPOSController {
+public class OpenPOSController implements Controller{
 
     //private final POSRepository posRepository = new PersistenceContext.repositories().POSRepository();
     

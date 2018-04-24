@@ -19,9 +19,10 @@ public class MealPlan {
     private List<Integer> numberOfDishes;
     private boolean closed;
 
-    public MealPlan(Menu menu, List<Integer> numberOfDishes) {
+    public MealPlan(Menu menu, List<Integer> numberOfDishes, boolean closed) {
         this.menu = menu;
         this.numberOfDishes = numberOfDishes;
+        this.closed = closed;
     }
 
     protected MealPlan(){}
