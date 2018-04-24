@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.menus;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EmbeddedId;
@@ -103,4 +104,23 @@ public class Menu {
         return mealList;
     }
     
+    /**
+     * Gets a list of meals from a menu in a certain menu period (Joao Reis - 1160600)
+     *
+     * @param periodStart beginning of established time period
+     * @param periodEnd end of established time period
+     * @return meals in a menu that belong to a certain time period
+     */
+    public List<Meal> mealsInPeriod(Date periodStart, Date periodEnd) {
+        List<Meal> list = new ArrayList<>();
+
+        for (Meal m : mealList) {
+            if (m.getDate().after(periodStart) && m.getDate().before(periodEnd)) {
+                list.add(m);
+            }
+        }
+
+        return list;
+    }
+
 }

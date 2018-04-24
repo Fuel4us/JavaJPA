@@ -8,6 +8,7 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -18,4 +19,12 @@ public interface MenuRepository extends DataRepository<Menu, Designation> {
    
     Iterable<Menu> findByState(boolean state);
     
+    /**
+     * finds a list of menus that exist in a specific period (Joao Reis - 1160600)
+     *
+     * @param beginning beginning of established time period
+     * @param end end of established time period
+     * @return menus that either have a start date or end date in the established time period
+     */
+    Iterable<Menu> findByMenuPeriod(Date beginning, Date end);
 }
