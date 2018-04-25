@@ -1,22 +1,21 @@
 package eapli.ecafeteria.domain.meals;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  */
 public class HeuristicConfiguration {
     
-    private Heuristic selectedHeuristic;
+    private List<Heuristic> heuristicsAvailable;
     
-    public HeuristicConfiguration(Heuristic selectedHeuristic) {
-        this.selectedHeuristic = selectedHeuristic;
+    public HeuristicConfiguration() {
+        heuristicsAvailable = new LinkedList<>();
     }
-    
-    public boolean selectNewHeuristic(Heuristic newHeuristic) {
-        if (newHeuristic != null){
-            this.selectedHeuristic = newHeuristic;
-            return true;
-        } else
-            return false;
+
+    public List<Heuristic> heuristics() {
+        return heuristicsAvailable;
     }
 }
