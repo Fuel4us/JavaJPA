@@ -29,15 +29,13 @@ public class ReasonTypeTest {
     public void testValueOf() {
         System.out.println("Test Value Of ----------------\n");
         
-        String name = ReasonType.REASON1.toString();
-        ReasonType reason = ReasonType.valueOf(name);
-        assertEquals(reason, ReasonType.REASON1);
-        assertNotEquals(reason, ReasonType.REASON2);
+        String reason1_name = "REASON1";
+        String reason2_name = "REASON2";
+        ReasonType reason = ReasonType.valueOf(reason1_name);
+        assertEquals(ReasonType.REASON1, reason);
         
-        name = ReasonType.REASON2.toString();
-        reason = ReasonType.valueOf(name);
-        assertNotEquals(reason, ReasonType.REASON1);
-        assertEquals(reason, ReasonType.REASON2);
+        reason = ReasonType.valueOf(reason2_name);
+        assertEquals(ReasonType.REASON2, reason);
     }
 
     

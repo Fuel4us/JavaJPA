@@ -69,7 +69,7 @@ public class Reason implements Serializable, AggregateRoot<Object> {
 
     @Override
     public boolean sameAs(Object other) {
-        if (!(other instanceof Dish)) {
+        if (!(other instanceof Reason)) {
             return false;
         }
 
