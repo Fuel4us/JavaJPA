@@ -5,14 +5,17 @@
  */
 package eapli.ecafeteria.domain.authz;
 
+import javax.persistence.Embeddable;
+
 
 
 /**
  *
  * @author pedromonteiro
  */
+@Embeddable
 public enum ReasonType {
-    REASON1("Reason 1"), REASON2("Reason 2");
+    REASON1("The user was always late."), REASON2("The user has not complied with a contract clause.");
         
         private final String reasonContent;
         
