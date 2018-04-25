@@ -28,7 +28,8 @@ public class OpenPOSController implements Controller{
      *
      * @return returns true if the POS was successfully opened or false if it is already openned
      */
-    public boolean openPOS(/*recebe qual a POS em questao*/){
+    public boolean openPOS(POS pos/*recebe qual a POS em questao?*/){
+        //opens POS
         return false;
     }
 }
