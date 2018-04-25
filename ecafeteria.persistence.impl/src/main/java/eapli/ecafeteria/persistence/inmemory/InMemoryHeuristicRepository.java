@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.meals.Heuristic;
+import eapli.ecafeteria.domain.meals.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 
@@ -8,10 +9,11 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  */
-public class InMemoryHeuristicRepository extends InMemoryRepository<Heuristic, String> implements HeuristicRepository {
+public class InMemoryHeuristicRepository extends InMemoryRepository<HeuristicConfiguration, Heuristic> implements HeuristicRepository {
 
     @Override
-    protected String newKeyFor(Heuristic t) {
-        return t.toString();
+    protected Heuristic newKeyFor(HeuristicConfiguration entity) {
+        return entity.heuristics().get(0);
     }
+
 }
