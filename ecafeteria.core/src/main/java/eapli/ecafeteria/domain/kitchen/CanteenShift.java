@@ -3,16 +3,17 @@ package eapli.ecafeteria.domain.kitchen;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 import javax.persistence.Version;
 
 @Entity
-public class CanteenShift implements AggregateRoot<Date>, Serializable{
+public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +26,8 @@ public class CanteenShift implements AggregateRoot<Date>, Serializable{
 
     // business ID
     @Column(unique = true)
-    private Date dateCS;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dateCS;
     @OneToMany
     private Meal mealCode;
     private String description;
@@ -34,7 +36,7 @@ public class CanteenShift implements AggregateRoot<Date>, Serializable{
         // for ORM
     }
 
-    public CanteenShift(Date date, Meal mealCode, String description) {
+    public CanteenShift(Calendar date, Meal mealCode, String description) {
         if (date == null) {
             throw new IllegalArgumentException();
         }
@@ -56,12 +58,12 @@ public class CanteenShift implements AggregateRoot<Date>, Serializable{
     }
 
     @Override
-    public Date id() {
+    public Calendar id() {
         return this.dateCS;
     }
 
     @Override
-    public boolean is(Date date) {
+    public boolean is(Calendar date) {
         return (date.getTime() == this.dateCS.getTime());
     }
 
