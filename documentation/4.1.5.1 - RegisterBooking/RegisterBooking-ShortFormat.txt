@@ -1,4 +1,5 @@
-Register Booking
+Register Booking:
+
 
 The user starts the new booking.
 
@@ -6,8 +7,7 @@ The systems shows the Meals for this weeks menu(To be decided by another use cas
 
 The user picks a meal to be booked(can only choose one at once).
 
-The system shows the nutricional value of the dish(of the chosen meal) and the weekly 
-calorie consumption(if the user chooses this meal) and ask to confirm.
+The system shows the meal and ask to confirm.
 
 The user confirms.
 
