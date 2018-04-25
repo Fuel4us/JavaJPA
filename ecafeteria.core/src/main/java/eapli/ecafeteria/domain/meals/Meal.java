@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
@@ -12,49 +7,55 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.persistence.EmbeddedId;
+import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 import javax.persistence.Version;
 
 /**
  *
  * @author Bernardo Carreira
+ * @authorEDIT Pedro Alves <1150372@isep.ipp.pt>
  */
 @Entity
-public class Meal implements AggregateRoot<Designation>, Serializable { //implementa aggregatedroot?
+public class Meal implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    private Long pk;
 
     @Version
     private Long version;
 
-    @EmbeddedId
-    private Designation name;
     /**
-     * cascade = CascadeType.NONE as the dishType is part of another aggregate
+     * Class Changed by: Pedro Alves
      */
+    @ManyToOne()
     private MealType mealType;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date mealDate;
+    @ManyToOne
     private Dish dish;
     private boolean active;
-    
 
-    public Meal(final MealType mealType, final Date mealDate, final Dish dish, final Designation name) {
-        if (mealType == null || name == null || dish == null || mealDate == null) {
+    public Meal(final MealType mealType, final Date mealDate, final Dish dish) {
+        if (mealType == null || dish == null || mealDate == null) {
             throw new IllegalArgumentException();
         }
-
         this.mealType = mealType;
         this.mealDate = mealDate;
         this.dish = dish;
-        this.name = name;
         this.active = true;
     }
 
-    protected Meal() {
+    public Meal() {
         // for ORM only
-    }
+    } 
 
     public Date getDate() {
         return mealDate;
@@ -78,15 +79,9 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
         }
 
         final Meal other = (Meal) o;
-        return id().equals(other.id());
+        return Objects.equals(this.pk, other.pk);
     }
 
-    @Override
-    public int hashCode() {
-        return this.name.hashCode();
-    }
-
-    @Override
     public boolean sameAs(Object other) {
         if (!(other instanceof Meal)) {
             return false;
@@ -97,27 +92,17 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
             return true;
         }
 
-        return id().equals(that.id()) && mealType.equals(that.mealType)
+        return  mealType.equals(that.mealType)
                 && dish.equals(that.dish) && mealDate.equals(that.mealDate)
                 && active == that.active;
     }
 
-    @Override
-    public boolean is(Designation id) {
-        return id().equals(id);
+    public boolean is(Long pk) {
+        return Objects.equals(this.pk, pk);
     }
 
     public MealType mealType() {
         return this.mealType;
-    }
-
-    @Override
-    public Designation id() {
-        return this.name;
-    }
-
-    public Designation name() {
-        return this.name;
     }
 
     /**
@@ -140,7 +125,7 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
     }
 
     public MealDTO toDTO() {
-        return new MealDTO(mealType.toString(), name.toString(),
+        return new MealDTO(mealType.toString(),
                 dish.dishType().id(), dish.dishType().description(), dish.nutricionalInfo().calories(),
                 dish.nutricionalInfo().salt(), dish.currentPrice().amount(),
                 dish.currentPrice().currency().getCurrencyCode(), active);
@@ -170,16 +155,15 @@ public class Meal implements AggregateRoot<Designation>, Serializable { //implem
 
     @Override
     public String toString() {
-        return "Meal{" +
-                "version=" + version +
-                ", name=" + name +
-                ", mealType=" + mealType +
-                ", mealDate=" + mealDate +
-                ", dish=" + dish +
-                ", active=" + active +
-                '}';
+        return "Meal{"
+                + "version=" + version
+                + ", mealType=" + mealType
+                + ", mealDate=" + mealDate
+                + ", dish=" + dish
+                + ", active=" + active
+                + '}';
     }
-    
+
     public String toString2() {
         SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
         String data2 = data.format(mealDate.getTime());

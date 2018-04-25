@@ -1,11 +1,13 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.framework.presentation.console.ShowMessageAction;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  */
+@Embeddable
 public class HeuristicA implements Heuristic {
     
     public HeuristicA(){

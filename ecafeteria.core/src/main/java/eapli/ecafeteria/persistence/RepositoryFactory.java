@@ -83,7 +83,7 @@ public interface RepositoryFactory {
     
     BookingRepository booking();
     
-    //HeuristicRepository heuristics();
+    HeuristicRepository heuristics();
     
     //CanteenShiftRepository canteenShift();
     

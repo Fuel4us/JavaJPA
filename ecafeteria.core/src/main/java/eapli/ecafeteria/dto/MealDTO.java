@@ -10,16 +10,15 @@ import eapli.framework.dto.DTO;
 /**
  *
  * @author Bernardo Carreira
- * 
+ *
  * a pure DTO for meal
  */
 @SuppressWarnings("squid:ClassVariableVisibilityCheck")
-public class MealDTO implements DTO{
-    
-    public MealDTO(String mealType, String name, String dishTypeAcronym, String dishTypeDescription,
+public class MealDTO implements DTO {
+
+    public MealDTO(String mealType, String dishTypeAcronym, String dishTypeDescription,
             Integer calories2, Integer salt2, double amount, String currency2, boolean active2) {
-        this.mealType=mealType;
-        this.name = name;
+        this.mealType = mealType;
         this.dishTypeAcronym = dishTypeAcronym;
         this.dishTypeDescription = dishTypeDescription;
         calories = calories2;
@@ -33,8 +32,6 @@ public class MealDTO implements DTO{
     public String dishTypeAcronym;
     public String dishTypeDescription;
 
-    public String name;
-
     public int calories;
     public int salt;
 
@@ -42,5 +39,5 @@ public class MealDTO implements DTO{
     public String currency;
 
     public boolean active;
-    
+
 }
