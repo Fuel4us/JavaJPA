@@ -83,9 +83,9 @@ public interface RepositoryFactory {
     
     BookingRepository booking();
     
-    //HeuristicRepository heuristics();
+    HeuristicRepository heuristics();
     
-    //CanteenShiftRepository canteenShift();
+    CanteenShiftRepository canteenShift();
     
     /*
     * POSUserRepository
@@ -96,4 +96,13 @@ public interface RepositoryFactory {
     * Movement
     */
     MovementRepository movement();
+    
+    
+    /**
+     * Reason Repository
+     * @return ReasoRepository
+     */
+
+    
+    ReasonRepository reason();
 }

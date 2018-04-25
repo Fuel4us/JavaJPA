@@ -6,6 +6,7 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -168,5 +169,27 @@ public class Meal implements Serializable {
         SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
         String data2 = data.format(mealDate.getTime());
         return String.format("DAY: %s /PLATE: %s /TYPE: %s /MEAL: %s", data2, dish.id(), mealType.toString(), dish.dishType().id());
+    }
+    
+    /**
+     * Creates a comparator to compare Meals according to their meal dates (joao
+     * reis - 1160600)
+     *
+     * @return comparator object that compares meal dates
+     */
+    public static Comparator<Meal> compareDates() {
+        return new Comparator<Meal>() {
+            @Override
+            public int compare(Meal t, Meal t1) {
+                if (t != null && t1 != null) {
+                    return t.getDate().compareTo(t1.getDate());
+                }
+                if (t1 == null) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        };
     }
 }

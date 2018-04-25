@@ -1,9 +1,10 @@
-//package eapli.ecafeteria.persistence;
-//
-//import eapli.framework.domain.Designation;
-//import eapli.framework.persistence.repositories.DataRepository;
-//import java.util.Date;
-//
-//public interface CanteenShiftRepository extends DataRepository<Date, Designation>{
-//    
-//}
+package eapli.ecafeteria.persistence;
+
+import eapli.ecafeteria.domain.kitchen.CanteenShift;
+import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Calendar;
+
+public interface CanteenShiftRepository extends DataRepository<CanteenShift, Calendar>{
+    
+    boolean close(Calendar cal);
+}

@@ -5,10 +5,25 @@
  */
 package eapli.ecafetaria.domain.finance;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  *
  * @author Josué Lapa
  */
+@Entity
 public class POS {
+
+    @Id
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
 }
