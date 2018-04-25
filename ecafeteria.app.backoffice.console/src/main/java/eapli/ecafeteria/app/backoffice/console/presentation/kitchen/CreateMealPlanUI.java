@@ -21,10 +21,11 @@ public class CreateMealPlanUI {
         int i = 0;
 
         for (Menu menu : menuList) {
-            System.out.println(i + ". Menu " + menu.id());
+            System.out.println(i + ". Menu with Starting date: " + menu.getStartDate()
+                                 + "and finishing date: " + menu.getEndDate());
             i++;
         }
-        System.out.printf("OPCAO: ");
+        System.out.printf("OPTION: ");
         Integer opcao = input.nextInt();
 
         Menu selectedMenu = controller.getMenu(menuList, opcao);
@@ -57,7 +58,7 @@ public class CreateMealPlanUI {
             i++;
         }
         
-        controller.saveMealPlan();
+        controller.saveMealPlan(mealPlan);
         
         System.out.println("Meal plan saved successfully!");
     }
