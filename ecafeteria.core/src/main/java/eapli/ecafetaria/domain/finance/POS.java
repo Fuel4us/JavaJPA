@@ -5,10 +5,13 @@
  */
 package eapli.ecafetaria.domain.finance;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Josué Lapa
  */
+@Entity
 public class POS {
     
 }

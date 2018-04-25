@@ -10,5 +10,9 @@ package eapli.ecafetaria.domain.finance;
  * @author Josué Lapa
  */
 public enum POSState {
+    OPEN, CLOSED;
     
+    public static POSState[] POSStateValues() {
+        return new POSState[]{OPEN,CLOSED};
+    }
 }
