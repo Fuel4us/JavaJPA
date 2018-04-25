@@ -3,14 +3,23 @@ package eapli.ecafeteria.domain.dishes;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Objects;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
  *
  * @author João Pereira <1150478@isep.ipp.pt>
  */
-@Embeddable
+@Entity
 public class Allergens implements Serializable {
+    
+    @Id
+    @GeneratedValue
+    private Long pk;
+    @Version
+    private Long version;
     
     /**
      * List that saves the allergens of an certain dish.

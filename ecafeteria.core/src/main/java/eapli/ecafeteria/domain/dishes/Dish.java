@@ -39,9 +39,6 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     /**
      * cascade = CascadeType.NONE as the dishType is part of another aggregate
      */
-    /**
-     * Class Changed by: João Pereira_115047
-     */
     @ManyToOne()
     private DishType dishType;
     private NutricionalInfo nutricionalInfo;
