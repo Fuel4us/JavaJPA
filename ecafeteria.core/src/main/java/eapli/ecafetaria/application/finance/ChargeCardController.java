@@ -5,10 +5,18 @@
  */
 package eapli.ecafetaria.application.finance;
 
+import eapli.ecafetaria.domain.movement.Movement;
+import eapli.ecafetaria.domain.movement.MovementType;
+import eapli.ecafeteria.Application;
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import java.util.Currency;
+import java.util.Locale;
+import java.util.Optional;
 
 /**
  *
@@ -21,23 +29,28 @@ public class ChargeCardController {
     //private final Movement movementRepository = PersistenceContext.repositories().transactions();
     
     public Iterable<CafeteriaUser> activeUsers() {
-
         return this.cafeteriaUserRepository.findAllActive();
     }
     
-    public void selectUser(Username username){ //boolean
-        //this.selectedUser = cafeteriaUserRepository.findByUsername(username);
+    public boolean selectUser(Username username){ //boolean
+        Optional<CafeteriaUser> OpCU = cafeteriaUserRepository.findByUsername(username);
+        
+        if(OpCU.isPresent()){
+            selectedUser = OpCU.get();
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     
     public boolean ChargeCard(double amount){  //bolean
-//        if(selectedUser!=null){
-//            
-//        }
-        
-//            Transaction transaction = new Transaction(moneyAmount, currency);
-//            if (selectedUser.account().chargeCard(moneyAmount, transaction)) {
-//                this.userRepository.save(selectedUser);
-//            }
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
+        if(selectedUser!=null){
+            Currency currency = Currency.getInstance(Locale.FRANCE);   
+            Movement movement = new Movement(this.selectedUser.mecanographicNumber(), MovementType.DEPOSIT, amount, currency);
+            return true;
+        }
         
         return false;
     }

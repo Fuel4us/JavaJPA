@@ -5,11 +5,14 @@
  */
 package eapli.ecafetaria.domain.movement;
 
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.domain.money.Money;
 import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Currency;
+import java.util.Locale;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,6 +29,9 @@ public class Movement implements Serializable {
     @GeneratedValue
     private int id;
     
+    @ManyToOne()    
+    private MecanographicNumber nif;
+    
     private Money quantity;
     private Calendar date;
     
@@ -36,7 +42,8 @@ public class Movement implements Serializable {
         //ORM
     }
     
-    public Movement(MovementType movementType, double quantityDouble, Currency currency){
+    public Movement(MecanographicNumber nif, MovementType movementType, double quantityDouble, Currency currency){
+        this.nif = nif;
         this.movementType = movementType;
         quantity = new Money(quantityDouble, currency);
         date= DateTime.now();
