@@ -16,12 +16,10 @@ public class MealPlan {
 
     private Menu menu;
     private List<Integer> numberOfDishes;
-    private boolean closed;
 
-    public MealPlan(Menu menu, List<Integer> numberOfDishes, boolean closed) {
+    public MealPlan(Menu menu, List<Integer> numberOfDishes) {
         this.menu = menu;
         this.numberOfDishes = numberOfDishes;
-        this.closed = closed;
     }
 
     protected MealPlan(){}
@@ -32,15 +30,5 @@ public class MealPlan {
 
     public List<Integer> getNumberOfDishes() {
         return numberOfDishes;
-    }
-
-    public boolean isClosed() {
-        return closed;
-    }
-    
-    public boolean toogleState(){
-        this.closed = !this.closed;
-        
-        return isClosed();
     }
 }
