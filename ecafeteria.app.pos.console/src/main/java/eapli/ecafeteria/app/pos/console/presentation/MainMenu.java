@@ -38,7 +38,7 @@ public class MainMenu extends AbstractUI {
     //POS MENU
     private static final int CHARGE_CARD_OPTION = 1;
     private static final int SHOW_AVAILABLE_MEALS = 2;
-    private static final int DELIVER_RESERVATION = 3;
+    private static final int DELIVER_BOOKING = 3;
 
     @Override
     public boolean show() {
@@ -91,13 +91,13 @@ public class MainMenu extends AbstractUI {
     }
     
     private Menu buildPOSMenu() {
-        final Menu menu = new Menu("Create Transaction >");
+        final Menu menu = new Menu("POS MENU >");
 
         menu.add(new MenuItem(CHARGE_CARD_OPTION, "Charge Card",
                 new ChargeCardAction()));
         /*menu.add(new MenuItem(SHOW_AVAILABLE_MEALS, "Show available meals",
                 new ShowAvailableMealsAction()));
-        menu.add(new MenuItem(DELIVER_RESERVATION, "Deliver reservation",
+        menu.add(new MenuItem(DELIVER_BOOKING, "Deliver booking",
                 new DeliverReservationAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         */
