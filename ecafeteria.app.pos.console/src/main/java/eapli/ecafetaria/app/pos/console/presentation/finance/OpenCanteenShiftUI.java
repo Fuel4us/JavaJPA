@@ -5,7 +5,7 @@
  */
 package eapli.ecafetaria.app.pos.console.presentation.finance;
 
-import eapli.ecafetaria.application.finance.OpenCanteenShiftController;
+import eapli.ecafetaria.application.finance.OpenShiftController;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class OpenCanteenShiftUI extends AbstractUI {
 
-    private final OpenCanteenShiftController theController = new OpenCanteenShiftController();
+    private final OpenShiftController theController = new OpenShiftController();
 
     protected Controller controller() {
         return this.theController;
@@ -30,13 +30,13 @@ public class OpenCanteenShiftUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Open Canteen Shift";
+        return "Open Shift";
     }
 
     @Override
     protected boolean doShow() {
 
-        String mealTypeList = "Meal Types \n";
+        String mealTypeList = "Meal Types \n\n";
 
         for (MealType mt : MealType.MealTypeValues()) {
             mealTypeList += mt.ordinal() + " - " + mt.toString() + "\n";
@@ -47,13 +47,13 @@ public class OpenCanteenShiftUI extends AbstractUI {
         final Date shiftDate = Console.readDate("Shift Day");
         
         try {
-            this.theController.setUpShiftInformation(shiftDate, MealType.values()[mealTypeOption]);
-            if(!theController.verifyShift()){
-                System.out.println("Shift already exists!\n");
+            if(!theController.verifyShift(shiftDate, MealType.values()[mealTypeOption])){
+                System.out.println("Shift already exists for the selected day and meal!\n");
                 return false; //Dúvida - o que acontece quando este método retorna false?
             }else{
-                theController.saveShift();
+                this.theController.saveShift(shiftDate, MealType.values()[mealTypeOption]);
             }
+            
         } catch (Exception e) {
             // TODO Auto-generated catch block
             Logger.getLogger(OpenCanteenShiftUI.class.getName()).log(Level.SEVERE, null, e);

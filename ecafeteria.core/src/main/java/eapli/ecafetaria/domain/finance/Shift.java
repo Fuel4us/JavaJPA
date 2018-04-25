@@ -7,6 +7,7 @@ package eapli.ecafetaria.domain.finance;
 
 import eapli.ecafeteria.domain.meals.MealType;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -23,5 +24,33 @@ public class Shift {
         this.mealType = mealType;
         this.shiftState = ShiftState.CLOSED; 
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Shift other = (Shift) obj;
+        if (!Objects.equals(this.shiftDate, other.shiftDate)) {
+            return false;
+        }
+        if (this.shiftState != other.shiftState) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
