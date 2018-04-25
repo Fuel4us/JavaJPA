@@ -1,74 +1,115 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.domain.authz;
 
-import java.util.ArrayList;
-import java.util.List;
+import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.framework.domain.ddd.AggregateRoot;
+import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
 /**
- *
+ * This class is responsible for the reason why a user was deactivated
  * @author pedromonteiro
  */
-public class Reason {
+@Entity
+public class Reason implements Serializable, AggregateRoot<Object> {
     
-    static class ReasonType{
-        String type;
+    private static final long serialVersionUID = 1L;
 
-        public ReasonType(String description) {
-            this.type = description;
-        }
-        
-        @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 97 * hash + Objects.hashCode(this.type);
-            return hash;
-        }
+    @Version
+    private Long version;
 
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final ReasonType other = (ReasonType) obj;
-            if (!Objects.equals(this.type, other.type)) {
-                return false;
-            }
-            return true;
-        }
-        
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reasonId;
+    private String comment;
+    private ReasonType reason;
+
+    /**
+     * For ORM effect.
+     */
+    protected Reason() {
+        //For ORM
     }
     
-    private static List<ReasonType> reasonList = new ArrayList<>();
-    public static boolean addReason(String reasonDescription){
-        ReasonType type = new ReasonType(reasonDescription);
-        if(reasonList.contains(type)) return false;
-        reasonList.add(type);
-        return true;
-        
-    }
-    
-    String comment;
-    ReasonType reason;
-
+    /**
+     * Constructor for reason must always hava a ReasonType predefined and a comment.
+     * @param rt Reason Type
+     * @param comment String with the comment for the deactivation
+     */
     public Reason(ReasonType rt, String comment) {
         this.reason = rt;
         this.comment = comment;
     }
-    
-    public static List<ReasonType> reasonTypes(){
-        return reasonList;
+   
+    /**
+     * Returns the reason ID
+     * @return Reason ID
+     */
+    @Override
+    public Long id() {
+        return reasonId;
     }
+    
+    protected String comment(){
+        return comment;
+    } 
+   
+    public ReasonType reasonType(){
+        return reason;
+    }
+
+    @Override
+    public String toString() {
+        return "Reason:" + reason.toString() + "\nComment: " + comment;
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        if (!(other instanceof Reason)) {
+            return false;
+        }
+
+        final Reason that = (Reason) other;
+        if (this == that) {
+            return true;
+        }
+
+        return /*id().equals(that.id()) &&*/ this.reasonType().equals(that.reasonType()) 
+                && this.comment().equals(that.comment()); // FIX ME is id needed?
+    }
+
+    @Override
+    public boolean is(Object otherId) {
+        return id().equals(otherId);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.reasonId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Reason other = (Reason) obj;
+        
+        return Objects.equals(this.reasonId, other.reasonId);
+    }
+
     
     
     
