@@ -13,7 +13,6 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
-import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Date;
@@ -24,15 +23,38 @@ import java.util.Date;
  */
 public class RegisterMealController implements Controller {
 
+    private final ListMealService svc = new ListMealService();
+
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
-    public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish,
-            final String name) throws DataIntegrityViolationException, DataConcurrencyException {
+    private final Meal meal = new Meal();
+
+    public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish) throws DataIntegrityViolationException, DataConcurrencyException {
 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
-        final Meal newMeal = new Meal(mealType, mealDate, dish, Designation.valueOf(name));
+        final Meal newMeal = new Meal(mealType, mealDate, dish);
 
         return this.mealRepository.save(newMeal);
     }
+
+    /**
+     * @autor Pedro Alves - 1150372
+     * @return
+     */
+    public Iterable<MealType> getMealTypes() {
+        return this.svc.allMealTypes();
+    }
+
+    /**
+     * @autor Pedro Alves - 1150372
+     * @param mealType
+     * @param mealDate
+     */
+    public void validateDate(MealType mealType, Date mealDate) {
+        if (mealType != null && mealDate != null) {
+            //completar o método
+        }
+    }
+
 }

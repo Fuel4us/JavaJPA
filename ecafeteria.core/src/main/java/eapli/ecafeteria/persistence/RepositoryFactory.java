@@ -79,10 +79,21 @@ public interface RepositoryFactory {
     
     LotRepository lots();
     
+    ExecutionRepository execution();
+    
     BookingRepository booking();
     
     //HeuristicRepository heuristics();
     
     //CanteenShiftRepository canteenShift();
     
+    /*
+    * POSUserRepository
+    */
+    //POSUserRepository POSUser();
+    
+    /*
+    * Movement
+    */
+    MovementRepository movement();
 }
