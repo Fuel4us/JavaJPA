@@ -1,6 +1,10 @@
 package eapli.ecafeteria.domain.authz;
 
+import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Embeddable;
@@ -20,6 +24,8 @@ import javax.persistence.TemporalType;
  */
 @Embeddable
 public class UserState implements Serializable, ValueObject{
+    
+//    private final ReasonRepository reasonRepo = PersistenceContext.repositories().reason();
 
     /**
      * Enumeration of the various possible User State.
@@ -76,12 +82,17 @@ public class UserState implements Serializable, ValueObject{
      * @param rt Reason type
      * @param comment Comment justifying the deactivation
      * @return true if it was possible to deactivate the user
+     * @throws eapli.framework.persistence.DataConcurrencyException
+     * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
-    public boolean deactivate(Calendar deactivatedOn, ReasonType rt, String comment) {
+    public boolean deactivate(Calendar deactivatedOn, ReasonType rt, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
         if (this.type == UserType.ACCEPTED) {
             this.type = UserType.DEACTIVATED;
             this.reason = new Reason(rt, comment);
             this.deactivatedOn = deactivatedOn;
+            /* Save reason in Repository */
+//            reasonRepo.save(reason);
+            
             return true;
         }
 

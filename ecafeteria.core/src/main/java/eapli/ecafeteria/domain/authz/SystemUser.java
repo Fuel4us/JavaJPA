@@ -17,6 +17,8 @@ import eapli.framework.domain.EmailAddress;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.dto.DTOable;
 import eapli.framework.dto.GenericDTO;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import eapli.framework.visitor.Visitable;
 import eapli.framework.visitor.Visitor;
@@ -202,7 +204,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		return (this.state.state() == UserState.UserType.ACCEPTED);
 	}
 
-	public void deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) {
+	public void deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
             
 		if(this.createdOn.compareTo(deactivatedOn) < 0)
                     state.deactivate(deactivatedOn, reasonType, comment);
