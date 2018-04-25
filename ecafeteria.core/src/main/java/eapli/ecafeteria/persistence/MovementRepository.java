@@ -13,5 +13,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author Hernani Gil
  */
 public interface MovementRepository extends DataRepository<Movement, Long>{
-
+    
 }
