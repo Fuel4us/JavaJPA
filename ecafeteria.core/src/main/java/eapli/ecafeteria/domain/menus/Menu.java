@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 /**
@@ -30,12 +32,12 @@ public class Menu {
 
     @Id
     @GeneratedValue
-    private int id;
-    /**
-     * cascade = CascadeType.NONE as the dishType is part of another aggregate
-     */
-    @ManyToOne()
+    private Long id;
+    
+    //(changed by Joao Reis 1160600)
+    @Temporal(TemporalType.DATE)
     private Date startDate;
+    @Temporal(TemporalType.DATE)
     private Date endDate;
     private List<Meal> mealList;
     private boolean published;
@@ -50,7 +52,7 @@ public class Menu {
         this.published = false;
     }
 
-    public int id() {
+    public Long id() {
         return id;
     }
 

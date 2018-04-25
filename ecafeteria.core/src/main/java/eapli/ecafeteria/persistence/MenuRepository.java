@@ -15,7 +15,7 @@ import java.util.Optional;
  *
  * @author Berccar
  */
-public interface MenuRepository extends DataRepository<Menu, Designation> {
+public interface MenuRepository extends DataRepository<Menu, Long> {
    
     Iterable<Menu> findByState(boolean state);
     
