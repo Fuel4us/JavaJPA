@@ -34,7 +34,8 @@ public class DeactivateUserController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
 //        return this.userRepository.findAll();
-        return this.cafetariaUserRepository.findAll();
+//        return this.cafetariaUserRepository.findAll();
+          return this.cafetariaUserRepository.findAllActive();
     }
     
     public ReasonType[] reasons(){

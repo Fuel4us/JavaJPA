@@ -58,7 +58,7 @@ public class Reason implements Serializable, AggregateRoot<Object> {
         return comment;
     } 
    
-    protected ReasonType reasonType(){
+    public ReasonType reasonType(){
         return reason;
     }
 
