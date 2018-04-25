@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.domain.authz;
 
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import org.junit.After;
@@ -103,9 +105,11 @@ public class UserStateTest {
 
     /**
      * Test of deactivate method, of class UserState.
+     * @throws eapli.framework.persistence.DataConcurrencyException
+     * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
     @Test
-    public void testDeactivate() {
+    public void testDeactivate() throws DataConcurrencyException, DataIntegrityViolationException {
         System.out.println("Test deactivate user ----------------\n");
         UserState instance = new UserState();
         instance.accept();
@@ -134,9 +138,11 @@ public class UserStateTest {
 
     /**
      * Test of deactivatedReason method, of class UserState.
+     * @throws eapli.framework.persistence.DataConcurrencyException
+     * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
     @Test
-    public void testDeactivatedReason() {
+    public void testDeactivatedReason() throws DataConcurrencyException, DataIntegrityViolationException {
         System.out.println("Test Deactivated Reason ----------------\n");
         UserState instance = new UserState();
         UserState instance_2 = new UserState();
@@ -162,9 +168,11 @@ public class UserStateTest {
 
     /**
      * Test of dateOfDeactivation method, of class UserState.
+     * @throws eapli.framework.persistence.DataConcurrencyException
+     * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
     @Test
-    public void testDateOfDeactivation() {
+    public void testDateOfDeactivation() throws DataConcurrencyException, DataIntegrityViolationException {
         System.out.println("Test Date of Deactivation ----------------\n");
         UserState instance = new UserState();
         instance.accept();
@@ -179,9 +187,11 @@ public class UserStateTest {
 
     /**
      * Test of state method, of class UserState.
+     * @throws eapli.framework.persistence.DataConcurrencyException
+     * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
     @Test
-    public void testState() {
+    public void testState() throws DataConcurrencyException, DataIntegrityViolationException {
         System.out.println("Test State ----------------\n");
         UserState instance = new UserState();
         UserState instance_2 = new UserState();

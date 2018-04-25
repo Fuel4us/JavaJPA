@@ -96,4 +96,13 @@ public interface RepositoryFactory {
     * Movement
     */
     MovementRepository movement();
+    
+    
+    /**
+     * Reason Repository
+     * @return ReasoRepository
+     */
+
+    
+    ReasonRepository reason();
 }
