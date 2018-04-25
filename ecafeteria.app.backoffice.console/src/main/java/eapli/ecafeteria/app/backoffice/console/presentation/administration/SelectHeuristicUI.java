@@ -17,7 +17,7 @@ public class SelectHeuristicUI extends AbstractUI {
     
     @Override
     protected boolean doShow() {
-        final Iterable<Heuristic> heuristicsTypes = theController.listHeuristics();
+        final Iterable<Heuristic> heuristicsTypes = theController.listHeuristics().iterator().next().heuristics();
         
         showHeuristics(heuristicsTypes);
         Heuristic newHeuristic = querySelection(heuristicsTypes);
