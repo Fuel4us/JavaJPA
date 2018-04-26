@@ -2,6 +2,7 @@ package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.util.Console;
@@ -75,12 +76,11 @@ public class CheckBookingsService {
                 }
             }
         }
-
         for (int i = 0; i < dishList.size(); i++) {
-            System.out.printf(i+1+" Booking Dish: "+dishList.get(i)+"\n");
+            System.out.println(i + 1 + " Booking Dish: " + dishList.get(i) + "\n");
         }
 
-        int choice = Console.readInteger("Which date do you want to see the respective Bookings?\n");
+        int choice = Console.readInteger("Which Dish do you want to see the respective Bookings?\n");
         if(choice>0&&choice<dishList.size()+1){
             for (Booking booking:
                  list) {
@@ -91,6 +91,36 @@ public class CheckBookingsService {
         }else{
             System.out.println("That option doesn't exist");
             displayBookingsByDish();
+        }
+    }
+
+    public void displayBookingsByMeal(){
+        List<Booking> list = getAllReservations();
+        List<Meal> mealList = new ArrayList<>();
+
+        if(list.size()>0){
+            for (Booking booking:
+                 list) {
+                if (!mealList.contains(booking.getMeal())){
+                    mealList.add(booking.getMeal());
+                }
+            }
+        }
+        for (int i = 0; i < mealList.size(); i++) {
+            System.out.println(i + 1 + " Booking Meal: " + mealList.get(i) + "\n");
+        }
+
+        int choice = Console.readInteger("Which Meal do you want to see the respective Bookings?\n");
+        if(choice>0&&choice<mealList.size()+1){
+            for (Booking booking:
+                    list) {
+                if(booking.getMeal().equals(mealList.get(choice-1))){
+                    System.out.println(booking);
+                }
+            }
+        }else{
+            System.out.println("That option doesn't exist");
+            displayBookingsByMeal();
         }
     }
 }
