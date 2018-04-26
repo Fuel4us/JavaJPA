@@ -98,7 +98,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaLotRepository();
     }
 
-    @Override 
     public MealLotRepository mealLots(){
         return new JpaMealLotRepository();
     }
