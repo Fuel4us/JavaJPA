@@ -34,8 +34,6 @@ public class Meal implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mealDate;
 
-    private Set<MealLot> listMealsLot;
-
     /**
      * Complete constructor for a meal.
      *
@@ -51,8 +49,7 @@ public class Meal implements Serializable {
         this.mealType = mealType;
         this.mealDate = mealDate;
         this.dish = dish;
-        listMealsLot = new HashSet<>();
-    }
+       }
 
     /**
      * Constructor that copies the content of another meal.
@@ -63,7 +60,6 @@ public class Meal implements Serializable {
         this.mealDate = other.mealDate;
         this.dish = other.dish;
         this.mealType = other.mealType;
-        listMealsLot = new HashSet<>();
     }
 
     /**
@@ -83,18 +79,6 @@ public class Meal implements Serializable {
 
     public MealType getMealType() {
         return mealType;
-    }
-
-    public Set<MealLot> getListMealsLot() {
-        return listMealsLot;
-    }
-
-    public boolean addMealLot(MealLot mealLot) {
-        return this.listMealsLot.add(mealLot);
-    }
-
-    public boolean removeMealLot(MealLot mealLot) {
-        return this.listMealsLot.remove(mealLot);
     }
 
     @Override
@@ -170,7 +154,7 @@ public class Meal implements Serializable {
         String data2 = data.format(mealDate.getTime());
         return String.format("DAY: %s /PLATE: %s /TYPE: %s /MEAL: %s", data2, dish.id(), mealType.toString(), dish.dishType().id());
     }
-    
+
     /**
      * Creates a comparator to compare Meals according to their meal dates (Joao
      * reis - 1160600)
