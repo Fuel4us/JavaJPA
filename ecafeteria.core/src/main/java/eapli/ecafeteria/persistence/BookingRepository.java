@@ -20,6 +20,8 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
         
         
         public Booking getNextBooking();
+
+        Iterable<Booking> findBookingsDeliveredByUser(Optional<CafeteriaUser> user);
         
         
         
