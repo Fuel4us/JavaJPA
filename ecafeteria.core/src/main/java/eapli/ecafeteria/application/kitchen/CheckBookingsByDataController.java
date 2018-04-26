@@ -3,7 +3,8 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.framework.application.Controller;
 
 /**
- * Made by Diogo Monteiro 1140302
+ *
+ * @author Diogo Monteiro
  */
 public class CheckBookingsByDataController implements Controller {
     CheckBookingsService service;
