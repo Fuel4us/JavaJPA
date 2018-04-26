@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author joaotiagow
+ * @author joaotiagow, Gonçalo Fonseca nº 1150503
  */
 public class MealPlanTest {
 
