@@ -55,4 +55,13 @@ public class MealPlan {
     public void changeState(MealPlan meal){
         meal.setClosed(true);
     }
+
+    @Override
+    public String toString() {
+        return "MealPlan{" +
+                ", menu=" + menu +
+                ", numberOfDishes=" + numberOfDishes +
+                ", closed=" + closed +
+                '}';
+    }
 }
