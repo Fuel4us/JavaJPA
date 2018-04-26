@@ -31,6 +31,13 @@ public class ListMenuService {
 
         return this.menuRepository.findByState(false);
     }
+    
+    /**
+     * Joao Reis - 1160600
+     * @param beginning beginning of the time period 
+     * @param end end of the time period
+     * @return a menu that either starts or ends on the specified time period
+     */
     public List<Meal> menuByPeriod(Date beginning, Date end) {
         Iterable<Menu> menuList =  menuRepository.findByMenuPeriod(beginning, end);
         List<Meal> mealList = new ArrayList<>();
@@ -42,7 +49,10 @@ public class ListMenuService {
         Collections.sort(mealList, Meal.compareDates());
         return mealList;
     }
-    
+    /**
+     * Joao Reis - 1160600
+     * @return 
+     */
     public List<Meal> menuForCurrentWeek(){
         Date beginning, end, aux;
         aux = new Date();
@@ -59,6 +69,10 @@ public class ListMenuService {
         return menuByPeriod(beginning, end);
     }
     
+    /**
+     * Joao Reis - 1160600
+     * @return 
+     */
     public List<Meal> menuForNextWeek() {
          Date beginning, end, aux;
         aux = new Date();
