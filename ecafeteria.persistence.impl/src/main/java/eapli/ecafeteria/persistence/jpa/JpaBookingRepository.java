@@ -12,25 +12,47 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import static jdk.nashorn.internal.objects.NativeString.match;
-
+    
 /**
  *
  * @author Ana Mafalda Silva
  */
 class JpaBookingRepository implements BookingRepository {
 
+    private final int NEXT_DAYS = 7, ONE_MORE_DAY = 1 * 24 * 60 * 60 * 1000;
+    
     public JpaBookingRepository() {
     }
 
     @Override
-    public Iterable<Booking> checkBookingsForNextDays(CafeteriaUser currentUser, Date currentDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<Booking> checkBookingsForNextDays(CafeteriaUser user, Date date) {
+        
+        Map<String, Object> params = new HashMap();
+        params.put("user", user);
+        params.put("bookingState", BookingState.RESERVED);
+        
+        List<Booking> bookingList = new ArrayList();
+        
+        long currentDate = date.getTime();
+        
+        for(int i = 0; i < NEXT_DAYS; i++){
+            bookingList.addAll((Collection<? extends Booking>) match("E.MEAL.MEALDATE = '" + new Date(date.getTime()) + "' and E.CAFETERIAUSER = :user and E.BOOKING.BOOKINGSTATE = :bookingState", bookingList));
+            
+            //+1 to that day
+            date.setTime((currentDate) + ONE_MORE_DAY);
+            currentDate = date.getTime();
+        }
+        
+        return bookingList;
     }
 
     @Override
