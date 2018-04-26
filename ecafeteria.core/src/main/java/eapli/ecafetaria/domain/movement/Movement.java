@@ -7,6 +7,7 @@ package eapli.ecafetaria.domain.movement;
 
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
+import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import eapli.framework.util.DateTime;
 import java.io.Serializable;
@@ -24,10 +25,10 @@ import javax.persistence.OneToOne;
  * @author Hernani Gil
  */
 @Entity
-public class Movement implements Serializable {
+public class Movement implements AggregateRoot<Long>,Serializable {
     @Id
     @GeneratedValue
-    private int id;
+    private Long id;
     
     @ManyToOne()    
     private MecanographicNumber nif;
@@ -48,4 +49,28 @@ public class Movement implements Serializable {
         quantity = new Money(quantityDouble, currency);
         date= DateTime.now();
     }
+
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean is(Long otherId) {
+        return AggregateRoot.super.is(otherId); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long id() {
+        return this.id;
+    }
+    
+    public MovementType type(){
+        return this.movementType;
+    }
+    
+    public MecanographicNumber nif(){
+        return this.nif;
+    }
+
 }

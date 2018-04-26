@@ -42,20 +42,19 @@ public class ChargeCardController {
             selectedUser = OpCU.get();
             return true;
         }else{
+            System.out.println("No user selected");
             return false;
         }
         
     }
     
-    public boolean ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
+    public void ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         if(selectedUser!=null){
             Currency currency = Currency.getInstance(Locale.FRANCE); 
             Movement movement = new Movement(this.selectedUser.mecanographicNumber(), MovementType.DEPOSIT, amount, currency);
+      
             movementRepository.save(movement);
-            return true;
         }
-        
-        return false;
     }
 }
