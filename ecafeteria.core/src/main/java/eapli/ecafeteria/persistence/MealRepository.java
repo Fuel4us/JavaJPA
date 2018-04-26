@@ -14,9 +14,9 @@ import java.util.Optional;
  *
  * @author Berccar
  */
-public interface MealRepository extends DataRepository<Meal, Designation> {
+public interface MealRepository extends DataRepository<Meal, Long> {
 
-    Optional<Meal> findByName(Designation name);
+    Optional<Meal> findById(Long id);
 
     Iterable<Meal> findAllByLot(Long lotId);
 }

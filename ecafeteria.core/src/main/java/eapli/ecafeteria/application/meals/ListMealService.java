@@ -31,7 +31,6 @@ public class ListMealService {
      * @return
      */
     public Iterable<MealType> allMealTypes() {
-        //por implementar
-        return null;
+        return MealType.MealTypeValues();
     }
 }

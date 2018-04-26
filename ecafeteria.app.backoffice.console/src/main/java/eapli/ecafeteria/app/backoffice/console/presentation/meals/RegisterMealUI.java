@@ -33,7 +33,7 @@ public class RegisterMealUI extends AbstractUI {
     protected boolean doShow() {
         final Iterable<MealType> mealTypes = this.theController.getMealTypes();
 
-        final SelectWidget<MealType> selectorMealType = new SelectWidget<>("Meal types:", mealTypes, new MealTypePrinter());
+        final SelectWidget<MealType> selectorMealType = new SelectWidget<>("Meal types:", mealTypes);
         selectorMealType.show();
         final MealType mealType = selectorMealType.selectedElement();
 
