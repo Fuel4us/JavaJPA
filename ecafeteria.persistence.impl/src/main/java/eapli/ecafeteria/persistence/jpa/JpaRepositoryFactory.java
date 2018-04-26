@@ -15,6 +15,7 @@ import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
+import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
@@ -135,5 +136,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public MealPlanRepository mealplans() {
         return new JpaMealPlanRepository();
+    }
+
+    @Override
+    public RatingRepository rating() {
+        return new JpaRatingRepository();
     }
 }

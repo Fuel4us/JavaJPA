@@ -26,8 +26,15 @@ public class Rating {
     public Rating() {
     }
 
-    public Rating(int score, String comment) {
+    public void setScore(int score) {
         this.score = score;
+    }
+
+    public int id() {
+        return id;
+    }
+
+    public void setComment(String comment) {
         this.comment = comment;
     }
 }

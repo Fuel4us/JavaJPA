@@ -107,4 +107,6 @@ public interface RepositoryFactory {
     ReasonRepository reason();
     
     MealPlanRepository mealplans();
+    
+    RatingRepository rating();
 }

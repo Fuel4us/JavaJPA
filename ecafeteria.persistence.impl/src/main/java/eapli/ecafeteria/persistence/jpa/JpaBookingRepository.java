@@ -7,25 +7,18 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
-import eapli.framework.domain.Designation;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
-import static jdk.nashorn.internal.objects.NativeString.match;
     
 /**
  *
@@ -78,10 +71,16 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
      * Rúben - 1160998
      */
     @Override
-    public Iterable<Booking> findBookingsDeliveredByUser(Optional<CafeteriaUser> user) {
+    public Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user) {
         Map<String, Object> params = new HashMap<>();
         params.put("user", user);
-        params.put("bookingState", BookingState.DELIVERED);
-        return (Iterable<Booking>) match("e.user =: user AND e.bookingState =: bookingState", params);
+        params.put("bookingState", BookingState.RESERVED);
+        return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState", params);
+    }
+
+    @Override
+    public void updateBookingRating(Booking choosen, Rating rating) {
+        Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID = " + rating.id() + " WHERE BOOKINGID = " + choosen.bookingId());
+        query.executeUpdate();
     }
 }
