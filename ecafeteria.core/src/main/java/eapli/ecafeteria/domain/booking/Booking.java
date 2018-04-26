@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Booking implements AggregateRoot<String>, Serializable{
     @OneToOne
     private Rating rating;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date bookingDate;
     
     private Booking(){

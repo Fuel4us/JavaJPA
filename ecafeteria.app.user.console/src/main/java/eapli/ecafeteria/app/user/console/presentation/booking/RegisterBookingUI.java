@@ -30,6 +30,7 @@ public class RegisterBookingUI extends AbstractUI{
     
     @Override
     protected boolean doShow() {
+        boolean flag = true;
         
         System.out.println("Escolha a Meal para reservar:");
         //Apresenta as meals possiveis para escolha
@@ -44,9 +45,15 @@ public class RegisterBookingUI extends AbstractUI{
         CafeteriaUser cu = controller.findCafeteriaUser(su.username());
         
         try {
-            controller.registerBooking(cu,meal);
+            flag = controller.registerBooking(cu,meal);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(RegisterBookingUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(flag == false){
+            System.out.println("Nao foi registado nenhum booking!");
+        }else{
+            System.out.println("Foi registado um booking!");
         }
         
         return true;

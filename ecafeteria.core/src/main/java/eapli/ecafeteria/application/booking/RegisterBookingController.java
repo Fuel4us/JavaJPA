@@ -50,7 +50,7 @@ public class RegisterBookingController {
         }
     }
     
-    public void registerBooking(CafeteriaUser cu, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException{
+    public boolean registerBooking(CafeteriaUser cu, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException{
         //Check if the meal is reserved 24 hours before the actual meal
         Date CurrentDate = new Date();
         Date mealDate = meal.getDate();
@@ -62,6 +62,10 @@ public class RegisterBookingController {
             Booking booking = new Booking(cu, meal);
             
             repBooking.save(booking);
+            
+            return true;
+        }else{
+            return false;
         }
         
     }
