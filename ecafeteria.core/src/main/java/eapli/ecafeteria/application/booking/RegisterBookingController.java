@@ -31,9 +31,9 @@ public class RegisterBookingController {
     
     private final static long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
     
-    public Meal findMealByID(int id){
+    public Meal findMealByID(long id){
         //Needs revision
-        Optional<Meal> OpMeal = repMeal.findOne(Long.valueOf("" + id));
+        Optional<Meal> OpMeal = repMeal.findOne(id);
         if(OpMeal.isPresent())
             return OpMeal.get();
         else{
@@ -60,6 +60,9 @@ public class RegisterBookingController {
         if(moreThanDay == true){
             //More then 24 hours
             Booking booking = new Booking(cu, meal);
+            
+            //Transactions
+            //It should check if the user has enough money to do this operation
             
             repBooking.save(booking);
             

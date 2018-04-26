@@ -98,21 +98,23 @@ public class Booking implements AggregateRoot<String>, Serializable{
             return false;
         }
         final Booking other = (Booking) obj;
-        if (this.bookingID.equals(other.bookingID)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if(!Objects.equals(this.bookingDate, other.bookingDate)){
+        //Testing dates
+//        if (!Objects.equals(this.bookingDate, other.bookingDate)) {
+//            return false;
+//        }
+        if (this.bookingState != other.bookingState) {
             return false;
         }
-        
         return Objects.equals(this.meal, other.meal);
     }
+    
+    
     
     public boolean isReserved() {
         return bookingState.equals(BookingState.RESERVED);
