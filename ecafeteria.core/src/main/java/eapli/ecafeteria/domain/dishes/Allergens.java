@@ -1,8 +1,9 @@
 package eapli.ecafeteria.domain.dishes;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,13 +25,13 @@ public class Allergens implements Serializable {
     /**
      * List that saves the allergens of an certain dish.
      */
-    private LinkedList<String> allerg;
+    private Set<String> allerg;
     
     /**
      * Constructor of the class
      * @param allerg 
      */
-    public Allergens(LinkedList<String> allerg) {
+    public Allergens(Set<String> allerg) {
         if (allerg == null) {
             throw new IllegalArgumentException("Allergenics can't be null!");
         }
@@ -41,14 +42,14 @@ public class Allergens implements Serializable {
      * Empty constructor of the class dish.
      */
     public Allergens() {
-        allerg = new LinkedList<>();
+        allerg = new HashSet<>();
     }
 
-    public LinkedList<String> getAllerg() {
+    public Set<String> getAllerg() {
         return allerg;
     }
 
-    public void setAllerg(LinkedList<String> allerg) {
+    public void setAllerg(Set<String> allerg) {
         this.allerg = allerg;
     }
 

@@ -9,6 +9,7 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,9 +23,13 @@ public class Booking implements AggregateRoot<String>, Serializable{
     private int bookingID;
     
     private String id;
+    @OneToOne
     private CafeteriaUser user;
+    @OneToOne
     private Meal meal;
     private BookingState bookingState;
+    @OneToOne
+    private Rating rating;
     
     public Booking(CafeteriaUser user, Meal meal){
         this.id = user.id() + meal.toString();
@@ -46,7 +51,9 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public String id() {
         return this.id;
     }
-    
+
+    public Meal getMeal(){ return this.meal;}
+
     public BookingState getBookingState(){
         return this.bookingState;
     }
@@ -106,5 +113,14 @@ public class Booking implements AggregateRoot<String>, Serializable{
     
     public boolean isDelivered() {
         return bookingState.equals(BookingState.DELIVERED);
+    }
+    
+    public void rating(Rating rating) {
+        this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + rating + '}';
     }
 }

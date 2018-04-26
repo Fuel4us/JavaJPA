@@ -4,6 +4,8 @@ import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +17,7 @@ public class CreateMealPlanUI {
     private final CreateMealPlanController controller = new CreateMealPlanController();
     private final Scanner input = new Scanner(System.in);
     
-    public void mainLoop(){
+    public void mainLoop() throws DataConcurrencyException, DataIntegrityViolationException{
         int option = 0;
         
         do{
@@ -63,7 +65,7 @@ public class CreateMealPlanUI {
         return selectedMenu;
     }
 
-    public void setDishQuantity() {
+    public void setDishQuantity() throws DataConcurrencyException, DataIntegrityViolationException {
         Menu selectedMenu = selectMenu();
 
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);

@@ -16,17 +16,20 @@ import java.util.Optional;
  *
  * @author Bernardo Carreira
  */
-public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Designation> implements MealRepository {
+public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
     @Override
-    public Optional<Meal> findByName(Designation name) {
+    public Optional<Meal> findById(Long id) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("name", name);
-        return matchOne("e.name=:name", params);
+        params.put("id", id);
+        return matchOne("e.id=:id", params);
     }
 
     @Override
     public Iterable<Meal> findAllByLot(Long lotId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final Map<String, Object> params = new HashMap<>();
+        params.put("lotId", lotId);
+        
+        return match("e.lotId = :lotId", params);
     }
 }

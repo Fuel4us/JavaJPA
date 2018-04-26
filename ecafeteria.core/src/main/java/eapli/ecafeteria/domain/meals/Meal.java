@@ -1,20 +1,18 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
-import eapli.ecafeteria.dto.MealDTO;
-import eapli.framework.domain.Designation;
-import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.ecafeteria.domain.kitchen.MealLot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
-import javax.persistence.Version;
 
 /**
  *
@@ -28,35 +26,52 @@ public class Meal implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long pk;
+    private Long id;
 
-    @Version
-    private Long version;
-
-    /**
-     * Class Changed by: Pedro Alves
-     */
-    //@ManyToOne()
+    private Dish dish;
     private MealType mealType;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mealDate;
-    @ManyToOne
-    private Dish dish;
-    private boolean active;
 
-    public Meal(final MealType mealType, final Date mealDate, final Dish dish) {
-        if (mealType == null || dish == null || mealDate == null) {
+    private Set<MealLot> listMealsLot;
+
+    /**
+     * Complete constructor for a meal.
+     *
+     * @param mealType
+     * @param mealDate
+     * @param dish
+     * @param mealMenu
+     */
+    public Meal(MealType mealType, Date mealDate, Dish dish) {
+        if (dish == null || mealDate == null) {
             throw new IllegalArgumentException();
         }
         this.mealType = mealType;
         this.mealDate = mealDate;
         this.dish = dish;
-        this.active = true;
+        listMealsLot = new HashSet<>();
     }
 
+    /**
+     * Constructor that copies the content of another meal.
+     *
+     * @param other
+     */
+    public Meal(Meal other) {
+        this.mealDate = other.mealDate;
+        this.dish = other.dish;
+        this.mealType = other.mealType;
+        listMealsLot = new HashSet<>();
+    }
+
+    /**
+     * Empty Constructor.
+     */
     public Meal() {
         // for ORM only
-    } 
+    }
 
     public Date getDate() {
         return mealDate;
@@ -70,6 +85,18 @@ public class Meal implements Serializable {
         return mealType;
     }
 
+    public Set<MealLot> getListMealsLot() {
+        return listMealsLot;
+    }
+
+    public boolean addMealLot(MealLot mealLot) {
+        return this.listMealsLot.add(mealLot);
+    }
+
+    public boolean removeMealLot(MealLot mealLot) {
+        return this.listMealsLot.remove(mealLot);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,7 +107,14 @@ public class Meal implements Serializable {
         }
 
         final Meal other = (Meal) o;
-        return Objects.equals(this.pk, other.pk);
+        return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 
     public boolean sameAs(Object other) {
@@ -92,44 +126,16 @@ public class Meal implements Serializable {
         if (this == that) {
             return true;
         }
-
-        return  mealType.equals(that.mealType)
-                && dish.equals(that.dish) && mealDate.equals(that.mealDate)
-                && active == that.active;
+        return mealType.equals(that.mealType)
+                && dish.equals(that.dish) && mealDate.equals(that.mealDate);
     }
 
-    public boolean is(Long pk) {
-        return Objects.equals(this.pk, pk);
+    public boolean is(Long id) {
+        return Objects.equals(this.id, id);
     }
 
     public MealType mealType() {
         return this.mealType;
-    }
-
-    /**
-     *
-     * @return true or false whether is or not active
-     */
-    public boolean isActive() {
-        return this.active;
-    }
-
-    /**
-     * toggles the state of the dish, activating it or deactivating it
-     * accordingly.
-     *
-     * @return whether the dish is active or not
-     */
-    public boolean toogleState() {
-        this.active = !this.active;
-        return isActive();
-    }
-
-    public MealDTO toDTO() {
-        return new MealDTO(mealType.toString(),
-                dish.dishType().id(), dish.dishType().description(), dish.nutricionalInfo().calories(),
-                dish.nutricionalInfo().salt(), dish.currentPrice().amount(),
-                dish.currentPrice().currency().getCurrencyCode(), active);
     }
 
     public void changeDishTo(Dish newDish) {
@@ -156,13 +162,7 @@ public class Meal implements Serializable {
 
     @Override
     public String toString() {
-        return "Meal{"
-                + "version=" + version
-                + ", mealType=" + mealType
-                + ", mealDate=" + mealDate
-                + ", dish=" + dish
-                + ", active=" + active
-                + '}';
+        return "Meal{" + "dish=" + dish + ", mealType=" + mealType + ", mealDate=" + mealDate + '}';
     }
 
     public String toString2() {
@@ -172,7 +172,7 @@ public class Meal implements Serializable {
     }
     
     /**
-     * Creates a comparator to compare Meals according to their meal dates (joao
+     * Creates a comparator to compare Meals according to their meal dates (Joao
      * reis - 1160600)
      *
      * @return comparator object that compares meal dates
