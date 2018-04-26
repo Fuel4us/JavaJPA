@@ -118,4 +118,9 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public void rating(Rating rating) {
         this.rating = rating;
     }
+
+    @Override
+    public String toString() {
+        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + rating + '}';
+    }
 }
