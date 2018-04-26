@@ -26,7 +26,7 @@ public class MealPlan {
         this.closed = false; //no inicio esta aberto logo closed=false
     }
 
-    protected MealPlan(){}
+    public MealPlan(){}
 
     public void setClosed(boolean closed) {
         this.closed = closed;
