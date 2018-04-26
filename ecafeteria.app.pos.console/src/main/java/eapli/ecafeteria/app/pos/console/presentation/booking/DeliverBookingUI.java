@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.app.pos.console.presentation.booking;
 
-//import eapli.ecafeteria.app.backoffice.console.presentation.meals.MealTypePrinter;
 import eapli.ecafeteria.application.booking.DeliverBookingController;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
@@ -41,20 +40,20 @@ public class DeliverBookingUI extends AbstractUI {
             user = theController.findUserByNumber(mn);
             final Iterable<MealType> mealTypes = theController.listMealTypes();
             
-            final SelectWidget<MealType> selector = null;
-            //selector = new SelectWidget<>(mealTypes, new MealTypePrinter());
+            final SelectWidget selector;
+            selector = new SelectWidget(BORDER, mealTypes);
             
             selector.show();
-            final MealType mealType = selector.selectedElement();
+            final MealType mealType = (MealType) selector.selectedElement();
             BookingState bookingState = BookingState.RESERVED;
             
             Iterable<Booking> bookings = theController.findBookingByUserAndDate(user, mealType, bookingState);
             
-            final SelectWidget<Booking> selector2 = null;
-            //selector2 = new SelectWidget<>(bookings, new BookingPrinter());
+            final SelectWidget selector2;
+            selector2 = new SelectWidget(BORDER, bookings);
             
             selector2.show();
-            final Booking booking = selector2.selectedElement();
+            final Booking booking = (Booking) selector2.selectedElement();
             
             System.out.println("Confirma a entrega da reserva" + booking.toString() + "\n");
             String resposta = Console.readLine("[S/N]\n");
