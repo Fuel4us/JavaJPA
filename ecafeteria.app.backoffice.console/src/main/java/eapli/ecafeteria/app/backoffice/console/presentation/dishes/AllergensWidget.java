@@ -1,6 +1,6 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
-import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -11,7 +11,7 @@ public class AllergensWidget {
     /**
      * LinkedList that saves the allergens.
      */
-    private LinkedList<String> allergens;
+    private Set<String> allergens;
 
     public void show() {
     }
@@ -20,11 +20,11 @@ public class AllergensWidget {
      * Returns the allergens.
      * @return 
      */
-    public LinkedList<String> getAllergenics() {
+    public Set<String> getAllergenics() {
         return allergens;
     }
     
-    public void setAllergenicsList(LinkedList<String> allerg) {
+    public void setAllergenicsList(Set<String> allerg) {
         allergens = allerg;
     }
 }

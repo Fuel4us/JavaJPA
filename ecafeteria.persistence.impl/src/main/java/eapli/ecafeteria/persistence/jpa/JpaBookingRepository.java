@@ -20,6 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import static jdk.nashorn.internal.objects.NativeString.match;
     
 /**
@@ -72,17 +76,33 @@ class JpaBookingRepository implements BookingRepository {
 
     @Override
     public Booking save(Booking entity) throws DataConcurrencyException, DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
+        EntityManager manager = factory.createEntityManager();
+        
+        manager.getTransaction().begin();
+        manager.persist(entity);
+        manager.getTransaction().commit();
+        manager.close();
+        
+        return entity;
     }
 
     @Override
     public Iterable<Booking> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
+        EntityManager manager = factory.createEntityManager();
+        
+        Query query=manager.createQuery("select * from Booking");
+        
+        return query.getResultList();
     }
 
     @Override
     public Optional<Booking> findOne(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
+        EntityManager manager = factory.createEntityManager();
+        
+        return Optional.of(manager.find(Booking.class, id));
     }
 
     @Override

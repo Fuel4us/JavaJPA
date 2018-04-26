@@ -9,7 +9,9 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -24,9 +26,9 @@ public class DishBootstrapper implements Action {
         final DishType vegie = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_VEGIE).get();
         final DishType fish = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_FISH).get();
         final DishType meat = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_MEAT).get();
-        LinkedList<String> allergens1 = new LinkedList<>();
-        LinkedList<String> allergens2 = new LinkedList<>();
-        LinkedList<String> allergens3 = new LinkedList<>();
+        Set<String> allergens1 = new HashSet<>();
+        Set<String> allergens2 = new HashSet<>();
+        Set<String> allergens3 = new HashSet<>();
 
         allergens1.add(TestDataConstants.ALLERGEN_CRUSTACEOS);
         allergens1.add(TestDataConstants.ALLERGEN_GLUTEN);
@@ -49,7 +51,7 @@ public class DishBootstrapper implements Action {
     /**
      *
      */
-    private void register(DishType dishType, String description, int cal, int salt, double price, LinkedList<String> allergens) {
+    private void register(DishType dishType, String description, int cal, int salt, double price, Set<String> allergens) {
         final RegisterDishController controller = new RegisterDishController();
         try {
             controller.registerDish(dishType, description, cal, salt, price, allergens);
