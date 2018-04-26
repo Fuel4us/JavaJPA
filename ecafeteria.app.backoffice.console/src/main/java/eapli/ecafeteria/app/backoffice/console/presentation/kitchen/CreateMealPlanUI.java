@@ -4,8 +4,7 @@ import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
+import eapli.framework.presentation.console.AbstractUI;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,15 +12,15 @@ import java.util.Scanner;
  *
  * @author Tiago Babo 1160760
  */
-public class CreateMealPlanUI {
+public class CreateMealPlanUI extends AbstractUI{
     private final CreateMealPlanController controller = new CreateMealPlanController();
     private final Scanner input = new Scanner(System.in);
     
-    public void mainLoop() throws DataConcurrencyException, DataIntegrityViolationException{
+    public void mainMenu(){
         int option = 0;
         
         do{
-            option = menu();
+            option = menuUI();
             
             switch(option){
                 case 0:
@@ -37,8 +36,8 @@ public class CreateMealPlanUI {
         }while(option != 0);
     }
     
-    public int menu(){
-        System.out.println("# CREATE MEAL PLAN #");
+    public int menuUI(){
+        System.out.println("");
         System.out.println("1. Create meal plan");
         System.out.println("0. Leave");
         System.out.printf("OPTION: ");
@@ -53,7 +52,7 @@ public class CreateMealPlanUI {
         int i = 0;
 
         for (Menu menu : menuList) {
-            System.out.println(i + ". Menu with Starting date: " + menu.getStartDate()
+            System.out.println(i + ". Menu with starting date: " + menu.getStartDate()
                                  + "and finishing date: " + menu.getEndDate());
             i++;
         }
@@ -65,7 +64,7 @@ public class CreateMealPlanUI {
         return selectedMenu;
     }
 
-    public void setDishQuantity() throws DataConcurrencyException, DataIntegrityViolationException {
+    public void setDishQuantity(){
         Menu selectedMenu = selectMenu();
 
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);
@@ -93,5 +92,16 @@ public class CreateMealPlanUI {
         controller.saveMealPlan(mealPlan);
         
         System.out.println("Meal plan saved successfully!");
+    }
+    
+    @Override
+    public boolean doShow() {
+        mainMenu();
+        return true;
+    }
+
+    @Override
+    public String headline() {
+        return "CREATE MEAL PLAN";
     }
 }
