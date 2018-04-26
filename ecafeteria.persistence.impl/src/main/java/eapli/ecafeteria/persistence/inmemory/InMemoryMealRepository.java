@@ -15,16 +15,16 @@ import java.util.Optional;
  *
  * @author Bernardo Carreira
  */
-public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation> implements MealRepository {
+public class InMemoryMealRepository extends InMemoryRepository<Meal, Long> implements MealRepository {
 
     @Override
-    public Optional<Meal> findByName(Designation name) {
+    public Optional<Meal> findById(Long id) {
 //        return matchOne(e -> e.name().equals(name));
         return null;
     }
 
     @Override
-    protected Designation newKeyFor(Meal entity) {
+    protected Long newKeyFor(Meal entity) {
 //        return entity.id();
         return null;
     }

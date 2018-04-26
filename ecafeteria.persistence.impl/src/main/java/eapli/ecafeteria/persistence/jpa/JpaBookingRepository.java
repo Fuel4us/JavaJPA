@@ -39,7 +39,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     @Override
-    public Iterable<Booking> checkBookingsForNextDays(CafeteriaUser user, Date date) {
+    public Iterable<Booking> checkBookingsForNextDays(Optional<CafeteriaUser> user, Date date) {
         
         Map<String, Object> params = new HashMap();
         params.put("user", user);
@@ -50,7 +50,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         long currentDate = date.getTime();
         
         for(int i = 0; i < NEXT_DAYS; i++){
-            bookingList.addAll((Collection<? extends Booking>) match("E.MEAL.MEALDATE = '" + new Date(date.getTime()) + "' and E.CAFETERIAUSER = :user and E.BOOKING.BOOKINGSTATE = :bookingState", bookingList));
+            bookingList.addAll(match("E.MEAL.MEALDATE = '" + new Date(date.getTime()) + "' and E.CAFETERIAUSER = :user and E.BOOKING.BOOKINGSTATE = :bookingState", params));
             
             //+1 to that day
             date.setTime((currentDate) + ONE_MORE_DAY);
