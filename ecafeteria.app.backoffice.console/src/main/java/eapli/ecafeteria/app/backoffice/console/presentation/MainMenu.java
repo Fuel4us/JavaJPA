@@ -7,6 +7,8 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.app.backoffice.console.presentation.administration.SelectHeuristicAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.administration.SelectHeuristicUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
@@ -177,7 +179,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(SET_KITCHEN_ALERT_LIMIT_OPTION, "Set kitchen alert limit",
                 new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(SELECT_HEURISTIC_OPTION, "Select Heuristic",
-                new ShowMessageAction("Under development")));
+                new SelectHeuristicAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
