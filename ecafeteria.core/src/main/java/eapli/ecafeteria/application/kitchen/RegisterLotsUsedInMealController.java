@@ -8,7 +8,7 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.domain.kitchen.MealLot;
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -23,11 +23,11 @@ public class RegisterLotsUsedInMealController implements Controller{
 
     private final LotRepository repository = PersistenceContext.repositories().lots();
 
-    public MealLot registerMealLot(int lotCode, Material ingredientCode, int quantity)
+    public Lot registerMealLot(int lotCode, Material ingredientCode, int quantity)
             throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
 
-        final MealLot mealLot = new MealLot(lotCode, ingredientCode, quantity);
+        final Lot mealLot = new Lot(lotCode, ingredientCode, quantity);
         return this.repository.save(mealLot);
     }
 }
