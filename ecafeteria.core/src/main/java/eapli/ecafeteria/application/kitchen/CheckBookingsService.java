@@ -3,6 +3,7 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.util.Console;
@@ -54,7 +55,7 @@ public class CheckBookingsService {
                 for (Booking booking :
                         list) {
                     if (booking.day().equals(dateList.get(choice - 1))) {
-                        System.out.println(booking);
+                        System.out.println(booking+"\n");
                     }
                 }
         }else{
@@ -85,7 +86,7 @@ public class CheckBookingsService {
             for (Booking booking:
                  list) {
                 if(booking.getMeal().getDish().equals(dishList.get(choice-1))){
-                    System.out.println(booking);
+                    System.out.println(booking+"\n");
                 }
             }
         }else{
@@ -115,12 +116,43 @@ public class CheckBookingsService {
             for (Booking booking:
                     list) {
                 if(booking.getMeal().equals(mealList.get(choice-1))){
-                    System.out.println(booking);
+                    System.out.println(booking+"\n");
                 }
             }
         }else{
             System.out.println("That option doesn't exist");
             displayBookingsByMeal();
         }
+    }
+
+    public void displayBookingsByMealType(){
+        List<Booking> list = getAllReservations();
+        List<MealType> mealTypeList = new ArrayList<>();
+        if(list.size()>0){
+            for (Booking booking:
+                    list) {
+                if (!mealTypeList.contains(booking.getMeal().getMealType())){
+                    mealTypeList.add(booking.getMeal().getMealType());
+                }
+            }
+        }
+
+        for (int i = 0; i < mealTypeList.size(); i++) {
+            System.out.println(i + 1 + " Booking Meal Type: " + mealTypeList.get(i) + "\n");
+        }
+        int choice = Console.readInteger("Which Meal Type do you want to see the respective Bookings?\n");
+        if(choice>0&&choice<mealTypeList.size()+1){
+            for (Booking booking:
+                    list) {
+                if(booking.getMeal().equals(mealTypeList.get(choice-1))){
+                    System.out.println(booking+"\n");
+                }
+            }
+        }else{
+            System.out.println("That option doesn't exist");
+            displayBookingsByMealType();
+        }
+
+
     }
 }
