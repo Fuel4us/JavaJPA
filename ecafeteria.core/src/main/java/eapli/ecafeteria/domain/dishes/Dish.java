@@ -20,11 +20,13 @@ import eapli.framework.domain.money.Money;
  * A Dish
  *
  * @author Jorge Santos ajs@isep.ipp.pt
- *
+ * 
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 @SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping", classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class, columns = {
-        @ColumnResult(name = "caloricCategory"), @ColumnResult(name = "n") }))
+    @ColumnResult(name = "caloricCategory")
+    , @ColumnResult(name = "n")}))
 public class Dish implements AggregateRoot<Designation>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,10 +44,11 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
+    private Allergens allerg;
 
     public Dish(final DishType dishType, final Designation name,
-            final NutricionalInfo nutricionalInfo, Money price) {
-        if (dishType == null || name == null || nutricionalInfo == null) {
+            final NutricionalInfo nutricionalInfo, Money price, Allergens allerg) {
+        if (dishType == null || name == null || nutricionalInfo == null || allerg == null) {
             throw new IllegalArgumentException();
         }
 
@@ -54,6 +57,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         this.nutricionalInfo = nutricionalInfo;
         this.setPrice(price);
         this.active = true;
+        this.allerg = allerg;
     }
 
     public Dish(final DishType dishType, final Designation name, Money price) {
@@ -124,6 +128,10 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         return this.nutricionalInfo;
     }
 
+    public Allergens allergens() {
+        return allerg;
+    }
+
     public Designation name() {
         return this.name;
     }
@@ -169,6 +177,13 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         setPrice(newPrice);
     }
 
+    public void changeAllergensTo(Allergens newAllergens) {
+        if (newAllergens == null) {
+            throw new IllegalArgumentException();
+        }
+        this.allerg = newAllergens;
+    }
+
     private void setPrice(Money price) {
         if (price == null || price.lessThanOrEqual(Money.euros(0))) {
             throw new IllegalArgumentException();
@@ -179,6 +194,6 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     public DishDTO toDTO() {
         return new DishDTO(dishType.id(), dishType.description(), name.toString(),
                 nutricionalInfo.calories(), nutricionalInfo.salt(), price.amount(),
-                price.currency().getCurrencyCode(), active);
+                price.currency().getCurrencyCode(), active, allerg.getAllerg());
     }
 }

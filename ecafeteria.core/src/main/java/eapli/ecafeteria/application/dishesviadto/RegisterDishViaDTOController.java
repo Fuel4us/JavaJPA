@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.dishes.Allergens;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
@@ -27,6 +28,8 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  * retrieved from the repository prior to its use
  *
  * @author SOU03408
+ * 
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 public class RegisterDishViaDTOController implements Controller {
 
@@ -49,7 +52,7 @@ public class RegisterDishViaDTOController implements Controller {
 
         // TODO: we are ignoring the currency and hardcoding everything is EUR
         final Dish newDish = new Dish(type.get(), Designation.valueOf(dto.name),
-                new NutricionalInfo(dto.calories, dto.salt), Money.euros(dto.price));
+                new NutricionalInfo(dto.calories, dto.salt), Money.euros(dto.price), new Allergens(dto.allergens));
 
         this.dishRepository.save(newDish);
     }

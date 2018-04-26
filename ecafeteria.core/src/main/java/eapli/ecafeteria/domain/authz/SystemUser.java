@@ -17,6 +17,8 @@ import eapli.framework.domain.EmailAddress;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.dto.DTOable;
 import eapli.framework.dto.GenericDTO;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import eapli.framework.visitor.Visitable;
 import eapli.framework.visitor.Visitor;
@@ -52,9 +54,8 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 	private RoleSet roles;
 	@Temporal(TemporalType.DATE)
 	private Calendar createdOn;
-	private boolean active;
-	@Temporal(TemporalType.DATE)
-	private Calendar deactivatedOn;
+        private boolean isActive;
+//	private UserState state;
 
 	public SystemUser(final String username, final String password, final String firstName, final String lastName,
 			final String email, final Set<RoleType> roles) {
@@ -74,8 +75,10 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		this.roles = new RoleSet();
 
 		this.roles.addAll(roles.stream().map(rt -> new Role(rt, this.createdOn)).collect(Collectors.toList()));
+                
+                this.isActive = true;
 
-		this.active = true;
+//		state = new UserState();
 	}
 
 	public SystemUser(final Username username, final Password password, final Name name, final EmailAddress email,
@@ -94,8 +97,10 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		this.name = name;
 		this.email = email;
 		this.roles = roles;
+                
+                this.isActive = true;
 
-		this.active = true;
+//		state = new UserState();
 	}
 
 	protected SystemUser() {
@@ -201,14 +206,17 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 	}
 
 	public boolean isActive() {
-		return this.active;
+//		return (this.state.state() == UserState.UserType.ACCEPTED);
+                return isActive;
 	}
 
-	public void deactivate(Calendar deactivatedOn) {
-		// FIXME validate parameters: not null; deactivatedOn > createdOn;
-		// cannot deactivate an inactive user
-		this.active = false;
-		this.deactivatedOn = deactivatedOn;
+	public void deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
+            
+		/*if(this.createdOn.compareTo(deactivatedOn) < 0)
+                    state.deactivate(deactivatedOn, reasonType, comment);
+                else {
+                    throw new IllegalArgumentException(createdOn+" > "+deactivatedOn);
+                }*/
 	}
 
 	@Override

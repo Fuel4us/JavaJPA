@@ -34,6 +34,10 @@ public interface RepositoryFactory {
     UserRepository users();
 
     DishTypeRepository dishTypes();
+    
+    MealRepository meals();
+    
+    MenuRepository menus();
 
     /**
      *
@@ -42,11 +46,7 @@ public interface RepositoryFactory {
      */
     CafeteriaUserRepository cafeteriaUsers(TransactionalContext autoTx);
 
-    /**
-     * repository will be created in auto transaction mode
-     *
-     * @return
-     */
+    
     CafeteriaUserRepository cafeteriaUsers();
 
     /**
@@ -76,4 +76,35 @@ public interface RepositoryFactory {
      * @return
      */
     DishReportingRepository dishReporting();
+    
+    LotRepository lots();
+    
+    ExecutionRepository execution();
+    
+    BookingRepository booking();
+    
+    HeuristicRepository heuristics();
+    
+    CanteenShiftRepository canteenShift();
+    
+    /*
+    * POSUserRepository
+    */
+    //POSUserRepository POSUser();
+    
+    /*
+    * Movement
+    */
+    MovementRepository movement();
+    
+    
+    /**
+     * Reason Repository
+     * @return ReasoRepository
+     */
+
+    
+    ReasonRepository reason();
+    
+    MealPlanRepository mealplans();
 }

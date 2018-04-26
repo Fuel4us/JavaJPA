@@ -1,0 +1,5 @@
+CheckNextBooking:
+
+The user starts in the program the process of checking his next reserved meal.
+The system shows the information about the reserved meal
+The use case ends.
