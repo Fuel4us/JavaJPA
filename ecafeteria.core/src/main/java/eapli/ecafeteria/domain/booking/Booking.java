@@ -46,7 +46,9 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public String id() {
         return this.id;
     }
-    
+
+    public Meal getMeal(){ return this.meal;}
+
     public BookingState getBookingState(){
         return this.bookingState;
     }
