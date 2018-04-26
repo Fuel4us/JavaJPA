@@ -16,7 +16,9 @@ public class MealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany
     private Menu menu;
+    
     private List<Integer> numberOfDishes;
     private boolean closed;
 
