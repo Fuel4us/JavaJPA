@@ -8,7 +8,8 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
-import java.util.LinkedList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -41,7 +42,7 @@ public class RegisterDishUI extends AbstractUI {
 
         final double price = Console.readDouble("Price:");
 
-        LinkedList<String> newAllergenList = new LinkedList<>();
+        Set<String> newAllergenList = new HashSet<>();
         final int num = Console.readInteger("Enter the number of allergens of the new list.");
         for (int i = 0; i < num; i++) {
             final String all = Console.readLine("Allergen:");
