@@ -32,6 +32,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CanteenShift
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.FindMealsByLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterLotsUsedInMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMealsActuallyCookedAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.PublishMenuUI;
@@ -97,6 +98,7 @@ public class MainMenu extends AbstractUI {
     private static final int CANTEEN_SHIFT_CLOSURE_OPTION = 4;
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
     private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
+    private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -260,6 +262,8 @@ public class MainMenu extends AbstractUI {
 
         menu.add(
                 new MenuItem(CANTEEN_SHIFT_CLOSURE_OPTION, "Canteen Shift Closure", new CanteenShiftClosureAction()));
+        
+        menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
         
         menu.add(new MenuItem(CREATE_MEAL_PLAN_OPTION, "Create Meal Plan", new CreateMealPlanAction()));
         
