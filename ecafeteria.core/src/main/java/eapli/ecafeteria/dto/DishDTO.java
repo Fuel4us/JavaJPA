@@ -2,6 +2,7 @@ package eapli.ecafeteria.dto;
 
 import eapli.framework.dto.DTO;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * a pure DTO for dishes
@@ -12,7 +13,7 @@ import java.util.LinkedList;
 public class DishDTO implements DTO {
 
     public DishDTO(String dishTypeAcronym, String dishTypeDescription, String name,
-            Integer calories2, Integer salt, double amount, String currency, boolean active, LinkedList<String> allergens) {
+            Integer calories2, Integer salt, double amount, String currency, boolean active, Set<String> allergens) {
         this.dishTypeAcronym = dishTypeAcronym;
         this.dishTypeDescription = dishTypeDescription;
         this.name = name;
@@ -37,5 +38,5 @@ public class DishDTO implements DTO {
 
     public boolean active;
 
-    public LinkedList<String> allergens;
+    public Set<String> allergens;
 }
