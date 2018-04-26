@@ -26,6 +26,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.Rep
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting.ReportHighCaloriesDishesUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.ListDishViaDTOUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.RegisterDishViaDTOUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.FindMealsByLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
@@ -83,6 +84,7 @@ public class MainMenu extends AbstractUI {
     // MATERIALS
     private static final int MATERIAL_REGISTER_OPTION = 1;
     private static final int MATERIAL_LIST_OPTION = 2;
+    private static final int FIND_MEALS_BY_LOT_OPTION = 3;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -237,6 +239,8 @@ public class MainMenu extends AbstractUI {
                 new RegisterMaterialAction()));
         menu.add(
                 new MenuItem(MATERIAL_LIST_OPTION, "List all materials", new ListMaterialAction()));
+        menu.add(
+                new MenuItem(FIND_MEALS_BY_LOT_OPTION, "Find Meals By Lot", new FindMealsByLotAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
