@@ -27,6 +27,9 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Designat
 
     @Override
     public Iterable<Meal> findAllByLot(Long lotId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final Map<String, Object> params = new HashMap<>();
+        params.put("lotId", lotId);
+        
+        return match("e.lotId = :lotId", params);
     }
 }
