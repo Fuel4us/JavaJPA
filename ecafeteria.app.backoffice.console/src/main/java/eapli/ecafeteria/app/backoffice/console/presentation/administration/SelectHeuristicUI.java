@@ -2,12 +2,9 @@ package eapli.ecafeteria.app.backoffice.console.presentation.administration;
 
 import eapli.ecafeteria.application.administration.SelectHeuristicController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
-import eapli.ecafeteria.domain.kitchen.Heuristic;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
-import eapli.framework.util.Console;
-import java.util.Iterator;
 
 /**
  *
@@ -25,6 +22,7 @@ public class SelectHeuristicUI extends AbstractUI {
         option.show();
         
         HeuristicConfiguration newHeuristic = (HeuristicConfiguration) option.selectedElement();
+        
         
         return MealPlan.changeHeuristicInUse(newHeuristic);
     }

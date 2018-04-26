@@ -19,7 +19,7 @@ public class ECafeteriaBootstrapper implements Action {
     public boolean execute() {
         // declare bootstrap actions
         final Action[] actions = {new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), new DishTypesBootstrapper(),
-            new CafeteriaUserBootstrapper(), new DishBootstrapper(), new MaterialsBootstrapper(), new HeuristicBootstrapper()};
+            new CafeteriaUserBootstrapper(), new DishBootstrapper(), new MaterialsBootstrapper(), new HeuristicBootstrapper(), new MealBootstrapper()};
 
         authenticateSuperUser();
 
@@ -39,6 +39,7 @@ public class ECafeteriaBootstrapper implements Action {
         roles.add(RoleType.ADMIN);
         roles.add(RoleType.MENU_MANAGER);
         roles.add(RoleType.KITCHEN_MANAGER);
+        roles.add(RoleType.CASHIER);
         final UserSession adminSession = new UserSession(
                 new SystemUser("poweruser", "poweruserA1", "joe", "doe", "joe@email.org", roles));
         AuthorizationService.setSession(adminSession);
