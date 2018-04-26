@@ -54,8 +54,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 	private RoleSet roles;
 	@Temporal(TemporalType.DATE)
 	private Calendar createdOn;
-        private boolean isActive;
-//	private UserState state;
+	private UserState state;
 
 	public SystemUser(final String username, final String password, final String firstName, final String lastName,
 			final String email, final Set<RoleType> roles) {
@@ -76,9 +75,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 
 		this.roles.addAll(roles.stream().map(rt -> new Role(rt, this.createdOn)).collect(Collectors.toList()));
                 
-                this.isActive = true;
-
-//		state = new UserState();
+		state = new UserState();
 	}
 
 	public SystemUser(final Username username, final Password password, final Name name, final EmailAddress email,
@@ -97,10 +94,8 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		this.name = name;
 		this.email = email;
 		this.roles = roles;
-                
-                this.isActive = true;
 
-//		state = new UserState();
+		state = new UserState();
 	}
 
 	protected SystemUser() {
@@ -206,18 +201,25 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 	}
 
 	public boolean isActive() {
-//		return (this.state.state() == UserState.UserType.ACCEPTED);
-                return isActive;
+		return (this.state.state() == UserState.UserType.ACCEPTED);
 	}
 
 	public void deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
             
-		/*if(this.createdOn.compareTo(deactivatedOn) < 0)
+		if(this.createdOn.compareTo(deactivatedOn) < 0)
                     state.deactivate(deactivatedOn, reasonType, comment);
                 else {
                     throw new IllegalArgumentException(createdOn+" > "+deactivatedOn);
-                }*/
+                }
 	}
+        
+        public boolean reject(){
+            return state.reject();
+        }
+        
+        public boolean activate(){
+            return state.accept();
+        }
 
 	@Override
 	public int hashCode() {

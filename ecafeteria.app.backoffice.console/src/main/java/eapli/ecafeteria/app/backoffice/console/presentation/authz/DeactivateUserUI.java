@@ -70,6 +70,7 @@ public class DeactivateUserUI extends AbstractUI {
             for(final ReasonType rType: this.theController.reasons()){
                 reasonList.add(rType);
                 System.out.println(reasonCounter+". "+rType+"\n");
+                reasonCounter++;
             }
             final int reasonNumber = Console.readInteger("Select the reason: ");
             

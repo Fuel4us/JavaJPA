@@ -21,7 +21,7 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
     @Override
     public boolean execute() {
         registerPowerUser();
-        registerAdmin("admin", TestDataConstants.PASSWORD1, "Jane", "Doe Admin", "jane.doe@email.local");
+        registerAdmin("admin", TestDataConstants.PASSWORD1, "Jane", "Doe Admin", "jane.doe@email.local", true);
         return true;
     }
 
@@ -34,7 +34,7 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
         roles.add(RoleType.CAFETERIA_USER);
 
         final SystemUser poweruser = registerUser("poweruser", TestDataConstants.PASSWORD1, "joe", "power",
-                "joe@email.org", roles);
+                "joe@email.org", roles, true);
         assert poweruser != null;
 
         // authenticate a super user to be able to register new users, and
@@ -48,10 +48,10 @@ public class MasterUsersBootstrapper extends UsersBootstrapperBase implements Ac
      *
      */
     private void registerAdmin(final String username, final String password, final String firstName,
-            final String lastName, final String email) {
+            final String lastName, final String email, boolean activateUser) {
         final Set<RoleType> roles = new HashSet<>();
         roles.add(RoleType.ADMIN);
 
-        registerUser(username, password, firstName, lastName, email, roles);
+        registerUser(username, password, firstName, lastName, email, roles, activateUser);
     }
 }

@@ -32,7 +32,7 @@ public class AddUserController implements Controller {
     }
 
     public SystemUser addUser(String username, String password, String firstName, String lastName,
-            String email, Set<RoleType> roles, Calendar createdOn)
+            String email, Set<RoleType> roles, Calendar createdOn, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
@@ -40,12 +40,14 @@ public class AddUserController implements Controller {
         userBuilder.withUsername(username).withPassword(password).withFirstName(firstName)
                 .withLastName(lastName).withEmail(email).withCreatedOn(createdOn).withRoles(roles);
 
+        if(activateUser) userBuilder.activator();
+        
         return this.userRepository.save(userBuilder.build());
     }
 
     public SystemUser addUser(String username, String password, String firstName, String lastName,
-            String email, Set<RoleType> roles)
+            String email, Set<RoleType> roles, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
-        return addUser(username, password, firstName, lastName, email, roles, DateTime.now());
+        return addUser(username, password, firstName, lastName, email, roles, DateTime.now(), activateUser);
     }
 }
