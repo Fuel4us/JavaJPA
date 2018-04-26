@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.domain.authz.UserState;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
@@ -42,6 +43,10 @@ class JpaCafeteriaUserRepository extends JpaAutoTxRepository<CafeteriaUser, Meca
 
     @Override
     public Iterable<CafeteriaUser> findAllActive() {
-        return match("e.systemUser.active = true");
+        final Map<String, Object> params = new HashMap<>();
+        params.put("state", UserState.UserType.ACCEPTED);
+        return match("e.systemUser.state.type=:state", params);
+        
+//        SELECT * FROM CAFETERIAUSER c, SYSTEMUSER s WHERE s.name = c.number AND s.type = 'ACCEPTED'
     }
 }

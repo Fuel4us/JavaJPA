@@ -3,10 +3,16 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.MealPlanRepository;
+import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.domain.Designation;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,16 +20,13 @@ import javax.persistence.*;
  */
 public class CreateMealPlanController {
     
+    private final MealPlanRepository mealPlanRepo = PersistenceContext.repositories().mealplans();
+    private final MenuRepository menuRepo = PersistenceContext.repositories().menus();
+    
     public List<Menu> getExistingMenus(){
         
         //NÃO SEI SE É ASSIM QUE SE FAZ PARA OBTER OS MENUS A PARTIR DA BASE DE DADOS
-        
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("mealplan");
-        EntityManager manager = factory.createEntityManager();
-        
-        Query query = manager.createQuery("SELECT m FROM Menu m");
-        
-        List<Menu> resultingList = query.getResultList();
+        List<Menu> resultingList = (List<Menu>) menuRepo.findAll();
         
         return resultingList;
     }
@@ -37,7 +40,7 @@ public class CreateMealPlanController {
     public MealPlan createMealPlan(Menu menu){
         List<Integer> numberDishes = new ArrayList<>();
         
-        MealPlan mPlan = new MealPlan(menu, numberDishes); //false - não está fechado quando criado
+        MealPlan mPlan = new MealPlan(menu, numberDishes);
         
         return mPlan;
     }
@@ -66,12 +69,10 @@ public class CreateMealPlanController {
         
         //NÃO SEI SE É ASSIM QUE SE FAZ PARA GUARDAR A MEAL PLAN NA BASE DE DADOS
         
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("mealplan");
-        EntityManager manager = factory.createEntityManager();
-        
-        manager.getTransaction().begin();
-        manager.persist(mealPlan);
-        manager.getTransaction().commit();
-        manager.close();
+        try {
+            mealPlanRepo.save(mealPlan);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

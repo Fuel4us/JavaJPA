@@ -28,7 +28,7 @@ public class LotBootstrapper implements Action {
 
         for(Material material : materialRepository.findAll()) {
             int i=1, j=i*2;
-            new RegisterLotsUsedInMealController().registerMealLot(i++, material, j);
+            new RegisterLotsUsedInMealController().registerLot(i++, material, j);
         }
     }
 }

@@ -26,6 +26,11 @@ public class Rating {
     public Rating() {
     }
 
+    public Rating(int score, String comment) {
+        this.score = score;
+        this.comment = comment;
+    }
+
     public void setScore(int score) {
         this.score = score;
     }

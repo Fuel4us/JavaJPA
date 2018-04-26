@@ -4,6 +4,7 @@ import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
@@ -11,7 +12,7 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
 
     @Override
     protected Calendar newKeyFor(CanteenShift entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entity.id();
     }
 
     @Override
@@ -26,7 +27,9 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
 
     @Override
     public boolean close(Calendar cal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(cal));
+        return cs.get().close();
     }
 
 }

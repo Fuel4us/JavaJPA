@@ -25,6 +25,7 @@ public class SystemUserBuilder implements DomainFactory<SystemUser> {
     private EmailAddress email;
     private final RoleSet roles;
     private Calendar createdOn;
+    private boolean activate;
 
     public SystemUserBuilder() {
         this.roles = new RoleSet();
@@ -103,16 +104,27 @@ public class SystemUserBuilder implements DomainFactory<SystemUser> {
         this.createdOn = createdOn;
         return this;
     }
+    
+    public SystemUserBuilder activator(){
+        this.activate = true;
+        return this;
+    }
 
     @Override
     public SystemUser build() {
         // since the factory knows that all the parts are needed it could throw
         // an exception. however, we will leave that to the constructor
+        SystemUser user;
+        
         if (this.createdOn != null) {
-            return new SystemUser(this.username, this.password, this.name, this.email, this.roles, this.createdOn);
+            user = new SystemUser(this.username, this.password, this.name, this.email, this.roles, this.createdOn);
         } else {
-            return new SystemUser(this.username, this.password, this.name, this.email, this.roles);
+            user =  new SystemUser(this.username, this.password, this.name, this.email, this.roles);
         }
+        
+        if(this.activate) user.activate();
+        
+        return user;
     }
 
     public SystemUserBuilder withRoles(Set<RoleType> someRoles) {

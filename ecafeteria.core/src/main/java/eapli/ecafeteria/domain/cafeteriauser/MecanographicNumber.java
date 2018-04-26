@@ -56,4 +56,8 @@ public class MecanographicNumber implements ValueObject, Serializable {
     public String toString() {
         return this.number;
     }
+    
+    public String number(){
+        return this.number;
+    }
 }

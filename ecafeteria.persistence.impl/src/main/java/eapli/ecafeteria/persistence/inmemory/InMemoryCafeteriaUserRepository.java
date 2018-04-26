@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
+import eapli.ecafeteria.domain.authz.UserState;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
@@ -31,6 +32,6 @@ public class InMemoryCafeteriaUserRepository extends InMemoryRepository<Cafeteri
 
     @Override
     public Iterable<CafeteriaUser> findAllActive() {
-        return match(e -> e.user().isActive());
+        return match(e -> e.user().equals(UserState.UserType.ACCEPTED));
     }
 }

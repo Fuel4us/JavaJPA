@@ -54,7 +54,9 @@ public class AcceptRefuseSignupRequestController implements Controller {
         // explicitly begin a transaction
         TxCtx.beginTransaction();
 
-        final SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
+        SystemUser newUser = createSystemUserForCafeteriaUser(theSignupRequest);
+        newUser.activate();
+        
         createCafeteriaUser(theSignupRequest, newUser);
         theSignupRequest = acceptTheSignupRequest(theSignupRequest);
 

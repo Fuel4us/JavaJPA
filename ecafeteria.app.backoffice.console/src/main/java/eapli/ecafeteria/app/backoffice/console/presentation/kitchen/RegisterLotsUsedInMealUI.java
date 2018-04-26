@@ -6,8 +6,11 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.RegisterLotsUsedInMealController;
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.kitchen.Material;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -24,6 +27,7 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
 
     private final RegisterLotsUsedInMealController controller = new RegisterLotsUsedInMealController();
     private final MaterialRepository matRepository = PersistenceContext.repositories().materials();
+    private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     protected Controller controller() {
         return this.controller;
@@ -31,19 +35,32 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
+
+        int i = 1, j = 1;
         final int lotCode = Console.readInteger("Lot Code:");
+        for (Material mat : matRepository.findAll()) {
+            System.out.println(j + " - " + mat.toString());
+            j++;
+        }
         final long ingredientCode = Console.readLong("Ingredient Code:");
         final int quantity = Console.readInteger("Quantity:");
-        
+        for (Meal meal : mealRepository.findAll()) {
+            System.out.println(i + " - " + meal.toString());
+            i++;
+        }
+        final long idMeal = Console.readLong("Meal ID:");
+
         try {
             Optional<Material> ingredient = matRepository.findOne(ingredientCode);
-            if (ingredient.isPresent()) {
-                this.controller.registerMealLot(lotCode, ingredient.get(), quantity);
+            Optional<Meal> meal = mealRepository.findById(idMeal);
+            if (ingredient.isPresent() && meal.isPresent()) {
+                Lot lot = this.controller.registerLot(lotCode, ingredient.get(), quantity);
+                this.controller.registerMealLot(meal.get(), lot);
             } else {
-                System.out.println("The ingredient doesn't exist.");
+                System.out.println("Ingredient or meal doesn't exist.");
             }
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-            System.out.println("That lot code is already in use.");
+            System.out.println("");
         }
         return false;
 

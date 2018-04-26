@@ -6,7 +6,6 @@
 package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.booking.RegisterBookingController;
-import eapli.ecafeteria.application.meals.RegisterMealController;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -47,7 +46,7 @@ public class BookingBootstrapper implements Action{
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
     
 }

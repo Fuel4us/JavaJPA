@@ -78,6 +78,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState", params);
     }
 
+    /**
+     * Rúben - 1160998
+     */
     @Override
     public void updateBookingRating(Booking choosen, Rating rating) {
         Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID = " + rating.id() + " WHERE BOOKINGID = " + choosen.bookingId());

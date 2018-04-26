@@ -12,19 +12,18 @@ import eapli.ecafeteria.persistence.ExecutionRepository;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealLotRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.RatingRepository;
+import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
-import java.util.Optional;
 
 /**
  *
@@ -98,6 +97,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaLotRepository();
     }
 
+    public MealLotRepository mealLots(){
+        return new JpaMealLotRepository();
+    }
+    
     @Override
     public BookingRepository booking() {
         return new JpaBookingRepository();
@@ -115,7 +118,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public ExecutionRepository execution() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JpaExecutionRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override
@@ -125,7 +128,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public CanteenShiftRepository canteenShift() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JpaCanteenShiftRepository();
     }
 
     @Override
@@ -141,5 +144,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public RatingRepository rating() {
         return new JpaRatingRepository();
+    }
+
+    @Override
+    public POSRepository POS() {
+        return new JpaPOSRepository();
     }
 }
