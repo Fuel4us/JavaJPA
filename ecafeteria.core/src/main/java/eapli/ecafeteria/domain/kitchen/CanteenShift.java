@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.Version;
 
 @Entity
-public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
+public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,19 +26,18 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     private Long pk;
     @Version
     private Long version;
-    
+
     // business ID
     @Column(unique = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dateCS;
-    
+
     @OneToOne
     private CanteenShiftState cfs;
-    
+
     @OneToMany
     private WorkSession ws;
-    
-    
+
     protected CanteenShift() {
         // for ORM
     }
@@ -55,7 +54,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     public CanteenShiftState canteenShiftState() {
         return this.cfs;
     }
-    
+
     public WorkSession workSession() {
         return this.ws;
     }
@@ -94,17 +93,17 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     public int hashCode() {
         return this.dateCS.hashCode();
     }
-    
-    public boolean open(){
-        if(this.cfs == CLOSED){
+
+    public boolean open() {
+        if (this.cfs == CLOSED) {
             this.cfs = OPEN;
             return true;
         }
         return false;
     }
-    
-    public boolean close(){
-        if(this.cfs == OPEN){
+
+    public boolean close() {
+        if (this.cfs == OPEN) {
             this.cfs = CLOSED;
             return true;
         }
