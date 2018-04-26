@@ -8,6 +8,7 @@ package eapli.ecafeteria.app.user.console.presentation;
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.app.user.console.presentation.booking.BookingRatingAction;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckBookingsForNextDaysUI;
+import eapli.ecafeteria.app.user.console.presentation.booking.RegisterBookingUI;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
@@ -99,7 +100,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private Menu buildBookingsMenu() {
         final Menu menu = new Menu("Bookings");
         menu.add(new MenuItem(LIST_MENUS_OPTION, "List menus", new ShowMessageAction("Not implemented yet")));
-        menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(BOOK_A_MEAL_OPTION, "Book a meal", () -> new RegisterBookingUI().show()));
         menu.add(new MenuItem(RATE_A_BOOKING_OPTION, "Rate a booking", new BookingRatingAction()));
         menu.add(new MenuItem(CHECK_BOOKINGS_FOR_NEXT_DAYS, "Check bookings for next days", () -> new CheckBookingsForNextDaysUI().show()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));

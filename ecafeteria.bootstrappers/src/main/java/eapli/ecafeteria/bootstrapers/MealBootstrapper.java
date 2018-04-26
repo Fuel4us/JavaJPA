@@ -28,11 +28,12 @@ public class MealBootstrapper implements Action{
         final Dish dish2 = repDish.findByName(Designation.valueOf(TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ)).get();
         
         registerMeal(dish1, MealType.LUNCH, new Date());
-//        registerMeal(dish1, MealType.DINNER, new Date());
-//        registerMeal(dish2, MealType.LUNCH, new Date());
-//        registerMeal(dish2, MealType.DINNER, new Date());
-//        registerMeal(dish1, MealType.LUNCH, new Date());
-//        
+        registerMeal(dish1, MealType.DINNER, new Date());
+        registerMeal(dish2, MealType.LUNCH, new Date());
+        registerMeal(dish2, MealType.DINNER, new Date());
+        registerMeal(dish1, MealType.LUNCH, new Date());
+        registerMeal(dish1, MealType.LUNCH, new Date(2020, 2, 1));
+        
         
         return true;
     }
