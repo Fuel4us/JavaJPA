@@ -50,7 +50,7 @@ public class ChargeCardController {
     public boolean ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         if(selectedUser!=null){
-            Currency currency = Currency.getInstance(Locale.FRANCE);   
+            Currency currency = Currency.getInstance(Locale.FRANCE); 
             Movement movement = new Movement(this.selectedUser.mecanographicNumber(), MovementType.DEPOSIT, amount, currency);
             movementRepository.save(movement);
             return true;
