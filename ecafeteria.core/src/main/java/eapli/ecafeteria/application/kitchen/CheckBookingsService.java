@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CheckBookingsService {
@@ -29,7 +30,21 @@ public class CheckBookingsService {
 
         return list;
     }
-    {
 
+    public void displayBookingsDate(){
+        List<Booking> list = getAllReservations();
+        List<Date> dateList = new ArrayList<>();
+
+        if(list.size()>0){
+            for (Booking booking:
+                    list) {
+                if(!dateList.contains(booking.day())){
+                    dateList.add(booking.day());
+                }
+            }
+            for (int i = 0; i <dateList.size() ; i++) {
+                System.out.println(i+1+" Date: "+dateList.get(i));
+            }
+        }
     }
 }
