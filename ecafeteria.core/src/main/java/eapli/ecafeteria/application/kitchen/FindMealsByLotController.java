@@ -1,7 +1,7 @@
 package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.kitchen.MealLot;
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.LotRepository;
@@ -14,7 +14,7 @@ public class FindMealsByLotController {
     private final LotRepository lotRepository = PersistenceContext.repositories().lots();
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
     
-    public Iterable<MealLot> getUsedLots() {
+    public Iterable<Lot> getUsedLots() {
         return lotRepository.findAll();
     }
     

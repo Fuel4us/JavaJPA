@@ -15,6 +15,6 @@ public class CreateMealPlanAction implements Action{
 
     @Override
     public boolean execute() {
-        return new CanteenShiftClosureUI().show();
+        return new CreateMealPlanUI().doShow();
     }
 }

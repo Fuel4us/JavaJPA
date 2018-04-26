@@ -32,8 +32,10 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CanteenShift
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.FindMealsByLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterLotsUsedInMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMealsActuallyCookedAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.menus.PublishMenuUI;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -81,6 +83,9 @@ public class MainMenu extends AbstractUI {
     private static final int DISH_LIST_DTO_OPTION = 8;
     private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
     private static final int DISH_CHANGE_OPTION = 10;
+    
+    //MENUS
+    private static final int PUBLISH_MENU_OPTION = 10;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
@@ -93,6 +98,7 @@ public class MainMenu extends AbstractUI {
     private static final int CANTEEN_SHIFT_CLOSURE_OPTION = 4;
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
     private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
+    private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -102,6 +108,7 @@ public class MainMenu extends AbstractUI {
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
     private static final int USERS_OPTION = 2;
+    private static final int MENUS_OPTION = 8;
     private static final int SETTINGS_OPTION = 4;
     private static final int DISH_TYPES_OPTION = 5;
     private static final int TRACEABILITY_OPTION = 6;
@@ -162,6 +169,9 @@ public class MainMenu extends AbstractUI {
         }
         if (AuthorizationService.session().authenticatedUser()
                 .isAuthorizedTo(ActionRight.MANAGE_MENUS)) {
+            final Menu menuMenu = buildMenuMenu();
+            mainMenu.add(new SubMenu(MENUS_OPTION, menuMenu,
+                    new ShowVerticalSubMenuAction(menuMenu)));
             final Menu dishTypeMenu = buildDishMenu();
             mainMenu.add(new SubMenu(DISH_TYPES_OPTION, dishTypeMenu,
                     new ShowVerticalSubMenuAction(dishTypeMenu)));
@@ -253,6 +263,8 @@ public class MainMenu extends AbstractUI {
         menu.add(
                 new MenuItem(CANTEEN_SHIFT_CLOSURE_OPTION, "Canteen Shift Closure", new CanteenShiftClosureAction()));
         
+        menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
+        
         menu.add(new MenuItem(CREATE_MEAL_PLAN_OPTION, "Create Meal Plan", new CreateMealPlanAction()));
         
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
@@ -287,6 +299,17 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REPORTING_DISHES_PER_CALORIC_CATEGORY_OPTION + 1,
                 "Dishes per Caloric Category (as tuples)",
                 () -> new ReportDishesPerCaloricCategoryAsTuplesUI().show()));
+
+        menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+
+        return menu;
+    }
+
+    private Menu buildMenuMenu() {
+        final Menu menu = new Menu("Menus>");
+
+        menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu",
+                () -> new PublishMenuUI().show()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 

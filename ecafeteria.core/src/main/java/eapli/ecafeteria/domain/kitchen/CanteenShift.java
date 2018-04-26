@@ -1,6 +1,8 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafetaria.domain.finance.WorkSession;
+import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
+import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -9,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.Version;
 
@@ -23,38 +26,38 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     private Long pk;
     @Version
     private Long version;
-
+    
     // business ID
     @Column(unique = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dateCS;
+    
+    @OneToOne
+    private CanteenShiftState cfs;
+    
     @OneToMany
-    private Meal mealCode;
-    private String description;
-
+    private WorkSession ws;
+    
+    
     protected CanteenShift() {
         // for ORM
     }
 
-    public CanteenShift(Calendar date, Meal mealCode, String description) {
+    public CanteenShift(Calendar date, CanteenShiftState cfs, WorkSession ws) {
         if (date == null) {
             throw new IllegalArgumentException();
         }
         this.dateCS = date;
-        this.mealCode = mealCode;
-        this.description = description;
+        this.cfs = cfs;
+        this.ws = ws;
     }
 
-    public Meal meal() {
-        return this.mealCode;
+    public CanteenShiftState canteenShiftState() {
+        return this.cfs;
     }
-
-    public String description() {
-        return this.description;
-    }
-
-    public void changeDescriptionTo(String newDescription) {
-        this.description = newDescription;
+    
+    public WorkSession workSession() {
+        return this.ws;
     }
 
     @Override
@@ -91,5 +94,20 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     public int hashCode() {
         return this.dateCS.hashCode();
     }
-
+    
+    public boolean open(){
+        if(this.cfs == CLOSED){
+            this.cfs = OPEN;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean close(){
+        if(this.cfs == OPEN){
+            this.cfs = CLOSED;
+            return true;
+        }
+        return false;
+    }
 }

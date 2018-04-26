@@ -19,7 +19,7 @@ public class CloseMealPlanUI {
                     System.out.println("End .. .. ..");
                     break;
                 case 1:
-                    break;
+                    controller.choseMealPlanToClose();
             }
         } while(option != 0);
     }

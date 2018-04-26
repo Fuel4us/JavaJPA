@@ -79,6 +79,8 @@ public interface RepositoryFactory {
     
     LotRepository lots();
     
+    MealLotRepository mealLots();
+    
     ExecutionRepository execution();
     
     BookingRepository booking();
@@ -86,6 +88,8 @@ public interface RepositoryFactory {
     HeuristicRepository heuristics();
     
     CanteenShiftRepository canteenShift();
+    
+    POSRepository POS();
     
     /*
     * POSUserRepository

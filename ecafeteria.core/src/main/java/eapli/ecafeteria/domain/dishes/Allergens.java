@@ -15,21 +15,22 @@ import javax.persistence.Version;
  */
 @Entity
 public class Allergens implements Serializable {
-    
+
     @Id
     @GeneratedValue
-    private Long pk;
+    private Long id;
     @Version
     private Long version;
-    
+
     /**
      * List that saves the allergens of an certain dish.
      */
     private Set<String> allerg;
-    
+
     /**
      * Constructor of the class
-     * @param allerg 
+     *
+     * @param allerg
      */
     public Allergens(Set<String> allerg) {
         if (allerg == null) {
@@ -37,7 +38,7 @@ public class Allergens implements Serializable {
         }
         this.allerg = allerg;
     }
-    
+
     /**
      * Empty constructor of the class dish.
      */
@@ -51,6 +52,10 @@ public class Allergens implements Serializable {
 
     public void setAllerg(Set<String> allerg) {
         this.allerg = allerg;
+    }
+
+    public Long id() {
+        return id;
     }
 
     @Override

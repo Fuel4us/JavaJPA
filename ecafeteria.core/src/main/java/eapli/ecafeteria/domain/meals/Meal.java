@@ -1,17 +1,15 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
-import eapli.ecafeteria.domain.kitchen.MealLot;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -28,7 +26,9 @@ public class Meal implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @OneToOne
     private Dish dish;
+    
     private MealType mealType;
 
     @Temporal(javax.persistence.TemporalType.DATE)
