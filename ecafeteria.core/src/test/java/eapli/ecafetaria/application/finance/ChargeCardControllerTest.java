@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.domain.booking;
+package eapli.ecafetaria.application.finance;
 
+import eapli.ecafeteria.domain.authz.Username;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,11 +16,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Leandro
+ * @author Hernani Gil
  */
-public class ComplaintTest {
+public class ChargeCardControllerTest {
     
-    public ComplaintTest() {
+    public ChargeCardControllerTest() {
     }
     
     @BeforeClass
@@ -37,8 +39,16 @@ public class ComplaintTest {
     public void tearDown() {
     }
 
+
+    /**
+     * Test of ChargeCard method, of class ChargeCardController.
+     */
 //    @Test
-//    public void testSomeMethod() {
+//    public void testChargeCard() throws Exception {
+//        System.out.println("ChargeCard");
+//        double amount = 0.0;
+//        ChargeCardController instance = new ChargeCardController();
+//        instance.ChargeCard(amount);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
 //    }
