@@ -1,10 +1,11 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.administration;
 
 import eapli.ecafeteria.application.administration.SelectHeuristicController;
-import eapli.ecafeteria.domain.meals.Heuristic;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.Heuristic;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -17,12 +18,12 @@ public class SelectHeuristicUI extends AbstractUI {
     
     @Override
     protected boolean doShow() {
-        final Iterable<Heuristic> heuristicsTypes = theController.listHeuristics().iterator().next().heuristics();
+        final List<Heuristic> heuristicsTypes = theController.listHeuristics().iterator().next().heuristics();
         
         showHeuristics(heuristicsTypes);
         Heuristic newHeuristic = querySelection(heuristicsTypes);
         
-        return true;
+        return MealPlan.changeHeuristicInUse(newHeuristic);
     }
     
     @Override
@@ -31,7 +32,7 @@ public class SelectHeuristicUI extends AbstractUI {
     }
     
     private void showHeuristics(Iterable<Heuristic> heuristicsTypes) {
-        int i = 0;
+        int i = 1;
         
         for(Heuristic h : heuristicsTypes){
             System.out.printf("%d. %s\n", i, h.toString());
@@ -42,7 +43,7 @@ public class SelectHeuristicUI extends AbstractUI {
         System.out.printf("\n");
     }
     
-    private Heuristic querySelection(Iterable<Heuristic> heuristicsTypes){
+    private Heuristic querySelection(List<Heuristic> heuristicsTypes){
         boolean valid = false;
         Integer option;
         
@@ -56,19 +57,6 @@ public class SelectHeuristicUI extends AbstractUI {
             
         } while (valid);
         
-        return findHeuristic(option, heuristicsTypes);
-    }
-    
-    private Heuristic findHeuristic(Integer option, Iterable<Heuristic> heuristicsTypes){
-        int i = 0;
-        Iterator<Heuristic> heuristicIterator = heuristicsTypes.iterator();
-        
-        while(i != option){
-            heuristicIterator.next();
-            i++;
-        }
-        
-        return heuristicIterator.next();
+        return heuristicsTypes.get(option - 1);
     }
 }
-
