@@ -18,10 +18,12 @@ public class MealPlan {
 
     private Menu menu;
     private List<Integer> numberOfDishes;
+    private boolean closed;
 
     public MealPlan(Menu menu, List<Integer> numberOfDishes) {
         this.menu = menu;
         this.numberOfDishes = numberOfDishes;
+        this.closed = false; //no inicio esta aberto logo closed=false
     }
 
     protected MealPlan(){}
