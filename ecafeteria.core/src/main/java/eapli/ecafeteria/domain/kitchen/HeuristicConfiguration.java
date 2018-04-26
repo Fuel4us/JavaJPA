@@ -1,33 +1,47 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import java.util.LinkedList;
-import java.util.List;
-import javax.persistence.CascadeType;
+import eapli.framework.domain.ddd.AggregateRoot;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 /**
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  */
 @Entity
-public class HeuristicConfiguration {
+public class HeuristicConfiguration implements AggregateRoot<Long>, Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Heuristic> heuristicsAvailable;
+    private Heuristic heuristic;
     
-    public HeuristicConfiguration() {
-        heuristicsAvailable = new LinkedList<>();
+    protected HeuristicConfiguration(){}
+    
+    public HeuristicConfiguration(Heuristic heuristic) {
+        this.heuristic = heuristic;
+    }
+    
+    public Heuristic heuristic(){
+        return this.heuristic;
+    }
+    
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Heuristic> heuristics() {
-        return heuristicsAvailable;
+    @Override
+    public Long id() {
+        return this.id;
+    }
+
+    @Override
+    public String toString() {
+        return this.heuristic.toString();
     }
 }

@@ -81,10 +81,9 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
         return false;
     }
 
-
     @Override
     public String toString() {
-        return "Execution{" + "cookedMeals=" + cookedMeals + '}';
+        return "Execution{" + "ID: " + pk + "cookedMeals=" + cookedMeals + '}';
     }
 
 }

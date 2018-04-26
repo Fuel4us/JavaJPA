@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class MealPlan {
     
-    public static Heuristic heuristicInUse;
+    public static HeuristicConfiguration heuristicInUse;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class MealPlan {
         return numberOfDishes;
     }
     
-    public static boolean changeHeuristicInUse(Heuristic newHeuristic){
+    public static boolean changeHeuristicInUse(HeuristicConfiguration newHeuristic){
         if(newHeuristic == null)
             return false;
         
