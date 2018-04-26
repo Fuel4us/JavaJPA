@@ -9,7 +9,9 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +62,7 @@ public class ChangeDishAllergensInfoUI extends AbstractUI {
                     out = 0;
                 } else if (answer.equalsIgnoreCase(ans2)) {
                     try {
-                        LinkedList<String> newAllergenList = new LinkedList<>();
+                        Set<String> newAllergenList = new HashSet<>();
                         final int num = Console.readInteger("Enter the number of allergens of the new list.");
                         for (int i = 0; i < num; i++) {
                             final String all = Console.readLine("Allergen:");

@@ -32,7 +32,7 @@ public class DeliverBookingController {
     }
     
     public Iterable<MealType> listMealTypes() {
-        return Arrays.asList(MealType.MealTypeValues());
+        return (Iterable<MealType>) MealType.MealTypeValues().iterator();
     }
     
     public Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState rs) {

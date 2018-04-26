@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public interface BookingRepository extends DataRepository<Booking, Long> {
 
-	Iterable<Booking> checkBookingsForNextDays(CafeteriaUser currentUser, Date currentDate);
+	Iterable<Booking> checkBookingsForNextDays(Optional <CafeteriaUser> currentUser, Date currentDate);
         
         Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState reservationState);
         

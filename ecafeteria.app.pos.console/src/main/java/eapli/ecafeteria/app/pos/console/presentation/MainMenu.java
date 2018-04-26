@@ -21,6 +21,7 @@ import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
+import eapli.ecafeteria.app.pos.console.presentation.booking.DeliverBookingAction;
 
 /**
  * TODO split this class in more specialized classes for each menu
@@ -96,11 +97,10 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CHARGE_CARD_OPTION, "Charge Card",
                 new ChargeCardAction()));
         /*menu.add(new MenuItem(SHOW_AVAILABLE_MEALS, "Show available meals",
-                new ShowAvailableMealsAction()));
+                new ShowAvailableMealsAction())); */
         menu.add(new MenuItem(DELIVER_BOOKING, "Deliver booking",
-                new DeliverReservationAction()));
+                new DeliverBookingAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        */
         return menu;
 
     }
