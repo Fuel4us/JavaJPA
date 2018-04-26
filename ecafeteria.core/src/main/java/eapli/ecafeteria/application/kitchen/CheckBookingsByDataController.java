@@ -1,12 +1,27 @@
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.framework.application.Controller;
+
 /**
  * Made by Diogo Monteiro 1140302
  */
-public class CheckBookingsByDataController {
-    //Initiate repository with "new" ation
+public class CheckBookingsByDataController implements Controller {
+    CheckBookingsService service;
 
-    //Method for selecting Bookings from information
-    //Must think if there should be multiple methods or only one that checks the information used by sintax
+    public CheckBookingsByDataController(){
+        service= new CheckBookingsService();
+    }
+
+    public void run(int choice){
+        if(choice==1){
+            service.displayBookingsDate();
+        }else if(choice ==2){
+            service.displayBookingsByMealType();
+        }else if(choice ==3){
+            service.displayBookingsByDish();
+        }else if(choice ==4){
+            service.displayBookingsByMeal();
+        }
+    }
 
 }

@@ -27,7 +27,7 @@ public class CheckBookingsService {
             System.out.println("There are no reservations");
         }else{
             for (Booking booking:
-                it ) {
+                    it ) {
                 list.add(booking);
             }
         }
@@ -58,11 +58,11 @@ public class CheckBookingsService {
                         System.out.println(booking+"\n");
                     }
                 }
-        }else{
+            }else{
                 System.out.println("That option doesn't exist");
                 displayBookingsDate();
             }
-    }
+        }
     }
 
     public void displayBookingsByDish(){
@@ -71,7 +71,7 @@ public class CheckBookingsService {
 
         if(list.size()>0){
             for (Booking booking:
-                 list) {
+                    list) {
                 if(!dishList.contains(booking.getMeal().getDish())){
                     dishList.add(booking.getMeal().getDish());
                 }
@@ -84,7 +84,7 @@ public class CheckBookingsService {
         int choice = Console.readInteger("Which Dish do you want to see the respective Bookings?\n");
         if(choice>0&&choice<dishList.size()+1){
             for (Booking booking:
-                 list) {
+                    list) {
                 if(booking.getMeal().getDish().equals(dishList.get(choice-1))){
                     System.out.println(booking+"\n");
                 }
@@ -101,7 +101,7 @@ public class CheckBookingsService {
 
         if(list.size()>0){
             for (Booking booking:
-                 list) {
+                    list) {
                 if (!mealList.contains(booking.getMeal())){
                     mealList.add(booking.getMeal());
                 }
