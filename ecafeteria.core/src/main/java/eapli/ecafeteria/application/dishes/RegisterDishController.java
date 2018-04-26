@@ -13,7 +13,7 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -30,7 +30,7 @@ public class RegisterDishController implements Controller {
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-            final double price, LinkedList<String> allerg) throws DataIntegrityViolationException, DataConcurrencyException {
+            final double price, Set<String> allerg) throws DataIntegrityViolationException, DataConcurrencyException {
 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
 
