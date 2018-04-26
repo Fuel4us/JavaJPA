@@ -12,6 +12,7 @@ import eapli.ecafeteria.persistence.ExecutionRepository;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
+import eapli.ecafeteria.persistence.MealLotRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -97,6 +98,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaLotRepository();
     }
 
+    @Override 
+    public MealLotRepository mealLots(){
+        return new JpaMealLotRepository();
+    }
+    
     @Override
     public BookingRepository booking() {
         return new JpaBookingRepository();

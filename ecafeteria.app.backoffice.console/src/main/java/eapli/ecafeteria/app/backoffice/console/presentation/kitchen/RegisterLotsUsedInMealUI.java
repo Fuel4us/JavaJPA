@@ -38,7 +38,7 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         try {
             Optional<Material> ingredient = matRepository.findOne(ingredientCode);
             if (ingredient.isPresent()) {
-                this.controller.registerMealLot(lotCode, ingredient.get(), quantity);
+                this.controller.registerLot(lotCode, ingredient.get(), quantity);
             } else {
                 System.out.println("The ingredient doesn't exist.");
             }

@@ -79,6 +79,8 @@ public interface RepositoryFactory {
     
     LotRepository lots();
     
+    MealLotRepository mealLots();
+    
     ExecutionRepository execution();
     
     BookingRepository booking();
