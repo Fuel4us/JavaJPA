@@ -12,9 +12,7 @@ import java.util.logging.Logger;
 
 import eapli.ecafeteria.application.authz.DeactivateUserController;
 import eapli.ecafeteria.domain.authz.ReasonType;
-import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
