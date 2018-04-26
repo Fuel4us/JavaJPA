@@ -35,7 +35,7 @@ public class MealPlanTest {
     @Test
     public void testChangeHeuristicInUseToNull() {
         System.out.println("changeHeuristicInUseToNull");
-        Heuristic newHeuristic = null;
+        HeuristicConfiguration newHeuristic = null;
         boolean expResult = false;
         boolean result = MealPlan.changeHeuristicInUse(newHeuristic);
         
@@ -45,7 +45,7 @@ public class MealPlanTest {
     @Test
     public void testChangeHeuristicInUseToHeuristicA(){
         System.out.println("changeHeuristicInUseToHeuristicA");
-        Heuristic newHeuristic = new HeuristicA();
+        HeuristicConfiguration newHeuristic = new HeuristicConfiguration(new HeuristicA());
         boolean expResult = true;
         boolean result = MealPlan.changeHeuristicInUse(newHeuristic);
         
