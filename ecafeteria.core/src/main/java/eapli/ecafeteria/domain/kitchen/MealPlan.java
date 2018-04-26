@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- * @author Tiago Babo 1160760
+ * @author Tiago Babo 1160760, Gonçalo Fonseca 1150503
  */
 @Entity
 public class MealPlan {
@@ -26,7 +26,11 @@ public class MealPlan {
         this.closed = false; //no inicio esta aberto logo closed=false
     }
 
-    protected MealPlan(){}
+    public MealPlan(){}
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
 
     public Menu getMenu() {
         return menu;
@@ -42,5 +46,22 @@ public class MealPlan {
         
         heuristicInUse = newHeuristic;
         return true;
+    }
+
+    /**
+     * Changes state to get it ready for the day.
+     * @param meal
+     */
+    public void changeState(MealPlan meal){
+        meal.setClosed(true);
+    }
+
+    @Override
+    public String toString() {
+        return "MealPlan{" +
+                ", menu=" + menu +
+                ", numberOfDishes=" + numberOfDishes +
+                ", closed=" + closed +
+                '}';
     }
 }
