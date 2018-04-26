@@ -3,6 +3,7 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.util.Console;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,26 @@ public class CloseMealPlanService {
         }
 
         return list;
+    }
+
+    public MealPlan choseMealPlanToClose() {
+        List<MealPlan> list = getAllMealPlans();
+        MealPlan mealToClose = new MealPlan();
+
+        if(list.size() > 0) {
+            for (int i= 0; i < list.size(); i++) {
+                System.out.println((i+1) + " - " + list.get(i) + "\n");
+            }
+            int choice = Console.readInteger("Which meal plan do you wish to close ? ");
+            if (choice > 0 && choice < list.size() + 1) {
+                mealToClose = list.get(choice-1);
+            } else {
+                System.out.println("This option does not exist");
+                return null;
+            }
+        }
+
+        return mealToClose;
     }
 
 }
