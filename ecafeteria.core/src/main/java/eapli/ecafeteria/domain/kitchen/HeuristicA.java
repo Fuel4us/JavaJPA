@@ -17,4 +17,9 @@ public class HeuristicA implements Heuristic {
     public void doHeuristicLogic() {
         new ShowMessageAction("Under Development").execute();
     }
+
+    @Override
+    public String toString() {
+        return "Heuristic A";
+    }
 }

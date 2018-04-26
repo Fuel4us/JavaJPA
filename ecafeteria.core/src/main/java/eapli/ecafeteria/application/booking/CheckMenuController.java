@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.booking;
 
+import eapli.ecafeteria.application.menus.ListMenuService;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -20,16 +21,11 @@ import java.util.List;
  * @author joao reis (1160600)
  */
 public class CheckMenuController {
-    MenuRepository rep = PersistenceContext.repositories().menus();
-    public List<Meal> getMenu(Date beginning, Date end) {
-        Iterable<Menu> menuList =  rep.findByMenuPeriod(beginning, end);
-        List<Meal> mealList = new ArrayList<>();
-        
-        for(Menu m: menuList) {
-            mealList.addAll(m.mealsInPeriod(beginning, end));
-        }
-        
-        Collections.sort(mealList, Meal.compareDates());
-        return mealList;
+    
+    public List<Meal> currentWeekMenu(){
+        return ListMenuService.menuForCurrentWeek();
+    }
+    public List<Meal> nextWeekMenu(){
+        return ListMenuService.menuForNextWeek();
     }
 }

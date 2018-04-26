@@ -9,11 +9,11 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  */
-public class InMemoryHeuristicRepository extends InMemoryRepository<HeuristicConfiguration, Heuristic> implements HeuristicRepository {
+public class InMemoryHeuristicRepository extends InMemoryRepository<HeuristicConfiguration, Long> implements HeuristicRepository {
 
     @Override
-    protected Heuristic newKeyFor(HeuristicConfiguration entity) {
-        return entity.heuristics().get(0);
+    protected Long newKeyFor(HeuristicConfiguration entity) {
+        return entity.id();
     }
 
 }

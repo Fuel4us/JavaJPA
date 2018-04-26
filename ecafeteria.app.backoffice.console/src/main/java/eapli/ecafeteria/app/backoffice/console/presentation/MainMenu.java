@@ -7,6 +7,8 @@ package eapli.ecafeteria.app.backoffice.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.app.backoffice.console.presentation.administration.SelectHeuristicAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.administration.SelectHeuristicUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
@@ -31,6 +33,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPl
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.FindMealsByLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMealsActuallyCookedAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -89,6 +92,7 @@ public class MainMenu extends AbstractUI {
     private static final int FIND_MEALS_BY_LOT_OPTION = 3;
     private static final int CANTEEN_SHIFT_CLOSURE_OPTION = 4;
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
+    private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -183,7 +187,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(SET_KITCHEN_ALERT_LIMIT_OPTION, "Set kitchen alert limit",
                 new ShowMessageAction("Not implemented yet")));
         menu.add(new MenuItem(SELECT_HEURISTIC_OPTION, "Select Heuristic",
-                new ShowMessageAction("Under development")));
+                new SelectHeuristicAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -250,6 +254,8 @@ public class MainMenu extends AbstractUI {
                 new MenuItem(CANTEEN_SHIFT_CLOSURE_OPTION, "Canteen Shift Closure", new CanteenShiftClosureAction()));
         
         menu.add(new MenuItem(CREATE_MEAL_PLAN_OPTION, "Create Meal Plan", new CreateMealPlanAction()));
+        
+        menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
         
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
