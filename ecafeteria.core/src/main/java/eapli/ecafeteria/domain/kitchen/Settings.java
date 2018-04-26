@@ -10,5 +10,17 @@ package eapli.ecafeteria.domain.kitchen;
  * @author 1160629@isep.ipp.pt
  */
 public class Settings {
+    LimitConfiguration limitConfig;
     
+    public Settings() {
+        limitConfig = new LimitConfiguration();
+    }
+    
+    public boolean configureYellowLimit(long limitValue){
+        return limitConfig.configureYellowLimit(limitValue);
+    }
+    
+    public boolean configureRedLimit(long limitValue){
+        return limitConfig.configureRedLimit(limitValue);
+    }
 }
