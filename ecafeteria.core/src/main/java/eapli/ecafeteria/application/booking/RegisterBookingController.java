@@ -62,9 +62,6 @@ public class RegisterBookingController {
             Booking booking = new Booking(cu, meal);
             
             repBooking.save(booking);
-        }else{
-            //Meal is served in less then 24 hours
-            //Cant be booked
         }
         
     }

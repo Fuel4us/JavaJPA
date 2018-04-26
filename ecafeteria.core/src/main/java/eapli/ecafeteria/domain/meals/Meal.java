@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -28,7 +29,9 @@ public class Meal implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @OneToOne
     private Dish dish;
+    
     private MealType mealType;
 
     @Temporal(javax.persistence.TemporalType.DATE)
