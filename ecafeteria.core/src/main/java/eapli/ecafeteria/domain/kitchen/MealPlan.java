@@ -38,6 +38,10 @@ public class MealPlan {
         return menu;
     }
 
+    public boolean isClosed() {
+        return closed;
+    }
+
     public List<Integer> getNumberOfDishes() {
         return numberOfDishes;
     }
