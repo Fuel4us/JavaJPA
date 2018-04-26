@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.booking.BookingState;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
+import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Calendar;
@@ -27,7 +28,7 @@ import static jdk.nashorn.internal.objects.NativeString.match;
  *
  * @author Ana Mafalda Silva
  */
-class JpaBookingRepository implements BookingRepository {
+class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
     public JpaBookingRepository() {
     }
@@ -39,52 +40,6 @@ class JpaBookingRepository implements BookingRepository {
 
     @Override
     public Booking getNextBooking() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Booking entity) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(Long entityId) throws DataIntegrityViolationException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Booking save(Booking entity) throws DataConcurrencyException, DataIntegrityViolationException {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
-        EntityManager manager = factory.createEntityManager();
-        
-        manager.getTransaction().begin();
-        manager.persist(entity);
-        manager.getTransaction().commit();
-        manager.close();
-        
-        return entity;
-    }
-
-    @Override
-    public Iterable<Booking> findAll() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
-        EntityManager manager = factory.createEntityManager();
-        
-        Query query=manager.createQuery("select * from Booking");
-        
-        return query.getResultList();
-    }
-
-    @Override
-    public Optional<Booking> findOne(Long id) {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("Booking");
-        EntityManager manager = factory.createEntityManager();
-        
-        return Optional.of(manager.find(Booking.class, id));
-    }
-
-    @Override
-    public long count() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
