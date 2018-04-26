@@ -38,5 +38,9 @@
     <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: com.h2database:h2:1.4.195" level="project" />
     <orderEntry type="module" module-name="framework" />
+    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-api:5.2.0-RC1" level="project" />
+    <orderEntry type="library" name="Maven: org.apiguardian:apiguardian-api:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.opentest4j:opentest4j:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-commons:1.2.0-RC1" level="project" />
   </component>
 </module>

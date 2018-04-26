@@ -6,10 +6,10 @@ import eapli.framework.actions.Action;
  *
  * @author ruben
  */
-public class MealRatingAction implements Action {
+public class BookingRatingAction implements Action {
     
     @Override
     public boolean execute() {
-        return new MealRatingUI().show();
+        return new BookingRatingUI().show();
     }
 }
