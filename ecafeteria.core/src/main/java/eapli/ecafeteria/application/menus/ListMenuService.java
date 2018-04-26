@@ -7,9 +7,14 @@ package eapli.ecafeteria.application.menus;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -24,5 +29,15 @@ public class ListMenuService {
 
         return this.menuRepository.findByState(false);
     }
-    
+    public List<Meal> menuByPeriod(Date beginning, Date end) {
+        Iterable<Menu> menuList =  menuRepository.findByMenuPeriod(beginning, end);
+        List<Meal> mealList = new ArrayList<>();
+        
+        for(Menu m: menuList) {
+            mealList.addAll(m.mealsInPeriod(beginning, end));
+        }
+        
+        Collections.sort(mealList, Meal.compareDates());
+        return mealList;
+    }
 }
