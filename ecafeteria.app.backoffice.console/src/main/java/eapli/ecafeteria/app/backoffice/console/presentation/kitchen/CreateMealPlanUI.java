@@ -14,7 +14,37 @@ import java.util.Scanner;
 public class CreateMealPlanUI {
     private final CreateMealPlanController controller = new CreateMealPlanController();
     private final Scanner input = new Scanner(System.in);
-
+    
+    public void mainLoop(){
+        int option = 0;
+        
+        do{
+            option = menu();
+            
+            switch(option){
+                case 0:
+                    System.out.println("\n# END #");
+                    break;
+                case 1:
+                    setDishQuantity();
+                    break;
+                default:
+                    System.out.println("\nINVALID OPTION!");
+                    break;
+            }
+        }while(option != 0);
+    }
+    
+    public int menu(){
+        System.out.println("# CREATE MEAL PLAN #");
+        System.out.println("1. Create meal plan");
+        System.out.println("0. Leave");
+        System.out.printf("OPTION: ");
+        int option = input.nextInt();
+        
+        return option;
+    }
+    
     public Menu selectMenu() {
         System.out.println("Select the menu for which you wish to create the meal plan:");
         List<Menu> menuList = controller.getExistingMenus();
