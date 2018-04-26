@@ -10,6 +10,6 @@ public class BookingRatingAction implements Action {
     
     @Override
     public boolean execute() {
-        return new BookingRatingUI().show();
+        return new BookingRatingUI().doShow();
     }
 }
