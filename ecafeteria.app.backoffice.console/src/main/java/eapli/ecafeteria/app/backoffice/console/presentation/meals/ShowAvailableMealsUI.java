@@ -28,24 +28,24 @@ public class ShowAvailableMealsUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        // show lista de meal types
-        final Iterable<MealType> mealTypes = this.theController.listMealTypes();
-
-        final SelectWidget selector = new SelectWidget(BORDER, mealTypes);
-
-        /* change to MealTypePrinter */
-        selector.show();
-
-        final MealType mealType = (MealType) selector.selectedElement();
-
-        // show lista de dishTypes
-        final Iterable<DishType> dishTypes = this.theController.listDishTypes();
-
-        Map<DishType, Integer> hashMap = theController.listTotalAvailableMeals(mealType, dishTypes);
-
-        hashMap.entrySet().forEach((entry) -> {
-            System.out.println(entry.getKey().id() + ": " + entry.getValue());
-        });
+//        // show lista de meal types
+//        final Iterable<MealType> mealTypes = this.theController.listMealTypes();
+//
+//        final SelectWidget selector = new SelectWidget(BORDER, mealTypes);
+//
+//        /* change to MealTypePrinter */
+//        selector.show();
+//
+//        final MealType mealType = (MealType) selector.selectedElement();
+//
+//        // show lista de dishTypes
+//        final Iterable<DishType> dishTypes = this.theController.listDishTypes();
+//
+//        Map<DishType, Integer> hashMap = theController.listTotalAvailableMeals(mealType, dishTypes);
+//
+//        hashMap.entrySet().forEach((entry) -> {
+//            System.out.println(entry.getKey().id() + ": " + entry.getValue());
+//        });
 
         return false;
     }

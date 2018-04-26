@@ -19,12 +19,14 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, Designation
 
     @Override
     public Optional<Meal> findByName(Designation name) {
-        return matchOne(e -> e.name().equals(name));
+//        return matchOne(e -> e.name().equals(name));
+        return null;
     }
 
     @Override
     protected Designation newKeyFor(Meal entity) {
-        return entity.id();
+//        return entity.id();
+        return null;
     }
 
     @Override

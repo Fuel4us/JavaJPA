@@ -2,14 +2,17 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.persistence.BookingRepository;
+import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.ExecutionRepository;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
-import eapli.ecafeteria.persistence.MealTypeRepository;
+import eapli.ecafeteria.persistence.MenuRepository;
+import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
@@ -20,7 +23,7 @@ import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
  *
  * Created by nuno on 21/03/16.
  */
-public abstract class JpaRepositoryFactory implements RepositoryFactory {
+public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public UserRepository users(TransactionalContext autoTx) {
@@ -93,13 +96,33 @@ public abstract class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaBookingRepository();
     }
 
-//    @Override
-//    public HeuristicRepository heuristics() {
-//        return new JpaHeuristicRepository(Application.settings().getPersistenceUnitName());
-//    }
-    
     @Override
     public JpaMovementRepository movement(){
         return new JpaMovementRepository();
+    }
+
+    @Override
+    public MenuRepository menus() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ExecutionRepository execution() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HeuristicRepository heuristics() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public CanteenShiftRepository canteenShift() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ReasonRepository reason() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

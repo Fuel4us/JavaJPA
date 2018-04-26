@@ -36,7 +36,7 @@ public class Meal implements Serializable {
     /**
      * Class Changed by: Pedro Alves
      */
-    @ManyToOne()
+    //@ManyToOne()
     private MealType mealType;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mealDate;
