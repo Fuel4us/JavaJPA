@@ -5,21 +5,29 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author Bernardo Carreira
+ * @EDIT Pedro Alves
  */
 public enum MealType {
 
     LUNCH, DINNER;
+
+    private static Set<MealType> mealsType = new HashSet<>();
 
     /**
      * get available Meal Types
      *
      * @return all MealTypes
      */
-    public static MealType[] MealTypeValues() {
-        return new MealType[]{LUNCH, DINNER};
+    public static Set<MealType> MealTypeValues() {
+        mealsType.add(LUNCH);
+        mealsType.add(DINNER);
+        return mealsType;
     }
 
 }

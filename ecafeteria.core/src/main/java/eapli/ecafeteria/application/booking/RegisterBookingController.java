@@ -33,7 +33,7 @@ public class RegisterBookingController {
     
     public Meal findMealByID(int id){
         //Needs revision
-        Optional<Meal> OpMeal = repMeal.findOne(Designation.valueOf("" + id));
+        Optional<Meal> OpMeal = repMeal.findOne(Long.valueOf("" + id));
         if(OpMeal.isPresent())
             return OpMeal.get();
         else{
