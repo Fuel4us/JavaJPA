@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.kitchen;
 
+import eapli.ecafeteria.domain.meals.Heuristic;
 import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
 import javax.persistence.*;
@@ -9,7 +10,9 @@ import javax.persistence.*;
  */
 @Entity
 public class MealPlan {
-
+    
+    public static Heuristic heuristicInUse;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,5 +33,13 @@ public class MealPlan {
 
     public List<Integer> getNumberOfDishes() {
         return numberOfDishes;
+    }
+    
+    public static boolean changeHeuristicInUse(Heuristic newHeuristic){
+        if(newHeuristic == null)
+            return false;
+        
+        heuristicInUse = newHeuristic;
+        return true;
     }
 }
