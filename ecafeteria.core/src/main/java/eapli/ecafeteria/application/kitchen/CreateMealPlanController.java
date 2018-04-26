@@ -16,7 +16,7 @@ public class CreateMealPlanController {
     
     public List<Menu> getExistingMenus(){
         
-        //DEVERA TER DE FAZER ALGUMA COISA COM A BASE DE DADOS PARA OBTER OS MENUS
+        //NÃO SEI SE É ASSIM QUE SE FAZ PARA OBTER OS MENUS A PARTIR DA BASE DE DADOS
         
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("mealplan");
         EntityManager manager = factory.createEntityManager();
@@ -63,13 +63,14 @@ public class CreateMealPlanController {
     }
     
     public void saveMealPlan(MealPlan mealPlan){
+        
+        //NÃO SEI SE É ASSIM QUE SE FAZ PARA GUARDAR A MEAL PLAN NA BASE DE DADOS
+        
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("mealplan");
         EntityManager manager = factory.createEntityManager();
         
-        MealPlan mPlan = mealPlan;
-        
         manager.getTransaction().begin();
-        manager.persist(mPlan);
+        manager.persist(mealPlan);
         manager.getTransaction().commit();
         manager.close();
     }
