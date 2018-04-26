@@ -1,6 +1,5 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafeteria.domain.meals.Heuristic;
 import eapli.ecafeteria.domain.menus.Menu;
 import java.util.List;
 import javax.persistence.*;

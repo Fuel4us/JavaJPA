@@ -1,10 +1,11 @@
-package eapli.ecafeteria.domain.meals;
+package eapli.ecafeteria.domain.kitchen;
 
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 public class HeuristicConfiguration {
     
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @OneToMany(cascade = CascadeType.ALL)

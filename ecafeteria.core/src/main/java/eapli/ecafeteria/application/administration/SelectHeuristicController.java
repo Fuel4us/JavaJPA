@@ -1,6 +1,6 @@
 package eapli.ecafeteria.application.administration;
 
-import eapli.ecafeteria.domain.meals.HeuristicConfiguration;
+import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;

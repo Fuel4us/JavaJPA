@@ -1,4 +1,4 @@
-package eapli.ecafeteria.domain.meals;
+package eapli.ecafeteria.domain.kitchen;
 
 import eapli.framework.presentation.console.ShowMessageAction;
 import javax.persistence.Embeddable;
