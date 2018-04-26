@@ -116,7 +116,7 @@ class JpaBookingRepository implements BookingRepository {
         params.put("user", user);
         params.put("mealType", mealType);
         params.put("bookingState", bookingState);
-        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.reservationState =:reservationState AND e.meal.day = '" + new java.sql.Date(Calendar.getInstance().getTimeInMillis()) + "'", params);
+        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.bookingState =:bookingState AND e.meal.day = '" + new java.sql.Date(Calendar.getInstance().getTimeInMillis()) + "'", params);
     }
     
 }
