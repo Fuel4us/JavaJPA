@@ -35,8 +35,10 @@ public class RegisterLotsUsedInMealController implements Controller {
         return this.lRepository.save(lot);
     }
 
-    public MealLot registeMealLot(Meal meal, Lot lot) throws DataIntegrityViolationException, DataConcurrencyException {
+    public MealLot registerMealLot(Meal meal, Lot lot) 
+            throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        
         final MealLot mealLot = new MealLot(meal, lot);
         return this.mlRepository.save(mealLot);
     }
