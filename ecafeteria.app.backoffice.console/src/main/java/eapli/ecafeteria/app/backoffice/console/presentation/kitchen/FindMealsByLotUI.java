@@ -2,7 +2,7 @@ package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.FindMealsByLotController;
 import eapli.ecafeteria.domain.kitchen.Lot;
-import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.kitchen.MealLot;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
@@ -12,31 +12,25 @@ import java.util.Scanner;
 public class FindMealsByLotUI extends AbstractUI {
 
     private final FindMealsByLotController controller = new FindMealsByLotController();
-
-    public void getUsedLots() {
-        for (Lot lot : controller.getUsedLots()) {
-            System.out.println(lot);
-        }
-
-        getCookedMealsWithLot();
-    }
-
-    public void getCookedMealsWithLot() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Select a lot");
-        Long lotId = scanner.nextLong();
-
-        for (Meal meal : controller.getCookedMealsWithLot(lotId)) {
-            System.out.println(meal);
-        }
-
-        scanner.close();
-    }
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     protected boolean doShow() {
-        getUsedLots();
+        for (Lot lot : controller.getUsedLots()) {
+            System.out.println(lot.id() + ": " + lot);
+        }
+
+        System.out.println("Select a lot");
+        int lotCode = scanner.nextInt();
+
+        Long lotId = controller.getLotPkWithCode(lotCode);
+
+        Lot lot = controller.getSelectedLot(lotId).get();
+
+        for (MealLot mealLot : controller.getMealLotWithLot(lot)) {
+            System.out.println(mealLot.getMeal());
+        }
+
         return true;
     }
 
