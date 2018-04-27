@@ -22,7 +22,8 @@ public class CafeteriaUserBootstrapper implements Action {
     @Override
     public boolean execute() {
         signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330", true);
-        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331", true);
+        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331", false);
+        signupAndApprove("900332", "Password1", "Mary", "Jane", "mary@jane.com", "900332", true);
 
         return true;
     }
@@ -38,7 +39,6 @@ public class CafeteriaUserBootstrapper implements Action {
         try {
             request = signupController.signup(username, password, firstName, lastName, email,
                     mecanographicNumber);
-            acceptController.acceptSignupRequest(request);
             if(accept) acceptController.acceptSignupRequest(request);
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             // assume it just a question of trying to insert duplicate record
