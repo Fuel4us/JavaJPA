@@ -104,7 +104,7 @@ public class CheckReservationsByDataUI extends AbstractUI {
         if(choice>0&&choice<mealTypeList.size()+1){
             for (Booking booking:
                     list) {
-                if(booking.getMeal().equals(mealTypeList.get(choice-1))){
+                if(booking.getMeal().getMealType().equals(mealTypeList.get(choice-1))){
                     System.out.println(booking+"\n");
                 }
             }

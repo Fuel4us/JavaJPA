@@ -28,6 +28,7 @@ public class CreateMealPlanUI extends AbstractUI{
                     break;
                 case 1:
                     setDishQuantity();
+                    System.out.println("Meal plan saved successfully!");
                     break;
                 default:
                     System.out.println("\nINVALID OPTION!");
@@ -90,8 +91,6 @@ public class CreateMealPlanUI extends AbstractUI{
         }
         
         controller.saveMealPlan(mealPlan);
-        
-        System.out.println("Meal plan saved successfully!");
     }
     
     @Override
