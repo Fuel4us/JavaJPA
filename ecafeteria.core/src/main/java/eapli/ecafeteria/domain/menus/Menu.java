@@ -83,6 +83,16 @@ public class Menu {
         return isPublished();
     }
     
+    public boolean publishMenu(){
+        if(published) {
+            return false;
+        }
+        else {
+            toogleState();
+            return true;
+        }
+    }
+    
     public boolean addMeal(Meal meal){
         //if(){}
         return mealList.add(meal);
