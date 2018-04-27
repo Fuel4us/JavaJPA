@@ -130,9 +130,9 @@ public class UserStateTest {
         
         instance_2.reject();
         
-        boolean result_bool = instance.deactivate(Calendar.getInstance(), ReasonType.REASON2, "Comment test");
+        Reason result_bool = instance_2.deactivate(Calendar.getInstance(), ReasonType.REASON2, "Comment test");
         
-        assertFalse(result_bool); //Sould be False because an rejected user cannot be DEACTIAVTED
+        assertNull(result_bool); //Sould be Null because an rejected user cannot be DEACTIAVTED
         assertNotEquals(instance_2.state(), UserState.UserType.DEACTIVATED); //Sould be Not Equal because the a rejected user can no be DEACTIVATED
     }
 

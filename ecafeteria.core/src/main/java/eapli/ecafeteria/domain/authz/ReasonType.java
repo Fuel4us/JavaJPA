@@ -13,7 +13,6 @@ import javax.persistence.Embeddable;
  *
  * @author pedromonteiro
  */
-@Embeddable
 public enum ReasonType {
     REASON1("The user was always late."), REASON2("The user has not complied with a contract clause.");
         
@@ -27,6 +26,4 @@ public enum ReasonType {
         public String toString() {
             return reasonContent;
         }
-        
-    
 }
