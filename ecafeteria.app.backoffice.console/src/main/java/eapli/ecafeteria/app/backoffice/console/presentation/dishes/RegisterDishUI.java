@@ -4,6 +4,8 @@ import eapli.ecafeteria.application.dishes.RegisterDishController;
 import eapli.ecafeteria.domain.dishes.Allergens;
 import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
+import eapli.ecafeteria.domain.kitchen.Material;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -11,6 +13,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -43,8 +46,9 @@ public class RegisterDishUI extends AbstractUI {
         nutricionalData.show();
 
         final double price = Console.readDouble("Price:");
-        
+
         Set<Allergens> newAllergList = new HashSet<>();
+        Set<Material> newMaterialsList = new HashSet<>();
         final SelectWidget<Allergens> show = new SelectWidget<>("Allergen List: (0 to exit)", AllergensList.getAllergList());
         show.show();
         int selectNum = show.selectedOption();
@@ -61,15 +65,32 @@ public class RegisterDishUI extends AbstractUI {
                 selectedAllerg = show.selectedElement();
             }
         }
-       
+
+        while (!selectMaterial().equals(null)) {
+            newMaterialsList.add(selectMaterial());
+        }
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price, newAllergList);
+                    price, newAllergList, newMaterialsList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }
 
         return false;
+    }
+
+    public Material selectMaterial() {
+        List<Material> listIngredients = this.theController.getAllMaterials();
+        for (int i = 0; i < listIngredients.size(); i++) {
+            System.out.println(i + 1 + " - " + this.theController.getAllMaterials().get(i));
+        }
+        System.out.println("Enter 0 to exit!");
+        int selectMaterial = Console.readInteger("Material ID:");
+        if (selectMaterial != 0) {
+            return listIngredients.get(selectMaterial - 1);
+        } else {
+            return null;
+        }
     }
 
     @Override

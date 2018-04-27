@@ -6,6 +6,7 @@ import eapli.ecafeteria.application.dishes.RegisterDishController;
 import eapli.ecafeteria.domain.dishes.Allergens;
 import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
+import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
@@ -31,6 +32,7 @@ public class DishBootstrapper implements Action {
         Set<Allergens> allergList1 = new HashSet<>();
         Set<Allergens> allergList2 = new HashSet<>();
         Set<Allergens> allergList3 = new HashSet<>();
+        Set<Material>  ingredientsList = new HashSet<>();
 
         allergList1.add(new Allergens(TestDataConstants.ALLERGEN_CRUSTACEOS));
         allergList1.add(new Allergens(TestDataConstants.ALLERGEN_GLUTEN));
@@ -40,12 +42,12 @@ public class DishBootstrapper implements Action {
 
         allergList3.add(new Allergens(TestDataConstants.ALLERGEN_GLUTEN));
 
-        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99, allergList1);
-        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85, allergList2);
-        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 250, 2, 3.99, allergList3);
-        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99, allergList3);
-        register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99, allergList2);
-        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99, allergList1);
+        register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99, allergList1, ingredientsList);
+        register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85, allergList2, ingredientsList);
+        register(fish, TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ, 250, 2, 3.99, allergList3, ingredientsList);
+        register(fish, TestDataConstants.DISH_NAME_LAGOSTA_SUADA, 230, 2, 24.99, allergList3, ingredientsList);
+        register(meat, TestDataConstants.DISH_NAME_PICANHA, 375, 2, 4.99, allergList2, ingredientsList);
+        register(meat, TestDataConstants.DISH_NAME_COSTELETA_A_SALSICHEIRO, 475, 2, 3.99, allergList1, ingredientsList);
 
         return true;
     }
@@ -53,10 +55,10 @@ public class DishBootstrapper implements Action {
     /**
      *
      */
-    private void register(DishType dishType, String description, int cal, int salt, double price, Set<Allergens> allergens) {
+    private void register(DishType dishType, String description, int cal, int salt, double price, Set<Allergens> allergens, Set<Material> ingredientsList) {
         final RegisterDishController controller = new RegisterDishController();
         try {
-            controller.registerDish(dishType, description, cal, salt, price, allergens);
+            controller.registerDish(dishType, description, cal, salt, price, allergens, ingredientsList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             // ignoring exception. assuming it is just a primary key violation
             // due to the tentative of inserting a duplicated user

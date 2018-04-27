@@ -32,15 +32,17 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        /*try {
+        try {
             Meal meal = selectMeal();
             Lot lot = selectLot(meal);
-            int quantityUsed = Console.readInteger("Quantity Used:");
-            this.controller.registerMealLot(meal, lot, quantityUsed);
+            if (lot != null) {
+                int quantityUsed = Console.readInteger("Quantity Used:");
+                this.controller.registerMealLot(meal, lot, quantityUsed);
+            } 
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             Logger.getLogger(RegisterLotsUsedInMealUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-         */
+
         return false;
 
     }
@@ -54,20 +56,25 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         return listMeals.get(selectMeal - 1);
     }
 
-    /*
     public Lot selectLot(Meal meal) {
-        List<Lot> listLots = this.controller.getLotsByMeal(meal);
-        for (int i = 0; i < listLots.size(); i++) {
-            System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString2());
+        List<Lot> listLotsByMeal = this.controller.getLotsByMeal(meal);
+        if (listLotsByMeal.isEmpty()) {
+            System.out.println("Não existem lotes com ingredientes registados para esta refeição!");
+        } else {
+
+            for (int i = 0; i < listLotsByMeal.size(); i++) {
+                System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString2());
+            }
+            int selectLot = Console.readInteger("Lot ID:");
+            while (selectLot < 0 || selectLot > listLotsByMeal.size() + 1) {
+                System.out.println("ID Inválido!!!");
+                selectLot = Console.readInteger("Lot ID:");
+            }
+            return listLotsByMeal.get(selectLot - 1);
         }
-        int selectLot = Console.readInteger("Lot ID:");
-        while (selectLot < 0 && selectLot > listLots.size() + 1) {
-            System.out.println("ID Inválido!!!");
-            selectLot = Console.readInteger("Lot ID:");
-        }
-        return listLots.get(selectLot - 1);
+        return null;
     }
-     */
+
     @Override
     public String headline() {
         return "Register Lots Used in Meal";

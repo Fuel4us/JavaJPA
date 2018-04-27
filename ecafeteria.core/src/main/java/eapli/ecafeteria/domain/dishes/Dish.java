@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.dishes;
 
+import eapli.ecafeteria.domain.kitchen.Material;
 import java.io.Serializable;
 
 import javax.persistence.ColumnResult;
@@ -16,12 +17,13 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import java.util.Set;
+import javax.persistence.ManyToMany;
 
 /**
  * A Dish
  *
  * @author Jorge Santos ajs@isep.ipp.pt
- * 
+ *
  * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
@@ -45,14 +47,16 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
-    
+    @ManyToMany
+    private Set<Material> ingredientsList;
+
     @ManyToOne()
     private Allergens allerg;
-    
+
     String allergenList;
 
     public Dish(final DishType dishType, final Designation name,
-            final NutricionalInfo nutricionalInfo, Money price, String allergenList) {
+            final NutricionalInfo nutricionalInfo, Money price, String allergenList, Set<Material> ingredientsList) {
         if (dishType == null || name == null || nutricionalInfo == null) {
             throw new IllegalArgumentException();
         }
@@ -63,6 +67,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         this.setPrice(price);
         this.active = true;
         this.allergenList = allergenList;
+        this.ingredientsList = ingredientsList;
     }
 
     public Dish(final DishType dishType, final Designation name, Money price) {
@@ -79,6 +84,13 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
 
     protected Dish() {
         // for ORM only
+    }
+
+    /**
+     * @return the ingredientsList
+     */
+    public Set<Material> getIngredientsList() {
+        return ingredientsList;
     }
 
     @Override

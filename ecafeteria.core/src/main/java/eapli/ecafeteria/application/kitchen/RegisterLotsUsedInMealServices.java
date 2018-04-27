@@ -35,11 +35,11 @@ public class RegisterLotsUsedInMealServices {
         return listMeals;
     }
     
-    /*
+    
     public List<Lot> getLotsFromMeal(Meal meal) {
         List<Lot> listLots = new ArrayList<>();
         for (Lot lot : lotRepository.findAll()) {
-            for (Material material : meal.getDish().getIngredients()) {
+            for (Material material : meal.getDish().getIngredientsList()) {
                 if (material.equals(lot.getIngredient())) {
                     listLots.add(lot);
                 }
@@ -47,5 +47,5 @@ public class RegisterLotsUsedInMealServices {
         }
         return listLots;
     }
-*/
+
 }
