@@ -1,17 +1,19 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.CloseMealPlanController;
+import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
 /**
  * @author Gonçalo Fonseca <1150503@isep.ipp.pt>
  */
-public class CloseMealPlanUI {
+public class CloseMealPlanUI extends AbstractUI {
 
     private static CloseMealPlanController controller = new CloseMealPlanController();
 
-    public static void mainLoop() {
-        int option = 0;
+    @Override
+    protected boolean doShow() {
+        int option;
         do {
             option = menu();
             switch (option) {
@@ -22,6 +24,13 @@ public class CloseMealPlanUI {
                     controller.choseMealPlanToClose();
             }
         } while(option != 0);
+
+        return true;
+    }
+
+    @Override
+    public String headline() {
+        return "Chose meal plan to close";
     }
 
     public static int menu(){

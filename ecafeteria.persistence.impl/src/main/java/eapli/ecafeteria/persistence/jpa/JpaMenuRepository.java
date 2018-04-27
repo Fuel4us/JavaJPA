@@ -45,8 +45,8 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     @Override
     public Iterable<Menu> findByState(boolean state) {
         final Map<String, Object> params = new HashMap<>();
-        params.put("state", state);
-        return match("(e.published == state)", params);
+        params.put("published", state);
+        return match("(e.published = :published)", params);
     }
 
 }

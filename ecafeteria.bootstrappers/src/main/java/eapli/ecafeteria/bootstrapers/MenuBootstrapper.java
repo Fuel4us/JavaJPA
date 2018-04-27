@@ -24,9 +24,11 @@ public class MenuBootstrapper implements Action {
 
         Date date1 = new Date(0000, 03, 27);
         Date date2 = new Date(0000, 03, 29);
+        Date date3 = new Date(0000, 12, 30);
 
         registerMenu(date1, date2);
         registerMenu(date1, date2);
+        registerMenu(date1, date3);
 
         return true;
     }

@@ -50,7 +50,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
         this.cfs = cfs;
         this.ws = ws;
     }
-    
+
     public CanteenShift(CanteenShiftState cfs, WorkSession ws) {
         this.dateCS = Calendar.getInstance();
         this.cfs = cfs;
@@ -72,7 +72,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
 
     @Override
     public boolean is(Calendar date) {
-        return (date.getTime() == this.dateCS.getTime());
+        return (this.dateCS.equals(date));
     }
 
     @Override
