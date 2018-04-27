@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author konng
+ * @author 1160629@isep.ipp.pt
  */
 public class KitchenLimitBootstrapper implements Action {
 

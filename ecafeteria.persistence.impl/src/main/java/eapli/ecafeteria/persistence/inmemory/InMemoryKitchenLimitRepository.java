@@ -11,7 +11,7 @@ import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository
 
 /**
  *
- * @author konng
+ * @author 1160629@isep.ipp.pt
  */
 public class InMemoryKitchenLimitRepository extends InMemoryRepository<LimitConfiguration, Long> implements KitchenLimitRepository {
 
