@@ -17,24 +17,14 @@ import java.util.List;
 public class CheckBookingsByDataController implements Controller {
     CheckBookingsService service;
 
+
     public CheckBookingsByDataController(){
         service= new CheckBookingsService();
     }
 
-    public void run(int choice){
-        if(choice==1){
-            service.displayBookingsDate();
-        }else if(choice ==2){
-            service.displayBookingsByMealType();
-        }else if(choice ==3){
-            service.displayBookingsByDish();
-        }else if(choice ==4){
-            service.displayBookingsByMeal();
-        }
-    }
 
     public List<Booking> getAllBookings(){
-    return service.getAllReservations();
+        return service.getAllReservations();
     }
 
 

@@ -22,7 +22,15 @@ public class CheckReservationsByDataUI extends AbstractUI {
 
         int choice = Console.readInteger("What information do you want to use for the search?\n1 - Day\n2 - Meal Type\n3- Dish\n4 - Meal");
         if(choice>0&&choice<5){
-            controller.run(choice);
+            if(choice==1){
+                displayBookingsByDate();
+            }else if(choice ==2){
+                displayBookingsByMealType();
+            }else if(choice ==3){
+                diplayBookingsByDish();
+            }else if(choice ==4){
+                displayBookingsByMeal();
+            }
         }
         return true;
     }
@@ -100,6 +108,9 @@ public class CheckReservationsByDataUI extends AbstractUI {
                     System.out.println(booking+"\n");
                 }
             }
+        }else{
+            System.out.println("That option doesn't exist");
+            displayBookingsByMealType();
         }
     }
 }
