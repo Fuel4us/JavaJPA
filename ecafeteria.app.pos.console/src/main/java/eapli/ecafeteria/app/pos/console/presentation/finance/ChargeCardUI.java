@@ -55,7 +55,8 @@ public class ChargeCardUI extends AbstractUI {
         if (flag) {
             double moneyAmount = Console.readDouble("Enter the amount of money that you wish to add to to user " + input);
             try {
-                chargeCardController.ChargeCard(moneyAmount);
+                double amount = chargeCardController.ChargeCard(moneyAmount);
+                System.out.println("CafeteriaUser: " + username + " Balance: " + amount);
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 Logger.getLogger(ChargeCardUI.class.getName()).log(Level.SEVERE, null, ex);
             }

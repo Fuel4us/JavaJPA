@@ -5,6 +5,7 @@
  */
 package eapli.ecafetaria.application.finance;
 
+import eapli.ecafetaria.domain.movement.BalanceService;
 import eapli.ecafetaria.domain.movement.Movement;
 import eapli.ecafetaria.domain.movement.MovementType;
 import eapli.ecafeteria.Application;
@@ -48,7 +49,7 @@ public class ChargeCardController {
         
     }
     
-    public void ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
+    public double ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
         //AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         if(selectedUser!=null){
             Currency currency = Currency.getInstance(Locale.FRANCE); 
@@ -56,5 +57,6 @@ public class ChargeCardController {
       
             movementRepository.save(movement);
         }
+        return BalanceService.balance(this.selectedUser.mecanographicNumber());
     }
 }
