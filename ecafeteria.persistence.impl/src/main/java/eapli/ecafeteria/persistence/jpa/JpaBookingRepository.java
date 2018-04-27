@@ -13,6 +13,7 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +54,27 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return bookingList;
     }
 
-    @Override
-    public Booking getNextBooking() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public Booking getNextBooking(Optional <CafeteriaUser> user, Date date) {
+        Iterable<Booking> nextBookings = checkBookingsForNextDays(user, date);
+        BirthDateComparator comparator = new BirthDateComparator();
+         List<Booking> bookingList = new ArrayList();
+         bookingList= (List<Booking>) nextBookings;
+         bookingList.sort(comparator);
+        return bookingList.get(0);
+    }
+    
+    public class BirthDateComparator implements Comparator<Booking> {
+        @Override
+        public int compare(Booking booking1, Booking booking2) {
+            if (booking1.getMeal().getDate().before(booking2.getMeal().getDate())) {
+                return -1;
+            } else if (booking1.getMeal().getDate().after(booking2.getMeal().getDate())) {
+                return 1;
+            } else {
+                return 0;
+            }        
+        }
     }
 
     @Override
@@ -85,5 +104,10 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public void updateBookingRating(Booking choosen, Rating rating) {
         Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID = " + rating.id() + " WHERE BOOKINGID = " + choosen.bookingId());
         query.executeUpdate();
+    }
+
+    @Override
+    public Booking getNextBooking() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
