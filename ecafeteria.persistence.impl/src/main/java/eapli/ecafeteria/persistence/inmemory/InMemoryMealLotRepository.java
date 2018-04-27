@@ -5,14 +5,16 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.kitchen.Lot;
-import eapli.ecafeteria.persistence.LotRepository;
+import eapli.ecafeteria.domain.kitchen.MealLot;
+import eapli.ecafeteria.persistence.MealLotRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
 
 /**
  *
  * @author Pedro Rodrigues (1140572)
  */
-public class InMemoryMealLotRepository extends InMemoryRepositoryWithLongPK<Lot> implements LotRepository{
+public class InMemoryMealLotRepository extends InMemoryRepositoryWithLongPK<MealLot> implements MealLotRepository{
+
+   
     
 }
