@@ -18,30 +18,28 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  * @author Berccar
  */
 public class PublishMenuController {
-    
+
     private final ListMenuService svc = new ListMenuService();
     private final MenuRepository repo = PersistenceContext.repositories().menus();
-    
+
     public boolean publishMenu(Menu menu) throws DataConcurrencyException, DataIntegrityViolationException {
-        
+
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-        
-        if ( menu == null){
-            throw new IllegalArgumentException();
+
+        boolean done = false;
+
+        if (menu != null) {
+            done = menu.publishMenu();
+            repo.save(menu);
         }
-        
-        boolean done = menu.publishMenu();
-        
-        repo.save(menu);
-                
+
         return done;
     }
-    
+
     public Iterable<Menu> listUnpublishedMenus() {
-        
+
         return this.svc.unpublishedMenus();
-        
+
     }
-    
+
 }
-    

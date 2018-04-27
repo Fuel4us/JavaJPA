@@ -41,9 +41,9 @@ public class PublishMenuUI extends AbstractUI {
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
         }
         
-        String done_STRING = "não";
+        String done_STRING = "n't";
         if(done){done_STRING="";}
-        System.out.println("The Menu "+done_STRING+"publicado!");
+        System.out.println("The Menu was"+done_STRING+" published!");
         
         return done;
     }
