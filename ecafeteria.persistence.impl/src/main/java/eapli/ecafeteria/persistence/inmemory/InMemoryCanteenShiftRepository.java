@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, Calendar> implements CanteenShiftRepository{
+public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, Calendar> implements CanteenShiftRepository {
 
     @Override
     protected Calendar newKeyFor(CanteenShift entity) {
@@ -27,7 +27,6 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
 
     @Override
     public boolean close(Calendar cal) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         Optional<CanteenShift> cs = matchOne(e -> e.id().equals(cal));
         return cs.get().close();
     }

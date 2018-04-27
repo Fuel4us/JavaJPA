@@ -17,18 +17,22 @@ public class FindMealsByLotUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         for (Lot lot : controller.getUsedLots()) {
-            System.out.println(lot.id() + ": " + lot);
+            System.out.println(lot.toString2());
+            System.out.println();
         }
 
         System.out.println("Select a lot");
         int lotCode = scanner.nextInt();
+        
+        System.out.println();
 
         Long lotId = controller.getLotPkWithCode(lotCode);
 
         Lot lot = controller.getSelectedLot(lotId).get();
 
         for (MealLot mealLot : controller.getMealLotWithLot(lot)) {
-            System.out.println(mealLot.getMeal());
+            System.out.println(mealLot.getMeal().toString3());
+            System.out.println();
         }
 
         return true;

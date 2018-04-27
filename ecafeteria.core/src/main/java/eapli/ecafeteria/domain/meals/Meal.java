@@ -178,9 +178,14 @@ public class Meal implements Serializable {
         return String.format("DAY: %s /PLATE: %s /TYPE: %s /MEAL: %s", data2, dish.id(), mealType.toString(), dish.dishType().id());
     }
 
+    public String toString3() {
+        SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+        String date = data.format(mealDate.getTime());
+        return "Dish: " + dish.name() + "\nMeal Type: " + mealType + "\nMeal Date: " + date;
+    }
+
     /**
-     * Creates a comparator to compare Meals according to their meal dates (Joao
-     * reis - 1160600)
+     * Creates a comparator to compare Meals according to their meal dates (Joao reis - 1160600)
      *
      * @return comparator object that compares meal dates
      */

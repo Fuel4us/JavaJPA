@@ -16,9 +16,20 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
     }
     
     private Optional<CanteenShift> findByDate(Calendar cal) {
+        boolean verify;
+        
         final Map<String, Object> params = new HashMap<>();
-        params.put("date", cal);
-        return matchOne("e.dateCS=:date", params);
+        params.put("year", cal.get(Calendar.YEAR));
+        Optional<CanteenShift> calYear = matchOne("e.dateCS.get(Calendar.YEAR)=:year", params);
+        verify = calYear.isPresent();
+        
+        if(verify == true){
+            final Map<String, Object> params2 = new HashMap<>();
+            params2.put("day_of_year", cal.get(Calendar.DAY_OF_YEAR));
+            return matchOne("e.dateCS.get(Calendar.DAY_OF_YEAR)=:day_of_year", params2);
+        }
+        
+        return Optional.empty();
     }
     
 }

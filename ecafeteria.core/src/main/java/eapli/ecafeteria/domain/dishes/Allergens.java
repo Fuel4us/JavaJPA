@@ -85,7 +85,7 @@ public class Allergens implements Serializable {
 
     @Override
     public String toString() {
-        return "Allergens{" + "allerg=" + allerg + '}';
+        return "The allergens are: " + allerg.toString();
     }
 
 }

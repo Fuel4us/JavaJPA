@@ -8,6 +8,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Random;
 
 /**
  * @author Gonçalo Silva (1161140)
@@ -29,9 +30,12 @@ public class LotBootstrapper implements Action {
         final MaterialRepository materialRepository = PersistenceContext.repositories().materials();
         final LotRepository lotRepository = PersistenceContext.repositories().lots();
 
+        Random random = new Random();
+        int i = 0, j = random.nextInt(100);
+
         for (Material material : materialRepository.findAll()) {
-            int i = 1, j = i * 2;
             Lot lot = new Lot(i++, material, j);
+
             lotRepository.save(lot);
         }
     }
