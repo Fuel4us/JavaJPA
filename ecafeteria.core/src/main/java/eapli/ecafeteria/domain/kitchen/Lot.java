@@ -19,7 +19,7 @@ import javax.persistence.OneToOne;
  * @author Pedro Rodrigues (1140572)
  */
 @Entity
-public class Lot implements AggregateRoot<Integer>, Serializable{
+public class Lot implements AggregateRoot<Integer>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class Lot implements AggregateRoot<Integer>, Serializable{
     private Long pk;
 
     //Business id
-    @Column(unique=true)
+    @Column(unique = true)
     private int lotCode;
     @OneToOne
     private Material ingredientCode;
@@ -57,18 +57,18 @@ public class Lot implements AggregateRoot<Integer>, Serializable{
     public Integer id() {
         return this.lotCode;
     }
-    
+
     @Override
     public boolean is(Integer otherId) {
         return Objects.equals(id(), otherId);
     }
-    
+
     @Override
     public boolean sameAs(Object other) {
         //Implementation needed
         return false;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -81,17 +81,20 @@ public class Lot implements AggregateRoot<Integer>, Serializable{
         final Lot other = (Lot) o;
         return Objects.equals(id(), other.id());
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.lotCode;
         return hash;
     }
-    
+
     @Override
     public String toString() {
         return "MealLot{" + "ID: " + pk + ", Código do lote: " + lotCode + ", Material= " + ingredientCode + ", Quantidade=" + quantity + '}';
     }
-    
+
+    public String toString2() {
+        return "Lot Code: " + lotCode + "\nMaterial: " + ingredientCode.description() + "\nQuantity: " + quantity;
+    }
 }
