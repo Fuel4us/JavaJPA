@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.kitchen;
 
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,14 +31,16 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
     //Business id
     @Column(unique = true)
     private int cookedMeals;
+    private Meal meal;
 
     //for ORM
     protected Execution() {
 
     }
 
-    public Execution(int cookedMeals) {
+    public Execution(Meal meal,int cookedMeals) {
         this.cookedMeals = cookedMeals;
+        this.meal=meal;
     }
 
     @Override

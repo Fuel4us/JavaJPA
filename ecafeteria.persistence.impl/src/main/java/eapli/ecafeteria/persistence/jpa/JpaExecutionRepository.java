@@ -14,7 +14,4 @@ import eapli.ecafeteria.persistence.ExecutionRepository;
  */
 public class JpaExecutionRepository extends CafeteriaJpaRepositoryBase<Execution, Long> implements ExecutionRepository {
 
-    public JpaExecutionRepository(String persistenceUnitName) {
-        super(persistenceUnitName);
-    }
 }

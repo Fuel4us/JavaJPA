@@ -6,12 +6,6 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.RegisterLotsUsedInMealController;
-import eapli.ecafeteria.domain.kitchen.Lot;
-import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.persistence.MaterialRepository;
-import eapli.ecafeteria.persistence.MealRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;

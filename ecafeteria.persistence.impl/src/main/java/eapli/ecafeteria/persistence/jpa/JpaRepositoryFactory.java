@@ -117,7 +117,7 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public ExecutionRepository execution() {
-        return new JpaExecutionRepository(Application.settings().getPersistenceUnitName());
+        return new JpaExecutionRepository();
     }
 
     @Override

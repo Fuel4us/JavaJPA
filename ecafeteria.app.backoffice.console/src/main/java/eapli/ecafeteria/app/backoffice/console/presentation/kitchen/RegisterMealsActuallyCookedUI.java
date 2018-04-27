@@ -28,10 +28,15 @@ public class RegisterMealsActuallyCookedUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
+        
+        this.controller.listMeals();
+        final long mealCode = Console.readLong("Meal ID: ");
         final int cookedMeals = Console.readInteger("Meals Actually Made: ");
 
         try {
-            this.controller.registerMealsActuallyMade(cookedMeals);
+            if (this.controller.checkedMeal(mealCode)) {
+                this.controller.registerMealsActuallyMade(mealCode, cookedMeals);
+            }
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             Logger.getLogger(RegisterMealsActuallyCookedUI.class.getName()).log(Level.SEVERE, null, ex);
         }

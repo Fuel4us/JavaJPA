@@ -8,7 +8,9 @@ package eapli.ecafeteria.application.kitchen;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.Execution;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.ExecutionRepository;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -21,12 +23,25 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 public class RegisterMealsActuallyCookedController implements Controller {
     
     private final ExecutionRepository repository = PersistenceContext.repositories().execution();
+    private final MealRepository mRepository = PersistenceContext.repositories().meals();
     
-    public Execution registerMealsActuallyMade(int cookedMeals) throws DataIntegrityViolationException, DataConcurrencyException {
+    public Execution registerMealsActuallyMade(long mealCode, int cookedMeals) throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
         
-        final Execution mealsActuallyMade = new Execution(cookedMeals);
+        Meal meal = mRepository.findById(mealCode).get();
+        final Execution mealsActuallyMade = new Execution(meal,cookedMeals);
          return this.repository.save(mealsActuallyMade);
+    }
+    
+    public void listMeals(){
+        
+        for (Meal meal : mRepository.findAll()) {
+            System.out.println(meal.getId() + " - " + meal.toString());
+        }
+    }
+    
+    public boolean checkedMeal(long mealCode){
+        return mRepository.findById(mealCode).isPresent();
     }
 }
      
