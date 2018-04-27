@@ -6,7 +6,10 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafetaria.domain.movement.Movement;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -14,5 +17,11 @@ import eapli.ecafeteria.persistence.MovementRepository;
  */
 public class JpaMovementRepository extends CafeteriaJpaRepositoryBase<Movement, Long> implements MovementRepository{
 
-    
+    @Override
+    public Iterable<Movement> findAllByNIF(MecanographicNumber nif) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("nif", nif);
+
+        return match("e.nif = :nif", params);
+    }
 }
