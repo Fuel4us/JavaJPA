@@ -30,6 +30,7 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
 
     //Business id
     private int cookedMeals;
+    
     private Meal meal;
 
     //for ORM
