@@ -262,12 +262,12 @@ public class MainMenu extends AbstractUI {
         menu.add(
                 new MenuItem(CANTEEN_SHIFT_CLOSURE_OPTION, "Canteen Shift Closure", new CanteenShiftClosureAction()));
 
-        menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
-
         menu.add(new MenuItem(CREATE_MEAL_PLAN_OPTION, "Create Meal Plan", new CreateMealPlanAction()));
 
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
 
+         menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
+        
         menu.add(new MenuItem(CHECK_BOOKINGS_BY_DATA,"Check Bookings By Data", new CheckReservationsByDataAction()));
 
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
