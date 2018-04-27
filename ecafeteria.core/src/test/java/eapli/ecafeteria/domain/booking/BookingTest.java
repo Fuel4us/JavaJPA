@@ -298,8 +298,8 @@ public class BookingTest {
         System.out.println("toString");
         
         String expResult = "Booking{bookingID=null, id=123456Meal{dish=eapli.ecafeteria.domain.dishes.Dish@65f955a, "
-                + "mealType=LUNCH, mealDate=" + booking.getMeal().getMealDate().toString() + "}, user=eapli.ecafeteria.domain.cafeteriauser."
-                + "CafeteriaUser@56760663, meal=Meal{dish=eapli.ecafeteria.domain.dishes.Dish@65f955a, mealType=LUNCH, "
+                + "mealType=LUNCH, mealDate=" + booking.getMeal().getMealDate().toString() + "}, user=TestFirstName TestLastName"
+                + ", meal=Meal{dish=eapli.ecafeteria.domain.dishes.Dish@65f955a, mealType=LUNCH, "
                 + "mealDate=" + booking.getMeal().getMealDate().toString() + "}, bookingState=RESERVED, rating=null}";
         String result = booking.toString();
         
