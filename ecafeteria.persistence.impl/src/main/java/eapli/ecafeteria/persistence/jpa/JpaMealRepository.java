@@ -29,7 +29,7 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
     public Iterable<Meal> findAllByLot(Long lotId) {
         final Map<String, Object> params = new HashMap<>();
         params.put("lotId", lotId);
-        
+
         return match("e.lotId = :lotId", params);
     }
 }
