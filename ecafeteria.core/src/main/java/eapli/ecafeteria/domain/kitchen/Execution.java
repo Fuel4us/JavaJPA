@@ -29,7 +29,6 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
     private Long pk;
 
     //Business id
-    @Column(unique = true)
     private int cookedMeals;
     private Meal meal;
 
