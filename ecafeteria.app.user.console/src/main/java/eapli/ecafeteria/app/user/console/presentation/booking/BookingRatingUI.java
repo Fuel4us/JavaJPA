@@ -29,27 +29,30 @@ public class BookingRatingUI extends AbstractUI {
         Optional<CafeteriaUser> user = controller.getUser();
         
         Iterable<Booking> booking = controller.getBookingsForRating(user);
-        int i = 0;
+        int count = 0;
         for(Booking b: booking){
-            i++;
-            System.out.println(i + ": " + b.toString());
+            count++;
+            System.out.println("- " + b.toString());
         }
-        
-        String bookingName = Console.readLine("Choose Booking:");
-        
-        Booking choosen = controller.chooseBooking(bookingName, booking);
-        
-        int score = Console.readInteger("Insert Rating (1-5):");
-        String comment = Console.readLine("Insert comment (optional):");
-        
-        try {
-            controller.createRating(choosen, score, comment);
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(BookingRatingUI.class.getName()).log(Level.SEVERE, null, ex);
+
+        if(count != 0){
+            String bookingName = Console.readLine("Choose Booking:");
+
+            Booking choosen = controller.chooseBooking(bookingName, booking);
+
+            int score = Console.readInteger("Insert Rating (1-5):");
+            String comment = Console.readLine("Insert comment (optional):");
+
+            try {
+                controller.createRating(choosen, score, comment);
+            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+                Logger.getLogger(BookingRatingUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            System.out.println("\nRating criado com sucesso");
+        }else{
+            System.out.println("\nNão há bookings para rating");
         }
-        
-        System.out.println("Rating criado com sucesso");
-        
         return true;
     }
 

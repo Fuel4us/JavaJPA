@@ -31,21 +31,28 @@ public class PublishMenuUI extends AbstractUI {
     protected boolean doShow() {
         final Iterable<Menu> unpublishedMenusList = theController.listUnpublishedMenus();
 
-        final SelectWidget<Menu> selector = new SelectWidget<>("Unpublished menus:", unpublishedMenusList);
-        selector.show();
-        final Menu theMenu = selector.selectedElement();
-        boolean done = false;
+        if (unpublishedMenusList.iterator().hasNext()) {
+            final SelectWidget<Menu> selector = new SelectWidget<>("Unpublished menus:", unpublishedMenusList);
+            selector.show();
+            final Menu theMenu = selector.selectedElement();
+            boolean done = false;
 
-        try {
-            done = theController.publishMenu(theMenu);
-        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            try {
+                done = theController.publishMenu(theMenu);
+            } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+            }
+
+            String done_STRING = "n't";
+            if (done) {
+                done_STRING = "";
+            }
+            System.out.println("The Menu was" + done_STRING + " published!");
+
+            return done;
+        } else {
+            System.out.println("\nThere are no Menus with unpublished state!");
+            return false;
         }
-        
-        String done_STRING = "não";
-        if(done){done_STRING="";}
-        System.out.println("The Menu "+done_STRING+"publicado!");
-        
-        return done;
     }
 
     @Override

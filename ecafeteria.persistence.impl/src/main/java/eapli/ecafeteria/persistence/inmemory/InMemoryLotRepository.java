@@ -12,4 +12,8 @@ public class InMemoryLotRepository extends InMemoryRepositoryWithLongPK<Lot> imp
         return matchOne(e -> e.id().equals(lotCode));
     }
 
+    @Override
+    public Long findPkWithCode(int lotCode) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
