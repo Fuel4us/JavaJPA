@@ -6,7 +6,6 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Optional;
 

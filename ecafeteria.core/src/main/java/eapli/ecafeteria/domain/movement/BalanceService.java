@@ -5,12 +5,9 @@
  */
 package eapli.ecafeteria.domain.movement;
 
-import static eapli.ecafeteria.domain.movement.MovementType.MovementTypeValues;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.framework.domain.money.Money;
-import java.util.Currency;
 
 /**
  *

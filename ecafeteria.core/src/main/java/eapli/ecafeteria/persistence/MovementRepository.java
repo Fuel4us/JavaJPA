@@ -8,7 +8,6 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;
-import java.util.Optional;
 
 /**
  *

@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.application.finance;
+package eapli.ecafeteria.application.finance;
 
-import eapli.ecafeteria.domain.authz.Username;
-import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -5,23 +5,21 @@
  */
 package eapli.ecafeteria.application.finance;
 
-import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Optional;
 
 /**
  *
  * @author Josué Lapa
  */
-public class OpenPOSController implements Controller{
+public class OpenPOSController implements Controller {
 
-  private final POSRepository posRepository = PersistenceContext.repositories().POS();
+    private final POSRepository posRepository = PersistenceContext.repositories().POS();
     private final CanteenShiftRepository canteenShiftRepository = PersistenceContext.repositories().canteenShift();
 
     /**

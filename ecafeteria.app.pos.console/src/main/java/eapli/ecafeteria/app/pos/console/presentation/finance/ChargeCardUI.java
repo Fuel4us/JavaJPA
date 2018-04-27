@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.app.pos.console.presentation.finance;
+package eapli.ecafeteria.app.pos.console.presentation.finance;
 
 import eapli.ecafeteria.application.finance.ChargeCardController;
 import eapli.ecafeteria.domain.authz.Username;

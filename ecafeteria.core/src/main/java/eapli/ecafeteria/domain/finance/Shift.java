@@ -9,25 +9,35 @@ import eapli.ecafeteria.domain.meals.MealType;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Josué Lapa
  */
 public class Shift {
- private static final long serialVersionUID = 1L;
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     private long id;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date shiftDate; //DATE OU SHIFTDATE?
+    @ManyToOne
     private MealType mealType;
+    @OneToOne
     private ShiftState shiftState;
+
+    public Shift() {
+    }
 
     public Shift(Date shiftDate, MealType mealType) {
         this.shiftDate = shiftDate;
         this.mealType = mealType;
-        this.shiftState = ShiftState.CLOSED; 
+        this.shiftState = ShiftState.CLOSED;
     }
     
 }

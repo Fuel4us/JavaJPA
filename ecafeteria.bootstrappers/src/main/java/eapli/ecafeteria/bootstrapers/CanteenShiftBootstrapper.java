@@ -1,6 +1,6 @@
 //package eapli.ecafeteria.bootstrapers;
 //
-//import eapli.ecafetaria.domain.finance.WorkSession;
+//import eapli.ecafeteria.domain.finance.WorkSession;
 //import eapli.ecafeteria.application.kitchen.CanteenShiftClosureController;
 //import eapli.ecafeteria.application.kitchen.RegisterCanteenShiftController;
 //import eapli.ecafeteria.domain.kitchen.CanteenShiftState;

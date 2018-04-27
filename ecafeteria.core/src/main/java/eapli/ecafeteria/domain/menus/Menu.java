@@ -2,19 +2,14 @@ package eapli.ecafeteria.domain.menus;
 
 import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.reporting.dishes.DishesPerCaloricCategory;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 
 /**
  *

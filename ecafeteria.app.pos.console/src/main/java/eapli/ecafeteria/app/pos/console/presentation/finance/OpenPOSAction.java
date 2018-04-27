@@ -6,7 +6,6 @@ package eapli.ecafeteria.app.pos.console.presentation.finance;
  * and open the template in the editor.
  */
 
-
 import eapli.framework.actions.Action;
 
 /**
