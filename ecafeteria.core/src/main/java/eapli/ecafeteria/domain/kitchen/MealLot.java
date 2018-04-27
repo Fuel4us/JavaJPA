@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
  * @author Pedro Rodrigues (1140572)
  */
 @Entity
-public class MealLot implements Serializable {
+public class MealLot implements AggregateRoot<Integer>,Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,14 +31,16 @@ public class MealLot implements Serializable {
     private Meal meal;
     @ManyToOne
     private Lot lot;
+    private int quantityUsed;
 
     protected MealLot() {
         //for ORM
     }
 
-    public MealLot(Meal meal, Lot lot) {
+    public MealLot(Meal meal, Lot lot, int quantityUsed) {
         this.meal = meal;
         this.lot = lot;
+        this.quantityUsed = quantityUsed;
     }
 
     public Meal getMeal() {
@@ -59,6 +62,21 @@ public class MealLot implements Serializable {
     @Override
     public String toString() {
         return "MealLot{" + "ID=" + pk + ", Meal=" + meal + ", Lot=" + lot + '}';
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean is(Integer otherId) {
+        return AggregateRoot.super.is(otherId); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Integer id() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

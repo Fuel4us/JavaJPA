@@ -6,11 +6,16 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.RegisterLotsUsedInMealController;
+import eapli.ecafeteria.domain.kitchen.Lot;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +24,6 @@ import eapli.framework.util.Console;
 public class RegisterLotsUsedInMealUI extends AbstractUI {
 
     private final RegisterLotsUsedInMealController controller = new RegisterLotsUsedInMealController();
-    
 
     protected Controller controller() {
         return this.controller;
@@ -28,28 +32,42 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
     @Override
     protected boolean doShow() {
 
-        this.controller.listMeals();
-        final long idMeal = Console.readLong("Meal ID:");
-        final int lotCode = Console.readInteger("Lot Code:");
-        this.controller.listMaterials();
-        final String ingredientCode = Console.readLine("Ingredient Acronym:");
-        final int quantity = Console.readInteger("Quantity:");
-
-        try {
-            
-            if (this.controller.checkMaterial(ingredientCode) && this.controller.checkMeal(idMeal)) {
-               this.controller.registerLot(lotCode, ingredientCode, quantity);
-                this.controller.registerMealLot(idMeal, lotCode);
-            } else {
-                System.out.println("Ingredient or meal invalid.");
-            }
-        } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
-            System.out.println("");
+        /*try {
+            Meal meal = selectMeal();
+            Lot lot = selectLot(meal);
+            int quantityUsed = Console.readInteger("Quantity Used:");
+            this.controller.registerMealLot(meal, lot, quantityUsed);
+        } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
+            Logger.getLogger(RegisterLotsUsedInMealUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+         */
         return false;
 
     }
 
+    public Meal selectMeal() {
+        List<Meal> listMeals = this.controller.getAllMeals();
+        for (int i = 0; i < listMeals.size(); i++) {
+            System.out.println(i + 1 + " - " + this.controller.getAllMeals().get(i));
+        }
+        int selectMeal = Console.readInteger("Meal ID:");
+        return listMeals.get(selectMeal - 1);
+    }
+
+    /*
+    public Lot selectLot(Meal meal) {
+        List<Lot> listLots = this.controller.getLotsByMeal(meal);
+        for (int i = 0; i < listLots.size(); i++) {
+            System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString2());
+        }
+        int selectLot = Console.readInteger("Lot ID:");
+        while (selectLot < 0 && selectLot > listLots.size() + 1) {
+            System.out.println("ID Inválido!!!");
+            selectLot = Console.readInteger("Lot ID:");
+        }
+        return listLots.get(selectLot - 1);
+    }
+     */
     @Override
     public String headline() {
         return "Register Lots Used in Meal";
