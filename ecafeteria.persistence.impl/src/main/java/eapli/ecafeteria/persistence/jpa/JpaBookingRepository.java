@@ -42,19 +42,17 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public Iterable<Booking> checkBookingsForNextDays(Optional<CafeteriaUser> user, Date date) {
         
         Map<String, Object> params = new HashMap();
-        params.put("user", user);
+        params.put("user", user.get());
         params.put("bookingState", BookingState.RESERVED);
         
         List<Booking> bookingList = new ArrayList();
         
-        long currentDate = date.getTime();
-        
         for(int i = 0; i < NEXT_DAYS; i++){
-            bookingList.addAll(match("E.MEAL.MEALDATE = '" + new Date(date.getTime()) + "' and E.CAFETERIAUSER = :user and E.BOOKING.BOOKINGSTATE = :bookingState", params));
+            params.put("date", new Date(date.getTime()));
+            bookingList.addAll(match("e.meal.mealDate = :date and e.user = :user and e.bookingState = :bookingState", params));
             
             //+1 to that day
-            date.setTime((currentDate) + ONE_MORE_DAY);
-            currentDate = date.getTime();
+            date.setTime(date.getTime() + ONE_MORE_DAY);
         }
         
         return bookingList;
