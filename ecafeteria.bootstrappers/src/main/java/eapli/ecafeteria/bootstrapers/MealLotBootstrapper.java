@@ -1,9 +1,10 @@
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.application.kitchen.RegisterLotsUsedInMealController;
 import eapli.ecafeteria.domain.kitchen.Lot;
+import eapli.ecafeteria.domain.kitchen.MealLot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.LotRepository;
+import eapli.ecafeteria.persistence.MealLotRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
@@ -19,9 +20,7 @@ public class MealLotBootstrapper implements Action {
     public boolean execute() {
         try {
             register();
-        } catch (DataIntegrityViolationException ex) {
-            return false;
-        } catch (DataConcurrencyException ex) {
+        } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             return false;
         }
 
@@ -31,12 +30,12 @@ public class MealLotBootstrapper implements Action {
     public void register() throws DataIntegrityViolationException, DataConcurrencyException {
         final MealRepository mealRepository = PersistenceContext.repositories().meals();
         final LotRepository lotRepository = PersistenceContext.repositories().lots();
-
-        final RegisterLotsUsedInMealController controller = new RegisterLotsUsedInMealController();
+        final MealLotRepository mealLotRepository = PersistenceContext.repositories().mealLots();
 
         for (Meal meal : mealRepository.findAll()) {
             for (Lot lot : lotRepository.findAll()) {
-                controller.registerMealLot(meal.getId(), lot.id());
+                MealLot mealLot = new MealLot(meal, lot);
+                mealLotRepository.save(mealLot);
             }
         }
     }

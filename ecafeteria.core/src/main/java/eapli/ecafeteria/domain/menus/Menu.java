@@ -90,7 +90,7 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu{"
-                + ", id=" + id
+                + "id=" + id
                 + ", startDate=" + startDate
                 + ", endDate=" + endDate
                 //                + ", mealList=" + mealList.toString()
