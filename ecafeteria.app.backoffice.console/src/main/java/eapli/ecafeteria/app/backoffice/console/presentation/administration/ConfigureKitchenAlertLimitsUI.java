@@ -19,11 +19,11 @@ public class ConfigureKitchenAlertLimitsUI extends AbstractUI{
 
     @Override
     protected boolean doShow() {
-        if(!controller.configureYellowLimit(Console.readLong("Input yellow limit value:"))){
+        if(!controller.configureYellowLimit(Console.readDouble("Input yellow limit value:"))){
             System.out.println("Unable to configure yellow limit");
             return true;
         }
-        if(!controller.configureRedLimit(Console.readLong("Input red limit value:"))){
+        if(!controller.configureRedLimit(Console.readDouble("Input red limit value:"))){
             System.out.println("Unable to configure red limit");
             return true;
         }

@@ -50,15 +50,15 @@ public class LimitConfiguration implements AggregateRoot<Long>, Serializable{
             System.out.println(e.getMessage());
         }
     }
-    public boolean configureYellowLimit(long limitValue){
+    public boolean configureYellowLimit(double limitValue){
         return configureLimit(yellowLimit, limitValue);
     }
     
-    public boolean configureRedLimit(long limitValue){
+    public boolean configureRedLimit(double limitValue){
         return configureLimit(redLimit, limitValue);
     }
     
-    private boolean configureLimit(Limit limit, long limitValue){
+    private boolean configureLimit(Limit limit, double limitValue){
         try{
             limit.configureLimitValue(limitValue);
             return true;

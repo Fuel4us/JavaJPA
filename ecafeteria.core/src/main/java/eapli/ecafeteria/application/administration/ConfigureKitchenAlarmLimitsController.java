@@ -25,11 +25,11 @@ public class ConfigureKitchenAlarmLimitsController implements Controller{
     //There is only one LimitConfiguration..?
     LimitConfiguration limitConfig = kitchenLimitRepository.findAll().iterator().next();
     
-    public boolean configureYellowLimit(long limitValue){
+    public boolean configureYellowLimit(double limitValue){
         return limitConfig.configureYellowLimit(limitValue);
     }
     
-    public boolean configureRedLimit(long limitValue){
+    public boolean configureRedLimit(double limitValue){
         return limitConfig.configureRedLimit(limitValue);
     }
     
