@@ -1,6 +1,7 @@
 package eapli.ecafeteria.application.administration;
 
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
+import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -16,5 +17,8 @@ public class SelectHeuristicController implements Controller {
     public Iterable<HeuristicConfiguration> listHeuristics(){
         return heuristicRepository.findAll();
     }
-
+    
+    public boolean changeHeuristicInUse(HeuristicConfiguration newHeuristic){
+        return MealPlan.changeHeuristicInUse(newHeuristic);
+    }
 }
