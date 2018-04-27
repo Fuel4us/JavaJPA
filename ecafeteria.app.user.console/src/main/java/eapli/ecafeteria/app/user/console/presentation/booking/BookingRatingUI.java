@@ -8,9 +8,13 @@ package eapli.ecafeteria.app.user.console.presentation.booking;
 import eapli.ecafeteria.application.booking.BookingRatingController;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -38,7 +42,11 @@ public class BookingRatingUI extends AbstractUI {
         int score = Console.readInteger("Insert Rating (1-5):");
         String comment = Console.readLine("Insert comment (optional):");
         
-        controller.createRating(choosen, score, comment);
+        try {
+            controller.createRating(choosen, score, comment);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(BookingRatingUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return true;
     }

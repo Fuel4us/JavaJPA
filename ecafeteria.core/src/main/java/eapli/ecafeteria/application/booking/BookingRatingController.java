@@ -13,7 +13,10 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Optional;
 
 /**
@@ -22,26 +25,36 @@ import java.util.Optional;
  */
 public class BookingRatingController implements Controller {
     
+    private final RatingRepository repRating = PersistenceContext.repositories().rating();
     private final BookingRepository repBooking = PersistenceContext.repositories().booking();
     private final CafeteriaUserRepository repCafeteriaUser = PersistenceContext.repositories().cafeteriaUsers();
 
-    public Iterable<Booking> getBookingsForRating(Optional<CafeteriaUser> user) {
-        Iterable<Booking> b = repBooking.findBookingsDeliveredByUser(user);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterable<Booking> getBookingsForRating(Optional<CafeteriaUser> optUser) {
+        if(optUser.isPresent()){
+            CafeteriaUser user = optUser.get();
+            return repBooking.findBookingsDeliveredByUser(user);
+        }
+        
+        System.out.println("User not found");
+        return null;
     }
 
     public Booking chooseBooking(String bookingName, Iterable<Booking> booking) {
         for(Booking b: booking){
-            if(b.id().equalsIgnoreCase(bookingName))
+            if(b.bookingId().equalsIgnoreCase(bookingName))
               return b;  
         }
         return null;
     }
 
-    public void createRating(Booking choosen, int score, String comment) {
-        Rating rating = new Rating(score, comment);
+    public void createRating(Booking choosen, int score, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
+        Rating rating = new Rating();
+        rating.setScore(score);
+        rating.setComment(comment);
         
-        choosen.rating(rating);
+        repRating.save(rating);
+        
+        //repBooking.updateBookingRating(choosen, rating);
     }
 
     public Optional<CafeteriaUser> getUser() {
