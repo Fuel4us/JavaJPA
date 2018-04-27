@@ -5,7 +5,6 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.authz;
 
-import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.visitor.Visitor;
 

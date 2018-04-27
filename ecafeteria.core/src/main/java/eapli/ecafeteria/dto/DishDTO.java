@@ -1,7 +1,6 @@
 package eapli.ecafeteria.dto;
 
 import eapli.framework.dto.DTO;
-import java.util.LinkedList;
 import java.util.Set;
 
 /**

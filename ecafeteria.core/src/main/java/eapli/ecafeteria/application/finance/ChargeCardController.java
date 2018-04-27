@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.application.finance;
+package eapli.ecafeteria.application.finance;
 
-import eapli.ecafetaria.domain.movement.BalanceService;
-import eapli.ecafetaria.domain.movement.Movement;
-import eapli.ecafetaria.domain.movement.MovementType;
-import eapli.ecafeteria.Application;
-import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.movement.BalanceService;
+import eapli.ecafeteria.domain.movement.Movement;
+import eapli.ecafeteria.domain.movement.MovementType;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;

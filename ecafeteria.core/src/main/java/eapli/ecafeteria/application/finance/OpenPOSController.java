@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.application.finance;
+package eapli.ecafeteria.application.finance;
 
-import eapli.ecafetaria.domain.finance.POS;
-import eapli.ecafeteria.persistence.POSRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.domain.finance.POS;
 import eapli.framework.application.Controller;
 import java.util.List;
 

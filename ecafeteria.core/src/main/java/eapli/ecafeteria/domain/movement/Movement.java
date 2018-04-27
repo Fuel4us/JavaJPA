@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.movement;
+package eapli.ecafeteria.domain.movement;
 
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -12,13 +12,10 @@ import eapli.framework.util.DateTime;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Currency;
-import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**

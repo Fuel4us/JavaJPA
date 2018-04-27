@@ -1,7 +1,5 @@
 package eapli.ecafeteria.domain.authz;
 
-import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.framework.domain.ddd.ValueObject;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -9,7 +7,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
