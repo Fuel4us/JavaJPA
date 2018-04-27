@@ -38,7 +38,7 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         final long idMeal = Console.readLong("Meal ID:");
         final int lotCode = Console.readInteger("Lot Code:");
         this.controller.listMaterials();
-        final long ingredientCode = Console.readLong("Ingredient Code:");
+        final String ingredientCode = Console.readLine("Ingredient Acronym:");
         final int quantity = Console.readInteger("Quantity:");
 
         try {

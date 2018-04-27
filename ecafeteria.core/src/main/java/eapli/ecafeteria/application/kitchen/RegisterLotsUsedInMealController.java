@@ -31,10 +31,10 @@ public class RegisterLotsUsedInMealController implements Controller {
     private final MaterialRepository matRepository = PersistenceContext.repositories().materials();
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
-    public Lot registerLot(int lotCode, long ingredientCode, int quantity)
+    public Lot registerLot(int lotCode, String ingredientCode, int quantity)
             throws DataIntegrityViolationException, DataConcurrencyException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-        Material ingredient = matRepository.findOne(ingredientCode).get();
+        Material ingredient = matRepository.findByAcronym(ingredientCode).get();
         final Lot lot = new Lot(lotCode, ingredient, quantity);
         return this.lRepository.save(lot);
     }
@@ -49,23 +49,19 @@ public class RegisterLotsUsedInMealController implements Controller {
     }
     
     public void listMeals(){
-        int i = 1;
         for (Meal meal : mealRepository.findAll()) {
-            System.out.println(i + " - " + meal.toString());
-            i++;
+            System.out.println(meal.getId() + " - " + meal.toString());
         }
     }
     
     public void listMaterials(){
-        int i = 1;
         for (Material material : matRepository.findAll()) {
-             System.out.println(i + " - " + material.toString());
-            i++;
+             System.out.println(material.id() + " - " + material.toString());
         }
     }
     
-    public boolean checkMaterial(long ingredientCode) {
-        return matRepository.findOne(ingredientCode).isPresent();
+    public boolean checkMaterial(String ingredientCode) {
+        return matRepository.findByAcronym(ingredientCode).isPresent();
     }
 
     public boolean checkMeal(long mealCode) {
