@@ -22,6 +22,7 @@
     <class>eapli.ecafeteria.domain.kitchen.LimitConfiguration</class>
     <class>eapli.ecafeteria.domain.authz.Reason</class>
     <class>eapli.ecafeteria.domain.menus.Menu</class>
+    <class>eapli.ecafetaria.domain.movement.Movement</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--

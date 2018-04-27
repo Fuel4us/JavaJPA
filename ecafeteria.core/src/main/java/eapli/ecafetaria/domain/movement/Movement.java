@@ -13,11 +13,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Currency;
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -29,11 +31,13 @@ public class Movement implements AggregateRoot<Long>, Serializable {
     @GeneratedValue
     private Long id;
     
-    @EmbeddedId    
+    @Embedded    
     private MecanographicNumber nif;
     
+    @Embedded
     private Money quantity;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar date;
     private MovementType movementType;
     
