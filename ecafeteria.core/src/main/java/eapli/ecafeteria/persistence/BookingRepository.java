@@ -24,8 +24,6 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
 
         Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user);
 
-    public void updateBookingRating(Booking choosen, Rating rating);
-        
-        
+        public void updateBookingRating(Booking choosen, Rating rating);
         
 }

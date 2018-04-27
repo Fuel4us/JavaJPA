@@ -17,6 +17,7 @@ import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -32,7 +33,13 @@ public class BookingRatingController implements Controller {
     public Iterable<Booking> getBookingsForRating(Optional<CafeteriaUser> optUser) {
         if(optUser.isPresent()){
             CafeteriaUser user = optUser.get();
-            return repBooking.findBookingsDeliveredByUser(user);
+            Iterable<Booking> list = repBooking.findBookingsDeliveredByUser(user);
+            ArrayList<Booking> res = new ArrayList<>();
+            for(Booking b : list){
+                if(b.getRating() == null)
+                    res.add(b);
+            }
+            return (Iterable<Booking>) res;
         }
         
         System.out.println("User not found");
