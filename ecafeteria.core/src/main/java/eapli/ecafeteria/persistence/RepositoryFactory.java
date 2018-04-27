@@ -85,6 +85,8 @@ public interface RepositoryFactory {
     
     HeuristicRepository heuristics();
     
+    KitchenLimitRepository kitchenLimit();
+    
     CanteenShiftRepository canteenShift();
     
     /*

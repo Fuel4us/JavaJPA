@@ -6,14 +6,21 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.framework.util.Math;
+import java.io.Serializable;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author 1160629@isep.ipp.pt
  */
-public final class Limit {
+@Embeddable
+public class Limit implements Serializable{
 
     private long limitValue;
+    
+    protected Limit(){
+        
+    }
 
     /**
      * Initializes limit with value if appropriate;
