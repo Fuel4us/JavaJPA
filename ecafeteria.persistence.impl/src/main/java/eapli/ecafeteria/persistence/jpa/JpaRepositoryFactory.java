@@ -1,8 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
-import eapli.ecafeteria.domain.kitchen.Heuristic;
-import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
@@ -10,6 +8,7 @@ import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
 import eapli.ecafeteria.persistence.ExecutionRepository;
 import eapli.ecafeteria.persistence.HeuristicRepository;
+import eapli.ecafeteria.persistence.KitchenLimitRepository;
 import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealLotRepository;
@@ -125,6 +124,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public HeuristicRepository heuristics() {
         return new JpaHeuristicRepository(Application.settings().getPersistenceUnitName());
     }
+    
+    @Override
+    public KitchenLimitRepository kitchenLimit() {
+        return new JpaKitchenLimitRepository(Application.settings().getPersistenceUnitName());
+    }
 
     @Override
     public CanteenShiftRepository canteenShift() {
@@ -151,4 +155,5 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public POSRepository POS() {
         return new JpaPOSRepository();
     }
+
 }
