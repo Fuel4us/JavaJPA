@@ -50,6 +50,12 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
         this.cfs = cfs;
         this.ws = ws;
     }
+    
+    public CanteenShift(CanteenShiftState cfs, WorkSession ws) {
+        this.dateCS = Calendar.getInstance();
+        this.cfs = cfs;
+        this.ws = ws;
+    }
 
     public CanteenShiftState canteenShiftState() {
         return this.cfs;
