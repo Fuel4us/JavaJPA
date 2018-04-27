@@ -53,7 +53,7 @@ public class RegisterBookingController {
     public boolean registerBooking(CafeteriaUser cu, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException{
         //Check if the meal is reserved 24 hours before the actual meal
         Date CurrentDate = new Date();
-        Date mealDate = meal.getDate();
+        Date mealDate = meal.getMealDate();
         
         boolean moreThanDay = Math.abs(mealDate.getTime() - CurrentDate.getTime()) > MILLIS_PER_DAY;
 

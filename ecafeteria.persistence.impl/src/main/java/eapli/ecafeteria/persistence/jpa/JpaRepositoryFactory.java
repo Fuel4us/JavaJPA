@@ -97,23 +97,23 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaLotRepository();
     }
 
-    public MealLotRepository mealLots(){
+    public MealLotRepository mealLots() {
         return new JpaMealLotRepository();
     }
-    
+
     @Override
     public BookingRepository booking() {
         return new JpaBookingRepository();
     }
 
     @Override
-    public JpaMovementRepository movement(){
+    public JpaMovementRepository movement() {
         return new JpaMovementRepository();
     }
 
     @Override
     public MenuRepository menus() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JpaMenuRepository();
     }
 
     @Override

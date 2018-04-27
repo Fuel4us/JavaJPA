@@ -50,7 +50,7 @@ public class CreateMealPlanController {
     }
     
     public String getMealDate(Meal meal){
-        return meal.getDate().toString();
+        return meal.getMealDate().toString();
     }
     
     public String getMealDishType(Meal meal){

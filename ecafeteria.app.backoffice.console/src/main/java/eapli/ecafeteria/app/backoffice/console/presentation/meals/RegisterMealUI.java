@@ -11,6 +11,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
 public class RegisterMealUI extends AbstractUI {
 
     private final RegisterMealController theController = new RegisterMealController();
-    
+
     private final ListDishService theDishes = new ListDishService();
 
     protected Controller controller() {
@@ -37,23 +38,23 @@ public class RegisterMealUI extends AbstractUI {
         selectorMealType.show();
         final MealType mealType = selectorMealType.selectedElement();
 
-        final Date mealDate = null;
-        // mealDate = Console.readLine("Data(aaaa-mm-dd):");
-        
-        this.theController.validateDate(mealType, mealDate);
+//        Date mealDateBegMenu;
+//
+//        mealDateBegMenu = Console.readDate("Insira a Data de inicio(aaaa-mm-dd)", "aaaa-mm-dd");
+        this.theController.validateDate(mealType, new Date());
 
         final Iterable<Dish> dishes = this.theDishes.allDishes();
         final SelectWidget<Dish> selectorDish = new SelectWidget<>("Dishes ", dishes, new DishPrinter());
         selectorDish.show();
         final Dish dish = selectorDish.selectedElement();
-        
+
         try {
-            this.theController.registerMeal(mealType, mealDate, dish);
+            this.theController.registerMeal(mealType, new Date(), dish);
+            return true;
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             Logger.getLogger(RegisterMealUI.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-
-        return false;
     }
 
     @Override
