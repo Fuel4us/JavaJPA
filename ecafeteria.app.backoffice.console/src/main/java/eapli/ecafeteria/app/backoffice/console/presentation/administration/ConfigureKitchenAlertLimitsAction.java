@@ -9,7 +9,7 @@ import eapli.framework.actions.Action;
 
 /**
  *
- * @author konng
+ * @author 1160629@isep.ipp.pt
  */
 public class ConfigureKitchenAlertLimitsAction implements Action{
 
