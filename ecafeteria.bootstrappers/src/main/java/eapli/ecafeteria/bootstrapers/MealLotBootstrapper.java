@@ -10,6 +10,8 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Gonçalo Silva (1161140)
@@ -32,10 +34,21 @@ public class MealLotBootstrapper implements Action {
         final LotRepository lotRepository = PersistenceContext.repositories().lots();
         final MealLotRepository mealLotRepository = PersistenceContext.repositories().mealLots();
 
-        for (Meal meal : mealRepository.findAll()) {
-            for (Lot lot : lotRepository.findAll()) {
-                MealLot mealLot = new MealLot(meal, lot);
-                mealLotRepository.save(mealLot);
+        List<Lot> list = new ArrayList<>();
+
+        for (Lot l : lotRepository.findAll()) {
+            list.add(l);
+        }
+
+        int i = 0;
+        for (Meal m : mealRepository.findAll()) {
+            MealLot mealLot = new MealLot(m, list.get(i));
+            mealLotRepository.save(mealLot);
+
+            i++;
+
+            if (i == list.size()) {
+                i = 0;
             }
         }
     }
