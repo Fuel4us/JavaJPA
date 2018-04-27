@@ -30,9 +30,11 @@ public class PublishMenuController {
             throw new IllegalArgumentException();
         }
         
-        menu.toogleState();
+        boolean done = menu.publishMenu();
         
-        return repo.save(menu).isPublished();
+        repo.save(menu);
+                
+        return done;
     }
     
     public Iterable<Menu> listUnpublishedMenus() {

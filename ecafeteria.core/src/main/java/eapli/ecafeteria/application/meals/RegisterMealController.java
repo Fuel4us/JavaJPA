@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -31,11 +32,23 @@ public class RegisterMealController implements Controller {
 
     public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish) throws DataIntegrityViolationException, DataConcurrencyException {
 
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-
         final Meal newMeal = new Meal(mealType, mealDate, dish);
 
         return this.mealRepository.save(newMeal);
+    }
+    
+    public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish, final Menu menu) throws DataIntegrityViolationException, DataConcurrencyException {
+
+        final Meal newMeal = new Meal(mealType, mealDate, dish, menu);
+
+        return this.mealRepository.save(newMeal);
+    }
+
+    public Meal updateMeal(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        Long id = meal.getId();
+        this.mealRepository.delete(id);
+        return this.mealRepository.save(meal);
     }
 
     /**

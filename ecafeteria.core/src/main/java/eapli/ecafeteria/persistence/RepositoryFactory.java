@@ -87,6 +87,8 @@ public interface RepositoryFactory {
     
     HeuristicRepository heuristics();
     
+    KitchenLimitRepository kitchenLimit();
+    
     CanteenShiftRepository canteenShift();
     
     POSRepository POS();
@@ -111,4 +113,6 @@ public interface RepositoryFactory {
     ReasonRepository reason();
     
     MealPlanRepository mealplans();
+    
+    RatingRepository rating();
 }

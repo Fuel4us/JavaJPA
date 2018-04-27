@@ -9,6 +9,7 @@ package eapli.ecafetaria.domain.movement;
  *
  * @author Hernani Gil
  */
+
 public enum MovementType {
     BOOKING, DEPOSIT, CANCEL;
     

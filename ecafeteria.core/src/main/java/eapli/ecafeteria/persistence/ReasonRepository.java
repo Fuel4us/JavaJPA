@@ -10,11 +10,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface ReasonRepository extends DataRepository<Reason, Long>{
     
-    /**
-     * Find the reasons by Reason Type
-     * @param rt Reason Type
-     * @return an Iterable of the reasons with rt
-     */
-    Iterable<Reason> findByReasonType(ReasonType rt);
     
 }

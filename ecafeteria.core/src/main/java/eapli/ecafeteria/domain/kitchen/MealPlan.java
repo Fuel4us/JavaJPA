@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Entity
 public class MealPlan {
     
+    private static final long serialVersionUID = 1L;
+    
     public static HeuristicConfiguration heuristicInUse;
     
     @Id
@@ -36,6 +38,10 @@ public class MealPlan {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
     public List<Integer> getNumberOfDishes() {

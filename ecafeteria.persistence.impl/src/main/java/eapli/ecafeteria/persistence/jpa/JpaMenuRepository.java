@@ -10,6 +10,7 @@ import eapli.ecafeteria.persistence.MenuRepository;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  *
@@ -18,8 +19,10 @@ import java.util.Map;
 public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> implements MenuRepository {
 
     @Override
-    public Iterable<Menu> findByState(boolean state) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Optional<Menu> findById(Long id) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return matchOne("e.id = :id", params);
     }
 
     /**
@@ -34,9 +37,16 @@ public class JpaMenuRepository extends CafeteriaJpaRepositoryBase<Menu, Long> im
     public Iterable<Menu> findByMenuPeriod(Date beginning, Date end) {
         final Map<String, Object> params = new HashMap<>();
         params.put("dateBeg", beginning);
-        params.put("dateEnd", beginning);
+        params.put("dateEnd", end);
 
         return match("(e.startDate >= :dateBeg and e.startDate<= :dateEnd) or (e.endDate >= :dateBeg and e.endDate<= :dateEnd)", params);
+    }
+
+    @Override
+    public Iterable<Menu> findByState(boolean state) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("state", state);
+        return match("(e.published == state)", params);
     }
 
 }

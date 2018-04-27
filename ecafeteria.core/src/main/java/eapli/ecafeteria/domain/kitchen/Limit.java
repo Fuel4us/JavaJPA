@@ -5,15 +5,22 @@
  */
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.framework.util.Math;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author 1160629@isep.ipp.pt
  */
-public final class Limit {
+@Embeddable
+public class Limit implements Serializable{
 
-    private long limitValue;
+    private double limitValue;
+    
+    protected Limit(){
+        
+    }
 
     /**
      * Initializes limit with value if appropriate;
@@ -24,13 +31,14 @@ public final class Limit {
         configureLimitValue(limitValue);
     }
     
-    public long getLimitValue() {
+    public double getLimitValue() {
         return limitValue;
     }
 
     // throws checked exception to force validation of value
-    public final void configureLimitValue(long limitValue) throws Exception {
-        if(Math.between(limitValue, 0, 100)){
+    public final void configureLimitValue(double limitValue) throws Exception {
+        BigDecimal value = BigDecimal.valueOf(limitValue);
+        if(value.compareTo(BigDecimal.valueOf(0))>=0 && value.compareTo(BigDecimal.valueOf(100))<=0){
             this.limitValue=limitValue;
         } else {
             throw new Exception("Invalid limit value. Limit must be between 0 and 100");

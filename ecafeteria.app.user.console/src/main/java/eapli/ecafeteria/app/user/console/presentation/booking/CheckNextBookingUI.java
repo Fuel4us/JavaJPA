@@ -5,7 +5,16 @@
  */
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.booking.CheckNextBookingController;
+import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.presentation.console.AbstractUI;
+import java.util.Date;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,9 +22,22 @@ import eapli.framework.presentation.console.AbstractUI;
  */
 public class CheckNextBookingUI extends AbstractUI {
 
+    private final CheckNextBookingController controller = new CheckNextBookingController();
+    
     @Override
     protected boolean doShow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SystemUser systemUser = AuthorizationService.session().authenticatedUser();
+        Optional<CafeteriaUser> user = null;
+        try {
+            user = controller.findUserByUsername(systemUser.username());
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(CheckBookingsForNextDaysUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        System.out.println(controller.getNextBooking(user, new Date()));
+        
+        return true;
     }
 
     @Override
