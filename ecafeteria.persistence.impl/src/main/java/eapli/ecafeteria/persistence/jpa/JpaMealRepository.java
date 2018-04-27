@@ -15,6 +15,7 @@ import java.util.Optional;
 /**
  *
  * @author Bernardo Carreira
+ * @EDIT Pedro Alves <1150372@isep.ipp.pt>
  */
 public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
@@ -31,5 +32,13 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         params.put("lotId", lotId);
 
         return match("e.lotId = :lotId", params);
+    }
+
+    @Override
+    public Iterable<Meal> findByIdMenu(Long idMenu) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("idMenu", idMenu);
+
+        return match("e.idMenu = :idMenu", params);
     }
 }

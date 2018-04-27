@@ -52,7 +52,7 @@ public class MealTest {
     }
 
     /**
-     * Test of getDate method, of class Meal.
+     * Test of getMealDate method, of class Meal.
      */
     @Test
     public void testGetDate() {
@@ -61,7 +61,7 @@ public class MealTest {
         Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new NutricionalInfo(4, 4), new Money(2.14, Currency.getInstance(Locale.GERMANY)), new Allergens());
         Meal instance = new Meal(MealType.LUNCH, expResult, d);
 
-        Date result = instance.getDate();
+        Date result = instance.getMealDate();
         assertEquals(expResult, result);
     }
 

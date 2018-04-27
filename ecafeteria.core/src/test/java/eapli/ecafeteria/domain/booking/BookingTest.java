@@ -298,9 +298,9 @@ public class BookingTest {
         System.out.println("toString");
         
         String expResult = "Booking{bookingID=null, id=123456Meal{dish=eapli.ecafeteria.domain.dishes.Dish@65f955a, "
-                + "mealType=LUNCH, mealDate=" + booking.getMeal().getDate().toString() + "}, user=eapli.ecafeteria.domain.cafeteriauser."
+                + "mealType=LUNCH, mealDate=" + booking.getMeal().getMealDate().toString() + "}, user=eapli.ecafeteria.domain.cafeteriauser."
                 + "CafeteriaUser@56760663, meal=Meal{dish=eapli.ecafeteria.domain.dishes.Dish@65f955a, mealType=LUNCH, "
-                + "mealDate=" + booking.getMeal().getDate().toString() + "}, bookingState=RESERVED, rating=null}";
+                + "mealDate=" + booking.getMeal().getMealDate().toString() + "}, bookingState=RESERVED, rating=null}";
         String result = booking.toString();
         
         assertEquals(expResult, result);

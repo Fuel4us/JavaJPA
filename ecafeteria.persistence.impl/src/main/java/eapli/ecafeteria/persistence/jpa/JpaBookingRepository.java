@@ -68,9 +68,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public class BirthDateComparator implements Comparator<Booking> {
         @Override
         public int compare(Booking booking1, Booking booking2) {
-            if (booking1.getMeal().getDate().before(booking2.getMeal().getDate())) {
+            if (booking1.getMeal().getMealDate().before(booking2.getMeal().getMealDate())) {
                 return -1;
-            } else if (booking1.getMeal().getDate().after(booking2.getMeal().getDate())) {
+            } else if (booking1.getMeal().getMealDate().after(booking2.getMeal().getMealDate())) {
                 return 1;
             } else {
                 return 0;
