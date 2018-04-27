@@ -132,9 +132,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+   
     @Override
     public ReasonRepository reason() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JpaReasonRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override
