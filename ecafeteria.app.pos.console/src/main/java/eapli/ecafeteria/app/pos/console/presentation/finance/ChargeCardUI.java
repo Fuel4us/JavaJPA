@@ -7,13 +7,10 @@ package eapli.ecafeteria.app.pos.console.presentation.finance;
 
 import eapli.ecafeteria.application.finance.ChargeCardController;
 import eapli.ecafeteria.domain.authz.Username;
-import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
