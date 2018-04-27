@@ -19,6 +19,8 @@ import java.util.Set;
  */
 public class RegisterDishUI extends AbstractUI {
 
+    private int flag = 0;
+
     private final RegisterDishController theController = new RegisterDishController();
 
     protected Controller controller() {
@@ -36,21 +38,21 @@ public class RegisterDishUI extends AbstractUI {
         final String name = Console.readLine("Name:");
 
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
-        nutricionalData.show(); 
-        
+        nutricionalData.show();
+
         final AllergensWidget allerg = new AllergensWidget();
 
         final double price = Console.readDouble("Price:");
 
         Set<String> newAllergenList = new HashSet<>();
-        // mudar isto
-        final int num = Console.readInteger("Enter the number of allergens on the dish.");
-        for (int i = 0; i < num; i++) {
-            final String all = Console.readLine("Allergen:");
-            if (newAllergenList.contains(all) == false) {
+
+        System.out.println("Insert the allergens of the dish:");
+        while (flag == 0) {
+            final String all = Console.readLine("Allergen: (type 'exit' to finish)");
+            if (!all.equals("exit")) {
                 newAllergenList.add(all);
             } else {
-                System.out.println("The allergen inserted is already on the list!");
+                flag+=1;
             }
         }
         allerg.setAllergenicsList(newAllergenList);
