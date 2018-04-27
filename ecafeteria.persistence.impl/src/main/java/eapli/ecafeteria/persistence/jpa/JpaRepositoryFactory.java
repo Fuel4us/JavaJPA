@@ -131,9 +131,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaCanteenShiftRepository();
     }
 
+   
     @Override
     public ReasonRepository reason() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new JpaReasonRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override

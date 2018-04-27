@@ -7,9 +7,12 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,7 +28,6 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class UserState implements Serializable, ValueObject{
     
-//    private final ReasonRepository reasonRepo = PersistenceContext.repositories().reason();
 
     /**
      * Enumeration of the various possible User State.
@@ -39,6 +41,7 @@ public class UserState implements Serializable, ValueObject{
 
     @Enumerated(EnumType.STRING)
     private UserType type;
+    @OneToOne(cascade = CascadeType.ALL)
     private Reason reason;
     @Temporal(TemporalType.DATE)
     private Calendar deactivatedOn;
@@ -85,18 +88,14 @@ public class UserState implements Serializable, ValueObject{
      * @throws eapli.framework.persistence.DataConcurrencyException
      * @throws eapli.framework.persistence.DataIntegrityViolationException
      */
-    public boolean deactivate(Calendar deactivatedOn, ReasonType rt, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
+    public Reason deactivate(Calendar deactivatedOn, ReasonType rt, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
         if (this.type == UserType.ACCEPTED) {
             this.type = UserType.DEACTIVATED;
-            this.reason = new Reason(rt, comment);
             this.deactivatedOn = deactivatedOn;
-            /* Save reason in Repository */
-//            reasonRepo.save(reason);
-            
-            return true;
+            this.reason = new Reason(rt, comment);
         }
 
-        return false;
+        return reason;
     }
 
     /**

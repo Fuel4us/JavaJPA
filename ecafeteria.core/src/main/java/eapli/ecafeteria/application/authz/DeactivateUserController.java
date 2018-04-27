@@ -6,10 +6,12 @@
 package eapli.ecafeteria.application.authz;
 
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.authz.Reason;
 import eapli.ecafeteria.domain.authz.ReasonType;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -23,15 +25,12 @@ import java.util.logging.Logger;
  */
 public class DeactivateUserController implements Controller {
 
-//    private final UserRepository userRepository = PersistenceContext.repositories().users(null);
     private final CafeteriaUserRepository cafetariaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
+    private final ReasonRepository reasonRepo = PersistenceContext.repositories().reason();
 
-//    public Iterable<SystemUser> activeUsers() {
     public Iterable<CafeteriaUser> activeUsers() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-//        return this.userRepository.findAll();
-//        return this.cafetariaUserRepository.findAll();
           return this.cafetariaUserRepository.findAllActive();
     }
     
@@ -40,18 +39,18 @@ public class DeactivateUserController implements Controller {
         return ReasonType.values();
     }
 
-//    public SystemUser deactivateUser(SystemUser user, ReasonType rType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
-    public CafeteriaUser deactivateUser(CafeteriaUser user, ReasonType rType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
+    public boolean deactivateUser(CafeteriaUser user, ReasonType rType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
+        Reason r = null;
         try{
-//            user.deactivate(DateTime.now(), rType, comment);
-            user.user().deactivate(DateTime.now(), rType, comment);
+            r = user.user().deactivate(DateTime.now(), rType, comment);
         } catch (IllegalArgumentException arg_ex){
             Logger.getLogger(DeactivateUserController.class.getName()).log(Level.SEVERE, null, arg_ex);
         }
         
-//        return this.userRepository.save(user);
-        return this.cafetariaUserRepository.save(user);
+        if(this.cafetariaUserRepository.save(user)!=null && this.reasonRepo.save(r)!=null) return true;
+        
+        return false;
     }
 }

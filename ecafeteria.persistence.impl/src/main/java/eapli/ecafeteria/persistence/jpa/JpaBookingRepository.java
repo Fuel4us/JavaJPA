@@ -32,6 +32,12 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public JpaBookingRepository() {
     }
 
+    /**
+     * Returns the list of bookings in reserved state for the next X days
+     * @param user User
+     * @param date Starting date to compare
+     * @return List of bookings
+     */
     @Override
     public Iterable<Booking> checkBookingsForNextDays(Optional<CafeteriaUser> user, Date date) {
         
@@ -54,7 +60,12 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return bookingList;
     }
 
-    
+    /**
+     * Returns the next booking from an User
+     * @param user User
+     * @param date Date to compare
+     * @return 
+     */
     @Override
     public Booking getNextBooking(Optional <CafeteriaUser> user, Date date) {
         Iterable<Booking> nextBookings = checkBookingsForNextDays(user, date);
@@ -78,6 +89,13 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         }
     }
 
+    /**
+     * Finds and returns a list of bookings by their user, meal type and state
+     * @param user User
+     * @param mealType Meal Type
+     * @param bookingState State
+     * @return Bookins
+     */
     @Override
     public Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState bookingState) {
         Map<String, Object> params = new HashMap<>();
@@ -88,7 +106,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Rúben - 1160998
+     * Returns all bookings in delivered state from an User
+     * @param user User
+     * @return List of bookings
      */
     @Override
     public Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user) {
@@ -99,15 +119,13 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Rúben - 1160998
+     * Updates a booking to set a Rating
+     * @param choosen Booking
+     * @param rating Rating
      */
     @Override
     public void updateBookingRating(Booking choosen, Rating rating) {
         Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID = " + rating.id() + " WHERE BOOKINGID = " + choosen.bookingId());
         query.executeUpdate();
     }
-
-    
-    
-    
 }
