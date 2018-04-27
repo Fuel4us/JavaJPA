@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.kitchen.MealLot;
 import eapli.framework.persistence.repositories.DataRepository;
 
@@ -14,4 +15,5 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface MealLotRepository extends DataRepository<MealLot, Long>{
     
+    Iterable<MealLot> findAllByLot(Lot lot);
 }
