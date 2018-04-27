@@ -5,7 +5,7 @@
  */
 package eapli.ecafetaria.app.pos.console.presentation.finance;
 
-import eapli.ecafetaria.application.finance.ChargeCardController;
+import eapli.ecafeteria.application.finance.ChargeCardController;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;

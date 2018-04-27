@@ -1,12 +1,14 @@
+package eapli.ecafeteria.app.pos.console.presentation.finance;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.app.pos.console.presentation.finance;
 
-import eapli.ecafetaria.application.finance.OpenPOSController;
-import eapli.ecafetaria.domain.finance.POS;
+
+
+import eapli.ecafeteria.application.finance.OpenPOSController;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
@@ -34,17 +36,18 @@ public class OpenPOSUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         String posString = "POS List \n\n";
-        List<POS> posList = theController.showPOSList();
-        int posOption = 0;
+        Iterable<Long> posList = theController.showPOSList();
 
-        for (POS p : posList) {
-            posString += posOption + " - " + p.toString() + "\n";
-            posOption++;
+        for (Long id : posList) {
+            posString += "POS - " + id + "\n";
         }
 
-        final int posIndex = Console.readInteger(posString);
+        final long posID = Console.readLong(posString);
         try {
-            theController.openPOS(posList.get(posIndex));
+            if(!theController.openPOS(posID)){
+                System.out.println("The is POS already opened!\n");
+                //return false; //Dúvida - o que acontece quando este método retorna false?
+            }
         } catch (Exception e) {
             Logger.getLogger(OpenPOSUI.class.getName()).log(Level.SEVERE, null, e);
         }

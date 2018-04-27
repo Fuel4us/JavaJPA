@@ -13,11 +13,11 @@ import eapli.framework.actions.Action;
  *
  * @author 11607
  */
-public class OpenPOSAction implements Action{
+public class OpenShiftAction implements Action {
 
     @Override
     public boolean execute() {
-        return new OpenPOSUI().show();
+        return new OpenShiftUI().show();
     }
     
 }

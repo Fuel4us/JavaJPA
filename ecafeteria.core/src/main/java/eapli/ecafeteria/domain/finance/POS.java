@@ -1,7 +1,7 @@
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.finance;
 
-import static eapli.ecafetaria.domain.finance.POSState.CLOSED;
-import static eapli.ecafetaria.domain.finance.POSState.OPEN;
+import static eapli.ecafeteria.domain.finance.POSState.CLOSED;
+import static eapli.ecafeteria.domain.finance.POSState.OPEN;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.Entity;

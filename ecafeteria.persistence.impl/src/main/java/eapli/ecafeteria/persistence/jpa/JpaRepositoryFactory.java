@@ -19,6 +19,7 @@ import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.ReasonRepository;
 import eapli.ecafeteria.persistence.RepositoryFactory;
+import eapli.ecafeteria.persistence.ShiftRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
@@ -154,6 +155,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public POSRepository POS() {
         return new JpaPOSRepository();
+    }
+
+    @Override
+    public ShiftRepository shift() {
+        return new JpaShiftRepository();
     }
 
 }

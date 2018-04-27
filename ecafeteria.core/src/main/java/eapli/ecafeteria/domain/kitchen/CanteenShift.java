@@ -1,6 +1,6 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafetaria.domain.finance.WorkSession;
+import eapli.ecafeteria.domain.finance.WorkSession;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -114,5 +114,9 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
             return true;
         }
         return false;
+    }
+
+    public boolean isClosed() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -31,5 +31,14 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
         
         return Optional.empty();
     }
-    
+        @Override
+    public boolean open(Calendar cal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Optional<CanteenShift> findCurrentDayShift() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

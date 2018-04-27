@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.finance;
 
 /**
  *
  * @author Josué Lapa
  */
 public class WorkSession {
-
+    private Shift currentShift;
+    private WorkSessionState workSessionState;
             
             
             

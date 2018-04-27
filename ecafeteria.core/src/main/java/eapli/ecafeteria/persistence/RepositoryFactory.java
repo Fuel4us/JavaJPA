@@ -115,4 +115,6 @@ public interface RepositoryFactory {
     MealPlanRepository mealplans();
     
     RatingRepository rating();
+
+    ShiftRepository shift();
 }
