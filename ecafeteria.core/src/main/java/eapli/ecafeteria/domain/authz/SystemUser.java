@@ -263,4 +263,11 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+    @Override
+    public String toString() {
+        return name.toString();
+    }
+        
+        
 }

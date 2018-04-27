@@ -48,6 +48,8 @@ public class BookingRatingUI extends AbstractUI {
             Logger.getLogger(BookingRatingUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        System.out.println("Rating criado com sucesso");
+        
         return true;
     }
 

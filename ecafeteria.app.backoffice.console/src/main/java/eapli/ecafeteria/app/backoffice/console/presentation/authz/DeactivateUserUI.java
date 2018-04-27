@@ -39,7 +39,7 @@ public class DeactivateUserUI extends AbstractUI {
         final List<ReasonType> reasonList = new ArrayList<>();
         
         if (!iterable.iterator().hasNext()) {
-            System.out.println("There is no registered User");
+            System.out.println("There is no registered Cafeteria User");
         } else {
             int reasonCounter = 1;
             final SelectWidget<CafeteriaUser> selector = new SelectWidget<>("Active Cafetaria Users:", iterable, new CafetariaUserPrinter());
@@ -71,7 +71,8 @@ public class DeactivateUserUI extends AbstractUI {
             }
             
             try {
-                    this.theController.deactivateUser(selectedUser, reasonList.get(reasonNumber - 1), reasonComent);
+                    boolean success = this.theController.deactivateUser(selectedUser, reasonList.get(reasonNumber - 1), reasonComent);
+                    if(success) System.out.println("\n\nThe user "+selectedUser+", was successfuly deactivated!\n\n");
                 } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
                     Logger.getLogger(DeactivateUserUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
