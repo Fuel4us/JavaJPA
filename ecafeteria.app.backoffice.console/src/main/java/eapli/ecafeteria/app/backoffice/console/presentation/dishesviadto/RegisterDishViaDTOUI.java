@@ -44,13 +44,13 @@ public class RegisterDishViaDTOUI extends AbstractUI {
 
         final double price = Console.readDouble("Price");
 
-        try {
-            final DishDTO dish = new DishDTO(theDishType.acronym, theDishType.description, name,
-                    nutricionalData.calories(), nutricionalData.salt(), price, "EUR", true, allergens.getAllergenics());
-            this.theController.registerDish(dish);
-        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-            System.out.println("You tried to enter a dish which already exists in the database.");
-        }
+//        try {
+//            final DishDTO dish = new DishDTO(theDishType.acronym, theDishType.description, name,
+//                    nutricionalData.calories(), nutricionalData.salt(), price, "EUR", true, allergens.getAllergenics());
+//            this.theController.registerDish(dish);
+//        } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
+//            System.out.println("You tried to enter a dish which already exists in the database.");
+//        }
 
         return false;
     }

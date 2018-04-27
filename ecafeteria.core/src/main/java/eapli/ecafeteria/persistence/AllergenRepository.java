@@ -9,6 +9,6 @@ import java.util.Optional;
  * @author João Pereira <1150478@isep.ipp.pt>
  */
 public interface AllergenRepository extends DataRepository<Allergens, Long> {
-    
+
     Optional<Allergens> findById(Long id);
 }

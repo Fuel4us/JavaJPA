@@ -117,4 +117,6 @@ public interface RepositoryFactory {
     RatingRepository rating();
 
     ShiftRepository shift();
+    
+     AllergenRepository allergen();
 }

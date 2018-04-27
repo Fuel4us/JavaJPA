@@ -30,12 +30,15 @@ public class RegisterDishController implements Controller {
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
 
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-            final double price, Set<String> allerg) throws DataIntegrityViolationException, DataConcurrencyException {
+            final double price,  Set<Allergens> allergList) throws DataIntegrityViolationException, DataConcurrencyException {
 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-
+        String allergenConcated = "";
+        for (Allergens alrg : allergList) {
+            allergenConcated += alrg.getAllergen() + "; ";
+        }
         final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-                Money.euros(price), new Allergens(allerg));
+                Money.euros(price), allergenConcated);
 
         return this.dishRepository.save(newDish);
     }

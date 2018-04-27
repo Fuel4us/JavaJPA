@@ -15,6 +15,7 @@ import eapli.ecafeteria.dto.DishDTO;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
+import java.util.Set;
 
 /**
  * A Dish
@@ -44,11 +45,15 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
+    
+    @ManyToOne()
     private Allergens allerg;
+    
+    String allergenList;
 
     public Dish(final DishType dishType, final Designation name,
-            final NutricionalInfo nutricionalInfo, Money price, Allergens allerg) {
-        if (dishType == null || name == null || nutricionalInfo == null || allerg == null) {
+            final NutricionalInfo nutricionalInfo, Money price, String allergenList) {
+        if (dishType == null || name == null || nutricionalInfo == null) {
             throw new IllegalArgumentException();
         }
 
@@ -57,7 +62,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         this.nutricionalInfo = nutricionalInfo;
         this.setPrice(price);
         this.active = true;
-        this.allerg = allerg;
+        this.allergenList = allergenList;
     }
 
     public Dish(final DishType dishType, final Designation name, Money price) {
@@ -128,8 +133,8 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         return this.nutricionalInfo;
     }
 
-    public Allergens allergens() {
-        return allerg;
+    public String allergens() {
+        return allergenList;
     }
 
     public Designation name() {
@@ -177,11 +182,11 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         setPrice(newPrice);
     }
 
-    public void changeAllergensTo(Allergens newAllergens) {
+    public void changeAllergensTo(String newAllergens) {
         if (newAllergens == null) {
             throw new IllegalArgumentException();
         }
-        this.allerg = newAllergens;
+        this.allergenList = newAllergens;
     }
 
     private void setPrice(Money price) {
@@ -194,6 +199,6 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     public DishDTO toDTO() {
         return new DishDTO(dishType.id(), dishType.description(), name.toString(),
                 nutricionalInfo.calories(), nutricionalInfo.salt(), price.amount(),
-                price.currency().getCurrencyCode(), active, allerg.getAllerg());
+                price.currency().getCurrencyCode(), active);
     }
 }

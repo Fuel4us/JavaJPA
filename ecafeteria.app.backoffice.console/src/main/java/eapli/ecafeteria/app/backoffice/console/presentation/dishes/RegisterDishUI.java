@@ -1,6 +1,8 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
 import eapli.ecafeteria.application.dishes.RegisterDishController;
+import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -40,26 +42,29 @@ public class RegisterDishUI extends AbstractUI {
         final NutricionalInfoDataWidget nutricionalData = new NutricionalInfoDataWidget();
         nutricionalData.show();
 
-        final AllergensWidget allerg = new AllergensWidget();
-
         final double price = Console.readDouble("Price:");
+        
+        Set<Allergens> newAllergList = new HashSet<>();
+        final SelectWidget<Allergens> show = new SelectWidget<>("Allergen List: (0 to exit)", AllergensList.getAllergList());
+        show.show();
+        int selectNum = show.selectedOption();
+        Allergens selectedAllerg = null;
+        if (selectNum != 0) {
+            selectedAllerg = show.selectedElement();
+        }
 
-        Set<String> newAllergenList = new HashSet<>();
-
-        System.out.println("Insert the allergens of the dish:");
-        while (flag == 0) {
-            final String all = Console.readLine("Allergen: (type 'exit' to finish)");
-            if (!all.equals("exit")) {
-                newAllergenList.add(all);
-            } else {
-                flag+=1;
+        while (selectNum != 0) {
+            newAllergList.add(selectedAllerg);
+            System.out.println("Próximo alergénico ?");
+            selectNum = show.selectedOption();
+            if (selectNum != 0) {
+                selectedAllerg = show.selectedElement();
             }
         }
-        allerg.setAllergenicsList(newAllergenList);
-
+       
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price, allerg.getAllergenics());
+                    price, newAllergList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }
