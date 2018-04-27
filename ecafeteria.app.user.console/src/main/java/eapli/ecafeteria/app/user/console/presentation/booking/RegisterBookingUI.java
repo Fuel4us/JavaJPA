@@ -6,13 +6,18 @@
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.booking.CheckBookingsForNextDaysController;
+import eapli.ecafeteria.application.booking.CheckMenuController;
 import eapli.ecafeteria.application.booking.RegisterBookingController;
+import eapli.ecafeteria.application.meals.ShowAvailableMealsController;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +29,7 @@ import java.util.logging.Logger;
 public class RegisterBookingUI extends AbstractUI{
 
     private final RegisterBookingController controller = new RegisterBookingController();
-    //private final ShowAvailableMealsController SAMController = new ShowAvailableMealsController();
+    private final CheckMenuController CheckMenuConttroller = new CheckMenuController();
     
     Scanner input = new Scanner(System.in);
     
@@ -32,17 +37,20 @@ public class RegisterBookingUI extends AbstractUI{
     protected boolean doShow() {
         boolean flag = true;
         
+        //Conferir utilizador
+        SystemUser su = AuthorizationService.session().authenticatedUser();
+        CafeteriaUser cu = controller.findCafeteriaUser(su.username());
+        
         System.out.println("Escolha a Meal para reservar:");
         //Apresenta as meals possiveis para escolha
-        //SAMController.showMeals();
+        List<Meal> lstMeals = CheckMenuConttroller.nextWeekMenu();
+        for (Meal m : lstMeals) {
+            System.out.println(m);
+        }
         
         //Utilizador escolhe meal para booking
         long mealID = input.nextLong();
         Meal meal = controller.findMealByID(mealID);
-        
-        //Conferir utilizador
-        SystemUser su = AuthorizationService.session().authenticatedUser();
-        CafeteriaUser cu = controller.findCafeteriaUser(su.username());
         
         try {
             flag = controller.registerBooking(cu,meal);
