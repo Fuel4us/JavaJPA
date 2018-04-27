@@ -79,7 +79,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
     public boolean sameAs(Object other) {
         // FIXME implement this method
         final CanteenShift cs = (CanteenShift) other;
-        return id().equals(cs.id());
+        return this.id().equals(cs.id());
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
         }
 
         final CanteenShift other = (CanteenShift) o;
-        return id().equals(other.id());
+        return this.id().equals(other.id());
     }
 
     @Override

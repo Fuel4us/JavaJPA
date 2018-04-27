@@ -14,7 +14,6 @@
         <class>eapli.ecafeteria.domain.dishes.Dish</class>
         <class>eapli.ecafeteria.domain.dishes.DishType</class>
         <class>eapli.ecafeteria.domain.booking.Booking</class>
-        <class>eapli.ecafeteria.domain.kitchen.CanteenShift</class>
         <class>eapli.ecafeteria.domain.kitchen.Lot</class>
         <class>eapli.ecafeteria.domain.kitchen.MealLot</class>
         <class>eapli.ecafeteria.domain.meals.Meal</class>
