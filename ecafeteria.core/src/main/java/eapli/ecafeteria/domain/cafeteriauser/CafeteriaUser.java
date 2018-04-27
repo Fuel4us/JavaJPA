@@ -95,4 +95,10 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     public MecanographicNumber id() {
         return this.mecanographicNumber;
     }
+
+    @Override
+    public String toString() {
+        return systemUser.toString();
+    }
+    
 }
