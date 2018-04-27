@@ -13,37 +13,32 @@
 //
 ///**
 // *
-// * WORKSECTION POR IMPLEMENTAR - <class>eapli.ecafeteria.domain.kitchen.CanteenShift</class> no persistance.xml
+// * WORKSECTION POR IMPLEMENTAR - persistance.xml
 // */
 //public class CanteenShiftBootstrapper implements Action {
-//
+//    
 //    @Override
 //    public boolean execute() {
+//        try {
+//            register();
+//        } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
+//            return false;
+//        }
+//
 //        return true;
 //    }
 //
-////    @Override
-////    public boolean execute() {
-////        try {
-////            register();
-////        } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
-////            return false;
-////        }
-////
-////        return true;
-////    }
-////
-////    public void register() throws DataIntegrityViolationException, DataConcurrencyException {
-////        final RegisterCanteenShiftController csController = new RegisterCanteenShiftController();
-////        
-////        Calendar c1 = Calendar.getInstance();
-////        c1.set(2018, 3, 27);
-////
-////        Calendar c2 = Calendar.getInstance();
-////        c1.set(2018, 0, 1);
-////
-////        csController.registerCanteenShift(c1, CanteenShiftState.OPEN, new WorkSession());
-////        
-////        csController.registerCanteenShift(c2, CanteenShiftState.CLOSED, new WorkSession());
-////    }
+//    public void register() throws DataIntegrityViolationException, DataConcurrencyException {
+//        final RegisterCanteenShiftController csController = new RegisterCanteenShiftController();
+//        
+//        Calendar c1 = Calendar.getInstance();
+//        c1.set(2018, 3, 27);
+//
+//        Calendar c2 = Calendar.getInstance();
+//        c1.set(2018, 0, 1);
+//
+//        csController.registerCanteenShift(c1, CanteenShiftState.OPEN, new WorkSession());
+//        
+//        csController.registerCanteenShift(c2, CanteenShiftState.CLOSED, new WorkSession());
+//    }
 //}
