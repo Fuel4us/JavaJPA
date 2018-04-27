@@ -32,10 +32,10 @@ public class UsersBootstrapperBase {
      */
     protected SystemUser registerUser(final String username, final String password,
             final String firstName, final String lastName, final String email,
-            final Set<RoleType> roles) {
+            final Set<RoleType> roles, boolean activateUser) {
         SystemUser u = null;
         try {
-            u = userController.addUser(username, password, firstName, lastName, email, roles);
+            u = userController.addUser(username, password, firstName, lastName, email, roles, activateUser);
             Logger.getLogger(MasterUsersBootstrapper.class.getSimpleName()).log(Level.FINE,
                     "»»» " + username);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {

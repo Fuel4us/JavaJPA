@@ -79,6 +79,8 @@ public interface RepositoryFactory {
     
     LotRepository lots();
     
+    MealLotRepository mealLots();
+    
     ExecutionRepository execution();
     
     BookingRepository booking();
@@ -88,6 +90,8 @@ public interface RepositoryFactory {
     KitchenLimitRepository kitchenLimit();
     
     CanteenShiftRepository canteenShift();
+    
+    POSRepository POS();
     
     /*
     * POSUserRepository
@@ -109,4 +113,6 @@ public interface RepositoryFactory {
     ReasonRepository reason();
     
     MealPlanRepository mealplans();
+    
+    RatingRepository rating();
 }

@@ -10,7 +10,6 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,11 +52,7 @@ public class ChangeDishAllergensInfoUI extends AbstractUI {
                     final int num = Console.readInteger("Enter the number of allergens to insert.");
                     for (int i = 0; i < num; i++) {
                         final String all = Console.readLine("Allergen:");
-                        if (selectedDish.allergens().getAllerg().contains(all) == false) {
-                            selectedDish.allergens().getAllerg().add(all);
-                        } else {
-                            System.out.println("The allergen inserted is already on the list!");
-                        }
+                        selectedDish.allergens().getAllerg().add(all);
                     }
                     out = 0;
                 } else if (answer.equalsIgnoreCase(ans2)) {
@@ -66,11 +61,7 @@ public class ChangeDishAllergensInfoUI extends AbstractUI {
                         final int num = Console.readInteger("Enter the number of allergens of the new list.");
                         for (int i = 0; i < num; i++) {
                             final String all = Console.readLine("Allergen:");
-                            if (newAllergenList.contains(all) == false) {
-                                newAllergenList.add(all);
-                            } else {
-                                System.out.println("The allergen inserted is already on the list!");
-                            }
+                            newAllergenList.add(all);
                         }
                         Allergens all = new Allergens(newAllergenList);
                         this.theController.changeAllergensInfo(selectedDish, all);

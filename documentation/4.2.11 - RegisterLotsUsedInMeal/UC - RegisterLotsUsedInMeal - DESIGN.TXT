@@ -6,9 +6,9 @@
 	* Utilizar a estrutura base standard da aplicação baseada em camadas
 
 
-   	Classes do domínio:  MealLot
+   	Classes do domínio:  MealLot, Lot
    	Controlador: RegisterLotsUsedInMealController
-   	Repository: MealLotRepository
+   	Repository: MealLotRepository, LotRepository
 
 
 	Diagrama de Sequência - websequencediagrams.com source
@@ -19,17 +19,37 @@
 		participant ":RegisterLotsUsedInMealController" as ctrl
 		participant ":PersistenceContext" as pc
 		participant ":RepositoryFactory" as rf
-		participant ":MealLotRepository" as repo
+		participant ":MatRepository" as matRepository
+		participant ":MealLotRepository" as mlRepository
+		participant ":LotRepository" as lRepository
+		participant ":MealRepository" as mRepository
 		participant ":MealLot" as ml
+		participant ":Lot" as l
 
 		rui->ctrl:create
 		ctrl->pc:repositories()
-		pc->rf:create
-		rf->repo:create
-		pc-->ctrl:MealLotRepository
-
+		pc->rf:lots()
+		rf-->ctrl:LotRepository()
+		ctrl->pc:repositories()
+        pc->rf:mealLots()
+        rf-->ctrl:MealLotRepository()
+        ctrl->pc:repositories()
+        pc->rf:materials()
+        rf-->ctrl:MaterialRepository()
+        ctrl->pc:repositories()
+        pc->rf:meals()
+        rf-->ctrl:MealRepository()
+        
 		rui->rui:doShow()
-		rui->ctrl:registerMealLot(lotCode, ingredientCode, quantity)
-
-		ctrl->ml:newMealLot = create(lotCode, ingredientCode, quantity)
-		ctrl->repo:save(newMealLot)
+		rui->ctrl:listMaterials()
+		ctrl->matRepository:findAll()
+		rui->ctrl:checkMaterial(ingredientCode)
+		rui->ctrl:registerLot(lotCode, ingredientCode, quantity)
+		ctrl->l:newLot = create(lotCode, ingredientCode, quantity)
+		ctrl->lRepository:save(newLot)
+		rui->ctrl:listMeals()
+		ctrl->mRepository:findAll()
+		rui->ctrl:checkMeal(mealCode)
+		rui->ctrl:registerMealLot(meal,lot)
+		ctrl->ml:newMealLot = create(meal,lot)
+		ctrl->mlRepository:save(newMealLot)

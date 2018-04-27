@@ -31,9 +31,9 @@ public class RegisterBookingController {
     
     private final static long MILLIS_PER_DAY = 24 * 60 * 60 * 1000L;
     
-    public Meal findMealByID(int id){
+    public Meal findMealByID(long id){
         //Needs revision
-        Optional<Meal> OpMeal = repMeal.findOne(Long.valueOf("" + id));
+        Optional<Meal> OpMeal = repMeal.findOne(id);
         if(OpMeal.isPresent())
             return OpMeal.get();
         else{
@@ -50,10 +50,10 @@ public class RegisterBookingController {
         }
     }
     
-    public void registerBooking(CafeteriaUser cu, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException{
+    public boolean registerBooking(CafeteriaUser cu, Meal meal) throws DataConcurrencyException, DataIntegrityViolationException{
         //Check if the meal is reserved 24 hours before the actual meal
         Date CurrentDate = new Date();
-        Date mealDate = meal.getDate();
+        Date mealDate = meal.getMealDate();
         
         boolean moreThanDay = Math.abs(mealDate.getTime() - CurrentDate.getTime()) > MILLIS_PER_DAY;
 
@@ -61,10 +61,14 @@ public class RegisterBookingController {
             //More then 24 hours
             Booking booking = new Booking(cu, meal);
             
+            //Transactions
+            //It should check if the user has enough money to do this operation
+            
             repBooking.save(booking);
+            
+            return true;
         }else{
-            //Meal is served in less then 24 hours
-            //Cant be booked
+            return false;
         }
         
     }

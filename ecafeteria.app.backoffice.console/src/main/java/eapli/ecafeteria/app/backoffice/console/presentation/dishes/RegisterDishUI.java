@@ -43,7 +43,8 @@ public class RegisterDishUI extends AbstractUI {
         final double price = Console.readDouble("Price:");
 
         Set<String> newAllergenList = new HashSet<>();
-        final int num = Console.readInteger("Enter the number of allergens of the new list.");
+        // mudar isto
+        final int num = Console.readInteger("Enter the number of allergens on the dish.");
         for (int i = 0; i < num; i++) {
             final String all = Console.readLine("Allergen:");
             if (newAllergenList.contains(all) == false) {

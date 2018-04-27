@@ -1,6 +1,8 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafetaria.domain.finance.WorkSession;
+import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
+import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -14,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.Version;
 
 @Entity
-public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
+public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,8 +31,10 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     @Column(unique = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dateCS;
+
     @OneToOne
     private CanteenShiftState cfs;
+
     @OneToMany
     private WorkSession ws;
 
@@ -46,11 +50,17 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
         this.cfs = cfs;
         this.ws = ws;
     }
+    
+    public CanteenShift(CanteenShiftState cfs, WorkSession ws) {
+        this.dateCS = Calendar.getInstance();
+        this.cfs = cfs;
+        this.ws = ws;
+    }
 
     public CanteenShiftState canteenShiftState() {
         return this.cfs;
     }
-    
+
     public WorkSession workSession() {
         return this.ws;
     }
@@ -69,7 +79,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
     public boolean sameAs(Object other) {
         // FIXME implement this method
         final CanteenShift cs = (CanteenShift) other;
-        return id().equals(cs.id());
+        return this.id().equals(cs.id());
     }
 
     @Override
@@ -82,7 +92,7 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
         }
 
         final CanteenShift other = (CanteenShift) o;
-        return id().equals(other.id());
+        return this.id().equals(other.id());
     }
 
     @Override
@@ -90,4 +100,19 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable{
         return this.dateCS.hashCode();
     }
 
+    public boolean open() {
+        if (this.cfs == CLOSED) {
+            this.cfs = OPEN;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean close() {
+        if (this.cfs == OPEN) {
+            this.cfs = CLOSED;
+            return true;
+        }
+        return false;
+    }
 }

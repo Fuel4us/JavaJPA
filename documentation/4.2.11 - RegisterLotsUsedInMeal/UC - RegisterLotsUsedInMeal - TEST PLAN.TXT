@@ -7,6 +7,7 @@
 	_______________________________
 
 	1. Fazer o login como chef/Password
-	2. Escolher a opção   Meal  >  Register Meal Lot
-	3. Introduzir o código de matéria prima, código do lote e quantidade de matéria prima.
-	4. Confirmar o registo efetuado através de Meal > List Lots Used in Meal
+	2. Escolher a opção   Meal  >  Register Lot Used In Meal
+	3. Escolher uma Meal da lista de refeições.
+	4. Introduzir o código de matéria prima, código do lote e quantidade de matéria prima.
+	5. Confirmar o registo efetuado através de Meal > List Lots Used in Meal

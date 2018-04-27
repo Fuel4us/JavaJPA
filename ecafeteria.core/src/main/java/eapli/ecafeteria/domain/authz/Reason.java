@@ -1,10 +1,12 @@
 package eapli.ecafeteria.domain.authz;
 
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +14,12 @@ import javax.persistence.Version;
 
 /**
  * This class is responsible for the reason why a user was deactivated
+ *
  * @author pedromonteiro
  */
 @Entity
-public class Reason implements Serializable, AggregateRoot<Object> {
-    
+public class Reason implements Serializable, AggregateRoot<Long> {
+
     private static final long serialVersionUID = 1L;
 
     @Version
@@ -25,8 +28,10 @@ public class Reason implements Serializable, AggregateRoot<Object> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reasonId;
+    @Column(name = "ReasonComment")
     private String comment;
-    private ReasonType reason;
+    @Enumerated
+    private ReasonType reasonType;
 
     /**
      * For ORM effect.
@@ -34,37 +39,39 @@ public class Reason implements Serializable, AggregateRoot<Object> {
     protected Reason() {
         //For ORM
     }
-    
+
     /**
      * Constructor for reason must always hava a ReasonType predefined and a comment.
+     *
      * @param rt Reason Type
      * @param comment String with the comment for the deactivation
      */
     public Reason(ReasonType rt, String comment) {
-        this.reason = rt;
+        this.reasonType = rt;
         this.comment = comment;
     }
-   
+
     /**
      * Returns the reason ID
+     *
      * @return Reason ID
      */
     @Override
     public Long id() {
         return reasonId;
     }
-    
-    protected String comment(){
+
+    protected String comment() {
         return comment;
-    } 
-   
-    public ReasonType reasonType(){
-        return reason;
+    }
+
+    public ReasonType reasonType() {
+        return reasonType;
     }
 
     @Override
     public String toString() {
-        return "Reason:" + reason.toString() + "\nComment: " + comment;
+        return "Reason:" + reasonType.toString() + "\nComment: " + comment;
     }
 
     @Override
@@ -78,13 +85,8 @@ public class Reason implements Serializable, AggregateRoot<Object> {
             return true;
         }
 
-        return /*id().equals(that.id()) &&*/ this.reasonType().equals(that.reasonType()) 
+        return /*id().equals(that.id()) &&*/ this.reasonType().equals(that.reasonType())
                 && this.comment().equals(that.comment()); // FIX ME is id needed?
-    }
-
-    @Override
-    public boolean is(Object otherId) {
-        return id().equals(otherId);
     }
 
     @Override
@@ -106,12 +108,8 @@ public class Reason implements Serializable, AggregateRoot<Object> {
             return false;
         }
         final Reason other = (Reason) obj;
-        
+
         return Objects.equals(this.reasonId, other.reasonId);
     }
 
-    
-    
-    
-    
 }

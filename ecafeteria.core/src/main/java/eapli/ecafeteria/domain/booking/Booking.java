@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -19,8 +21,8 @@ import javax.persistence.OneToOne;
 public class Booking implements AggregateRoot<String>, Serializable{
 
     @Id
-    @GeneratedValue
-    private int bookingID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long bookingID;
     
     private String id;
     @OneToOne
@@ -31,15 +33,22 @@ public class Booking implements AggregateRoot<String>, Serializable{
     @OneToOne
     private Rating rating;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date bookingDate;
+
+    public Booking() {
+    }
+    
     public Booking(CafeteriaUser user, Meal meal){
         this.id = user.id() + meal.toString();
         this.user = user;
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
+        this.bookingDate = new Date();
     }
     
     public Date day() {
-        return meal.getDate();
+        return this.bookingDate;
     }
     
     @Override
@@ -47,9 +56,12 @@ public class Booking implements AggregateRoot<String>, Serializable{
         return false;
     }
 
-    @Override
     public String id() {
         return this.id;
+    }
+    
+    public String bookingId() {
+        return Long.toString(bookingID);
     }
 
     public Meal getMeal(){ return this.meal;}
@@ -69,10 +81,11 @@ public class Booking implements AggregateRoot<String>, Serializable{
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 97 * hash + this.bookingID;
+        hash = 97 * hash + Objects.hashCode(this.bookingID);
         hash = 97 * hash + Objects.hashCode(this.id);
         hash = 97 * hash + Objects.hashCode(this.user);
         hash = 97 * hash + Objects.hashCode(this.meal);
+        hash = 97 * hash + Objects.hashCode(this.bookingDate);
         return hash;
     }
 
@@ -88,20 +101,23 @@ public class Booking implements AggregateRoot<String>, Serializable{
             return false;
         }
         final Booking other = (Booking) obj;
-        if (this.bookingID != other.bookingID) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if (!Objects.equals(this.meal, other.meal)) {
+        //Testing dates
+//        if (!Objects.equals(this.bookingDate, other.bookingDate)) {
+//            return false;
+//        }
+        if (this.bookingState != other.bookingState) {
             return false;
         }
-        return true;
+        return Objects.equals(this.meal, other.meal);
     }
+    
+    
     
     public boolean isReserved() {
         return bookingState.equals(BookingState.RESERVED);
@@ -117,6 +133,10 @@ public class Booking implements AggregateRoot<String>, Serializable{
     
     public void rating(Rating rating) {
         this.rating = rating;
+    }
+    
+    public Rating getRating() {
+        return this.rating;
     }
 
     @Override

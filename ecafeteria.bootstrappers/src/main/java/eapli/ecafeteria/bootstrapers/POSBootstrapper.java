@@ -11,11 +11,11 @@ import eapli.framework.actions.Action;
  *
  * @author Hernani Gil
  */
-public class POSBootstrapper extends UsersBootstrapperBase implements Action {
+public class POSBootstrapper implements Action{
 
     @Override
     public boolean execute() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
     
 }

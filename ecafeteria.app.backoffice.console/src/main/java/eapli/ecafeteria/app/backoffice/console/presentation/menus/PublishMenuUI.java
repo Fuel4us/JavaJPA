@@ -34,13 +34,18 @@ public class PublishMenuUI extends AbstractUI {
         final SelectWidget<Menu> selector = new SelectWidget<>("Unpublished menus:", unpublishedMenusList);
         selector.show();
         final Menu theMenu = selector.selectedElement();
+        boolean done = false;
 
         try {
-            return theController.publishMenu(theMenu);
+            done = theController.publishMenu(theMenu);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
         }
         
-        return false;
+        String done_STRING = "não";
+        if(done){done_STRING="";}
+        System.out.println("The Menu "+done_STRING+"publicado!");
+        
+        return done;
     }
 
     @Override

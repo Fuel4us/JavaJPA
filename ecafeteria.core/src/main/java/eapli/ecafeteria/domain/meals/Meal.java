@@ -1,17 +1,16 @@
 package eapli.ecafeteria.domain.meals;
 
 import eapli.ecafeteria.domain.dishes.Dish;
-import eapli.ecafeteria.domain.kitchen.MealLot;
+import eapli.ecafeteria.domain.menus.Menu;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -28,11 +27,16 @@ public class Meal implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @OneToOne
     private Dish dish;
+
     private MealType mealType;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date mealDate;
+
+    @OneToOne
+    private Menu menu;
 
     /**
      * Complete constructor for a meal.
@@ -49,7 +53,7 @@ public class Meal implements Serializable {
         this.mealType = mealType;
         this.mealDate = mealDate;
         this.dish = dish;
-       }
+    }
 
     /**
      * Constructor that copies the content of another meal.
@@ -60,6 +64,7 @@ public class Meal implements Serializable {
         this.mealDate = other.mealDate;
         this.dish = other.dish;
         this.mealType = other.mealType;
+        this.menu = other.menu;
     }
 
     /**
@@ -69,7 +74,17 @@ public class Meal implements Serializable {
         // for ORM only
     }
 
-    public Date getDate() {
+    public Meal(MealType mealType, Date mealDate, Dish dish, Menu menu) {
+        if (dish == null || mealDate == null || menu == null) {
+            throw new IllegalArgumentException();
+        }
+        this.mealType = mealType;
+        this.mealDate = mealDate;
+        this.dish = dish;
+        this.menu = menu;
+    }
+
+    public Date getMealDate() {
         return mealDate;
     }
 
@@ -79,6 +94,14 @@ public class Meal implements Serializable {
 
     public MealType getMealType() {
         return mealType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void insertMenu(Menu menu) {
+        this.menu = menu;
     }
 
     @Override
@@ -166,7 +189,7 @@ public class Meal implements Serializable {
             @Override
             public int compare(Meal t, Meal t1) {
                 if (t != null && t1 != null) {
-                    return t.getDate().compareTo(t1.getDate());
+                    return t.getMealDate().compareTo(t1.getMealDate());
                 }
                 if (t1 == null) {
                     return 1;

@@ -1,7 +1,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.FindMealsByLotController;
-import eapli.ecafeteria.domain.kitchen.MealLot;
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class FindMealsByLotUI extends AbstractUI {
     private final FindMealsByLotController controller = new FindMealsByLotController();
 
     public void getUsedLots() {
-        for (MealLot lot : controller.getUsedLots()) {
+        for (Lot lot : controller.getUsedLots()) {
             System.out.println(lot);
         }
 

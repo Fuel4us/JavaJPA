@@ -21,8 +21,8 @@ public class CafeteriaUserBootstrapper implements Action {
 
     @Override
     public boolean execute() {
-        signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330");
-        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331");
+        signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330", true);
+        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331", true);
 
         return true;
     }
@@ -31,7 +31,7 @@ public class CafeteriaUserBootstrapper implements Action {
      *
      */
     private SignupRequest signupAndApprove(final String username, final String password, final String firstName,
-            final String lastName, final String email, String mecanographicNumber) {
+            final String lastName, final String email, String mecanographicNumber, boolean accept) {
         final SignupController signupController = new SignupController();
         final AcceptRefuseSignupRequestController acceptController = new AcceptRefuseSignupRequestController();
         SignupRequest request = null;
@@ -39,6 +39,7 @@ public class CafeteriaUserBootstrapper implements Action {
             request = signupController.signup(username, password, firstName, lastName, email,
                     mecanographicNumber);
             acceptController.acceptSignupRequest(request);
+            if(accept) acceptController.acceptSignupRequest(request);
         } catch (final DataConcurrencyException | DataIntegrityViolationException e) {
             // assume it just a question of trying to insert duplicate record
             Logger.getLogger(ECafeteriaBootstrapper.class.getSimpleName())
