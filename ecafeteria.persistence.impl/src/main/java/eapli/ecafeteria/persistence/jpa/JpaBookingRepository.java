@@ -58,9 +58,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public Booking getNextBooking(Optional <CafeteriaUser> user, Date date) {
         Iterable<Booking> nextBookings = checkBookingsForNextDays(user, date);
         BirthDateComparator comparator = new BirthDateComparator();
-         List<Booking> bookingList = new ArrayList();
-         bookingList= (List<Booking>) nextBookings;
-         bookingList.sort(comparator);
+        List<Booking> bookingList = new ArrayList();
+        bookingList= (List<Booking>) nextBookings;
+        bookingList.sort(comparator);
         return bookingList.get(0);
     }
     
@@ -106,8 +106,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         query.executeUpdate();
     }
 
-    @Override
-    public Booking getNextBooking() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+    
 }
