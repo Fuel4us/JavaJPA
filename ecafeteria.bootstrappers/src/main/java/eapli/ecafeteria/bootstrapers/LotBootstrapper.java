@@ -30,11 +30,11 @@ public class LotBootstrapper implements Action {
         final MaterialRepository materialRepository = PersistenceContext.repositories().materials();
         final LotRepository lotRepository = PersistenceContext.repositories().lots();
 
+        int lotCode = 1;
         Random random = new Random();
-        int i = 0, j = random.nextInt(100);
 
         for (Material material : materialRepository.findAll()) {
-            Lot lot = new Lot(i++, material, j);
+            Lot lot = new Lot(lotCode++, material, random.nextInt(100));
 
             lotRepository.save(lot);
         }
