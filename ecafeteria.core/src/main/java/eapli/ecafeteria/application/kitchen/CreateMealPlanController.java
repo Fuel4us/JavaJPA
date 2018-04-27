@@ -25,7 +25,6 @@ public class CreateMealPlanController {
     
     public List<Menu> getExistingMenus(){
         
-        //NÃO SEI SE É ASSIM QUE SE FAZ PARA OBTER OS MENUS A PARTIR DA BASE DE DADOS
         List<Menu> resultingList = (List<Menu>) menuRepo.findAll();
         
         return resultingList;
@@ -66,9 +65,6 @@ public class CreateMealPlanController {
     }
     
     public void saveMealPlan(MealPlan mealPlan){
-        
-        //NÃO SEI SE É ASSIM QUE SE FAZ PARA GUARDAR A MEAL PLAN NA BASE DE DADOS
-        
         try {
             mealPlanRepo.save(mealPlan);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
