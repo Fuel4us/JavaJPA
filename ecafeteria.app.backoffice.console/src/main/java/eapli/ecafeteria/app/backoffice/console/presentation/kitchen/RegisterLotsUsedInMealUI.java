@@ -63,7 +63,7 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         } else {
 
             for (int i = 0; i < listLotsByMeal.size(); i++) {
-                System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString2());
+                System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString3());
             }
             int selectLot = Console.readInteger("Lot ID:");
             while (selectLot < 0 || selectLot > listLotsByMeal.size() + 1) {

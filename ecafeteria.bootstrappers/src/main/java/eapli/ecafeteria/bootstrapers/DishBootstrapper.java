@@ -8,6 +8,7 @@ import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -25,6 +26,7 @@ public class DishBootstrapper implements Action {
     public boolean execute() {
         
         final DishTypeRepository dishTypeRepo = PersistenceContext.repositories().dishTypes();
+        final MaterialRepository matRepo = PersistenceContext.repositories().materials();
         final DishType vegie = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_VEGIE).get();
         final DishType fish = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_FISH).get();
         final DishType meat = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_MEAT).get();
@@ -33,7 +35,12 @@ public class DishBootstrapper implements Action {
         Set<Allergens> allergList2 = new HashSet<>();
         Set<Allergens> allergList3 = new HashSet<>();
         Set<Material>  ingredientsList = new HashSet<>();
-
+        
+        for (Material material : matRepo.findAll()) {
+            ingredientsList.add(material);
+        }
+        
+        
         allergList1.add(new Allergens(TestDataConstants.ALLERGEN_CRUSTACEOS));
         allergList1.add(new Allergens(TestDataConstants.ALLERGEN_GLUTEN));
 

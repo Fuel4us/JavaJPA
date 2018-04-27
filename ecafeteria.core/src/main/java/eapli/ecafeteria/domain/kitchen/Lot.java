@@ -104,4 +104,8 @@ public class Lot implements AggregateRoot<Integer>, Serializable {
     public String toString2() {
         return "Lot Code: " + lotCode + "\nMaterial: " + getIngredient().description() + "\nQuantity: " + quantity;
     }
+    
+    public String toString3(){
+        return "Material:" + getIngredient().description() + "\nQuantity:" + quantity;
+    }
 }
