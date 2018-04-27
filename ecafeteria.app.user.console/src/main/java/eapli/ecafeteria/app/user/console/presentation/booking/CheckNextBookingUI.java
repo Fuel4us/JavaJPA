@@ -34,7 +34,7 @@ public class CheckNextBookingUI extends AbstractUI {
             Logger.getLogger(CheckBookingsForNextDaysUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //vai buscar as bookings para os proximos dias com a data atual e da sout
+        
         System.out.println(controller.getNextBooking(user, new Date()));
         
         return true;

@@ -55,6 +55,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     
+    @Override
     public Booking getNextBooking(Optional <CafeteriaUser> user, Date date) {
         Iterable<Booking> nextBookings = checkBookingsForNextDays(user, date);
         BirthDateComparator comparator = new BirthDateComparator();
