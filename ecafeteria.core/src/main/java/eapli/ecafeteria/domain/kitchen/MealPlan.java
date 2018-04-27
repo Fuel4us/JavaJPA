@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Entity
 public class MealPlan {
     
+    private static final long serialVersionUID = 1L;
+    
     public static HeuristicConfiguration heuristicInUse;
     
     @Id
