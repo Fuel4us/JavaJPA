@@ -3,6 +3,7 @@ package eapli.ecafeteria.app.user.console.presentation.booking;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.booking.CheckBookingsForNextDaysController;
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -31,8 +32,14 @@ public class CheckBookingsForNextDaysUI extends AbstractUI{
         }
         
         //vai buscar as bookings para os proximos dias com a data atual e da sout
-        System.out.println(controller.findBookingsForNextDays(user, new Date()));
-        
+        for(Booking b : controller.findBookingsForNextDays(user, new Date()))
+            System.out.println(
+                "\nBooking nº " + b.bookingId() + ":\nData: " + b.getMeal().getMealDate() + 
+                " | Prato: " + b.getMeal().getDish().name() +
+                " (" + b.getMeal().getMealType() +
+                ") | Preco: " + b.getMeal().getDish().currentPrice().amount() + " " +
+                b.getMeal().getDish().currentPrice().currency()
+            );
         return true;
     }
 
