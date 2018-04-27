@@ -40,7 +40,7 @@ public class CheckBookingsService {
         return list;
     }
 
-    public void displayBookingsDate() {
+    public List<Date> displayBookingsDate() {
         List<Booking> list = getAllReservations();
         List<Date> dateList = new ArrayList<>();
 
@@ -51,26 +51,11 @@ public class CheckBookingsService {
                     dateList.add(booking.day());
                 }
             }
-            for (int i = 0; i < dateList.size(); i++) {
-                System.out.println(i + 1 + " Booking Date: " + dateList.get(i) + "\n");
-            }
-
-            int choice = Console.readInteger("Which date do you want to see the respective Bookings?\n");
-            if (choice > 0 && choice < dateList.size() + 1){
-                for (Booking booking :
-                        list) {
-                    if (booking.day().equals(dateList.get(choice - 1))) {
-                        System.out.println(booking+"\n");
-                    }
-                }
-            }else{
-                System.out.println("That option doesn't exist");
-                displayBookingsDate();
-            }
         }
+        return dateList;
     }
 
-    public void displayBookingsByDish(){
+    public List<Dish> displayBookingsByDish(){
         List<Booking> list = getAllReservations();
         List<Dish> dishList = new ArrayList<>();
 
@@ -82,25 +67,11 @@ public class CheckBookingsService {
                 }
             }
         }
-        for (int i = 0; i < dishList.size(); i++) {
-            System.out.println(i + 1 + " Booking Dish: " + dishList.get(i) + "\n");
-        }
 
-        int choice = Console.readInteger("Which Dish do you want to see the respective Bookings?\n");
-        if(choice>0&&choice<dishList.size()+1){
-            for (Booking booking:
-                    list) {
-                if(booking.getMeal().getDish().equals(dishList.get(choice-1))){
-                    System.out.println(booking+"\n");
-                }
-            }
-        }else{
-            System.out.println("That option doesn't exist");
-            displayBookingsByDish();
-        }
+        return dishList;
     }
 
-    public void displayBookingsByMeal(){
+    public List<Meal> displayBookingsByMeal(){
         List<Booking> list = getAllReservations();
         List<Meal> mealList = new ArrayList<>();
 
@@ -112,25 +83,11 @@ public class CheckBookingsService {
                 }
             }
         }
-        for (int i = 0; i < mealList.size(); i++) {
-            System.out.println(i + 1 + " Booking Meal: " + mealList.get(i) + "\n");
-        }
 
-        int choice = Console.readInteger("Which Meal do you want to see the respective Bookings?\n");
-        if(choice>0&&choice<mealList.size()+1){
-            for (Booking booking:
-                    list) {
-                if(booking.getMeal().equals(mealList.get(choice-1))){
-                    System.out.println(booking+"\n");
-                }
-            }
-        }else{
-            System.out.println("That option doesn't exist");
-            displayBookingsByMeal();
-        }
+        return mealList;
     }
 
-    public void displayBookingsByMealType(){
+    public List<MealType> displayBookingsByMealType(){
         List<Booking> list = getAllReservations();
         List<MealType> mealTypeList = new ArrayList<>();
         if(list.size()>0){
@@ -141,23 +98,6 @@ public class CheckBookingsService {
                 }
             }
         }
-
-        for (int i = 0; i < mealTypeList.size(); i++) {
-            System.out.println(i + 1 + " Booking Meal Type: " + mealTypeList.get(i) + "\n");
-        }
-        int choice = Console.readInteger("Which Meal Type do you want to see the respective Bookings?\n");
-        if(choice>0&&choice<mealTypeList.size()+1){
-            for (Booking booking:
-                    list) {
-                if(booking.getMeal().equals(mealTypeList.get(choice-1))){
-                    System.out.println(booking+"\n");
-                }
-            }
-        }else{
-            System.out.println("That option doesn't exist");
-            displayBookingsByMealType();
-        }
-
-
+        return mealTypeList;
     }
 }
