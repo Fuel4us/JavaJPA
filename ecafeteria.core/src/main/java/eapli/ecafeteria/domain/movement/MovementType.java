@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.movement;
 
 /**
  *
  * @author Hernani Gil
  */
-public class ShiftDate {
+
+public enum MovementType {
+    BOOKING, DEPOSIT, CANCEL;
     
+    public static MovementType[] MovementTypeValues(){
+        return new MovementType[]{BOOKING, DEPOSIT, CANCEL};
+    }
 }

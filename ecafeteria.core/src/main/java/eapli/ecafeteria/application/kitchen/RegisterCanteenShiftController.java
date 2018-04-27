@@ -1,6 +1,6 @@
 package eapli.ecafeteria.application.kitchen;
 
-import eapli.ecafetaria.domain.finance.WorkSession;
+import eapli.ecafeteria.domain.finance.WorkSession;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;

@@ -5,11 +5,8 @@
  */
 package eapli.ecafeteria.domain.booking;
 
-import eapli.ecafeteria.domain.authz.Name;
-import eapli.ecafeteria.domain.authz.Password;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.domain.dishes.Dish;
@@ -17,14 +14,12 @@ import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.domain.Designation;
-import eapli.framework.domain.EmailAddress;
 import eapli.framework.domain.money.Money;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;

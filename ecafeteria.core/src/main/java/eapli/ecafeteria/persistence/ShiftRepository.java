@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafetaria.domain.finance.Shift;
+import eapli.ecafeteria.domain.finance.Shift;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Date;

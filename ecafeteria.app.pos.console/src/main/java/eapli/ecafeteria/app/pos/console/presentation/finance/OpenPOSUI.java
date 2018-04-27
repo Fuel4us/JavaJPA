@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.app.pos.console.presentation.finance;
+package eapli.ecafeteria.app.pos.console.presentation.finance;
 
-import eapli.ecafetaria.application.finance.OpenPOSController;
-import eapli.ecafetaria.domain.finance.POS;
+import eapli.ecafeteria.application.finance.OpenPOSController;
+import eapli.ecafeteria.domain.finance.POS;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;

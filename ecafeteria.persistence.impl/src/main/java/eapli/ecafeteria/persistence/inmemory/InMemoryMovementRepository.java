@@ -5,11 +5,10 @@
  */
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafetaria.domain.movement.Movement;
+import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
-import java.util.Optional;
 
 /**
  *

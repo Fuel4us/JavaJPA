@@ -6,7 +6,6 @@
 package eapli.ecafeteria.app.pos.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
-import eapli.ecafetaria.app.pos.console.presentation.finance.ChargeCardAction;
 import eapli.ecafeteria.Application;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
@@ -21,6 +20,7 @@ import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
+import eapli.ecafeteria.app.pos.console.presentation.finance.ChargeCardAction;
 import eapli.ecafeteria.app.pos.console.presentation.booking.DeliverBookingAction;
 import eapli.ecafeteria.app.pos.console.presentation.meals.ShowAvailableMealsAction;
 

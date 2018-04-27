@@ -5,8 +5,6 @@
  */
 package eapli.ecafeteria.domain.authz;
 
-import javax.persistence.Embeddable;
-
 
 
 /**

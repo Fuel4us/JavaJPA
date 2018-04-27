@@ -1,6 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
-import eapli.ecafetaria.domain.finance.POS;
+import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.persistence.POSRepository;
 
 class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements POSRepository{

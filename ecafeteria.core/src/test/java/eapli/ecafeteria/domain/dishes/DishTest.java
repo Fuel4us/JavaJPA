@@ -6,7 +6,6 @@ import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.money.Money;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 

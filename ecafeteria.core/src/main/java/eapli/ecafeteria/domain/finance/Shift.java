@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.finance;
 
 import eapli.ecafeteria.domain.meals.MealType;
 import java.util.Date;
