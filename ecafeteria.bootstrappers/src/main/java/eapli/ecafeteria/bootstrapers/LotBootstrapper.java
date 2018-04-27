@@ -28,14 +28,12 @@ public class LotBootstrapper implements Action {
 
     public void register() throws DataIntegrityViolationException, DataConcurrencyException {
         final MaterialRepository materialRepository = PersistenceContext.repositories().materials();
-        
+
         final RegisterLotsUsedInMealController controller = new RegisterLotsUsedInMealController();
 
         for (Material material : materialRepository.findAll()) {
             int i = 1, j = i * 2;
-            controller.registerLot(i++, material, j);
-
-            System.out.println(i);
+            //controller.registerLot(i++, material, j);
         }
     }
 }

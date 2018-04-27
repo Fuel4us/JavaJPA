@@ -204,13 +204,16 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		return (this.state.state() == UserState.UserType.ACCEPTED);
 	}
 
-	public void deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
+	public Reason deactivate(Calendar deactivatedOn, ReasonType reasonType, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
             
+            Reason r;
 		if(this.createdOn.compareTo(deactivatedOn) < 0)
-                    state.deactivate(deactivatedOn, reasonType, comment);
+                    r = state.deactivate(deactivatedOn, reasonType, comment);
                 else {
                     throw new IllegalArgumentException(createdOn+" > "+deactivatedOn);
                 }
+                
+                return r;
 	}
         
         public boolean reject(){
@@ -260,4 +263,11 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+    @Override
+    public String toString() {
+        return name.toString();
+    }
+        
+        
 }

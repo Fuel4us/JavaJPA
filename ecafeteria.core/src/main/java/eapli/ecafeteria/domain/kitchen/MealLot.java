@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,7 +26,9 @@ public class MealLot implements Serializable {
     @GeneratedValue
     private Long pk;
 
+    @ManyToOne
     private Meal meal;
+    @ManyToOne
     private Lot lot;
 
     protected MealLot() {
@@ -57,7 +60,5 @@ public class MealLot implements Serializable {
     public String toString() {
         return "MealLot{" + "ID=" + pk + ", Meal=" + meal + ", Lot=" + lot + '}';
     }
-    
-    
 
 }

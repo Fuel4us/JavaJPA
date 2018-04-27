@@ -37,7 +37,7 @@ public class RegisterBookingUI extends AbstractUI{
         //SAMController.showMeals();
         
         //Utilizador escolhe meal para booking
-        int mealID = input.nextInt();
+        long mealID = input.nextLong();
         Meal meal = controller.findMealByID(mealID);
         
         //Conferir utilizador

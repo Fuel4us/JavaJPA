@@ -2,10 +2,8 @@ package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.kitchen.RegisterLotsUsedInMealController;
 import eapli.ecafeteria.domain.kitchen.Lot;
-import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.LotRepository;
-import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
@@ -38,7 +36,7 @@ public class MealLotBootstrapper implements Action {
 
         for (Meal meal : mealRepository.findAll()) {
             for (Lot lot : lotRepository.findAll()) {
-                controller.registerMealLot(meal, lot);
+                controller.registerMealLot(meal.getId(), lot.id());
             }
         }
     }

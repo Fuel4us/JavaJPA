@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.LotRepository;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.Query;
+import java.util.Optional;
 
 /**
  * @author Gonçalo Silva (1161140)
@@ -20,5 +21,9 @@ public class JpaLotRepository extends CafeteriaJpaRepositoryBase<Lot, Long> impl
         query.setParameter("lotCode", lotCode);
 
         return (Long) query.getSingleResult();
+    }
+
+    public Optional<Lot> findByLotCode(int lotCode) {
+        return matchOne("e.lotCode=:lotCode", "lotCode", lotCode);
     }
 }
