@@ -9,8 +9,7 @@
 	* O lote utilizado numa refeição é identificado pelo código do lote que deve ser único.
 	* Exemplos de lotes: código lote(1), código matéria prima(3-Ovos), 100(kg).
 
-	* Uma refeição pode conter 1 ou mais lotes.
-	* Um lote pertence a 1 ou mais refeição.
+	* Uma refeição pode conter 0 ou mais lotes.
 
 
 

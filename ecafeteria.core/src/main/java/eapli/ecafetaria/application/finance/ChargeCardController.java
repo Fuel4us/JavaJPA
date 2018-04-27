@@ -12,6 +12,7 @@ import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -30,10 +31,9 @@ public class ChargeCardController {
     
     private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
     private final MovementRepository movementRepository = PersistenceContext.repositories().movement();
-    
-    public Iterable<CafeteriaUser> activeUsers() {
-        return this.cafeteriaUserRepository.findAllActive();
-    }
+//    public Iterable<CafeteriaUser> activeUsers() {
+//        return this.cafeteriaUserRepository.findAllActive();
+//    }
     
     public boolean selectUser(Username username){ //boolean
         Optional<CafeteriaUser> OpCU = cafeteriaUserRepository.findByUsername(username);
@@ -49,10 +49,10 @@ public class ChargeCardController {
     }
     
     public void ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
+        //AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         if(selectedUser!=null){
             Currency currency = Currency.getInstance(Locale.FRANCE); 
-            Movement movement = new Movement(this.selectedUser.mecanographicNumber(), MovementType.DEPOSIT, amount, currency);
+            Movement movement = new Movement(new MecanographicNumber(this.selectedUser.mecanographicNumber().number()), MovementType.DEPOSIT, amount, currency);
       
             movementRepository.save(movement);
         }

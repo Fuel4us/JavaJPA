@@ -32,9 +32,12 @@ import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CanteenShift
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.CreateMealPlanAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.FindMealsByLotAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.ListMaterialAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterLotsUsedInMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMaterialAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.RegisterMealsActuallyCookedAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.meals.RegisterMealAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.PublishMenuUI;
+import eapli.ecafeteria.app.backoffice.console.presentation.menus.RegisterMenuAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -82,9 +85,11 @@ public class MainMenu extends AbstractUI {
     private static final int DISH_LIST_DTO_OPTION = 8;
     private static final int DISH_ACTIVATE_DEACTIVATE_OPTION = 9;
     private static final int DISH_CHANGE_OPTION = 10;
-    
+
     //MENUS
     private static final int PUBLISH_MENU_OPTION = 10;
+    private static final int REGISTER_MENU_OPTION = 11;
+    private static final int REGISTER_MEAL_OPTION = 12;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
@@ -97,6 +102,7 @@ public class MainMenu extends AbstractUI {
     private static final int CANTEEN_SHIFT_CLOSURE_OPTION = 4;
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
     private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
+    private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -260,11 +266,13 @@ public class MainMenu extends AbstractUI {
 
         menu.add(
                 new MenuItem(CANTEEN_SHIFT_CLOSURE_OPTION, "Canteen Shift Closure", new CanteenShiftClosureAction()));
-        
+
+        menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
+
         menu.add(new MenuItem(CREATE_MEAL_PLAN_OPTION, "Create Meal Plan", new CreateMealPlanAction()));
-        
+
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
-        
+
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
@@ -306,6 +314,12 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(PUBLISH_MENU_OPTION, "Publish Menu",
                 () -> new PublishMenuUI().show()));
+
+        menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu",
+                () -> new RegisterMenuAction().execute()));
+
+        menu.add(new MenuItem(REGISTER_MEAL_OPTION, "Register Meals",
+                () -> new RegisterMealAction().execute()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 

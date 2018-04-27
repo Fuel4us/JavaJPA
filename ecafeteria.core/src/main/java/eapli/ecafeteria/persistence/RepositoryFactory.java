@@ -89,6 +89,8 @@ public interface RepositoryFactory {
     
     CanteenShiftRepository canteenShift();
     
+    POSRepository POS();
+    
     /*
     * POSUserRepository
     */
@@ -109,4 +111,6 @@ public interface RepositoryFactory {
     ReasonRepository reason();
     
     MealPlanRepository mealplans();
+    
+    RatingRepository rating();
 }

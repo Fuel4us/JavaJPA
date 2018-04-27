@@ -30,4 +30,16 @@ public class Rating {
         this.score = score;
         this.comment = comment;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int id() {
+        return id;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

@@ -10,13 +10,17 @@ import javax.persistence.*;
 @Entity
 public class MealPlan {
     
+    private static final long serialVersionUID = 1L;
+    
     public static HeuristicConfiguration heuristicInUse;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany
     private Menu menu;
+    
     private List<Integer> numberOfDishes;
     private boolean closed;
 
@@ -34,6 +38,10 @@ public class MealPlan {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
     public List<Integer> getNumberOfDishes() {

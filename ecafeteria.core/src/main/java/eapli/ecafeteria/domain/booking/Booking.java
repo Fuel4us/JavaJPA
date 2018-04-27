@@ -35,8 +35,8 @@ public class Booking implements AggregateRoot<String>, Serializable{
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bookingDate;
-    
-    private Booking(){
+
+    public Booking() {
     }
     
     public Booking(CafeteriaUser user, Meal meal){
@@ -56,9 +56,12 @@ public class Booking implements AggregateRoot<String>, Serializable{
         return false;
     }
 
-    @Override
     public String id() {
         return this.id;
+    }
+    
+    public String bookingId() {
+        return Long.toString(bookingID);
     }
 
     public Meal getMeal(){ return this.meal;}
@@ -98,21 +101,23 @@ public class Booking implements AggregateRoot<String>, Serializable{
             return false;
         }
         final Booking other = (Booking) obj;
-        if (this.bookingID.equals(other.bookingID)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.user, other.user)) {
             return false;
         }
-        if(!Objects.equals(this.bookingDate, other.bookingDate)){
+        //Testing dates
+//        if (!Objects.equals(this.bookingDate, other.bookingDate)) {
+//            return false;
+//        }
+        if (this.bookingState != other.bookingState) {
             return false;
         }
-        
         return Objects.equals(this.meal, other.meal);
     }
+    
+    
     
     public boolean isReserved() {
         return bookingState.equals(BookingState.RESERVED);
@@ -128,6 +133,10 @@ public class Booking implements AggregateRoot<String>, Serializable{
     
     public void rating(Rating rating) {
         this.rating = rating;
+    }
+    
+    public Rating getRating() {
+        return this.rating;
     }
 
     @Override

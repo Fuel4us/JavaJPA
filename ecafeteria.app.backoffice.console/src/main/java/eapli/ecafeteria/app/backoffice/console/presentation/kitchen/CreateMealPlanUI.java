@@ -24,7 +24,7 @@ public class CreateMealPlanUI extends AbstractUI{
             
             switch(option){
                 case 0:
-                    System.out.println("\n# END #");
+                    System.out.println("\n# END OF CREATE MEAL #");
                     break;
                 case 1:
                     setDishQuantity();
