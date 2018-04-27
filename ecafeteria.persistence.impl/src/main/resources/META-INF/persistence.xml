@@ -15,6 +15,7 @@
     <class>eapli.ecafeteria.domain.dishes.DishType</class>
     <class>eapli.ecafeteria.domain.booking.Booking</class>
     <class>eapli.ecafeteria.domain.kitchen.Lot</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealLot</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>
     <class>eapli.ecafeteria.domain.meals.MealType</class>
     <class>eapli.ecafeteria.domain.kitchen.HeuristicConfiguration</class>
@@ -22,6 +23,7 @@
     <class>eapli.ecafeteria.domain.kitchen.LimitConfiguration</class>
     <class>eapli.ecafeteria.domain.authz.Reason</class>
     <class>eapli.ecafeteria.domain.menus.Menu</class>
+
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--
