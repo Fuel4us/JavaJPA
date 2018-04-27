@@ -30,10 +30,12 @@ public class BookingBootstrapper implements Action{
         final CafeteriaUserRepository repCU = PersistenceContext.repositories().cafeteriaUsers();
         
         final Meal meal1 = repMeal.findAll().iterator().next();
+        final Meal meal2 = repMeal.findById(Long.valueOf("31")).get();
         
         final CafeteriaUser cu1 = repCU.findByUsername(new Username(TestDataConstants.USER_900330)).get();
         
         registerBooking(cu1,meal1);
+        registerBooking(cu1,meal2);
         
         return true;
     }
