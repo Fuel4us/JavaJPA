@@ -52,9 +52,9 @@ public class BookingRatingController implements Controller {
         rating.setScore(score);
         rating.setComment(comment);
         
-        repRating.save(rating);
+        rating = repRating.save(rating);
         
-        //repBooking.updateBookingRating(choosen, rating);
+        repBooking.updateBookingRating(choosen, rating);
     }
 
     public Optional<CafeteriaUser> getUser() {
