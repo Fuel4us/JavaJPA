@@ -42,11 +42,11 @@ public class PublishMenuUI extends AbstractUI {
             } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             }
 
-            String done_STRING = "n't";
+            String message = "No Menu was published!";
             if (done) {
-                done_STRING = "";
+                message = "The Menu id " + theMenu.id() + " was published!";
             }
-            System.out.println("The Menu was" + done_STRING + " published!");
+            System.out.println(message);
 
             return done;
         } else {
