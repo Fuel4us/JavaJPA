@@ -8,10 +8,10 @@ import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, Calendar> implements CanteenShiftRepository {
+public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, String> implements CanteenShiftRepository {
 
     @Override
-    protected Calendar newKeyFor(CanteenShift entity) {
+    protected String newKeyFor(CanteenShift entity) {
         return entity.id();
     }
 
@@ -38,6 +38,11 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
 
     @Override
     public Optional<CanteenShift> findCurrentDayShift() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean verifyByDate(String date) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

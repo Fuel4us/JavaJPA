@@ -11,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 /**
@@ -19,8 +18,8 @@ import javax.persistence.Version;
  * @author Josué Lapa
  */
 @Entity
-public class WorkSession implements AggregateRoot<Integer>, Serializable{
-    
+public class WorkSession implements AggregateRoot<Integer>, Serializable {
+
     private static final long serialVersionUID = 1L;
 
     // ORM primary key
@@ -29,15 +28,23 @@ public class WorkSession implements AggregateRoot<Integer>, Serializable{
     private Long pk;
     @Version
     private Long version;
-    
+
     //Business id
     @Column(unique = true)
     private int workSessionCode;
-    
-    //atributos
 
-    //construtor
+    //atributos
     
+    
+    protected WorkSession() {
+        // for ORM
+    }
+    
+    //construtor
+    public WorkSession(int workSessionCode) {
+        this.workSessionCode = workSessionCode;
+    }
+
     @Override
     public boolean sameAs(Object other) {
         final WorkSession ws = (WorkSession) other;
@@ -73,15 +80,7 @@ public class WorkSession implements AggregateRoot<Integer>, Serializable{
             return false;
         }
         final WorkSession other = (WorkSession) obj;
-        if (this.workSessionCode != other.workSessionCode) {
-            return false;
-        }
-        return true;
+        return this.workSessionCode == other.workSessionCode;
     }
-    
-    
-    
-    
-    
-    
+
 }

@@ -23,6 +23,7 @@ import eapli.ecafeteria.persistence.RepositoryFactory;
 import eapli.ecafeteria.persistence.ShiftRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
+import eapli.ecafeteria.persistence.WorkSessionRepository;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
 
@@ -136,7 +137,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public CanteenShiftRepository canteenShift() {
         return new JpaCanteenShiftRepository();
     }
-
+    
+    @Override
+    public WorkSessionRepository workSession() {
+        return new JpaWorkSessionRepository();
+    }
    
     @Override
     public ReasonRepository reason() {

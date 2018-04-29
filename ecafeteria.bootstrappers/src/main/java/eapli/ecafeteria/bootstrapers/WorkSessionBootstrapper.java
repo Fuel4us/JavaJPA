@@ -1,18 +1,16 @@
 //package eapli.ecafeteria.bootstrapers;
 //
-//import eapli.ecafeteria.domain.finance.WorkSession;
-//import eapli.ecafeteria.application.kitchen.RegisterCanteenShiftController;
-//import eapli.ecafeteria.domain.kitchen.CanteenShiftState;
+//import eapli.ecafeteria.application.finance.RegisterWorkSessionController;
 //import eapli.framework.actions.Action;
 //import eapli.framework.persistence.DataConcurrencyException;
 //import eapli.framework.persistence.DataIntegrityViolationException;
 //
 ///**
-// * persistance.xml -> <class>eapli.ecafeteria.domain.kitchen.CanteenShift</class>
-// * 
+// *
+// * persistance.xml -> <class>eapli.ecafeteria.domain.finance.WorkSession</class>
 // */
-//public class CanteenShiftBootstrapper implements Action {
-//    
+//public class WorkSessionBootstrapper implements Action{
+//
 //    @Override
 //    public boolean execute() {
 //        try {
@@ -23,11 +21,11 @@
 //
 //        return true;
 //    }
-//
+//    
 //    public void register() throws DataIntegrityViolationException, DataConcurrencyException {
-//        final RegisterCanteenShiftController csController = new RegisterCanteenShiftController();
+//        final RegisterWorkSessionController wsController = new RegisterWorkSessionController();
 //        
-//        csController.registerCanteenShift("20180429", CanteenShiftState.OPEN, new WorkSession(1));
+//        wsController.registerCanteenShift(1);
 //        
 //    }
 //}

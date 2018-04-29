@@ -16,6 +16,10 @@ public interface POSRepository extends DataRepository<POS, Long> {
 
     public boolean openPOS(Long id);
 
+    /**
+     *
+     * @return true if at least one pos is open (to close it)
+     */
     public boolean findOpenToClose();
 
 }
