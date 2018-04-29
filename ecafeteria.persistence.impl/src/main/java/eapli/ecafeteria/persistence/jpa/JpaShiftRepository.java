@@ -9,6 +9,8 @@ import eapli.ecafeteria.domain.finance.Shift;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.ShiftRepository;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -24,11 +26,10 @@ public class JpaShiftRepository extends CafeteriaJpaRepositoryBase<Shift, Long> 
 
     @Override
     public boolean checkShift(Date shiftDate, MealType shiftMealType) {
-        return false;
+        final Map<String, Object> params = new HashMap<>();
+        params.put("shiftDate", shiftDate);
+        params.put("shiftMealType", shiftMealType);
+        return matchOne("e.shiftDate = :shiftDate AND e.shiftMealType = :shiftMealType", params).isPresent();
 
-    }
-    @Override
-    public void addShift(Date shiftDate, MealType shiftMealType){
-        
     }
 }

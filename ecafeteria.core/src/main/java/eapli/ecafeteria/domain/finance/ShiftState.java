@@ -5,11 +5,14 @@
  */
 package eapli.ecafeteria.domain.finance;
 
+import eapli.framework.domain.ddd.ValueObject;
+import java.io.Serializable;
+
 /**
  *
  * @author Josué Lapa
  */
-public enum ShiftState {
+public enum ShiftState implements Serializable, ValueObject{
     OPEN, CLOSED;
     
     public static ShiftState[] ShiftStateValues() {
