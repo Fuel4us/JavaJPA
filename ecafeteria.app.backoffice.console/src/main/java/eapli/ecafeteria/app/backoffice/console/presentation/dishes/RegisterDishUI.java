@@ -5,13 +5,15 @@ import eapli.ecafeteria.domain.dishes.Allergens;
 import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.AllergenRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,8 +25,6 @@ import java.util.Set;
  * changed by João Pereira <1150478@isep.ipp.pt>
  */
 public class RegisterDishUI extends AbstractUI {
-
-    private int flag = 0;
 
     private final RegisterDishController theController = new RegisterDishController();
 
@@ -47,31 +47,14 @@ public class RegisterDishUI extends AbstractUI {
 
         final double price = Console.readDouble("Price:");
 
-        Set<Allergens> newAllergList = new HashSet<>();
         Set<Material> newMaterialsList = new HashSet<>();
-        final SelectWidget<Allergens> show = new SelectWidget<>("Allergen List: (0 to exit)", AllergensList.getAllergList());
-        show.show();
-        int selectNum = show.selectedOption();
-        Allergens selectedAllerg = null;
-        if (selectNum != 0) {
-            selectedAllerg = show.selectedElement();
-        }
 
-        while (selectNum != 0) {
-            newAllergList.add(selectedAllerg);
-            System.out.println("Próximo alergénico ?");
-            selectNum = show.selectedOption();
-            if (selectNum != 0) {
-                selectedAllerg = show.selectedElement();
-            }
-        }
-
-        while (!selectMaterial().equals(null)) {
+        /* while (!selectMaterial().equals(null)) {
             newMaterialsList.add(selectMaterial());
-        }
+        }*/
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price, newAllergList, newMaterialsList);
+                    price, getNewAllergenList(), newMaterialsList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }
@@ -91,6 +74,26 @@ public class RegisterDishUI extends AbstractUI {
         } else {
             return null;
         }
+    }
+
+    public List<Allergens> getNewAllergenList() {
+        int i = 1, flag = 0;
+        List<Allergens> newAllergList = new ArrayList<>();
+        List<Allergens> listAllerg = this.theController.getAllAllergens();
+        for (Allergens allerg : listAllerg) {
+            System.out.println(i + " - " + allerg.getAllergen());
+            i++;
+        }
+        System.out.println("Enter 0 to exit!");
+        while (flag == 0) {
+            int selectAllergen = Console.readInteger("Allergen ID:");
+            if (selectAllergen != 0) {
+                newAllergList.add(listAllerg.get(selectAllergen - 1));
+            } else {
+                flag = 1;
+            }
+        }
+        return newAllergList;
     }
 
     @Override
