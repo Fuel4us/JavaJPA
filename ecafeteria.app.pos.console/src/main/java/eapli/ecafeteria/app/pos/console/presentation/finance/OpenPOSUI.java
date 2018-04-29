@@ -6,6 +6,7 @@ package eapli.ecafeteria.app.pos.console.presentation.finance;
  * and open the template in the editor.
  */
 import eapli.ecafeteria.application.finance.OpenPOSController;
+import eapli.ecafeteria.domain.finance.POS;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
@@ -32,10 +33,10 @@ public class OpenPOSUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         String posString = "POS List \n\n";
-        Iterable<Long> posList = theController.showPOSList();
+        Iterable<POS> posList = theController.showPOSList();
 
-        for (Long id : posList) {
-            posString += "POS - " + id + "\n";
+        for (POS pos : posList) {
+            posString += "POS - " + pos.id() + "\n";
         }
 
         final long posID = Console.readLong(posString);

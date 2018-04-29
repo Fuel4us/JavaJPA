@@ -14,7 +14,7 @@ public interface CanteenShiftRepository extends DataRepository<CanteenShift, Cal
      */
     boolean close(Calendar cal);
 
-    public boolean open(Calendar cal);
+    public boolean openNewShift(Calendar cal);
 
     public Optional<CanteenShift> findCurrentDayShift();
 }
