@@ -44,7 +44,7 @@ public class OpenShiftUI extends AbstractUI {
 
         final int mealTypeOption = Console.readInteger(mealTypeList);
 
-        final Date shiftDate = Console.readDate("Shift Day");
+        final Date shiftDate = Console.readDate("Shift Date (\"yyyy/MM/dd\")");
         
         try {
             if(!theController.verifyShift(shiftDate, MealType.values()[mealTypeOption])){

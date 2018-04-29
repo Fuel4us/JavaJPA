@@ -42,15 +42,12 @@ public class OpenPOSController implements Controller {
             //verificar se o shift da cantina esta aberto ou nao
 
             Optional<CanteenShift> canteenShift = canteenShiftRepository.findCurrentDayShift();
-            if (canteenShift.isPresent() && canteenShift.get().isClosed()) {
-                //muda estado da worksession para carregamento
-                //
-            } else {
-                if (!canteenShift.isPresent()) {
-                    //abre o shift do dia atual(1ª caixa)
-                    canteenShiftRepository.openNewShift(Calendar.getInstance());
-                }
+
+            if (!canteenShift.isPresent()) {
+                //abre o shift do dia atual(1ª caixa)
+                canteenShiftRepository.openNewShift(Calendar.getInstance());
             }
+
             return true;
         }
         return false;

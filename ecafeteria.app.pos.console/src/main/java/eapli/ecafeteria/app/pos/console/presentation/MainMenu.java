@@ -22,6 +22,8 @@ import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
 import eapli.ecafeteria.app.pos.console.presentation.finance.ChargeCardAction;
 import eapli.ecafeteria.app.pos.console.presentation.booking.DeliverBookingAction;
+import eapli.ecafeteria.app.pos.console.presentation.finance.OpenPOSAction;
+import eapli.ecafeteria.app.pos.console.presentation.finance.OpenShiftAction;
 import eapli.ecafeteria.app.pos.console.presentation.meals.ShowAvailableMealsAction;
 
 /**
@@ -41,6 +43,8 @@ public class MainMenu extends AbstractUI {
     private static final int CHARGE_CARD_OPTION = 1;
     private static final int SHOW_AVAILABLE_MEALS = 2;
     private static final int DELIVER_BOOKING = 3;
+    private static final int OPEN_POS = 4;
+    private static final int CREATE_SHIFT = 5;
 
     @Override
     public boolean show() {
@@ -101,6 +105,8 @@ public class MainMenu extends AbstractUI {
                 new ShowAvailableMealsAction()));
         menu.add(new MenuItem(DELIVER_BOOKING, "Deliver booking",
                 new DeliverBookingAction()));
+        menu.add(new MenuItem(OPEN_POS, "Open POS", new OpenPOSAction()));
+        menu.add(new MenuItem(CREATE_SHIFT, "Create Shift", new OpenShiftAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
 

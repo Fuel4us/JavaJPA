@@ -23,7 +23,9 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
         if (!pos.isOpen()) {
 
             //abre POS
-            return true;
+            if(pos.open()){
+                return true;
+            }
         }
         return false;
     }
