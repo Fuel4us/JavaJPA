@@ -3,7 +3,6 @@ package eapli.ecafeteria.domain.kitchen;
 import eapli.ecafeteria.domain.finance.WorkSession;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
-import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
@@ -19,8 +18,6 @@ public class CanteenShift implements AggregateRoot<String>, Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private final CanteenShiftRepository csRepository = PersistenceContext.repositories().canteenShift();
-
     // ORM primary key
     @Id
     @GeneratedValue
@@ -46,7 +43,7 @@ public class CanteenShift implements AggregateRoot<String>, Serializable {
         if (dateCS == null) {
             throw new IllegalArgumentException();
         }
-        if(csRepository.verifyByDate(dateCS)){
+        if(PersistenceContext.repositories().canteenShift().verifyByDate(dateCS)){
             this.dateCS = dateCS;
             this.cfs = cfs;
             this.ws = ws;
