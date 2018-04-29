@@ -91,6 +91,8 @@ public interface RepositoryFactory {
     
     CanteenShiftRepository canteenShift();
     
+    WorkSessionRepository workSession();
+    
     POSRepository POS();
     
     /*
@@ -117,4 +119,6 @@ public interface RepositoryFactory {
     RatingRepository rating();
 
     ShiftRepository shift();
+    
+     AllergenRepository allergen();
 }

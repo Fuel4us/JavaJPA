@@ -23,6 +23,8 @@ public class CreateMealPlanController {
     private final MealPlanRepository mealPlanRepo = PersistenceContext.repositories().mealplans();
     private final MenuRepository menuRepo = PersistenceContext.repositories().menus();
     
+    /*===============STAR OF CODE FOR CREATING A NEW MEAL PLAN===============*/
+    
     public List<Menu> getExistingMenus(){
         
         List<Menu> resultingList = (List<Menu>) menuRepo.findAll();
@@ -71,4 +73,26 @@ public class CreateMealPlanController {
             Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /*===============END OF CODE FOR CREATING A NEW MEAL PLAN================*/
+    
+//    /*=============STAR OF CODE FOR EDITING AN EXISTING MEAL PLAN============*/
+//    
+//    public List<MealPlan> getExistingMealPlan(){
+//        List<MealPlan> resultingList = (List<MealPlan>) mealPlanRepo.findAll();
+//        
+//        return resultingList;
+//    }
+//    
+//    public MealPlan getMealPlan(List<MealPlan> mealPlanList, Integer opcao){
+//        MealPlan mealPlan = mealPlanList.get(opcao);
+//        
+//        return mealPlan;
+//    }
+//    
+//    public void cleanNumberOfDishes(MealPlan mealPlan){
+//        mealPlan.cleanNumberOfDishes();
+//    }
+//    
+//    /*=============END OF CODE FOR EDITING AN EXISTING MEAL PLAN=============*/
 }

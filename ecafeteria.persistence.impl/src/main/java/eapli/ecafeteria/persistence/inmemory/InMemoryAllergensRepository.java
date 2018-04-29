@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.inmemory;
 
 import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
 import java.util.Optional;

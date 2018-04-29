@@ -11,6 +11,10 @@ public class CanteenShiftClosureController implements Controller {
     private final POSRepository posRepository = PersistenceContext.repositories().POS();
     private final CanteenShiftRepository csRepository = PersistenceContext.repositories().canteenShift();
 
+    /**
+     * It does not return false if there are no open POS 
+     * @return true if sucess
+     */
     public boolean canteenShiftClosure() {
         posRepository.findOpenToClose();
 

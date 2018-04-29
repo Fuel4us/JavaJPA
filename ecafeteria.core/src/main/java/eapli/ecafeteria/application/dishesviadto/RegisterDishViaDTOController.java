@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
@@ -51,10 +51,10 @@ public class RegisterDishViaDTOController implements Controller {
         }
 
         // TODO: we are ignoring the currency and hardcoding everything is EUR
-        final Dish newDish = new Dish(type.get(), Designation.valueOf(dto.name),
-                new NutricionalInfo(dto.calories, dto.salt), Money.euros(dto.price), new Allergens(dto.allergens));
+//        final Dish newDish = new Dish(type.get(), Designation.valueOf(dto.name),
+//                new NutricionalInfo(dto.calories, dto.salt), Money.euros(dto.price), new AllergensList(dto.allergens));
 
-        this.dishRepository.save(newDish);
+//        this.dishRepository.save(newDish);
     }
 
     public Iterable<DishTypeDTO> dishTypes() {

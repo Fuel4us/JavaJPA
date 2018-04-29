@@ -7,7 +7,6 @@ package eapli.ecafeteria.domain.finance;
 
 import eapli.ecafeteria.domain.meals.MealType;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;

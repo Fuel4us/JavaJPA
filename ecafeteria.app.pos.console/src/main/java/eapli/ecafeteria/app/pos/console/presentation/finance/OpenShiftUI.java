@@ -10,8 +10,6 @@ package eapli.ecafeteria.app.pos.console.presentation.finance;
 import eapli.ecafeteria.application.finance.OpenShiftController;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.application.Controller;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.Date;

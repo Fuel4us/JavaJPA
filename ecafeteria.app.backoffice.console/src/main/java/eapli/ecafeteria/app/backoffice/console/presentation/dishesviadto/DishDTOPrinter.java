@@ -15,6 +15,6 @@ public class DishDTOPrinter implements Visitor<DishDTO> {
     @Override
     public void visit(DishDTO visitee) {
         System.out.printf("%-30s%-25s%-10s%-4s", visitee.name, visitee.dishTypeDescription,
-                visitee.price, String.valueOf(visitee.active), visitee.allergens);
+                visitee.price, String.valueOf(visitee.active));
     }
 }

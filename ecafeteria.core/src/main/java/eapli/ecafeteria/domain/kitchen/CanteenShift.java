@@ -3,22 +3,23 @@ package eapli.ecafeteria.domain.kitchen;
 import eapli.ecafeteria.domain.finance.WorkSession;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
+import eapli.ecafeteria.persistence.CanteenShiftRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
 import javax.persistence.Version;
 
 @Entity
-public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
+public class CanteenShift implements AggregateRoot<String>, Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    private final CanteenShiftRepository csRepository = PersistenceContext.repositories().canteenShift();
 
     // ORM primary key
     @Id
@@ -29,32 +30,27 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
 
     // business ID
     @Column(unique = true)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar dateCS;
+    private String dateCS;
 
-    @OneToOne
+    //@OneToOne
     private CanteenShiftState cfs;
 
-    @OneToMany
+    @OneToOne
     private WorkSession ws;
 
     protected CanteenShift() {
         // for ORM
     }
 
-    public CanteenShift(Calendar date, CanteenShiftState cfs, WorkSession ws) {
-        if (date == null) {
+    public CanteenShift(String dateCS, CanteenShiftState cfs, WorkSession ws) {
+        if (dateCS == null) {
             throw new IllegalArgumentException();
         }
-        this.dateCS = date;
-        this.cfs = cfs;
-        this.ws = ws;
-    }
-
-    public CanteenShift(CanteenShiftState cfs, WorkSession ws) {
-        this.dateCS = Calendar.getInstance();
-        this.cfs = cfs;
-        this.ws = ws;
+        if(csRepository.verifyByDate(dateCS)){
+            this.dateCS = dateCS;
+            this.cfs = cfs;
+            this.ws = ws;
+        }
     }
 
     public CanteenShiftState canteenShiftState() {
@@ -66,12 +62,12 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
     }
 
     @Override
-    public Calendar id() {
+    public String id() {
         return this.dateCS;
     }
 
     @Override
-    public boolean is(Calendar date) {
+    public boolean is(String date) {
         return (this.dateCS.equals(date));
     }
 
@@ -117,6 +113,6 @@ public class CanteenShift implements AggregateRoot<Calendar>, Serializable {
     }
 
     public boolean isClosed() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.cfs == CLOSED;
     }
 }

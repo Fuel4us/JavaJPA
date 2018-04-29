@@ -72,4 +72,8 @@ public class MealPlan {
                 ", closed=" + closed +
                 '}';
     }
+    
+    public void cleanNumberOfDishes(){
+        numberOfDishes.clear();
+    }
 }
