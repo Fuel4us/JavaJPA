@@ -7,10 +7,6 @@ import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 
-/**
- * persistance.xml -> <class>eapli.ecafeteria.domain.kitchen.CanteenShift</class>
- * 
- */
 public class CanteenShiftBootstrapper implements Action {
     
     @Override

@@ -5,10 +5,6 @@ import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 
-/**
- *
- * persistance.xml -> <class>eapli.ecafeteria.domain.finance.WorkSession</class>
- */
 public class WorkSessionBootstrapper implements Action{
 
     @Override
