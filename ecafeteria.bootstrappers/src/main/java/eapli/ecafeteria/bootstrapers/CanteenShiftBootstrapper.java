@@ -2,7 +2,6 @@ package eapli.ecafeteria.bootstrapers;
 
 import eapli.ecafeteria.application.kitchen.RegisterCanteenShiftController;
 import eapli.ecafeteria.domain.finance.WorkSession;
-import eapli.ecafeteria.domain.kitchen.CanteenShiftState;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.WorkSessionRepository;
 import eapli.framework.actions.Action;
@@ -28,7 +27,7 @@ public class CanteenShiftBootstrapper implements Action {
         
         WorkSession ws1 = wsRepository.findOne(1).get();
         
-        csController.registerCanteenShift("20180430", CanteenShiftState.OPEN, ws1);
+        csController.registerCanteenShift("20180430", ws1);
         
     }
 }

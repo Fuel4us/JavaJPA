@@ -19,4 +19,11 @@ public class RegisterCanteenShiftController implements Controller{
         final CanteenShift cs = new CanteenShift(date, cfs, ws1);
         return this.csRepository.save(cs);
     }
+    
+    public CanteenShift registerCanteenShift(String date, WorkSession ws1) throws DataIntegrityViolationException, DataConcurrencyException {
+        //AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        
+        final CanteenShift cs = new CanteenShift(date, ws1);
+        return this.csRepository.save(cs);
+    }
 }
