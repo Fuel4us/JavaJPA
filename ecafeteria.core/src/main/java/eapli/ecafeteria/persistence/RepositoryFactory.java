@@ -121,4 +121,6 @@ public interface RepositoryFactory {
     ShiftRepository shift();
     
      AllergenRepository allergen();
+
+    public DelieveryRepository delieveries();
 }

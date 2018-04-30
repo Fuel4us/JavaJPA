@@ -74,6 +74,17 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return bookingList.get(0);
     }
 
+    @Override
+    public Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser) {
+         final Query q = entityManager().createQuery(""
+                + "SELECT e FROM Booking e "
+                + "WHERE e.cafeteriaUser = 1 "
+                + "AND e.bookingState = 2 ");
+        q.setParameter(1, cafUser);
+        q.setParameter(2, BookingState.RESERVED);
+        return q.getResultList();
+    }
+
     public class BirthDateComparator implements Comparator<Booking> {
         @Override
         public int compare(Booking booking1, Booking booking2) {

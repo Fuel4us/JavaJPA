@@ -19,6 +19,7 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
         
         Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState reservationState);
         
+        Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser);
         
         public Booking getNextBooking(Optional <CafeteriaUser> user, Date date);
 

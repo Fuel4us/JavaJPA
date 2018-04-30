@@ -4,6 +4,7 @@ import eapli.ecafeteria.Application;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
+import eapli.ecafeteria.persistence.DelieveryRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.DishTypeRepository;
@@ -171,6 +172,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public AllergenRepository allergen() {
         return new JpaAllergenRepository();
+    }
+
+    @Override
+    public DelieveryRepository delieveries() {
+         return new JpaDelieveryRepository();
     }
 
 }
