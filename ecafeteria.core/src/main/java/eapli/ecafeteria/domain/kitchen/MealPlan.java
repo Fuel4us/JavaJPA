@@ -1,7 +1,6 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.menus.Menu;
-import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -18,15 +17,13 @@ public class MealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @ManyToOne
     private Menu menu;
     
-    private List<Integer> numberOfDishes;
     private boolean closed;
 
-    public MealPlan(Menu menu, List<Integer> numberOfDishes) {
+    public MealPlan(Menu menu) {
         this.menu = menu;
-        this.numberOfDishes = numberOfDishes;
         this.closed = false; //no inicio esta aberto logo closed=false
     }
 
@@ -43,10 +40,6 @@ public class MealPlan {
     public boolean isClosed() {
         return closed;
     }
-
-    public List<Integer> getNumberOfDishes() {
-        return numberOfDishes;
-    }
     
     public static boolean changeHeuristicInUse(HeuristicConfiguration newHeuristic){
         if(newHeuristic == null)
@@ -55,7 +48,7 @@ public class MealPlan {
         heuristicInUse = newHeuristic;
         return true;
     }
-
+    
     /**
      * Changes state to get it ready for the day.
      * @param meal
@@ -68,12 +61,7 @@ public class MealPlan {
     public String toString() {
         return "MealPlan{" +
                 ", menu=" + menu +
-                ", numberOfDishes=" + numberOfDishes +
                 ", closed=" + closed +
                 '}';
-    }
-    
-    public void cleanNumberOfDishes(){
-        numberOfDishes.clear();
     }
 }
