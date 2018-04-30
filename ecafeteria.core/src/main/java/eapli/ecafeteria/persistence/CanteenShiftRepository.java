@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CanteenShiftRepository extends DataRepository<CanteenShift, String> {
 
-    boolean verifyByDate(String CSdate);
+    boolean verifyByDate(String csDate);
     
     /**
      *

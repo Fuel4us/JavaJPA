@@ -3,15 +3,15 @@ package eapli.ecafeteria.domain.kitchen;
 import eapli.ecafeteria.domain.finance.WorkSession;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.OPEN;
 import static eapli.ecafeteria.domain.kitchen.CanteenShiftState.CLOSED;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.ddd.AggregateRoot;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
 
 @Entity
 public class CanteenShift implements AggregateRoot<String>, Serializable {
@@ -20,57 +20,53 @@ public class CanteenShift implements AggregateRoot<String>, Serializable {
     
     // ORM primary key
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pk;
-    @Version
-    private Long version;
 
     // business ID
     @Column(unique = true)
-    private String dateCS;
+    private String canteenShiftDate;
 
-    //@OneToOne
-    private CanteenShiftState cfs;
+    private CanteenShiftState canteenShiftState;
 
     @OneToOne
-    private WorkSession ws;
+    private WorkSession workSession;
 
     protected CanteenShift() {
         // for ORM
     }
 
-    public CanteenShift(String dateCS, CanteenShiftState cfs, WorkSession ws) {
-        if (dateCS == null) {
+    public CanteenShift(String canteenShiftDate, CanteenShiftState canteenShiftState, WorkSession workSession) {
+        if (Strings.isNullOrEmpty(canteenShiftDate)) {
             throw new IllegalArgumentException();
         }
-        if(PersistenceContext.repositories().canteenShift().verifyByDate(dateCS)){
-            this.dateCS = dateCS;
-            this.cfs = cfs;
-            this.ws = ws;
-        }
+        //if(PersistenceContext.repositories().canteenShift().verifyByDate(dateCS)){
+            this.canteenShiftDate = canteenShiftDate;
+            this.canteenShiftState = canteenShiftState;
+            this.workSession = workSession;
+        //}
     }
 
     public CanteenShiftState canteenShiftState() {
-        return this.cfs;
+        return this.canteenShiftState;
     }
 
     public WorkSession workSession() {
-        return this.ws;
+        return this.workSession;
     }
 
     @Override
     public String id() {
-        return this.dateCS;
+        return this.canteenShiftDate;
     }
 
     @Override
     public boolean is(String date) {
-        return (this.dateCS.equals(date));
+        return (this.canteenShiftDate.equals(date));
     }
 
     @Override
     public boolean sameAs(Object other) {
-        // FIXME implement this method
         final CanteenShift cs = (CanteenShift) other;
         return this.id().equals(cs.id());
     }
@@ -90,26 +86,26 @@ public class CanteenShift implements AggregateRoot<String>, Serializable {
 
     @Override
     public int hashCode() {
-        return this.dateCS.hashCode();
+        return this.canteenShiftDate.hashCode();
     }
 
     public boolean open() {
-        if (this.cfs == CLOSED) {
-            this.cfs = OPEN;
+        if (this.canteenShiftState == CLOSED) {
+            this.canteenShiftState = OPEN;
             return true;
         }
         return false;
     }
 
     public boolean close() {
-        if (this.cfs == OPEN) {
-            this.cfs = CLOSED;
+        if (this.canteenShiftState == OPEN) {
+            this.canteenShiftState = CLOSED;
             return true;
         }
         return false;
     }
 
     public boolean isClosed() {
-        return this.cfs == CLOSED;
+        return this.canteenShiftState == CLOSED;
     }
 }
