@@ -2,6 +2,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
+import eapli.framework.util.Strings;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -21,11 +22,11 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
     }
     
     @Override
-    public boolean verifyByDate(String CSdate) {
-        Query query = entityManager().createQuery("select e.pk from " + this.entityClass.getSimpleName() + " e where e.CSdate = :CSdate");
-        query.setParameter("dateCS", CSdate);
+    public boolean verifyByDate(String csDate) {
+        Query query = entityManager().createQuery("select e.pk from " + this.entityClass.getSimpleName() + " e where e.csDate=:csDate");
+        query.setParameter("dateCS", csDate);
 
-        return (String) query.getSingleResult() == null;
+        return Strings.isNullOrEmpty((String) query.getSingleResult());
     }
     
     @Override

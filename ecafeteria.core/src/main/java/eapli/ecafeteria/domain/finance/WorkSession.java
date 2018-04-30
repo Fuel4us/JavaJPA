@@ -10,9 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Version;
 
 /**
  *
@@ -25,10 +24,8 @@ public class WorkSession implements AggregateRoot<Integer>, Serializable {
 
     // ORM primary key
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pk;
-    @Version
-    private Long version;
 
     //Business id
     @Column(unique = true)

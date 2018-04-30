@@ -1,6 +1,8 @@
 package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
+import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealPlanRepository;
@@ -39,15 +41,10 @@ public class CreateMealPlanController {
     }
     
     public MealPlan createMealPlan(Menu menu){
-        List<Integer> numberDishes = new ArrayList<>();
         
-        MealPlan mPlan = new MealPlan(menu, numberDishes);
+        MealPlan mPlan = new MealPlan(menu);
         
         return mPlan;
-    }
-    
-    public void setDishQuantity(MealPlan mealPlan, Integer numberOfDishes){
-        mealPlan.getNumberOfDishes().add(numberOfDishes);
     }
     
     public String getMealDate(Meal meal){
@@ -66,6 +63,18 @@ public class CreateMealPlanController {
         return meal.getMealType().toString();
     }
     
+    public MealPlanItemQuantity setItemQuantity(Meal meal, int quantity, MealPlan mealPlan, MealPlanItem item){
+        MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity, item);
+        
+        return itemQuantity;
+    }
+    
+    public MealPlanItem setPlanItem(Meal meal, MealPlan mealPlan){
+        MealPlanItem item = new MealPlanItem(meal, mealPlan);
+        
+        return item;
+    }
+    
     public void saveMealPlan(MealPlan mealPlan){
         try {
             mealPlanRepo.save(mealPlan);
@@ -73,26 +82,5 @@ public class CreateMealPlanController {
             Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     /*===============END OF CODE FOR CREATING A NEW MEAL PLAN================*/
-    
-//    /*=============STAR OF CODE FOR EDITING AN EXISTING MEAL PLAN============*/
-//    
-//    public List<MealPlan> getExistingMealPlan(){
-//        List<MealPlan> resultingList = (List<MealPlan>) mealPlanRepo.findAll();
-//        
-//        return resultingList;
-//    }
-//    
-//    public MealPlan getMealPlan(List<MealPlan> mealPlanList, Integer opcao){
-//        MealPlan mealPlan = mealPlanList.get(opcao);
-//        
-//        return mealPlan;
-//    }
-//    
-//    public void cleanNumberOfDishes(MealPlan mealPlan){
-//        mealPlan.cleanNumberOfDishes();
-//    }
-//    
-//    /*=============END OF CODE FOR EDITING AN EXISTING MEAL PLAN=============*/
 }
