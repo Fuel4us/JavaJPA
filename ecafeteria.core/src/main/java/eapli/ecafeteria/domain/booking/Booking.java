@@ -75,7 +75,7 @@ public class Booking implements AggregateRoot<String>, Serializable{
     }
     
     public String sumaryList() {
-        return String.format("%s", meal.toString2());
+        return String.format("%s", meal.toStringDate());
     }
 
     @Override

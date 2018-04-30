@@ -31,7 +31,7 @@ public class FindMealsByLotUI extends AbstractUI {
         Lot lot = controller.getSelectedLot(lotId).get();
 
         for (MealLot mealLot : controller.getMealLotWithLot(lot)) {
-            System.out.println(mealLot.getMeal().toString3());
+            System.out.println(mealLot.getMeal().toStringOnlyMeal());
             System.out.println();
         }
 

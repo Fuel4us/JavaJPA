@@ -12,5 +12,7 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface DishRepository extends DataRepository<Dish, Designation> {
 
-	Optional<Dish> findByName(Designation name);
+    Optional<Dish> findByName(Designation name);
+
+    public Iterable<Dish> findAllActives();
 }

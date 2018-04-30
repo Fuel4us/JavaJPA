@@ -6,11 +6,11 @@
 package eapli.ecafeteria.application.meals;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.application.dishes.ListDishService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
@@ -26,25 +26,37 @@ public class RegisterMealController implements Controller {
 
     private final ListMealService svc = new ListMealService();
 
+    private final ListDishService theDishes = new ListDishService();
+
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
-    private final Meal meal = new Meal();
+    private Meal meal = null;
 
+    /**
+     * Método que regista a Nova Meal.
+     *
+     * @param mealType
+     * @param mealDate
+     * @param dish
+     * @return
+     * @throws DataIntegrityViolationException
+     * @throws DataConcurrencyException
+     */
     public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish) throws DataIntegrityViolationException, DataConcurrencyException {
-
         final Meal newMeal = new Meal(mealType, mealDate, dish);
-
-        return this.mealRepository.save(newMeal);
-    }
-    
-    public Meal registerMeal(final MealType mealType, final Date mealDate, final Dish dish, final Menu menu) throws DataIntegrityViolationException, DataConcurrencyException {
-
-        final Meal newMeal = new Meal(mealType, mealDate, dish, menu);
-
+        meal = newMeal;
         return this.mealRepository.save(newMeal);
     }
 
-    public Meal updateMeal(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException {
+    /**
+     * Método por desenvolver que atualizará a Meal, adicionando o menu.
+     *
+     * @param meal
+     * @return
+     * @throws DataConcurrencyException
+     * @throws DataIntegrityViolationException
+     */
+    public Meal updateMeal(Meal meal) throws DataConcurrencyException, DataIntegrityViolationException { //alterações 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         Long id = meal.getId();
         this.mealRepository.delete(id);
@@ -59,15 +71,13 @@ public class RegisterMealController implements Controller {
         return this.svc.allMealTypes();
     }
 
-    /**
-     * @autor Pedro Alves - 1150372
-     * @param mealType
-     * @param mealDate
-     */
-    public void validateDate(MealType mealType, Date mealDate) {
-        if (mealType != null && mealDate != null) {
-            //completar o método
-        }
+    public Iterable<Dish> getAllDishesActives() {
+        return this.theDishes.allDishesActives();
+    }
+
+    @Override
+    public String toString() {
+        return meal.toStringOnlyMeal();
     }
 
 }
