@@ -17,6 +17,7 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 
 /**
@@ -47,13 +48,12 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
+    String allergenList;
     @ManyToMany
     private Set<Material> ingredientsList;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     private Allergens allerg;
-
-    String allergenList;
 
     public Dish(final DishType dishType, final Designation name,
             final NutricionalInfo nutricionalInfo, Money price, String allergenList, Set<Material> ingredientsList) {

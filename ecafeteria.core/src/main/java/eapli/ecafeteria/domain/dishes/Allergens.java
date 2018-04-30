@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,9 +18,6 @@ public class Allergens implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    Dish dish;
 
     private String allergen;
 
