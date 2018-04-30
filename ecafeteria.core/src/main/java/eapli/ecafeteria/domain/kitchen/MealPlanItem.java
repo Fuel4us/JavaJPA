@@ -29,7 +29,7 @@ public class MealPlanItem {
     @OneToOne
     private Meal item;
     
-    @ManyToOne
+    @OneToOne
     private MealPlan mealPlan;
     
     public MealPlanItem(Meal item, MealPlan mealPlan){
