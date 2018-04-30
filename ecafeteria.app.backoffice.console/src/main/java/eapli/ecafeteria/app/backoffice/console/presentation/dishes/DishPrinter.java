@@ -16,6 +16,6 @@ public class DishPrinter implements Visitor<Dish> {
     @Override
     public void visit(Dish visitee) {
         System.out.printf("%-30s%-25s%-10s%-4s%40s", visitee.name(), visitee.dishType().description(),
-                visitee.currentPrice(), String.valueOf(visitee.isActive()), visitee.allergens().getAllerg().toString());
+                visitee.currentPrice(), String.valueOf(visitee.isActive()), visitee.allergens());
     }
 }

@@ -7,7 +7,6 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealRepository;
-import eapli.framework.domain.Designation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.finance;
 
 /**
  *
- * @author Josué Lapa
+ * @author Hernani Gil
  */
-public class WorkSession {
-
-            
-            
-            
+public class ShiftDate {
+    
 }

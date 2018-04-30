@@ -6,7 +6,6 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.framework.util.Console;
 
 import java.util.ArrayList;
 import java.util.Date;

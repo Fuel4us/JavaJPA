@@ -23,8 +23,12 @@
     <class>eapli.ecafeteria.domain.kitchen.LimitConfiguration</class>
     <class>eapli.ecafeteria.domain.authz.Reason</class>
     <class>eapli.ecafeteria.domain.menus.Menu</class>
-    <class>eapli.ecafetaria.domain.movement.Movement</class>
+    <class>eapli.ecafeteria.domain.movement.Movement</class>
     <class>eapli.ecafeteria.domain.kitchen.Execution</class>
+    <class>eapli.ecafeteria.domain.dishes.Allergens</class>
+	<class>eapli.ecafeteria.domain.kitchen.CanteenShift</class>
+	<class>eapli.ecafeteria.domain.finance.WorkSession</class>
+    <class>eapli.ecafeteria.domain.finance.POS</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--

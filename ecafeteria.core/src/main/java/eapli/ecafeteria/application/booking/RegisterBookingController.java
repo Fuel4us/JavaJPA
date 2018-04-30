@@ -5,9 +5,9 @@
  */
 package eapli.ecafeteria.application.booking;
 
-import eapli.ecafetaria.domain.movement.BalanceService;
-import eapli.ecafetaria.domain.movement.Movement;
-import eapli.ecafetaria.domain.movement.MovementType;
+import eapli.ecafeteria.domain.movement.BalanceService;
+import eapli.ecafeteria.domain.movement.Movement;
+import eapli.ecafeteria.domain.movement.MovementType;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;

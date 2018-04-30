@@ -42,7 +42,7 @@ public class MealLotBootstrapper implements Action {
 
         int i = 0;
         for (Meal m : mealRepository.findAll()) {
-            MealLot mealLot = new MealLot(m, list.get(i));
+            MealLot mealLot = new MealLot(m, list.get(i),20);
             mealLotRepository.save(mealLot);
 
             i++;

@@ -28,8 +28,10 @@ public class CreateMealPlanUI extends AbstractUI{
                     break;
                 case 1:
                     setDishQuantity();
-                    System.out.println("Meal plan saved successfully!");
                     break;
+//                case 2:
+//                    editMealPlan();
+//                    break;
                 default:
                     System.out.println("\nINVALID OPTION!");
                     break;
@@ -40,6 +42,7 @@ public class CreateMealPlanUI extends AbstractUI{
     public int menuUI(){
         System.out.println("");
         System.out.println("1. Create meal plan");
+//        System.out.println("2. Edit meal plan");
         System.out.println("0. Leave");
         System.out.printf("OPTION: ");
         int option = input.nextInt();
@@ -48,8 +51,11 @@ public class CreateMealPlanUI extends AbstractUI{
     }
     
     public Menu selectMenu() {
-        System.out.println("Select the menu for which you wish to create the meal plan:");
+        
         List<Menu> menuList = controller.getExistingMenus();
+        
+        System.out.println("\n## Select the menu for which you wish to create the meal plan: ##");
+        
         int i = 0;
 
         for (Menu menu : menuList) {
@@ -57,7 +63,7 @@ public class CreateMealPlanUI extends AbstractUI{
                                  + "and finishing date: " + menu.getEndDate());
             i++;
         }
-        System.out.printf("OPTION: ");
+        System.out.printf("\nOPTION: ");
         Integer opcao = input.nextInt();
 
         Menu selectedMenu = controller.getMenu(menuList, opcao);
@@ -67,10 +73,10 @@ public class CreateMealPlanUI extends AbstractUI{
 
     public void setDishQuantity(){
         Menu selectedMenu = selectMenu();
-
+        
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);
 
-        System.out.println("Assign the number of dishes for each of the meals:");
+        System.out.println("\nAssign the number of dishes for each of the meals:");
 
         int i = 0;
         Integer numberOfDishes;
@@ -103,4 +109,59 @@ public class CreateMealPlanUI extends AbstractUI{
     public String headline() {
         return "CREATE MEAL PLAN";
     }
+//    /*=======================================================================*/
+//    
+//    public MealPlan selectMealPlan() {
+//        List<MealPlan> mealPlanList = controller.getExistingMealPlan();
+//        
+//        System.out.println("\n## Select the meal plan you wish to edit: ##");
+//        
+//        for(MealPlan mp: mealPlanList){
+//            int i = 0;
+//            System.out.println(i + ". Meal Plan of Menu with starting date: " + mp.getMenu().getStartDate()
+//                                 + "and finishing date: " + mp.getMenu().getEndDate());
+//            i++;
+//        }
+//        System.out.printf("\nOPTION: ");
+//        Integer opcao = input.nextInt();
+//        
+//        MealPlan selectedMealPlan = controller.getMealPlan(mealPlanList, opcao);
+//        
+//        return selectedMealPlan;
+//    }
+//    
+//    public void editMealPlan(){
+//        MealPlan selectedMealPlan = selectMealPlan();
+//        
+//        System.out.println("\nAssign the new number of dishes for each of the meals:");
+//
+//        int i = 0;
+//        Integer numberOfDishes;
+//        
+//        List<Integer> oldNumberOfDishes = selectedMealPlan.getNumberOfDishes();
+//        
+//        controller.cleanNumberOfDishes(selectedMealPlan);
+//        
+//        for (Meal meal : selectedMealPlan.getMenu().getMealList()) {
+//            for(Integer numDish: oldNumberOfDishes){
+//                System.out.printf(i + " --> %s || %s || %s || %s\n",
+//                                                        controller.getMealDate(meal),
+//                                                        controller.getMealDishType(meal),
+//                                                        controller.getMealDishName(meal),
+//                                                        controller.getMealType(meal));
+//                System.out.printf("Old Number of Dishes -> %d\n", numDish);
+//                System.out.printf("New Number of dishes: ");
+//                numberOfDishes = input.nextInt();
+//                System.out.printf("\n");
+//
+//                controller.setDishQuantity(selectedMealPlan, numberOfDishes);
+//
+//                i++;
+//            }
+//        }
+//        
+//        controller.saveMealPlan(selectedMealPlan);
+//    }
+//    
+//    /*=======================================================================*/
 }

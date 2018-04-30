@@ -5,19 +5,13 @@
  */
 package eapli.ecafeteria.app.pos.console.presentation.meals;
 
-import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.meals.ShowAvailableMealsController;
-import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.MealType;
-import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  *

@@ -3,33 +3,62 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import javax.persistence.Query;
 
-class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift, Calendar> implements CanteenShiftRepository{
+class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift, String> implements CanteenShiftRepository{
 
+    @Override
+    public void forEach(Consumer<? super CanteenShift> cnsmr) {
+        super.forEach(cnsmr); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Spliterator<CanteenShift> spliterator() {
+        return super.spliterator(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public boolean verifyByDate(String CSdate) {
+        Query query = entityManager().createQuery("select e.pk from " + this.entityClass.getSimpleName() + " e where e.CSdate = :CSdate");
+        query.setParameter("dateCS", CSdate);
+
+        return (String) query.getSingleResult() == null;
+    }
+    
     @Override
     public boolean close(Calendar cal) {
         Optional<CanteenShift> cs = this.findByDate(cal);
+        if(!cs.isPresent())
+            return false;
         return cs.get().close();
     }
     
     private Optional<CanteenShift> findByDate(Calendar cal) {
-        boolean verify;
+        String dateCS;
         
-        final Map<String, Object> params = new HashMap<>();
-        params.put("year", cal.get(Calendar.YEAR));
-        Optional<CanteenShift> calYear = matchOne("e.dateCS.get(Calendar.YEAR)=:year", params);
-        verify = calYear.isPresent();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
         
-        if(verify == true){
-            final Map<String, Object> params2 = new HashMap<>();
-            params2.put("day_of_year", cal.get(Calendar.DAY_OF_YEAR));
-            return matchOne("e.dateCS.get(Calendar.DAY_OF_YEAR)=:day_of_year", params2);
-        }
+        if(month <= 9)
+            dateCS = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
+        else
+            dateCS = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
         
-        return Optional.empty();
+        return matchOne("e.dateCS=:dateCS", "dateCS", dateCS);
     }
-    
+     
+    @Override
+    public boolean openNewShift(Calendar cal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Optional<CanteenShift> findCurrentDayShift() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

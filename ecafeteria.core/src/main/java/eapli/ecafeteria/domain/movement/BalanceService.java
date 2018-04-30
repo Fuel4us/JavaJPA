@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafetaria.domain.movement;
+package eapli.ecafeteria.domain.movement;
 
-import static eapli.ecafetaria.domain.movement.MovementType.MovementTypeValues;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.framework.domain.money.Money;
-import java.util.Currency;
 
 /**
  *

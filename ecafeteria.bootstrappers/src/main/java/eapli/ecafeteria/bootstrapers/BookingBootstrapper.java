@@ -5,8 +5,7 @@
  */
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafetaria.application.finance.ChargeCardController;
-import eapli.ecafetaria.domain.movement.BalanceService;
+import eapli.ecafeteria.application.finance.ChargeCardController;
 import eapli.ecafeteria.application.booking.RegisterBookingController;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;

@@ -1,13 +1,11 @@
 package eapli.ecafeteria.domain.dishes;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Version;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,42 +14,30 @@ import javax.persistence.Version;
 @Entity
 public class Allergens implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue
     private Long id;
-    @Version
-    private Long version;
 
-    /**
-     * List that saves the allergens of an certain dish.
-     */
-    private Set<String> allerg;
+    @ManyToOne
+    Dish dish;
 
-    /**
-     * Constructor of the class
-     *
-     * @param allerg
-     */
-    public Allergens(Set<String> allerg) {
-        if (allerg == null) {
-            throw new IllegalArgumentException("Allergenics can't be null!");
-        }
-        this.allerg = allerg;
+    private String allergen;
+
+    public Allergens(String allergen) {
+        this.allergen = allergen;
     }
 
-    /**
-     * Empty constructor of the class dish.
-     */
     public Allergens() {
-        allerg = new HashSet<>();
     }
 
-    public Set<String> getAllerg() {
-        return allerg;
+    public String getAllergen() {
+        return allergen;
     }
 
-    public void setAllerg(Set<String> allerg) {
-        this.allerg = allerg;
+    public void setAllergen(String allergen) {
+        this.allergen = allergen;
     }
 
     public Long id() {
@@ -60,8 +46,8 @@ public class Allergens implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.allerg);
+        int hash = 3;
+        hash = 59 * hash + Objects.hashCode(this.allergen);
         return hash;
     }
 
@@ -77,15 +63,10 @@ public class Allergens implements Serializable {
             return false;
         }
         final Allergens other = (Allergens) obj;
-        if (!Objects.equals(this.allerg, other.allerg)) {
+        if (!Objects.equals(this.allergen, other.allergen)) {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "The allergens are: " + allerg.toString();
     }
 
 }

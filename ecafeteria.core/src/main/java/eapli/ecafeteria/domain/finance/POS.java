@@ -1,11 +1,12 @@
-package eapli.ecafetaria.domain.finance;
+package eapli.ecafeteria.domain.finance;
 
-import static eapli.ecafetaria.domain.finance.POSState.CLOSED;
-import static eapli.ecafetaria.domain.finance.POSState.OPEN;
+import static eapli.ecafeteria.domain.finance.POSState.CLOSED;
+import static eapli.ecafeteria.domain.finance.POSState.OPEN;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Version;
@@ -17,26 +18,19 @@ public class POS implements AggregateRoot<Long>, Serializable{
     
     // ORM primary key
     @Id
-    @GeneratedValue
-    private Long pk;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Version
     private Long version;
-    
-    @Id
-    private Long id;
-    
-    @OneToOne
+   
     private POSState posState;
     //ponham aqui os atributos que faltarem de acordo com o modelo de dominio
     
-    
-    protected POS() {
+    public POS() {
         // for ORM
+        this.posState = POSState.CLOSED;
     }
     
-    public POS(Long id){
-        this.id = id;
-    }
     
     @Override
     public boolean sameAs(Object other) {
