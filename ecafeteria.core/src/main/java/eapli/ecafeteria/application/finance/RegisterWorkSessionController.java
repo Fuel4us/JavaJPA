@@ -11,7 +11,7 @@ public class RegisterWorkSessionController implements Controller{
     
     private final WorkSessionRepository wsRepository = PersistenceContext.repositories().workSession();
 
-    public WorkSession registerCanteenShift(Integer workSessionCode) throws DataIntegrityViolationException, DataConcurrencyException {
+    public WorkSession registerWorkSession(Integer workSessionCode) throws DataIntegrityViolationException, DataConcurrencyException {
 
         final WorkSession ws = new WorkSession(workSessionCode);
         return this.wsRepository.save(ws);

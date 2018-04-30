@@ -26,9 +26,22 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
     }
 
     @Override
-    public boolean close(Calendar cal) {
-        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(cal));
-        return cs.get().close();
+    public CanteenShift close(Calendar cal) {
+        String canteenShiftDate;
+        
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        
+        if(month <= 9)
+            canteenShiftDate = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
+        else
+            canteenShiftDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
+        
+        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(canteenShiftDate));
+        if(!cs.get().close())
+            return null;
+        return cs.get();
     }
 
     @Override

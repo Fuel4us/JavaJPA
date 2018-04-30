@@ -7,14 +7,14 @@ import java.util.Optional;
 
 public interface CanteenShiftRepository extends DataRepository<CanteenShift, String> {
 
-    boolean verifyByDate(String csDate);
+    boolean verifyByDate(String canteenShiftDate);
     
     /**
      *
      * @param cal - it will compare the date in YYYYMMDD
      * @return true if found it and if is open, to close it
      */
-    boolean close(Calendar cal);
+    CanteenShift close(Calendar cal);
 
     public boolean openNewShift(Calendar cal);
 

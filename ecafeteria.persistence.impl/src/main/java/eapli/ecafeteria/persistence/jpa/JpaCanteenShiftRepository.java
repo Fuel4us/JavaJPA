@@ -22,36 +22,39 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
     }
     
     @Override
-    public boolean verifyByDate(String csDate) {
-        Query query = entityManager().createQuery("select e.pk from " + this.entityClass.getSimpleName() + " e where e.csDate=:csDate");
-        query.setParameter("dateCS", csDate);
+    public boolean verifyByDate(String canteenShiftDate) {
+        Query query = entityManager().createQuery("select e.pk from " + this.entityClass.getSimpleName() + " e where e.canteenShiftDate=:canteenShiftDate");
+        query.setParameter("canteenShiftDate", canteenShiftDate);
 
         return Strings.isNullOrEmpty((String) query.getSingleResult());
     }
     
     @Override
-    public boolean close(Calendar cal) {
+    public CanteenShift close(Calendar cal) {
         Optional<CanteenShift> cs = this.findByDate(cal);
         if(!cs.isPresent())
-            return false;
-        return cs.get().close();
+            return null;
+        
+        if(!cs.get().close())
+            return null;
+        return cs.get();
     }
     
     private Optional<CanteenShift> findByDate(Calendar cal) {
-        String dateCS;
+        String canteenShiftDate;
         
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
         
         if(month <= 9)
-            dateCS = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
+            canteenShiftDate = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
         else
-            dateCS = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
+            canteenShiftDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
         
-        return matchOne("e.dateCS=:dateCS", "dateCS", dateCS);
+        return matchOne("e.canteenShiftDate=:canteenShiftDate", "canteenShiftDate", canteenShiftDate);
     }
-     
+    
     @Override
     public boolean openNewShift(Calendar cal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
