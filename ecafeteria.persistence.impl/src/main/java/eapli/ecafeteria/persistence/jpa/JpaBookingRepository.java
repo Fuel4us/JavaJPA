@@ -73,7 +73,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         bookingList.sort(comparator);
         return bookingList.get(0);
     }
-    
+
     public class BirthDateComparator implements Comparator<Booking> {
         @Override
         public int compare(Booking booking1, Booking booking2) {
@@ -95,12 +95,14 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
      * @return Bookins
      */
     @Override
-    public Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState bookingState) {
+    public Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState bookingState) {
         Map<String, Object> params = new HashMap<>();
-        params.put("user", user);
+        params.put("user", user.get());
         params.put("mealType", mealType);
         params.put("bookingState", bookingState);
-        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.bookingState =:bookingState AND e.meal.day = '" + new java.sql.Date(Calendar.getInstance().getTimeInMillis()) + "'", params);
+        Date mealDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        params.put("mealDate", mealDate);
+        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.bookingState =:bookingState AND e.meal.mealDate = :mealDate", params);
     }
 
     /**

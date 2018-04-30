@@ -31,7 +31,7 @@ public class DeliverBookingController {
     }
     
     public Iterable<MealType> listMealTypes() {
-        return (Iterable<MealType>) MealType.MealTypeValues().iterator();
+        return (Iterable<MealType>) MealType.MealTypeValues();
     }
     
     public Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState rs) {
