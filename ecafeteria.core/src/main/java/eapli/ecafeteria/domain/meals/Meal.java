@@ -234,10 +234,13 @@ public class Meal implements Serializable {
      * @return true or false
      */
     private boolean setMenu(Menu menu) {
-        if (validaMenu(menu)) {
-            this.menu = menu;
-            return true;
+        if (menu != null) {
+            if (validaMenu(menu)) {
+                this.menu = menu;
+                return true;
+            }
         }
+        this.menu = menu;
         return false;
     }
 
@@ -311,9 +314,9 @@ public class Meal implements Serializable {
     public String toString() {
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         String date = data.format(mealDate.getTime());
-        return "Dish: " + dish.name().toString() + "\nMeal Type: " + mealType.toString() + "\nMeal Date: " + date;
+        return "\nDish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
     }
-    
+
     public String toStringAll() {
         SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
         String data2 = data.format(mealDate.getTime());

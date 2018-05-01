@@ -3,7 +3,11 @@ package eapli.ecafeteria.domain.menus;
 import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.application.menus.RegisterMenuController;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.MealRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.Designation;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -263,4 +267,21 @@ public class Menu implements Serializable {
         }
     }
 
+    public void valideMealsOfMenu() throws DataConcurrencyException, DataConcurrencyException, DataIntegrityViolationException {
+        final MealRepository mealRepository = PersistenceContext.repositories().meals();
+        Set<Meal> mealsOfMenu = getMealList();
+        Set<Meal> mealsOfPeriod = mealsInPeriod(startDate, endDate);
+
+        if (mealsOfMenu != null && mealsOfMenu != null) {
+
+            for (Meal meal : mealsOfMenu) {
+                if (!mealsOfPeriod.contains(meal)) {
+                    meal.insertMenu(null);
+                    mealRepository.save(meal);
+                }
+            }
+
+        }
+
+    }
 }

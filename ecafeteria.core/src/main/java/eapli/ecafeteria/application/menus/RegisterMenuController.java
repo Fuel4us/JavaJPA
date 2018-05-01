@@ -30,7 +30,7 @@ public class RegisterMenuController {
 
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
-    Iterable<Meal> allMeals = this.mealRepository.findAll();
+    Iterable<Meal> allMeals;
 
     private Menu menu = new Menu();
 
@@ -59,7 +59,7 @@ public class RegisterMenuController {
     public Iterable<Meal> getAllMealsAvailablesToMenu(Menu menu) {
 
         Set<Meal> mealsAvailables = new HashSet<>();
-
+        allMeals = this.mealRepository.findAll();
         for (Meal meal : allMeals) {
             if (meal.getMealDate() != null) {
                 if (meal.getMenu() == null && meal.validaMenu(menu)) {
@@ -72,7 +72,11 @@ public class RegisterMenuController {
 
     public Iterable<Meal> getAllMealsOfMenu(Menu menu) {
         Set<Meal> mealsAvailables = new HashSet<>();
-
+        allMeals = this.mealRepository.findAll();
+        
+        if (allMeals == null) {
+            return new HashSet<>();
+        }
         for (Meal meal : allMeals) {
             if (meal.getMenu() != null) {
                 if (meal.getMenu().id().equals(menu.id())) {
@@ -81,6 +85,15 @@ public class RegisterMenuController {
             }
         }
         return mealsAvailables;
+    }
+
+    public void printerMenuInformations(Menu menu) {
+        Iterable<Meal> mealsOfMenu;
+        mealsOfMenu = getAllMealsOfMenu(menu);
+        System.out.println("***     MENU BEM INSERIDO ***");
+        System.out.println(menu.toString());
+        System.out.println("*****       MEALS DO MENU       *****");
+        System.out.println(mealsOfMenu.toString());
     }
 
 }
