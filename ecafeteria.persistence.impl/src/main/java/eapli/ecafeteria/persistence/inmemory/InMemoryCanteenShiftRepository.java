@@ -45,11 +45,6 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
     }
 
     @Override
-    public boolean openNewShift(Calendar cal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Optional<CanteenShift> findCurrentDayShift() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

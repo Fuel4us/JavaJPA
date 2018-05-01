@@ -6,11 +6,13 @@
 package eapli.ecafeteria.application.finance;
 
 import eapli.ecafeteria.domain.finance.POS;
+import eapli.ecafeteria.domain.finance.WorkSession;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -43,9 +45,17 @@ public class OpenPOSController implements Controller {
 
             Optional<CanteenShift> canteenShift = canteenShiftRepository.findCurrentDayShift();
 
-            if (!canteenShift.isPresent()) {
+            if (canteenShift == null) {
                 //abre o shift do dia atual(1ª caixa)
-                canteenShiftRepository.openNewShift(Calendar.getInstance());
+
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 1);
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+
+                String formatted = format1.format(cal.getTime());
+                
+                //abre um novo turno de cantina
+                //canteenShiftRepository.save(new CanteenShift(Calendar.getInstance(), new WorkSession()));
             }
 
             return true;

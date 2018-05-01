@@ -5,6 +5,7 @@ import eapli.ecafeteria.persistence.POSRepository;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import javax.persistence.NoResultException;
 
 class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements POSRepository {
 
@@ -12,7 +13,11 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
     public Optional<POS> findPOSByID(Long id) {
         final Map<String, Object> params = new HashMap<>();
         params.put("id", id);
-        return matchOne("e.id = :id", params);
+        try {
+            return matchOne("e.id = :id", params);
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
@@ -23,7 +28,7 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
         if (!pos.isOpen()) {
 
             //abre POS
-            if(pos.open()){
+            if (pos.open()) {
                 return true;
             }
         }

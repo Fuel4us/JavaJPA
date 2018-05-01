@@ -44,6 +44,8 @@ public class OpenPOSUI extends AbstractUI {
             if (!theController.openPOS(posID)) {
                 System.out.println("The is POS already opened!\n");
                 //return false; //Dúvida - o que acontece quando este método retorna false?
+            }else{
+                System.out.println("POS opened successfully!\n");
             }
         } catch (Exception e) {
             Logger.getLogger(OpenPOSUI.class.getName()).log(Level.SEVERE, null, e);

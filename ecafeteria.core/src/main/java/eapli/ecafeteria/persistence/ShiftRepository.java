@@ -16,7 +16,6 @@ import java.util.Date;
  */
 public interface ShiftRepository extends DataRepository<Shift, Long>{
     
-    public Iterable<Shift> findByDate(Date shiftDate);
     public boolean checkShift(Date shiftDate, MealType shiftMealType);
     
 }

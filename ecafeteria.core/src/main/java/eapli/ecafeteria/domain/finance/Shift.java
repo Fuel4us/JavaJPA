@@ -10,6 +10,7 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,19 +21,23 @@ import javax.persistence.Temporal;
  *
  * @author Josué Lapa
  */
+@Entity
 public class Shift implements AggregateRoot<Long>, Serializable{
-
+    
     private static final long serialVersionUID = 1L;
-
+    //public  static final int LUNCH_INIT_HOUR = 12;
+    //public  static final int LUNCH_END_HOUR = 15;
+    public  static final int DINNER_INIT_HOUR = 15;
+    //public static final int DINNER_END_HOUR = 21;
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date shiftDate; //DATE OU SHIFTDATE?
-    @OneToOne
     private MealType mealType;
-    @OneToOne
     private ShiftState shiftState;
 
     public Shift() {
