@@ -40,5 +40,4 @@ public class MealPlanItemQuantity {
         this.itemQuantity = itemQuantity;
     }
     
-    
 }
