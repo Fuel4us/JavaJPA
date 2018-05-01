@@ -36,7 +36,7 @@ public class RegisterMealUI extends AbstractUI {
         String dataRecebida;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         df.setLenient(false);
-        Date mealDateBegMenu = null;
+        Date mealDate = null;
         Date aux = null;
 
         do {
@@ -45,12 +45,12 @@ public class RegisterMealUI extends AbstractUI {
             dataRecebida = s.nextLine();
             try {
                 aux = df.parse(dataRecebida);
-                mealDateBegMenu = aux;
+                mealDate = aux;
                 System.out.println("***DADO BEM INSERIDO***\n\n");
             } catch (ParseException ex) {
                 System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
-        } while (mealDateBegMenu == null);
+        } while (mealDate == null);
 
         final Iterable<MealType> mealTypes = this.theController.getMealTypes();
 
@@ -85,7 +85,7 @@ public class RegisterMealUI extends AbstractUI {
             } while (dish == null);
 
             try {
-                this.theController.registerMeal(mealType, mealDateBegMenu, dish);
+                this.theController.registerMeal(mealType, mealDate, dish);
                 System.out.println("\n\n            ###     MEAL BEM INSERIDA       ###");
                 System.out.println(this.theController.toString());
                 return true;

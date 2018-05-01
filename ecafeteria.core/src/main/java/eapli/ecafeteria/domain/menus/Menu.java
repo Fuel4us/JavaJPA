@@ -1,9 +1,11 @@
 package eapli.ecafeteria.domain.menus;
 
 import eapli.ecafeteria.application.meals.ListMealService;
+import eapli.ecafeteria.application.menus.RegisterMenuController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.Designation;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,9 +49,9 @@ public class Menu implements Serializable {
         if (startDate == null || endDate == null || name == null) {
             throw new IllegalArgumentException();
         }
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        changeName(name);
+        changeStartDate(startDate);
+        changeEndDate(endDate);
         this.published = false;
     }
 
@@ -64,8 +66,8 @@ public class Menu implements Serializable {
             throw new IllegalArgumentException();
         }
         this.name = Designation.valueOf("Nome não inserido!!!");
-        this.startDate = startDate;
-        this.endDate = endDate;
+        changeStartDate(startDate);
+        changeEndDate(endDate);
         this.published = false;
     }
 
@@ -219,17 +221,18 @@ public class Menu implements Serializable {
 
     @Override
     public String toString() {
-        return "Menu{"
-                + ", Name=" + name
-                + ", startDate=" + startDate
-                + ", endDate=" + endDate
-                + '}';
+        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
+        String data1 = data.format(startDate.getTime());
+        String data2 = data.format(endDate.getTime());
+        return "Menu --> "
+                + " Name: " + name
+                + ", startDate: " + data1
+                + ", endDate: " + data2;
     }
 
     public Set<Meal> getMealList() {
-        ListMealService lms = new ListMealService();
-
-        return (Set<Meal>) lms.allMealsOfMenu(this.id);
+        RegisterMenuController rmc = new RegisterMenuController();
+        return (Set<Meal>) rmc.getAllMealsOfMenu(this);
     }
 
     /**

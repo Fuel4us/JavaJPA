@@ -50,12 +50,10 @@ public class Meal implements Serializable {
         if (dish == null || mealDate == null || mealType == null || menu == null) {
             throw new IllegalArgumentException();
         }
-        this.mealType = mealType;
-        this.mealDate = mealDate;
-        this.dish = dish;
-        if (validaMenu(menu)) {
-            this.menu = menu;
-        }
+        setMealType(mealType);
+        setMealDate(mealDate);
+        setDish(dish);
+        setMenu(menu);
     }
 
     /**
@@ -69,9 +67,9 @@ public class Meal implements Serializable {
         if (dish == null || mealDate == null || mealType == null) {
             throw new IllegalArgumentException();
         }
-        this.mealType = mealType;
-        this.mealDate = mealDate;
-        this.dish = dish;
+        setMealType(mealType);
+        setMealDate(mealDate);
+        setDish(dish);
         this.menu = null;
     }
 
@@ -83,15 +81,13 @@ public class Meal implements Serializable {
      * @param other
      */
     public Meal(Meal other) {
-        if (other.dish == null || other.mealType == null) {
+        if (other.dish == null || other.mealDate == null || other.mealType == null || other.menu == null) {
             throw new IllegalArgumentException();
         }
-        this.mealDate = other.mealDate;
-        this.dish = other.dish;
-        this.mealType = other.mealType;
-        if (validaMenu(menu)) {
-            this.menu = other.menu;
-        }
+        setMealType(other.mealType);
+        setMealDate(other.mealDate);
+        setDish(other.dish);
+        setMenu(other.menu);
     }
 
     /**
@@ -212,14 +208,12 @@ public class Meal implements Serializable {
      */
     private boolean setMealDate(Date date) {
         if (menu != null) {
-            if (menu.getStartDate() != null && menu.getEndDate() != null) {
-                if (date.after(menu.getStartDate()) && date.before(menu.getEndDate())) {
-                    this.mealDate = date;
-                    return true;
-                }
+            if (!validaMenu(menu)) {
+                return false;
             }
         }
-        return false;
+        this.mealDate = date;
+        return true;
     }
 
     /**
@@ -229,6 +223,17 @@ public class Meal implements Serializable {
      * @return true or false
      */
     public boolean insertMenu(Menu menu) {
+        return setMenu(menu);
+
+    }
+
+    /**
+     * Método que atribui um menu à Meal em questão.
+     *
+     * @param menu
+     * @return true or false
+     */
+    private boolean setMenu(Menu menu) {
         if (validaMenu(menu)) {
             this.menu = menu;
             return true;
@@ -242,9 +247,9 @@ public class Meal implements Serializable {
      * @param menu
      * @return true or false
      */
-    private boolean validaMenu(Menu menu) {
+    public boolean validaMenu(Menu menu) {
         if (menu.getEndDate() != null && menu.getStartDate() != null) {
-            return menu.getStartDate().before(mealDate) && menu.getEndDate().after(mealDate);
+            return ((menu.getStartDate().before(mealDate) || menu.getStartDate().equals(mealDate)) && (menu.getEndDate().after(mealDate)) || menu.getEndDate().equals(mealDate));
         }
         return false;
     }
@@ -304,19 +309,15 @@ public class Meal implements Serializable {
 
     @Override
     public String toString() {
-        return "Meal{" + "dish=" + dish.name().toString() + ", mealType=" + mealType + ", mealDate=" + mealDate + ",menu=" + menu.getName().toString() + '}';
-    }
-
-    public String toStringDate() {
-        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
-        String data2 = data.format(mealDate.getTime());
-        return String.format("DAY: %s /PLATE: %s /TYPE: %s /MENU: %s", data2, dish.name().toString(), mealType.toString(), menu.getName().toString());
-    }
-
-    public String toStringOnlyMeal() {
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         String date = data.format(mealDate.getTime());
         return "Dish: " + dish.name().toString() + "\nMeal Type: " + mealType.toString() + "\nMeal Date: " + date;
+    }
+    
+    public String toStringAll() {
+        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
+        String data2 = data.format(mealDate.getTime());
+        return String.format("DAY: %s /PLATE: %s /TYPE: %s /MENU: %s", data2, dish.name().toString(), mealType.toString(), menu.getName().toString());
     }
 
     /**
