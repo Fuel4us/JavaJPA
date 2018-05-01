@@ -51,4 +51,12 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
 
         return query.getResultList();
     }
+
+    @Override
+    public Iterable<Meal> findByMenu(Menu menu) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("menu", menu);
+
+        return match("e.menu = :menu", params);
+    }
 }

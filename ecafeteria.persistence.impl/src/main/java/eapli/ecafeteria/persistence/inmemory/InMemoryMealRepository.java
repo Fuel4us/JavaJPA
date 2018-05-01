@@ -42,4 +42,9 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, Long> imple
     public Iterable<Meal> findAllMealsAvailables(Menu menu) {
         return match(e -> e.getMenu() == null && e.insertMenu(menu));
     }
+
+    @Override
+    public Iterable<Meal> findByMenu(Menu menu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

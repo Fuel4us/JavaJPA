@@ -21,6 +21,8 @@ public interface MealRepository extends DataRepository<Meal, Long> {
     Iterable<Meal> findAllByLot(Long lotId);
     
     Iterable<Meal> findByIdMenu(Long idMenu);
+    
+    Iterable<Meal> findByMenu(Menu menu);
 
     Iterable<Meal> findAllMealsAvailables(Menu menu);
 }
