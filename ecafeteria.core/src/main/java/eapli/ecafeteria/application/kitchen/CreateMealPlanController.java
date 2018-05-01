@@ -5,6 +5,8 @@ import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.persistence.MealPlanItemQuantityRepository;
+import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.domain.Designation;
@@ -23,6 +25,8 @@ public class CreateMealPlanController {
     
     private final MealPlanRepository mealPlanRepo = PersistenceContext.repositories().mealplans();
     private final MenuRepository menuRepo = PersistenceContext.repositories().menus();
+    private final MealPlanItemRepository mpiRepo = PersistenceContext.repositories().mealplanitems();
+    private final MealPlanItemQuantityRepository mpiqRepo = PersistenceContext.repositories().mealplanitemquantities();
     
     /*===============STAR OF CODE FOR CREATING A NEW MEAL PLAN===============*/
     
@@ -62,13 +66,13 @@ public class CreateMealPlanController {
         return meal.getMealType().toString();
     }
     
-    public MealPlanItemQuantity setItemQuantity(int quantity, MealPlanItem item){
+    public MealPlanItemQuantity createItemQuantity(int quantity, MealPlanItem item){
         MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity, item);
         
         return itemQuantity;
     }
     
-    public MealPlanItem setPlanItem(Meal meal, MealPlan mealPlan){
+    public MealPlanItem createPlanItem(Meal meal, MealPlan mealPlan){
         MealPlanItem item = new MealPlanItem(meal, mealPlan);
         
         return item;
@@ -77,6 +81,22 @@ public class CreateMealPlanController {
     public void saveMealPlan(MealPlan mealPlan){
         try {
             mealPlanRepo.save(mealPlan);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void saveMealPlanItem(MealPlanItem mpItem){
+        try {
+            mpiRepo.save(mpItem);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void saveMealPlanItemQuantity(MealPlanItemQuantity mpItemQuantity){
+        try {
+            mpiqRepo.save(mpItemQuantity);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
         }

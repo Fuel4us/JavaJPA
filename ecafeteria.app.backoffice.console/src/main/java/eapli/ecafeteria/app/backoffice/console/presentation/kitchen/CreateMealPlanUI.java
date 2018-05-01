@@ -80,8 +80,6 @@ public class CreateMealPlanUI extends AbstractUI {
         Menu selectedMenu = selectMenu();
 
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);
-        MealPlanItem item = null;
-        MealPlanItemQuantity itemQuantity = null;
         int quantity;
         
         Set<Meal> list = mealPlan.getMenu().getMealList();
@@ -101,11 +99,15 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.printf("Number of dishes: ");
             quantity = input.nextInt();
             System.out.printf("\n");
-
-            item = controller.setPlanItem(meal, mealPlan);
-            itemQuantity = controller.setItemQuantity(quantity, item);
+            
+            MealPlanItem item = controller.createPlanItem(meal, mealPlan);
+            MealPlanItemQuantity itemQuantity = controller.createItemQuantity(quantity, item);
+            
+            controller.saveMealPlanItem(item);
+            controller.saveMealPlanItemQuantity(itemQuantity);
         }
         controller.saveMealPlan(mealPlan);
+        
         return true;
     }
 
