@@ -241,7 +241,7 @@ public class Menu implements Serializable {
 
     /**
      * Gets a list of meals from a menu in a certain menu period (Joao Reis -
-     * 1160600)
+     * 1160600) modificado por outro aluno
      *
      * @param periodStart beginning of established time period
      * @param periodEnd end of established time period
