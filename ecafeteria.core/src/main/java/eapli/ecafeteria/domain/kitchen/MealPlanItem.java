@@ -6,6 +6,7 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,20 +27,15 @@ public class MealPlanItem {
     private int id;
     
     @OneToOne
-    private Meal item;
+    private Meal mealItem;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private MealPlan mealPlan;
     
-    public MealPlanItem(Meal item, MealPlan mealPlan){
-        this.item = item;
+    public MealPlanItem(Meal mealItem, MealPlan mealPlan){
+        this.mealItem = mealItem;
         this.mealPlan = mealPlan;
     }
     
     public MealPlanItem(){}
-
-    public void setItem(Meal item) {
-        this.item = item;
-    }
-    
 }

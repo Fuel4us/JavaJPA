@@ -34,7 +34,7 @@ public class CreateMealPlanUI extends AbstractUI {
                     if(setDishQuantity()){
                         System.out.println("\nMeal plan saved successfully!");
                     }else{
-                        System.out.println("\nMeal plan not saved!");
+                        System.out.println("\nNOT POSSIBLE TO SAVE THE MEAL PLAN DUE TO LACK OF MEALS!");
                     }
                     break;
                 default:
@@ -101,9 +101,9 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.printf("\n");
             
             MealPlanItem item = controller.createPlanItem(meal, mealPlan);
-            MealPlanItemQuantity itemQuantity = controller.createItemQuantity(quantity, item);
-            
             controller.saveMealPlanItem(item);
+            
+            MealPlanItemQuantity itemQuantity = controller.createItemQuantity(quantity, item);
             controller.saveMealPlanItemQuantity(itemQuantity);
         }
         controller.saveMealPlan(mealPlan);

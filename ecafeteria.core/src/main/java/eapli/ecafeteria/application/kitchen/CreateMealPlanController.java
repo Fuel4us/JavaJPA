@@ -68,13 +68,11 @@ public class CreateMealPlanController {
     
     public MealPlanItemQuantity createItemQuantity(int quantity, MealPlanItem item){
         MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity, item);
-        
         return itemQuantity;
     }
     
     public MealPlanItem createPlanItem(Meal meal, MealPlan mealPlan){
         MealPlanItem item = new MealPlanItem(meal, mealPlan);
-        
         return item;
     }
     
@@ -101,5 +99,6 @@ public class CreateMealPlanController {
             Logger.getLogger(CreateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     /*===============END OF CODE FOR CREATING A NEW MEAL PLAN================*/
 }
