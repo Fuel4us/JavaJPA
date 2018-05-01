@@ -8,7 +8,6 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.framework.domain.Designation;
-import java.util.ArrayList;
 import java.util.List;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -34,7 +33,7 @@ public class CreateMealPlanController {
         return resultingList;
     }
     
-    public Menu getMenu(List<Menu> menuList, Integer opcao){
+    public Menu getMenu(List<Menu> menuList, int opcao){
         Menu menu = menuList.get(opcao);
         
         return menu;
@@ -63,7 +62,7 @@ public class CreateMealPlanController {
         return meal.getMealType().toString();
     }
     
-    public MealPlanItemQuantity setItemQuantity(Meal meal, int quantity, MealPlan mealPlan, MealPlanItem item){
+    public MealPlanItemQuantity setItemQuantity(int quantity, MealPlanItem item){
         MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity, item);
         
         return itemQuantity;
