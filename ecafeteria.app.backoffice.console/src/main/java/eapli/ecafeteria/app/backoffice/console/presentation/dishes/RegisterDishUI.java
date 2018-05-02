@@ -10,7 +10,6 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,11 +51,13 @@ public class RegisterDishUI extends AbstractUI {
             newMaterialsList.add(ingredient);
             listIngredients.remove(ingredient);
             ingredient = selectMaterial(listIngredients);
-
         }
+        
+        Set<Allergen> allergList = getNewAllergenList();
+        
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price, getNewAllergenList(), newMaterialsList);
+                    price, allergList, newMaterialsList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }
@@ -81,9 +82,9 @@ public class RegisterDishUI extends AbstractUI {
         }
     }
 
-    public List<Allergen> getNewAllergenList() {
+    public Set<Allergen> getNewAllergenList() {
         int i = 1, flag = 0;
-        List<Allergen> newAllergList = new ArrayList<>();
+        Set<Allergen> newAllergList = new HashSet<>();
         List<Allergen> listAllerg = this.theController.getAllAllergens();
         System.out.println("\n ALLERGEN LIST:");
         for (Allergen allerg : listAllerg) {
