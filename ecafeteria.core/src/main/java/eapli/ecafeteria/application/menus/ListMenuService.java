@@ -9,6 +9,7 @@ import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
 public class ListMenuService {
 
     private static final MenuRepository menuRepository = PersistenceContext.repositories().menus();
+    private static final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
     public Iterable<Menu> unpublishedMenus() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
@@ -42,9 +44,14 @@ public class ListMenuService {
     public static List<Meal> menuByPeriod(Date beginning, Date end) {
         Iterable<Menu> menuList = menuRepository.findByMenuPeriod(beginning, end);
         List<Meal> mealList = new ArrayList<>();
-
+        Iterable<Meal> mealsInMenu;
         for (Menu m : menuList) {
-            mealList.addAll(m.mealsInPeriod(beginning, end));
+            mealsInMenu = mealRepository.findByMenu(m);
+            for (Meal meal : mealsInMenu) {
+                if (meal.getMealDate().after(beginning) && meal.getMealDate().before(end)) {
+                    mealList.add(meal);
+                }
+            }
         }
 
         Collections.sort(mealList, Meal.compareDates());

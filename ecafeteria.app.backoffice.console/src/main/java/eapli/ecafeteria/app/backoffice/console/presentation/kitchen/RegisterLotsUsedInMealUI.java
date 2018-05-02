@@ -13,7 +13,9 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,11 +36,16 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
 
         try {
             Meal meal = selectMeal();
-            Lot lot = selectLot(meal);
-            if (lot != null) {
-                int quantityUsed = Console.readInteger("Quantity Used:");
+            List<Lot> listLotsByMeal = this.controller.getLotsByMeal(meal);
+            Lot lot = selectLot(listLotsByMeal);
+            int quantityUsed = 0;
+            
+            while (lot.id() != 0) {
+                quantityUsed = Console.readInteger("Quantity Used:");
                 this.controller.registerMealLot(meal, lot, quantityUsed);
-            } 
+                listLotsByMeal.remove(lot);
+                lot = selectLot(listLotsByMeal);
+            }
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             Logger.getLogger(RegisterLotsUsedInMealUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,23 +63,24 @@ public class RegisterLotsUsedInMealUI extends AbstractUI {
         return listMeals.get(selectMeal - 1);
     }
 
-    public Lot selectLot(Meal meal) {
-        List<Lot> listLotsByMeal = this.controller.getLotsByMeal(meal);
+    public Lot selectLot(List<Lot> listLotsByMeal) {
         if (listLotsByMeal.isEmpty()) {
             System.out.println("Não existem lotes com ingredientes registados para esta refeição!");
         } else {
 
             for (int i = 0; i < listLotsByMeal.size(); i++) {
-                System.out.println(i + 1 + " - " + this.controller.getLotsByMeal(meal).get(i).toString3());
+                System.out.println(i + 1 + " - " + listLotsByMeal.get(i).toString3());
             }
             int selectLot = Console.readInteger("Lot ID:");
-            while (selectLot < 0 || selectLot > listLotsByMeal.size() + 1) {
+            while (selectLot <= 0 || selectLot > listLotsByMeal.size()) {
                 System.out.println("ID Inválido!!!");
                 selectLot = Console.readInteger("Lot ID:");
             }
-            return listLotsByMeal.get(selectLot - 1);
+            if (selectLot != 0 && !listLotsByMeal.isEmpty()) {
+                return listLotsByMeal.get(selectLot - 1);
+            }
         }
-        return null;
+        return new Lot(0, null, 0);
     }
 
     @Override

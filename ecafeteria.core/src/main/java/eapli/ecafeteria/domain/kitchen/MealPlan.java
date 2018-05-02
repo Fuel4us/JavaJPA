@@ -1,13 +1,14 @@
 package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.menus.Menu;
+import eapli.framework.domain.ddd.AggregateRoot;
 import javax.persistence.*;
 
 /**
  * @author Tiago Babo 1160760, Gonçalo Fonseca 1150503
  */
 @Entity
-public class MealPlan {
+public class MealPlan implements AggregateRoot<Long>{
     
     private static final long serialVersionUID = 1L;
     
@@ -15,7 +16,7 @@ public class MealPlan {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @ManyToOne
     private Menu menu;
@@ -63,5 +64,15 @@ public class MealPlan {
                 ", menu=" + menu +
                 ", closed=" + closed +
                 '}';
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long id() {
+        return this.id;
     }
 }

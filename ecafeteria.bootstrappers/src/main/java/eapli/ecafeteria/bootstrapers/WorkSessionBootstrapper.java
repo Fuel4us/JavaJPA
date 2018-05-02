@@ -19,9 +19,9 @@ public class WorkSessionBootstrapper implements Action{
     }
     
     public void register() throws DataIntegrityViolationException, DataConcurrencyException {
+
         final RegisterWorkSessionController wsController = new RegisterWorkSessionController();
         
-        wsController.registerCanteenShift(1);
-        
+        wsController.registerWorkSession(1);
     }
 }

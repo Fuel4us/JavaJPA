@@ -11,6 +11,7 @@ import eapli.ecafeteria.persistence.ShiftRepository;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -18,18 +19,17 @@ import java.util.Map;
  */
 public class JpaShiftRepository extends CafeteriaJpaRepositoryBase<Shift, Long> implements ShiftRepository {
 
-    @Override
-    public Iterable<Shift> findByDate(Date shiftDate) {
-        return null;
-
-    }
 
     @Override
-    public boolean checkShift(Date shiftDate, MealType shiftMealType) {
+    public boolean checkShift(Date shiftDate, MealType mealType) {
         final Map<String, Object> params = new HashMap<>();
         params.put("shiftDate", shiftDate);
-        params.put("shiftMealType", shiftMealType);
-        return matchOne("e.shiftDate = :shiftDate AND e.shiftMealType = :shiftMealType", params).isPresent();
-
+        params.put("mealType", mealType);
+        try {
+            matchOne("e.shiftDate = :shiftDate AND e.mealType = :mealType", params).isPresent();
+            return false;
+        } catch (NoResultException e) {
+            return true;
+        }
     }
 }

@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.domain.meals;
 
+import eapli.framework.domain.ddd.ValueObject;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +15,7 @@ import java.util.Set;
  * @author Bernardo Carreira
  * @EDIT Pedro Alves
  */
-public enum MealType {
+public enum MealType implements Serializable, ValueObject{
 
     LUNCH, DINNER;
 

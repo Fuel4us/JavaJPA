@@ -7,7 +7,6 @@ import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
 import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.DishRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
@@ -18,7 +17,6 @@ import eapli.framework.domain.money.Money;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -45,7 +43,7 @@ public class RegisterDishController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         String allergenConcated = "";
         for (Allergens alrg : allergList) {
-            allergenConcated += alrg.getAllergen() + "; ";
+            allergenConcated += alrg.getDescription()+ "; ";
         }
         final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
                 Money.euros(price), allergenConcated, ingredientsList);
@@ -70,7 +68,6 @@ public class RegisterDishController implements Controller {
         for (Allergens allerg : allergRepository.findAll()) {
             listAllergens.add(allerg);
         }
-
         return listAllergens;
     }
 }

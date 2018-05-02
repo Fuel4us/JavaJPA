@@ -5,17 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.finance.Shift;
-import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.framework.persistence.repositories.DataRepository;
-import java.util.Date;
 
 /**
  *
- * @author 11607
+ * @author Tiago Babo 1160760
  */
-public interface ShiftRepository extends DataRepository<Shift, Long>{
-    
-    public boolean checkShift(Date shiftDate, MealType shiftMealType);
+public interface MealPlanItemQuantityRepository extends DataRepository<MealPlanItemQuantity, Long>{
     
 }

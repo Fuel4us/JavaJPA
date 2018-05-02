@@ -47,13 +47,18 @@ public class CanteenShift implements AggregateRoot<String>, Serializable {
         //}
     }
 
+    /**
+     * Canteen shift state initializes open 
+     * @param canteenShiftDate
+     * @param workSession
+     */
     public CanteenShift(String canteenShiftDate, WorkSession workSession) {
         if (Strings.isNullOrEmpty(canteenShiftDate)) {
             throw new IllegalArgumentException();
         }
         //if(PersistenceContext.repositories().canteenShift().verifyByDate(dateCS)){
             this.canteenShiftDate = canteenShiftDate;
-            this.canteenShiftState = CanteenShiftState.OPEN;
+            this.canteenShiftState = OPEN;
             this.workSession = workSession;
         //}
     }

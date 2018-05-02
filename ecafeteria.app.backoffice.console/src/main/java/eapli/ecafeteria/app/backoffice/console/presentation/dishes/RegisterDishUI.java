@@ -47,11 +47,16 @@ public class RegisterDishUI extends AbstractUI {
 
         final double price = Console.readDouble("Price:");
 
+        List<Material> listIngredients = this.theController.getAllMaterials();
         Set<Material> newMaterialsList = new HashSet<>();
+        Material ingredient = selectMaterial(listIngredients);
 
-        /* while (!selectMaterial().equals(null)) {
-            newMaterialsList.add(selectMaterial());
-        }*/
+        while (!ingredient.id().equals(" ")) {
+            newMaterialsList.add(ingredient);
+            listIngredients.remove(ingredient);
+            ingredient = selectMaterial(listIngredients);
+
+        }
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
                     price, getNewAllergenList(), newMaterialsList);
@@ -62,17 +67,20 @@ public class RegisterDishUI extends AbstractUI {
         return false;
     }
 
-    public Material selectMaterial() {
-        List<Material> listIngredients = this.theController.getAllMaterials();
+    public Material selectMaterial(List<Material> listIngredients) {
         for (int i = 0; i < listIngredients.size(); i++) {
-            System.out.println(i + 1 + " - " + this.theController.getAllMaterials().get(i));
+            System.out.println(i + 1 + " - " + listIngredients.get(i).description());
         }
         System.out.println("Enter 0 to exit!");
         int selectMaterial = Console.readInteger("Material ID:");
-        if (selectMaterial != 0) {
+        while (selectMaterial < 0 || selectMaterial > listIngredients.size()) {
+            System.out.println("Incorrect Ingredient ID!!! Enter again:\n");
+            selectMaterial = Console.readInteger("Material ID:");
+        }
+        if (selectMaterial != 0 && !listIngredients.isEmpty()) {
             return listIngredients.get(selectMaterial - 1);
         } else {
-            return null;
+            return new Material(" ", " ");
         }
     }
 
@@ -81,14 +89,18 @@ public class RegisterDishUI extends AbstractUI {
         List<Allergens> newAllergList = new ArrayList<>();
         List<Allergens> listAllerg = this.theController.getAllAllergens();
         for (Allergens allerg : listAllerg) {
-            System.out.println(i + " - " + allerg.getAllergen());
+            System.out.println(i + " - " + allerg.getDescription());
             i++;
         }
         System.out.println("Enter 0 to exit!");
         while (flag == 0) {
             int selectAllergen = Console.readInteger("Allergen ID:");
             if (selectAllergen != 0) {
-                newAllergList.add(listAllerg.get(selectAllergen - 1));
+                if (newAllergList.contains(listAllerg.get(selectAllergen - 1)) == false) {
+                    newAllergList.add(listAllerg.get(selectAllergen - 1));
+                } else {
+                    System.out.println("This allergen is already on the list!");
+                }
             } else {
                 flag = 1;
             }

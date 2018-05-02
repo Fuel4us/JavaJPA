@@ -58,16 +58,4 @@ public class MealBootstrapper implements Action{
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void registerMeal(Dish dish, MealType mealType, Date date, Menu menu) {
-        final RegisterMealController controller = new RegisterMealController();
-        
-        try {
-            controller.registerMeal(mealType, date, dish, menu);
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
 }

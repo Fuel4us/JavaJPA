@@ -27,7 +27,7 @@ public class OpenShiftController implements Controller {
     private final ShiftRepository shiftRepository = PersistenceContext.repositories().shift();
 
     public boolean verifyShift(Date shiftDay, MealType mealType) {
-        //verificar se já existe para a refeição do dia escolhido
+        //verificar se já existe para a refeição do dia escolhido.
         return shiftRepository.checkShift(shiftDay, mealType);
     }
 

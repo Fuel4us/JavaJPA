@@ -20,9 +20,9 @@ public class AllergenBootstrapper implements Action {
     @Override
     public boolean execute() {
         try {
-            register(TestDataConstants.ALLERGEN_GLUTEN);
-            register(TestDataConstants.ALLERGEN_CRUSTACEOS);
-            register(TestDataConstants.ALLERGEN_PEIXES);
+            register("gl", TestDataConstants.ALLERGEN_GLUTEN);
+            register("crus", TestDataConstants.ALLERGEN_CRUSTACEOS);
+            register("pe", TestDataConstants.ALLERGEN_PEIXES);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(AllergenBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
@@ -31,8 +31,8 @@ public class AllergenBootstrapper implements Action {
         return true;
     }
 
-    private void register(String allergName) throws DataConcurrencyException, DataIntegrityViolationException {
-        Allergens allerg = new Allergens(allergName);
+    private void register(String allergAcronym, String allergDescription) throws DataConcurrencyException, DataIntegrityViolationException {
+        Allergens allerg = new Allergens(allergAcronym, allergDescription);
 
         allergRepository.save(allerg);
     }
