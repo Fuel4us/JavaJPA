@@ -3,7 +3,7 @@ package eapli.ecafeteria.bootstrapers;
 import java.util.logging.Logger;
 
 import eapli.ecafeteria.application.dishes.RegisterDishController;
-import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.Material;
@@ -33,9 +33,9 @@ public class DishBootstrapper implements Action {
         final DishType fish = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_FISH).get();
         final DishType meat = dishTypeRepo.findByAcronym(TestDataConstants.DISH_TYPE_MEAT).get();
 
-        List<Allergens> allergList1 = new ArrayList<>();
-        List<Allergens> allergList2 = new ArrayList<>();
-        List<Allergens> allergList3 = new ArrayList<>();
+        List<Allergen> allergList1 = new ArrayList<>();
+        List<Allergen> allergList2 = new ArrayList<>();
+        List<Allergen> allergList3 = new ArrayList<>();
         Set<Material>  ingredientsList = new HashSet<>();
         
         for (Material material : matRepo.findAll()) {
@@ -43,13 +43,13 @@ public class DishBootstrapper implements Action {
         }
         
         
-        allergList1.add(new Allergens("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
-        allergList1.add(new Allergens("gl", TestDataConstants.ALLERGEN_GLUTEN));
+        allergList1.add(new Allergen("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
+        allergList1.add(new Allergen("gl", TestDataConstants.ALLERGEN_GLUTEN));
 
-        allergList2.add(new Allergens("pe", TestDataConstants.ALLERGEN_PEIXES));
-        allergList2.add(new Allergens("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
+        allergList2.add(new Allergen("pe", TestDataConstants.ALLERGEN_PEIXES));
+        allergList2.add(new Allergen("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
 
-        allergList3.add(new Allergens("gl", TestDataConstants.ALLERGEN_GLUTEN));
+        allergList3.add(new Allergen("gl", TestDataConstants.ALLERGEN_GLUTEN));
 
         register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99, allergList1, ingredientsList);
         register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85, allergList2, ingredientsList);
@@ -64,7 +64,7 @@ public class DishBootstrapper implements Action {
     /**
      *
      */
-    private void register(DishType dishType, String description, int cal, int salt, double price, List<Allergens> allergens, Set<Material> ingredientsList) {
+    private void register(DishType dishType, String description, int cal, int salt, double price, List<Allergen> allergens, Set<Material> ingredientsList) {
         final RegisterDishController controller = new RegisterDishController();
         try {
             controller.registerDish(dishType, description, cal, salt, price, allergens, ingredientsList);

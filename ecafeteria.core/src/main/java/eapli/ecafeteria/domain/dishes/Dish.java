@@ -48,12 +48,12 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
-    String allergenList;
+    private String allergenList;
     @ManyToMany
     private Set<Material> ingredientsList;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private Allergens allerg;
+    private Allergen allerg;
 
     public Dish(final DishType dishType, final Designation name,
             final NutricionalInfo nutricionalInfo, Money price, String allergenList, Set<Material> ingredientsList) {

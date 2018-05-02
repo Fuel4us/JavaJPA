@@ -10,17 +10,17 @@ import java.util.Set;
  */
 public class AllergensList {
 
-    private static final Set<Allergens> allergenList = new HashSet<>();
+    private static final Set<Allergen> allergenList = new HashSet<>();
 
     public static boolean addAllerg(String acronym, String description) {
-        return allergenList.add(new Allergens(acronym, description));
+        return allergenList.add(new Allergen(acronym, description));
     }
 
-    public static boolean removeAllerg(Allergens allerg) {
+    public static boolean removeAllerg(Allergen allerg) {
         return allergenList.remove(allerg);
     }
 
-    public static Set<Allergens> getAllergList() {
+    public static Set<Allergen> getAllergList() {
         return allergenList;
     }
 

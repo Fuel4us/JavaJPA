@@ -1,6 +1,6 @@
 package eapli.ecafeteria.bootstrapers;
 
-import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.actions.Action;
@@ -32,7 +32,7 @@ public class AllergenBootstrapper implements Action {
     }
 
     private void register(String allergAcronym, String allergDescription) throws DataConcurrencyException, DataIntegrityViolationException {
-        Allergens allerg = new Allergens(allergAcronym, allergDescription);
+        Allergen allerg = new Allergen(allergAcronym, allergDescription);
 
         allergRepository.save(allerg);
     }
