@@ -7,9 +7,9 @@ import eapli.ecafeteria.persistence.WorkSessionRepository;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static eapli.ecafeteria.application.kitchen.Utilities.createCurrentDate;
 
 public class CanteenShiftBootstrapper implements Action {
     
@@ -31,23 +31,10 @@ public class CanteenShiftBootstrapper implements Action {
         Iterable<WorkSession> Iws = wsRepository.findAll();
         WorkSession ws1 = Iws.iterator().next();
         
-        //uma string em formato YYYYMMDD, para o dia de hoje
-        Calendar cal = Calendar.getInstance();
-        String canteenShiftDate;
-        
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        
-        if(month <= 9)
-            canteenShiftDate = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
-        else
-            canteenShiftDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
-        
         //para um dia que já passou
-        csController.registerCanteenShift("20180101", ws1);
+        csController.registerCanteenShift("2018-01-01", ws1);
         
         //para o dia atual
-        csController.registerCanteenShift(canteenShiftDate, ws1);
+        csController.registerCanteenShift(createCurrentDate(), ws1);
     }
 }

@@ -2,7 +2,9 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.persistence.POSRepository;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.persistence.NoResultException;
@@ -36,17 +38,18 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
     }
 
     @Override
-    public boolean findOpenToClose() {
+    public List<POS> findOpenToClose() {
 
-        boolean verify = false;
+        List<POS> posList = new ArrayList<>();
 
         for (POS pos : findAll()) {
             if (pos.isOpen()) {
                 pos.close();
-                verify = true;
+                posList.add(pos);
             }
         }
-        return verify;
+        
+        return posList;
     }
 
 }
