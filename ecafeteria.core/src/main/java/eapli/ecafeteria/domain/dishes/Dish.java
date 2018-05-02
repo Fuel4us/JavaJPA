@@ -53,9 +53,6 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     @ManyToMany
     private Set<Material> ingredientsList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Allergen allerg;
-
     public Dish(final DishType dishType, final Designation name,
             final NutricionalInfo nutricionalInfo, Money price, Set<Allergen> allergenList, Set<Material> ingredientsList) {
         if (dishType == null || name == null || nutricionalInfo == null) {
