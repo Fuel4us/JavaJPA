@@ -35,9 +35,9 @@ public class MovementFactory {
     public boolean createMovement(){
         if (amount > 0) {
             movement = new Movement(nif, movementType, amount, currency);  
-            System.out.println("Movement amount <= 0\n");
             return true;
         }
+            System.out.println("Movement amount isn't valid\n");
         return false;
     }
     
