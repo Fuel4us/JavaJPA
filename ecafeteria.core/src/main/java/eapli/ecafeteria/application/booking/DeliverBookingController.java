@@ -87,24 +87,6 @@ public class DeliverBookingController implements Controller {
         return false;
     }
     
-    /*public boolean registerDelivery() throws DataConcurrencyException {
-
-        Delievery d = new Delievery(Calendar.getInstance(), user, bookingMeal);
-        try {
-            bookingMeal.updateBookingMealStatus(BookingMealStatus.DELIVERED);
-            deliveryRepo.save(d);
-        } catch (DataIntegrityViolationException ex) {
-            System.out.println("CANNOT REGISTER DELIVERY!!!");
-            Logger.getLogger(RegisterMealDelieveryController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return true;
-    }
-
-    public void setBooking(BookingMeal b) {
-        this.bookingMeal = b;
-    }
-*/
     public boolean registerDelivery() throws DataConcurrencyException, DataIntegrityViolationException {
         
         Delievery d = new Delievery(Calendar.getInstance(), user, booking);

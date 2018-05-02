@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.pos.console.presentation.booking;
 
 import eapli.ecafeteria.application.booking.DeliverBookingController;
 import eapli.ecafeteria.domain.booking.Booking;
+import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -35,6 +36,7 @@ public class DeliverBookingUI extends AbstractUI {
         boolean flag2;
         do {
             final String mecNum = Console.readLine("Input the mecanographic number:");
+            MecanographicNumber mn = new MecanographicNumber(mecNum + "");
             controller.cafetariaUserToSee(mecNum);
             controller.showBookedBookings();
             int choice = Console.readInteger("Please choose a booking: ");
@@ -45,9 +47,7 @@ public class DeliverBookingUI extends AbstractUI {
                 if(controller.registerDelivery()){
                     System.out.println("Success!!");
                 }
-            }   catch (DataIntegrityViolationException ex) {
-                    Logger.getLogger(DeliverBookingUI.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (DataConcurrencyException ex) {
+            }   catch (DataIntegrityViolationException | DataConcurrencyException ex) {
                     Logger.getLogger(DeliverBookingUI.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
