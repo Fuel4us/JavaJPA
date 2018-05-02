@@ -5,7 +5,9 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import java.util.HashMap;
@@ -58,5 +60,13 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         params.put("menu", menu);
 
         return match("e.menu = :menu", params);
+    }
+
+    @Override
+    public Iterable<Meal> findAllByMealType(MealType mealType, DishType dishType) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("mealType", mealType);
+        params.put("dishType", dishType);
+        return match("e.mealType = :mealType AND e.dish.dishType =:dishType", params);
     }
 }
