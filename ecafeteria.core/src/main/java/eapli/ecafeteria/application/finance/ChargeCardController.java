@@ -6,37 +6,36 @@
 package eapli.ecafeteria.application.finance;
 
 import eapli.ecafeteria.domain.movement.BalanceService;
-import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.movement.MovementType;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
+import eapli.ecafeteria.domain.movement.MovementFactory;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.Currency;
-import java.util.Locale;
 import java.util.Optional;
 
 /**
  *
  * @author Hernani Gil
  */
+
 public class ChargeCardController {
     private CafeteriaUser selectedUser;
     
     private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
     private final MovementRepository movementRepository = PersistenceContext.repositories().movement();
-//    public Iterable<CafeteriaUser> activeUsers() {
-//        return this.cafeteriaUserRepository.findAllActive();
-//    }
+    private MovementFactory factory;
     
     public boolean selectUser(Username username){ //boolean
         Optional<CafeteriaUser> OpCU = cafeteriaUserRepository.findByUsername(username);
         
-        if(OpCU.isPresent()){
+        
+        //se o existe e se o seu estado de SystemUser está ativo
+        if(OpCU.isPresent() && OpCU.get().user().activate()){
             selectedUser = OpCU.get();
             return true;
         }else{
@@ -46,13 +45,14 @@ public class ChargeCardController {
         
     }
     
-    public double ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{  //bolean
+    public double ChargeCard(double amount) throws DataConcurrencyException, DataIntegrityViolationException{ 
         //AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.SALE);
         if(selectedUser!=null){
-            Currency currency = Currency.getInstance(Locale.FRANCE); 
-            Movement movement = new Movement(new MecanographicNumber(this.selectedUser.mecanographicNumber().number()), MovementType.DEPOSIT, amount, currency);
-      
-            movementRepository.save(movement);
+            factory = new MovementFactory(new MecanographicNumber(this.selectedUser.mecanographicNumber().number()), MovementType.DEPOSIT, amount);
+            
+            if(factory.createMovement()){
+                factory.saveMovement();
+            }
         }
         return BalanceService.balance(this.selectedUser.mecanographicNumber());
     }
