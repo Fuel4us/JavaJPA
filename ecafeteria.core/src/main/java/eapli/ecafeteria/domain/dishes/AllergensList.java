@@ -12,8 +12,8 @@ public class AllergensList {
 
     private static final Set<Allergens> allergenList = new HashSet<>();
 
-    public static boolean addAllerg(String allerg) {
-        return allergenList.add(new Allergens(allerg));
+    public static boolean addAllerg(String acronym, String description) {
+        return allergenList.add(new Allergens(acronym, description));
     }
 
     public static boolean removeAllerg(Allergens allerg) {

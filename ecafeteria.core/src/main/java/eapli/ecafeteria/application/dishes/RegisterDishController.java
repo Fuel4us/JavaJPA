@@ -43,7 +43,7 @@ public class RegisterDishController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
         String allergenConcated = "";
         for (Allergens alrg : allergList) {
-            allergenConcated += alrg.getAllergen() + "; ";
+            allergenConcated += alrg.getDescription()+ "; ";
         }
         final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
                 Money.euros(price), allergenConcated, ingredientsList);

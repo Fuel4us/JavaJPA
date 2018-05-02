@@ -19,31 +19,34 @@ public class Allergens implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String allergen;
+    private String acronym;
+    private String description;
 
-    public Allergens(String allergen) {
-        this.allergen = allergen;
+    public Allergens(String acronym, String description) {
+        this.acronym = acronym;
+        this.description = description;
     }
 
     public Allergens() {
     }
 
-    public String getAllergen() {
-        return allergen;
+    public String getAcronym() {
+        return acronym;
     }
 
-    public void setAllergen(String allergen) {
-        this.allergen = allergen;
+    public String getDescription() {
+        return description;
     }
-
+    
     public Long id() {
         return id;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.allergen);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.acronym);
+        hash = 47 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -59,10 +62,18 @@ public class Allergens implements Serializable {
             return false;
         }
         final Allergens other = (Allergens) obj;
-        if (!Objects.equals(this.allergen, other.allergen)) {
+        if (!Objects.equals(this.acronym, other.acronym)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Allergens{" + "acronym=" + acronym + ", description=" + description + '}';
     }
 
 }

@@ -43,13 +43,13 @@ public class DishBootstrapper implements Action {
         }
         
         
-        allergList1.add(new Allergens(TestDataConstants.ALLERGEN_CRUSTACEOS));
-        allergList1.add(new Allergens(TestDataConstants.ALLERGEN_GLUTEN));
+        allergList1.add(new Allergens("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
+        allergList1.add(new Allergens("gl", TestDataConstants.ALLERGEN_GLUTEN));
 
-        allergList2.add(new Allergens(TestDataConstants.ALLERGEN_PEIXES));
-        allergList2.add(new Allergens(TestDataConstants.ALLERGEN_CRUSTACEOS));
+        allergList2.add(new Allergens("pe", TestDataConstants.ALLERGEN_PEIXES));
+        allergList2.add(new Allergens("crus", TestDataConstants.ALLERGEN_CRUSTACEOS));
 
-        allergList3.add(new Allergens(TestDataConstants.ALLERGEN_GLUTEN));
+        allergList3.add(new Allergens("gl", TestDataConstants.ALLERGEN_GLUTEN));
 
         register(vegie, TestDataConstants.DISH_NAME_TOFU_GRELHADO, 140, 1, 2.99, allergList1, ingredientsList);
         register(vegie, TestDataConstants.DISH_NAME_LENTILHAS_SALTEADAS, 180, 1, 2.85, allergList2, ingredientsList);
