@@ -6,6 +6,7 @@
 package eapli.ecafeteria.application.finance;
 
 import eapli.ecafeteria.domain.movement.BalanceService;
+import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.movement.MovementType;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
@@ -16,13 +17,14 @@ import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Currency;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
  *
  * @author Hernani Gil
  */
-
 public class ChargeCardController {
     private CafeteriaUser selectedUser;
     
@@ -35,7 +37,7 @@ public class ChargeCardController {
         
         
         //se o existe e se o seu estado de SystemUser está ativo
-        if(OpCU.isPresent() && OpCU.get().user().activate()){
+        if(OpCU.isPresent() && OpCU.get().user().isActive()){
             selectedUser = OpCU.get();
             return true;
         }else{
@@ -54,6 +56,7 @@ public class ChargeCardController {
                 factory.saveMovement();
             }
         }
+        
         return BalanceService.balance(this.selectedUser.mecanographicNumber());
     }
 }
