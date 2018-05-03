@@ -1,6 +1,9 @@
 package eapli.ecafeteria.domain.kitchen;
 
-public enum CanteenShiftState {
+import eapli.framework.domain.ddd.ValueObject;
+import java.io.Serializable;
+
+public enum CanteenShiftState implements Serializable, ValueObject{
     OPEN, CLOSED;
     
     public static CanteenShiftState[] CanteenShiftState() {

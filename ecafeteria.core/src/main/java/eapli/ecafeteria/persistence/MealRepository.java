@@ -5,8 +5,10 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.framework.domain.Designation;
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Optional;
 
@@ -20,5 +22,11 @@ public interface MealRepository extends DataRepository<Meal, Long> {
 
     Iterable<Meal> findAllByLot(Long lotId);
     
+    Iterable<Meal> findAllByMealType(MealType mealType, DishType dishType);
+    
     Iterable<Meal> findByIdMenu(Long idMenu);
+    
+    Iterable<Meal> findByMenu(Menu menu);
+
+    Iterable<Meal> findAllMealsAvailables(Menu menu);
 }

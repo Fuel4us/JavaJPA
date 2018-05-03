@@ -13,9 +13,7 @@ import eapli.ecafeteria.persistence.RatingRepository;
  * @author ruben
  */
 public class JpaRatingRepository extends CafeteriaJpaRepositoryBase<Rating, Long> implements RatingRepository{
-    
     public JpaRatingRepository() {
     }
-    
     
 }

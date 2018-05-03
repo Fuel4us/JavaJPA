@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
+import static eapli.ecafeteria.application.kitchen.Utilities.createCurrentDate;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
@@ -8,10 +9,10 @@ import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, Calendar> implements CanteenShiftRepository {
+public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenShift, String> implements CanteenShiftRepository {
 
     @Override
-    protected Calendar newKeyFor(CanteenShift entity) {
+    protected String newKeyFor(CanteenShift entity) {
         return entity.id();
     }
 
@@ -26,9 +27,24 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
     }
 
     @Override
-    public boolean close(Calendar cal) {
-        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(cal));
-        return cs.get().close();
+    public CanteenShift close() {
+        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(createCurrentDate()));
+
+        if (!cs.get().close()) {
+            return null;
+        }
+
+        return cs.get();
+    }
+
+    @Override
+    public Optional<CanteenShift> findCurrentDayShift() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean verifyByDate(String date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

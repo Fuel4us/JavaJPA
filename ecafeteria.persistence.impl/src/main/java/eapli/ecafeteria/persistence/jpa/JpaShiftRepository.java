@@ -5,10 +5,13 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
-import eapli.ecafetaria.domain.finance.Shift;
+import eapli.ecafeteria.domain.finance.Shift;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.ShiftRepository;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -16,19 +19,17 @@ import java.util.Date;
  */
 public class JpaShiftRepository extends CafeteriaJpaRepositoryBase<Shift, Long> implements ShiftRepository {
 
-    @Override
-    public Iterable<Shift> findByDate(Date shiftDate) {
-        return null;
-
-    }
 
     @Override
-    public boolean checkShift(Date shiftDate, MealType shiftMealType) {
-        return false;
-
-    }
-    @Override
-    public void addShift(Date shiftDate, MealType shiftMealType){
-        
+    public boolean checkShift(Date shiftDate, MealType mealType) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("shiftDate", shiftDate);
+        params.put("mealType", mealType);
+        try {
+            matchOne("e.shiftDate = :shiftDate AND e.mealType = :mealType", params).isPresent();
+            return false;
+        } catch (NoResultException e) {
+            return true;
+        }
     }
 }

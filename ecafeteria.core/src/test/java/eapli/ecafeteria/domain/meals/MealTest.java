@@ -5,16 +5,17 @@
  */
 package eapli.ecafeteria.domain.meals;
 
-import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.Allergen;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
-import eapli.ecafeteria.dto.MealDTO;
+import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.money.Money;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +59,7 @@ public class MealTest {
     public void testGetDate() {
         System.out.println("getDate");
         Date expResult = new Date(2018, 4, 24);
-        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new NutricionalInfo(4, 4), new Money(2.14, Currency.getInstance(Locale.GERMANY)), new Allergens());
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
         Meal instance = new Meal(MealType.LUNCH, expResult, d);
 
         Date result = instance.getMealDate();
@@ -80,7 +81,7 @@ public class MealTest {
         Date date7 = new Date(2018, 4, 23);
         Date date8 = new Date(2018, 4, 25);
 
-        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new NutricionalInfo(4, 4), new Money(2.14, Currency.getInstance(Locale.GERMANY)), new Allergens());
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"),  new Money(2.14, Currency.getInstance(Locale.GERMANY)));
         Meal meal1 = new Meal(MealType.LUNCH, date1, d);
         Meal meal2 = new Meal(MealType.LUNCH, date2, d);
         Meal meal3 = new Meal(MealType.LUNCH, date3, d);

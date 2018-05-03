@@ -5,12 +5,15 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
-import eapli.framework.domain.Designation;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,7 +33,6 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
     public Iterable<Meal> findAllByLot(Long lotId) {
         final Map<String, Object> params = new HashMap<>();
         params.put("lotId", lotId);
-
         return match("e.lotId = :lotId", params);
     }
 
@@ -40,5 +42,31 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         params.put("idMenu", idMenu);
 
         return match("e.idMenu = :idMenu", params);
+    }
+
+    @Override
+    public Iterable<Meal> findAllMealsAvailables(Menu menu) {
+        Query query = entityManager().createQuery("select e.id from " + this.entityClass.getSimpleName() + " e where e.menu_id = :nullMenu and e.mealdate BETWEEN dataInicio and dataFim");
+        query.setParameter("nullMenu", null);
+        query.setParameter("dataInicio", menu.getStartDate());
+        query.setParameter("dataFim", menu.getEndDate());
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Iterable<Meal> findByMenu(Menu menu) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("menu", menu);
+
+        return match("e.menu = :menu", params);
+    }
+
+    @Override
+    public Iterable<Meal> findAllByMealType(MealType mealType, DishType dishType) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("mealType", mealType);
+        params.put("dishType", dishType);
+        return match("e.mealType = :mealType AND e.dish.dishType =:dishType", params);
     }
 }

@@ -32,6 +32,10 @@ public class ListMealService {
         return this.mealRepository.findByIdMenu(id);
     }
 
+    public Iterable<Meal> allMealsAvailablesToMenu(Menu menu) {
+        return this.mealRepository.findAllMealsAvailables(menu);
+    }
+
     /**
      * @autor Pedro ALves
      * @return

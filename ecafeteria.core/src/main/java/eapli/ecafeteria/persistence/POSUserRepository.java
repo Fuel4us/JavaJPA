@@ -5,7 +5,7 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafetaria.domain.finance.POSUser;
+import eapli.ecafeteria.domain.finance.POSUser;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;

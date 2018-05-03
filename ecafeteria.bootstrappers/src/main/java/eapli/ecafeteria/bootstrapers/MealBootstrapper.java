@@ -13,7 +13,6 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.Date;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,16 +58,4 @@ public class MealBootstrapper implements Action{
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void registerMeal(Dish dish, MealType mealType, Date date, Menu menu) {
-        final RegisterMealController controller = new RegisterMealController();
-        
-        try {
-            controller.registerMeal(mealType, date, dish, menu);
-        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
 }

@@ -44,27 +44,50 @@ public class Meal implements Serializable {
      * @param mealType
      * @param mealDate
      * @param dish
-     * @param mealMenu
+     * @param menu
      */
-    public Meal(MealType mealType, Date mealDate, Dish dish) {
-        if (dish == null || mealDate == null) {
+    public Meal(MealType mealType, Date mealDate, Dish dish, Menu menu) {
+        if (dish == null || mealDate == null || mealType == null || menu == null) {
             throw new IllegalArgumentException();
         }
-        this.mealType = mealType;
-        this.mealDate = mealDate;
-        this.dish = dish;
+        setMealType(mealType);
+        setMealDate(mealDate);
+        setDish(dish);
+        setMenu(menu);
+    }
+
+    /**
+     * Partial constructor for a meal.
+     *
+     * @param mealType
+     * @param mealDate
+     * @param dish
+     */
+    public Meal(MealType mealType, Date mealDate, Dish dish) {
+        if (dish == null || mealDate == null || mealType == null) {
+            throw new IllegalArgumentException();
+        }
+        setMealType(mealType);
+        setMealDate(mealDate);
+        setDish(dish);
+        this.menu = null;
     }
 
     /**
      * Constructor that copies the content of another meal.
      *
+     * Ver a melhor fomra para depois copiar meals.
+     *
      * @param other
      */
     public Meal(Meal other) {
-        this.mealDate = other.mealDate;
-        this.dish = other.dish;
-        this.mealType = other.mealType;
-        this.menu = other.menu;
+        if (other.dish == null || other.mealDate == null || other.mealType == null || other.menu == null) {
+            throw new IllegalArgumentException();
+        }
+        setMealType(other.mealType);
+        setMealDate(other.mealDate);
+        setDish(other.dish);
+        setMenu(other.menu);
     }
 
     /**
@@ -74,37 +97,179 @@ public class Meal implements Serializable {
         // for ORM only
     }
 
-    public Meal(MealType mealType, Date mealDate, Dish dish, Menu menu) {
-        if (dish == null || mealDate == null || menu == null) {
-            throw new IllegalArgumentException();
-        }
-        this.mealType = mealType;
-        this.mealDate = mealDate;
-        this.dish = dish;
-        this.menu = menu;
-    }
-
+    /**
+     * Método que retorna a data da Meal.
+     *
+     * @return variavel do tipo Date
+     */
     public Date getMealDate() {
         return mealDate;
     }
 
+    /**
+     * Método que retorna o dish que faz parte da refeição.
+     *
+     * @return Dish
+     */
     public Dish getDish() {
         return dish;
     }
 
+    /**
+     * Método que retorno o tipo da Meal, neste caso se é LUNCH or DINNER.
+     *
+     * @return MealType
+     */
     public MealType getMealType() {
         return mealType;
     }
 
+    /**
+     * Método que retorna o menu a que pertence esta meal.
+     *
+     * @return Menu
+     */
+    public Menu getMenu() {
+        return menu;
+    }
+
+    /**
+     * Método que retorna o id que é definido na database h2 para esta Meal.
+     *
+     * @return Long
+     */
     public Long getId() {
         return id;
     }
 
-    public void insertMenu(Menu menu) {
+    /**
+     * Método que aktera o prato da meal.
+     *
+     * @param newDish
+     * @return true or false.
+     */
+    public boolean changeDishTo(Dish newDish) {
+        return setDish(newDish);
+    }
+
+    /**
+     * Método que altera o prato da meal.
+     *
+     * @param dish
+     * @return true or false.
+     */
+    private boolean setDish(Dish dish) {
+        if (dish != null && dish.isActive()) {
+            this.dish = dish;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Método que altera a mealType da meal.
+     *
+     * @param newMealType
+     * @return true or false
+     */
+    public boolean changeMealTypeTo(MealType newMealType) {
+        return setMealType(newMealType);
+    }
+
+    /**
+     * Método que altera a mealType da meal.
+     *
+     * @param mealType
+     * @return true or false
+     */
+    private boolean setMealType(MealType mealType) {
+        if (mealType != null) {
+            this.mealType = mealType;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Método que altera o mealDate da meal.
+     *
+     * @param date
+     * @return
+     */
+    public boolean changeMealDate(Date date) {
+        return setMealDate(date);
+    }
+
+    /**
+     * Método que altera o mealDate da meal.
+     *
+     * @param date
+     * @return
+     */
+    private boolean setMealDate(Date date) {
+        if (menu != null) {
+            if (!validaMenu(menu)) {
+                return false;
+            }
+        }
+        this.mealDate = date;
+        return true;
+    }
+
+    /**
+     * Método que atribui um menu à Meal em questão.
+     *
+     * @param menu
+     * @return true or false
+     */
+    public boolean insertMenu(Menu menu) {
+        return setMenu(menu);
+
+    }
+
+    /**
+     * Método que atribui um menu à Meal em questão.
+     *
+     * @param menu
+     * @return true or false
+     */
+    private boolean setMenu(Menu menu) {
+        if (menu != null) {
+            if (validaMenu(menu)) {
+                this.menu = menu;
+                return true;
+            }
+        }
         this.menu = menu;
+        return false;
+    }
+
+    /**
+     * Método que verifica se a meal é válida para o menu em questão.
+     *
+     * @param menu
+     * @return true or false
+     */
+    public boolean validaMenu(Menu menu) {
+        if (menu.getEndDate() != null && menu.getStartDate() != null) {
+            return ((menu.getStartDate().before(mealDate) || menu.getStartDate().equals(mealDate)) && (menu.getEndDate().after(mealDate)) || menu.getEndDate().equals(mealDate));
+        }
+        return false;
+    }
+
+    /**
+     * Método que retorna true caso a meal já tenha sido atribuída a um menu.
+     *
+     * @return
+     */
+    public boolean menuAtribuído() {
+        return menu != null;
     }
 
     @Override
+    /**
+     * Método que verifica se o objeto é o mesmo.
+     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -114,7 +279,7 @@ public class Meal implements Serializable {
         }
 
         final Meal other = (Meal) o;
-        return Objects.equals(this.id, other.id);
+        return is(other.id);
     }
 
     @Override
@@ -124,68 +289,43 @@ public class Meal implements Serializable {
         return hash;
     }
 
+    /**
+     * Método que verifica se os objetos possuem o mesmo MealType, o mesmo Dish
+     * e a mesma MealDate.
+     *
+     * @param other
+     * @return true or false
+     */
     public boolean sameAs(Object other) {
         if (!(other instanceof Meal)) {
             return false;
         }
 
         final Meal that = (Meal) other;
-        if (this == that) {
-            return true;
-        }
         return mealType.equals(that.mealType)
                 && dish.equals(that.dish) && mealDate.equals(that.mealDate);
     }
 
-    public boolean is(Long id) {
+    private boolean is(Long id) {
         return Objects.equals(this.id, id);
-    }
-
-    public MealType mealType() {
-        return this.mealType;
-    }
-
-    public void changeDishTo(Dish newDish) {
-        setDish(newDish);
-    }
-
-    private void setDish(Dish dish) {
-        if (dish == null || !dish.isActive()) {
-            throw new IllegalArgumentException();
-        }
-        this.dish = dish;
-    }
-
-    public void changeMealTypeTo(MealType newMealType) {
-        setMealType(newMealType);
-    }
-
-    private void setMealType(MealType mealType) {
-        if (mealType == null) {
-            throw new IllegalArgumentException();
-        }
-        this.mealType = mealType;
     }
 
     @Override
     public String toString() {
-        return "Meal{" + "dish=" + dish + ", mealType=" + mealType + ", mealDate=" + mealDate + '}';
-    }
-
-    public String toString2() {
-        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
-        String data2 = data.format(mealDate.getTime());
-        return String.format("DAY: %s /PLATE: %s /TYPE: %s /MEAL: %s", data2, dish.id(), mealType.toString(), dish.dishType().id());
-    }
-
-    public String toString3() {
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         String date = data.format(mealDate.getTime());
-        return "Dish: " + dish.name() + "\nMeal Type: " + mealType + "\nMeal Date: " + date;
+        return "\nDish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
+    }
+
+    public String toStringAll() {
+        SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy");
+        String data2 = data.format(mealDate.getTime());
+        return String.format("DAY: %s /PLATE: %s /TYPE: %s /MENU: %s", data2, dish.name().toString(), mealType.toString(), menu.getName().toString());
     }
 
     /**
-     * Creates a comparator to compare Meals according to their meal dates (Joao reis - 1160600)
+     * Creates a comparator to compare Meals according to their meal dates (Joao
+     * reis - 1160600)
      *
      * @return comparator object that compares meal dates
      */

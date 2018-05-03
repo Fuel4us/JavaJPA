@@ -22,10 +22,9 @@ import static org.junit.Assert.*;
 public class MealPlanTest {
 
     private Menu menu = new Menu(new Date(), new Date());
-    private List<Integer> dishes = new ArrayList<>();
 
-    private MealPlan meal = new MealPlan(menu, dishes);
-    private MealPlan meal2 = new MealPlan(menu, dishes);
+    private MealPlan meal = new MealPlan(menu);
+    private MealPlan meal2 = new MealPlan(menu);
     
     public MealPlanTest() {
     }

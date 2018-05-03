@@ -2,14 +2,17 @@ package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.framework.persistence.repositories.DataRepository;
-import java.util.Calendar;
+import java.util.Optional;
 
-public interface CanteenShiftRepository extends DataRepository<CanteenShift, Calendar>{
+public interface CanteenShiftRepository extends DataRepository<CanteenShift, String> {
+
+    boolean verifyByDate(String canteenShiftDate);
     
     /**
-     *
-     * @param cal - it will compare the date in DDMMYYYY
-     * @return true if found it and if is open, to close it
+     * For the current day
+     * @return
      */
-    boolean close(Calendar cal);
+    CanteenShift close();
+
+    public Optional<CanteenShift> findCurrentDayShift();
 }

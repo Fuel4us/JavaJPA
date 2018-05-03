@@ -18,4 +18,9 @@ public class ListDishService {
 
         return this.dishRepository.findAll();
     }
+
+    public Iterable<Dish> allDishesActives() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
+        return this.dishRepository.findAllActives();
+    }
 }

@@ -12,8 +12,8 @@ public class MealPrinter implements Visitor<Meal> {
 
     @Override
     public void visit(Meal visitee) {
-        System.out.printf("%-30s%-25s%-10s%-4s",
+        System.out.printf("%-25s%-10s%-10s",
                 visitee.getDish().name(), visitee.getMealType(),
-                visitee.getMealDate(), visitee.getId());
+                visitee.getMealDate());
     }
 }

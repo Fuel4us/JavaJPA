@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
 import java.util.ArrayList;
@@ -42,19 +43,17 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     public Iterable<Booking> checkBookingsForNextDays(Optional<CafeteriaUser> user, Date date) {
         
         Map<String, Object> params = new HashMap();
-        params.put("user", user);
+        params.put("user", user.get());
         params.put("bookingState", BookingState.RESERVED);
         
         List<Booking> bookingList = new ArrayList();
         
-        long currentDate = date.getTime();
-        
         for(int i = 0; i < NEXT_DAYS; i++){
-            bookingList.addAll(match("E.MEAL.MEALDATE = '" + new Date(date.getTime()) + "' and E.CAFETERIAUSER = :user and E.BOOKING.BOOKINGSTATE = :bookingState", params));
+            params.put("date", new Date(date.getTime()));
+            bookingList.addAll(match("e.meal.mealDate = :date and e.user = :user and e.bookingState = :bookingState", params));
             
             //+1 to that day
-            date.setTime((currentDate) + ONE_MORE_DAY);
-            currentDate = date.getTime();
+            date.setTime(date.getTime() + ONE_MORE_DAY);
         }
         
         return bookingList;
@@ -75,7 +74,18 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         bookingList.sort(comparator);
         return bookingList.get(0);
     }
-    
+
+    @Override
+    public Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser) {
+         final Query q = entityManager().createQuery(""
+                + "SELECT e FROM Booking e "
+                + "WHERE e.user = 1 "
+                + "AND e.bookingState = 2 ");
+        q.setParameter(1, cafUser);
+        q.setParameter(2, BookingState.RESERVED);
+        return q.getResultList();
+    }
+
     public class BirthDateComparator implements Comparator<Booking> {
         @Override
         public int compare(Booking booking1, Booking booking2) {
@@ -97,12 +107,23 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
      * @return Bookins
      */
     @Override
-    public Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState bookingState) {
+    public Iterable<Booking> findBookingByUserAndDate(Optional <CafeteriaUser> user, MealType mealType, BookingState bookingState) {
         Map<String, Object> params = new HashMap<>();
-        params.put("user", user);
+        params.put("user", user.get());
         params.put("mealType", mealType);
         params.put("bookingState", bookingState);
-        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.bookingState =:bookingState AND e.meal.day = '" + new java.sql.Date(Calendar.getInstance().getTimeInMillis()) + "'", params);
+        Date mealDate = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
+        params.put("mealDate", mealDate);
+        return (Iterable<Booking>) match("e.user =:user AND e.meal.mealType =:mealType AND e.bookingState =:bookingState AND e.meal.mealDate = :mealDate", params);
+    }
+    
+        @Override
+    public Iterable<Booking> findBookingByDate(MealType mealType, DishType dishType, BookingState bookingState) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mealType", mealType);
+        params.put("dishType", dishType);
+        params.put("bookingState", bookingState);
+        return (Iterable<Booking>) match("e.meal.mealType =:mealType AND e.meal.dish.dishType =:dishType AND e.bookingState =:bookingState", params);
     }
 
     /**

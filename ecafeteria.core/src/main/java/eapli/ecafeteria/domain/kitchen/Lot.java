@@ -32,21 +32,28 @@ public class Lot implements AggregateRoot<Integer>, Serializable {
     @Column(unique = true)
     private int lotCode;
     @OneToOne
-    private Material ingredientCode;
+    private Material ingredient;
     private int quantity;
-
+    
     protected Lot() {
         //for ORM
     }
 
-    public Lot(int lotCode, Material ingredientCode, int quantity) {
+    public Lot(int lotCode, Material ingredient, int quantity) {
         this.lotCode = lotCode;
-        this.ingredientCode = ingredientCode;
+        this.ingredient = ingredient;
         this.quantity = quantity;
     }
 
     public int getQuantity() {
         return quantity;
+    }
+
+    /**
+     * @return the ingredientCode
+     */
+    public Material getIngredient() {
+        return ingredient;
     }
 
     public void changeQuantity(int quantity) {
@@ -91,10 +98,14 @@ public class Lot implements AggregateRoot<Integer>, Serializable {
 
     @Override
     public String toString() {
-        return "MealLot{" + "ID: " + pk + ", Código do lote: " + lotCode + ", Material= " + ingredientCode + ", Quantidade=" + quantity + '}';
+        return "MealLot{" + "ID: " + pk + ", Código do lote: " + lotCode + ", Ingrediente= " + getIngredient() + ", Quantidade=" + quantity + '}';
     }
 
     public String toString2() {
-        return "Lot Code: " + lotCode + "\nMaterial: " + ingredientCode.description() + "\nQuantity: " + quantity;
+        return "Lot Code: " + lotCode + "\nMaterial: " + getIngredient().description() + "\nQuantity: " + quantity;
+    }
+    
+    public String toString3(){
+        return "Material:" + getIngredient().description() + "\nQuantity:" + quantity;
     }
 }

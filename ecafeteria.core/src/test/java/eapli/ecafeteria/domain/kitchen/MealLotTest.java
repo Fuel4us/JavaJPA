@@ -46,7 +46,7 @@ public class MealLotTest {
         System.out.println("getMeal");
         Meal expResult = new Meal();
         Lot lot = new Lot();
-        MealLot instance = new MealLot(expResult, lot);
+        MealLot instance = new MealLot(expResult, lot, 2);
         Meal result = instance.getMeal();
         assertEquals(expResult, result);
         
@@ -74,7 +74,7 @@ public class MealLotTest {
         System.out.println("getLot");
         Meal meal = new Meal();
         Lot expResult = new Lot();
-        MealLot instance = new MealLot(meal, expResult);
+        MealLot instance = new MealLot(meal, expResult,2);
         Lot result = instance.getLot();
         assertEquals(expResult, result);
         

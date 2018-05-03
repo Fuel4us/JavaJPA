@@ -1,6 +1,5 @@
 package eapli.ecafeteria.persistence.inmemory;
 
-import eapli.ecafeteria.domain.kitchen.Heuristic;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;

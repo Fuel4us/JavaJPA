@@ -6,10 +6,8 @@
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.application.booking.CheckBookingsForNextDaysController;
 import eapli.ecafeteria.application.booking.CheckMenuController;
 import eapli.ecafeteria.application.booking.RegisterBookingController;
-import eapli.ecafeteria.application.meals.ShowAvailableMealsController;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -17,7 +15,6 @@ import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
