@@ -42,16 +42,11 @@ public class ListMenuService {
      * @return a menu that either starts or ends on the specified time period
      */
     public static List<Meal> menuByPeriod(Date beginning, Date end) {
-        Iterable<Menu> menuList = menuRepository.findByMenuPeriod(beginning, end);
         List<Meal> mealList = new ArrayList<>();
         Iterable<Meal> mealsInMenu;
-        for (Menu m : menuList) {
-            mealsInMenu = mealRepository.findByMenu(m);
-            for (Meal meal : mealsInMenu) {
-                if (meal.getMealDate().after(beginning) && meal.getMealDate().before(end)) {
-                    mealList.add(meal);
-                }
-            }
+        mealsInMenu = mealRepository.findByDatePeriod(beginning, end);
+        for (Meal meal : mealsInMenu) {
+            mealList.add(meal);
         }
 
         Collections.sort(mealList, Meal.compareDates());
