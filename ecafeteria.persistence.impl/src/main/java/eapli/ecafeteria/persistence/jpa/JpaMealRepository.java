@@ -55,6 +55,12 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         return query.getResultList();
     }
 
+    /**
+     * joao reis (1160600)
+     *
+     * @param menu
+     * @return meals that have menu with the same id as de menu in the parameter
+     */
     @Override
     public Iterable<Meal> findByMenu(Menu menu) {
         final Map<String, Object> params = new HashMap<>();
@@ -70,7 +76,14 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         params.put("dishType", dishType);
         return match("e.mealType = :mealType AND e.dish.dishType =:dishType", params);
     }
-    
+
+    /**
+     * joao reis(1160600)
+     *
+     * @param start start date of the time period
+     * @param end end date of the time period
+     * @return meals that have meal date in the established time period
+     */
     @Override
     public Iterable<Meal> findByDatePeriod(Date start, Date end) {
         final Map<String, Object> params = new HashMap<>();
