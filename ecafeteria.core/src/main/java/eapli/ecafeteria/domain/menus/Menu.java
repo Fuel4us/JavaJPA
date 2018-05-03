@@ -161,6 +161,10 @@ public class Menu implements Serializable {
         return changeStartDate(date);
     }
 
+    public void newStartDate(Date date) {
+        this.startDate = date;
+    }
+
     /**
      * Altera a data inicio do Menu.
      *
