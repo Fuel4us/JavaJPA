@@ -24,16 +24,17 @@ public class HeuristicBootstrapper implements Action {
         return true;
     }
     
-    private void register() {
+    private void register(){
         try {
             final HeuristicRepository heuristicRepository = PersistenceContext.repositories().heuristics();
             
             AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
             
-            HeuristicConfiguration entity = new HeuristicConfiguration(new HeuristicA());
+            HeuristicConfiguration entity = new HeuristicConfiguration(new HeuristicA("Heuristic A"));
             heuristicRepository.save(entity);
         } catch (final DataConcurrencyException | DataIntegrityViolationException ex) {
-            Logger.getLogger(HeuristicBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(KitchenLimitBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

@@ -38,29 +38,6 @@ public class MealPlanTest {
     public static void tearDownClass() {
     }
 
-    /**
-     * Test of changeHeuristicInUse method, of class MealPlan.
-     */
-    @Test
-    public void testChangeHeuristicInUseToNull() {
-        System.out.println("changeHeuristicInUseToNull");
-        HeuristicConfiguration newHeuristic = null;
-        boolean expResult = false;
-        boolean result = MealPlan.changeHeuristicInUse(newHeuristic);
-        
-        assertEquals(expResult, result);
-    }
-    
-    @Test
-    public void testChangeHeuristicInUseToHeuristicA(){
-        System.out.println("changeHeuristicInUseToHeuristicA");
-        HeuristicConfiguration newHeuristic = new HeuristicConfiguration(new HeuristicA());
-        boolean expResult = true;
-        boolean result = MealPlan.changeHeuristicInUse(newHeuristic);
-        
-        assertEquals(expResult, result);
-    }
-
     @Test
     public void changeState() {
         meal.changeState(meal);
