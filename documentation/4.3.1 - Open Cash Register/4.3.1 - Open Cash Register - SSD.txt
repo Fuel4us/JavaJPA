@@ -1,0 +1,7 @@
+1. The POSUser logs in and selects the option to open a POS.
+2. The system shows the POS list. 
+3. The cashier selects the POS to work on. 
+4. The POSUser selects the option to create a new shift
+5. The system asks for shift information. 
+6. The Cashier inserts the shift information. 
+7. The system validates the shift and saves it.
