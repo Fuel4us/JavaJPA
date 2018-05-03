@@ -43,6 +43,10 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
         this.meal=meal;
     }
 
+    public Meal getMeal() {
+        return meal;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
