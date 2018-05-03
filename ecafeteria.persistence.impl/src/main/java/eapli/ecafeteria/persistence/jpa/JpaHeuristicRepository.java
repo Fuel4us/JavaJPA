@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
+import java.util.Iterator;
 
 /**
  *
@@ -14,4 +15,14 @@ public class JpaHeuristicRepository extends JpaAutoTxRepository<HeuristicConfigu
         super(persistenceUnitName);
     }
     
+    public HeuristicConfiguration last(){
+        final Iterator<HeuristicConfiguration> it = findAll().iterator();
+        HeuristicConfiguration value = null;
+        
+        while(it.hasNext()){
+            value = it.next();
+        }
+        
+        return value;
+    }
 }
