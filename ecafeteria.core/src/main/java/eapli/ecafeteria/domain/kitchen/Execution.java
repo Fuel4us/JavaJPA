@@ -47,6 +47,10 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
         return meal;
     }
 
+    public int getCookedMeals() {
+        return cookedMeals;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
