@@ -4,6 +4,7 @@ import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.ecafeteria.persistence.POSRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -16,6 +17,7 @@ import java.util.logging.Logger;
 
 public class CanteenShiftClosureController implements Controller {
 
+    private Meal meal;
     private final POSRepository posRepository = PersistenceContext.repositories().POS();
     private final CanteenShiftRepository csRepository = PersistenceContext.repositories().canteenShift();
 
@@ -53,6 +55,10 @@ public class CanteenShiftClosureController implements Controller {
         }
         
         return true;
+    }
+
+    public void setMeal(Meal meal){
+        this.meal=meal;
     }
 
 }
