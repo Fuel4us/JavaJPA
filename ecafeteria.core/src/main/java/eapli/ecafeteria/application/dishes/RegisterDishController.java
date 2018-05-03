@@ -2,7 +2,7 @@ package eapli.ecafeteria.application.dishes;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.dishes.Allergens;
+import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.dishes.NutricionalInfo;
@@ -38,15 +38,12 @@ public class RegisterDishController implements Controller {
     private final AllergenRepository allergRepository = PersistenceContext.repositories().allergen();
 
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
-            final double price, List<Allergens> allergList, Set<Material> ingredientsList) throws DataIntegrityViolationException, DataConcurrencyException {
+            final double price, Set<Allergen> allergList, Set<Material> ingredientsList) throws DataIntegrityViolationException, DataConcurrencyException {
 
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_MENUS);
-        String allergenConcated = "";
-        for (Allergens alrg : allergList) {
-            allergenConcated += alrg.getDescription()+ "; ";
-        }
+
         final Dish newDish = new Dish(dishType, Designation.valueOf(name), new NutricionalInfo(calories, salt),
-                Money.euros(price), allergenConcated, ingredientsList);
+                Money.euros(price), allergList, ingredientsList);
 
         return this.dishRepository.save(newDish);
     }
@@ -63,9 +60,9 @@ public class RegisterDishController implements Controller {
         return listIngredients;
     }
 
-    public List<Allergens> getAllAllergens() {
-        List<Allergens> listAllergens = new ArrayList<>();
-        for (Allergens allerg : allergRepository.findAll()) {
+    public List<Allergen> getAllAllergens() {
+        List<Allergen> listAllergens = new ArrayList<>();
+        for (Allergen allerg : allergRepository.findAll()) {
             listAllergens.add(allerg);
         }
         return listAllergens;

@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.inmemory;
 
+import static eapli.ecafeteria.application.kitchen.Utilities.createCurrentDate;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
@@ -26,21 +27,13 @@ public class InMemoryCanteenShiftRepository extends InMemoryRepository<CanteenSh
     }
 
     @Override
-    public CanteenShift close(Calendar cal) {
-        String canteenShiftDate;
-        
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-        
-        if(month <= 9)
-            canteenShiftDate = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
-        else
-            canteenShiftDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
-        
-        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(canteenShiftDate));
-        if(!cs.get().close())
+    public CanteenShift close() {
+        Optional<CanteenShift> cs = matchOne(e -> e.id().equals(createCurrentDate()));
+
+        if (!cs.get().close()) {
             return null;
+        }
+
         return cs.get();
     }
 

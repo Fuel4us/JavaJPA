@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -22,14 +23,16 @@ public class Rating {
     private int id;
     
     private int score;
-    private String comment;
+    
+    @OneToOne
+    private Comment comment;
 
     public Rating() {
     }
 
     public Rating(int score, String comment) {
         this.score = score;
-        this.comment = comment;
+        this.comment = new Comment(comment);
     }
 
     public void setScore(int score) {
@@ -40,7 +43,7 @@ public class Rating {
         return id;
     }
 
-    public void setComment(String comment) {
+    public void setComment(Comment comment) {
         this.comment = comment;
     }
 

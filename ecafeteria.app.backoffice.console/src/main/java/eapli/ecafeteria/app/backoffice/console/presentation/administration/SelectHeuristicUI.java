@@ -1,10 +1,12 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.administration;
 
 import eapli.ecafeteria.application.administration.SelectHeuristicController;
+import eapli.ecafeteria.domain.kitchen.Heuristic;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.presentation.console.ShowMessageAction;
+import java.util.List;
 
 /**
  *
@@ -16,12 +18,12 @@ public class SelectHeuristicUI extends AbstractUI {
     
     @Override
     protected boolean doShow() {
-        final Iterable<HeuristicConfiguration> heuristicsTypes = theController.listHeuristics();
+        final List<Heuristic> heuristicsTypes = theController.listHeuristics();
         
         SelectWidget option = new SelectWidget("Please select heuristic number", heuristicsTypes);
         option.show();
         
-        HeuristicConfiguration newHeuristic = (HeuristicConfiguration) option.selectedElement();
+        Heuristic newHeuristic = (Heuristic) option.selectedElement();
         
         boolean success = theController.changeHeuristicInUse(newHeuristic);
         

@@ -34,7 +34,7 @@ public class CreateMealPlanUI extends AbstractUI {
                     if(setDishQuantity()){
                         System.out.println("\nMeal plan saved successfully!");
                     }else{
-                        System.out.println("\nNOT POSSIBLE TO SAVE THE MEAL PLAN DUE TO LACK OF MEALS!");
+                        System.out.println("\nNOT POSSIBLE TO SAVE THE MEAL PLAN DUE TO LACK OF MEALS FOR THE CHOSEN MENU!");
                     }
                     break;
                 default:

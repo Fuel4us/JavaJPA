@@ -8,11 +8,11 @@ import javax.persistence.Embeddable;
  * @author joaotiagow
  */
 @Embeddable
-public class HeuristicA implements Heuristic {
+public class HeuristicB implements Heuristic {
     
     private String name;
     
-    public HeuristicA(String name){
+    public HeuristicB(String name){
         this.name = name;
     }
 

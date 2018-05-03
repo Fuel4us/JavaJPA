@@ -48,15 +48,13 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
     private NutricionalInfo nutricionalInfo;
     private Money price;
     private boolean active;
-    String allergenList;
+    @ManyToMany
+    private Set<Allergen> allergenList;
     @ManyToMany
     private Set<Material> ingredientsList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Allergens allerg;
-
     public Dish(final DishType dishType, final Designation name,
-            final NutricionalInfo nutricionalInfo, Money price, String allergenList, Set<Material> ingredientsList) {
+            final NutricionalInfo nutricionalInfo, Money price, Set<Allergen> allergenList, Set<Material> ingredientsList) {
         if (dishType == null || name == null || nutricionalInfo == null) {
             throw new IllegalArgumentException();
         }
@@ -145,7 +143,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         return this.nutricionalInfo;
     }
 
-    public String allergens() {
+    public Set<Allergen> allergens() {
         return allergenList;
     }
 
@@ -194,7 +192,7 @@ public class Dish implements AggregateRoot<Designation>, Serializable {
         setPrice(newPrice);
     }
 
-    public void changeAllergensTo(String newAllergens) {
+    public void changeAllergensTo(Set<Allergen> newAllergens) {
         if (newAllergens == null) {
             throw new IllegalArgumentException();
         }
