@@ -11,6 +11,7 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepository;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -52,6 +53,11 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, Long> imple
 
     @Override
     public Iterable<Meal> findAllByMealType(MealType mealType, DishType dishType) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Iterable<Meal> findByDatePeriod(Date start, Date end) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
