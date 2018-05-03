@@ -1,7 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
-import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
@@ -17,7 +16,6 @@ import eapli.ecafeteria.persistence.LotRepository;
 import eapli.ecafeteria.persistence.MaterialRepository;
 import eapli.ecafeteria.persistence.MealLotRepository;
 import eapli.ecafeteria.persistence.MealPlanItemQuantityRepository;
-import eapli.ecafeteria.persistence.MealPlanItemRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
@@ -184,11 +182,6 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public DelieveryRepository delieveries() {
          return new JpaDelieveryRepository();
-    }
-
-    @Override
-    public MealPlanItemRepository mealplanitems() {
-        return new JpaMealPlanItemRepository();
     }
 
     @Override

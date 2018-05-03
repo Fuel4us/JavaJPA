@@ -27,12 +27,11 @@ public class MealPlanItemQuantity {
     
     private int itemQuantity;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private MealPlanItem item;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private MealPlanItem item;
     
-    public MealPlanItemQuantity(int itemQuantity, MealPlanItem item){
+    public MealPlanItemQuantity(int itemQuantity){
         this.itemQuantity = itemQuantity;
-        this.item = item;
     }
     
     public MealPlanItemQuantity(){}

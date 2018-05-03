@@ -2,7 +2,6 @@ package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
-import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
@@ -83,6 +82,7 @@ public class CreateMealPlanUI extends AbstractUI {
         int quantity;
         
         Set<Meal> list = mealPlan.getMenu().getMealList();
+        List<MealPlanItemQuantity> number = controller.getItemQuantityList(mealPlan);
         
         if (list.isEmpty()) {
             return false;
@@ -99,12 +99,9 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.printf("Number of dishes: ");
             quantity = input.nextInt();
             System.out.printf("\n");
+            MealPlanItemQuantity mpiq = controller.createMealPlanItemQuantity(quantity);
+            number.add(mpiq);
             
-            MealPlanItem item = controller.createPlanItem(meal, mealPlan);
-            controller.saveMealPlanItem(item);
-            
-            MealPlanItemQuantity itemQuantity = controller.createItemQuantity(quantity, item);
-            controller.saveMealPlanItemQuantity(itemQuantity);
         }
         controller.saveMealPlan(mealPlan);
         
