@@ -58,13 +58,35 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         
         return bookingList;
     }
-
+    
+    @Override
+    public Booking getNextBooking(Optional<CafeteriaUser> user, Date date) {
+        
+        Map<String, Object> params = new HashMap();
+        params.put("user", user.get());
+        params.put("bookingState", BookingState.RESERVED);
+        
+        List<Booking> bookingList = new ArrayList();
+        
+        bookingList.addAll(match("e.user = :user and e.bookingState = :bookingState", params));
+        
+        //dar sort pela data
+        BirthDateComparator comparator = new BirthDateComparator();
+        bookingList.sort(comparator);
+        
+        for(Booking b : bookingList)
+            if(b.getMeal().getMealDate().after(date))
+                return b;
+        
+        return null;
+    }
+/*
     /**
      * Returns the next booking from an User
      * @param user User
      * @param date Date to compare
      * @return 
-     */
+     
     @Override
     public Booking getNextBooking(Optional <CafeteriaUser> user, Date date) {
         Iterable<Booking> nextBookings = checkBookingsForNextDays(user, date);
@@ -74,7 +96,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         bookingList.sort(comparator);
         return bookingList.get(0);
     }
-
+*/
     @Override
     public Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser) {
          final Query q = entityManager().createQuery(""
