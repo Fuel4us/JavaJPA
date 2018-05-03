@@ -1,5 +1,6 @@
 package eapli.ecafeteria.application.administration;
 
+import eapli.ecafeteria.domain.administration.Settings;
 import eapli.ecafeteria.domain.kitchen.Heuristic;
 import eapli.ecafeteria.domain.kitchen.HeuristicA;
 import eapli.ecafeteria.domain.kitchen.HeuristicB;
@@ -32,10 +33,11 @@ public class SelectHeuristicController implements Controller {
         try {
             final HeuristicConfiguration heuristicToUse = new HeuristicConfiguration(newHeuristic);
             
-            if(heuristicRepository.save(heuristicToUse) == null)
-                return false;
-            else
+            if(Settings.getInstance().defineNewHeuristic(heuristicToUse)){
+                heuristicRepository.save(heuristicToUse);
                 return true;
+            } else
+                return false;
         } catch (DataConcurrencyException | DataIntegrityViolationException e) {
             Logger.getLogger(SelectHeuristicController.class.getName()).log(Level.SEVERE, null, e);
             return false;

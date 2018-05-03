@@ -23,7 +23,7 @@ public class ConfigureKitchenAlarmLimitsController implements Controller{
     private final KitchenLimitRepository kitchenLimitRepository = PersistenceContext.repositories().kitchenLimit();
     
     //There is only one LimitConfiguration..?
-    LimitConfiguration limitConfig = kitchenLimitRepository.findAll().iterator().next();
+    LimitConfiguration limitConfig = kitchenLimitRepository.first();
     
     public boolean configureYellowLimit(double limitValue){
         return limitConfig.configureYellowLimit(limitValue);
