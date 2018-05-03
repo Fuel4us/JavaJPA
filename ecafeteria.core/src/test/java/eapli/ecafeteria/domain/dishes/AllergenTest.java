@@ -91,7 +91,7 @@ public class AllergenTest {
     public void testToString() {
         System.out.println("toString");
         Allergen instance = new Allergen(acronym, description);
-        String expResult = "Allergen: acronym=cr; description=crustaceos;";
+        String expResult = "crustaceos;";
         String result = instance.toString();
         assertEquals(expResult, result);
     }

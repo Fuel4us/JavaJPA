@@ -73,7 +73,7 @@ public class Allergen implements Serializable {
 
     @Override
     public String toString() {
-        return "Allergen:" + " acronym=" + acronym + "; description=" + description + ';';
+        return description + ";";
     }
 
 }
