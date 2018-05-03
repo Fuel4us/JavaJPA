@@ -81,7 +81,7 @@ public class CreateMealPlanUI extends AbstractUI {
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);
         int quantity;
         
-        Set<Meal> list = mealPlan.getMenu().getMealList();
+        Set<Meal> list = controller.getMealList(mealPlan);
         List<MealPlanItemQuantity> number = controller.getItemQuantityList(mealPlan);
         
         if (list.isEmpty()) {

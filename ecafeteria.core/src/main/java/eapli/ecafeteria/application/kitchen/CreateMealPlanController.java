@@ -12,6 +12,7 @@ import java.util.List;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,6 +46,10 @@ public class CreateMealPlanController {
         MealPlan mPlan = new MealPlan(menu);
         
         return mPlan;
+    }
+    
+    public Set<Meal> getMealList(MealPlan mealPlan){
+        return mealPlan.getMenu().getMealList();
     }
     
     public String getMealDate(Meal meal){
