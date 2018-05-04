@@ -13,5 +13,7 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author Tiago Babo 1160760
  */
 public interface MealPlanRepository extends DataRepository<MealPlan, Long>{
-    
+
+    public void changeState(MealPlan mealPlan);
+
 }

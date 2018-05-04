@@ -53,4 +53,7 @@ public class CloseMealPlanService {
         return mealToClose;
     }
 
+    public void changeStateDB(MealPlan mealPlan) {
+    }
+
 }

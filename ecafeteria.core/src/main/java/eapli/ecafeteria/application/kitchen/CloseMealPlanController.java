@@ -14,8 +14,10 @@ public class CloseMealPlanController {
         service = new CloseMealPlanService();
     }
 
+
     public void choseMealPlanToClose() {
         meal = service.choseMealPlanToClose();
+        //service.changeStateDB(meal);
         meal.changeState(meal);
     }
 
