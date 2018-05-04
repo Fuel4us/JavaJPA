@@ -61,7 +61,7 @@ public class BookingRatingController implements Controller {
         Rating rating = new Rating();
         rating.setScore(score);
         
-        if(comment.equalsIgnoreCase("")) {
+        if(!comment.equalsIgnoreCase("")) {
             Comment obj_com = new Comment(comment);
             obj_com = repComment.save(obj_com);
         
