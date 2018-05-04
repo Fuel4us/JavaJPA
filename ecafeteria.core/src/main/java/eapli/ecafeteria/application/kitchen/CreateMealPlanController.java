@@ -80,8 +80,8 @@ public class CreateMealPlanController {
         }
     }
     
-    public MealPlanItemQuantity createMealPlanItemQuantity(int quantity){
-        MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity);
+    public MealPlanItemQuantity createMealPlanItemQuantity(int quantity, Meal meal){
+        MealPlanItemQuantity itemQuantity = new MealPlanItemQuantity(quantity, meal);
         return itemQuantity;
     }
     

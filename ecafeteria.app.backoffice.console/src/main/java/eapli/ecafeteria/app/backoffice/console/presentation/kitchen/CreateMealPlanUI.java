@@ -99,7 +99,7 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.printf("Number of dishes: ");
             quantity = input.nextInt();
             System.out.printf("\n");
-            MealPlanItemQuantity mpiq = controller.createMealPlanItemQuantity(quantity);
+            MealPlanItemQuantity mpiq = controller.createMealPlanItemQuantity(quantity, meal);
             number.add(mpiq);
             
         }
