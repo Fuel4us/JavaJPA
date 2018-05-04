@@ -238,6 +238,8 @@ public class Meal implements Serializable {
             if (validaMenu(menu)) {
                 this.menu = menu;
                 return true;
+            } else {
+                return false;
             }
         }
         this.menu = menu;

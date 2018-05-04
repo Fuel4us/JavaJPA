@@ -36,7 +36,7 @@ public class RegisterMenuUI extends AbstractUI {
     Date aux;
     String name = null;
 
-    Menu menu;
+    Menu menu = new Menu();
 
     @Override
     protected boolean doShow() {
