@@ -2,7 +2,6 @@ package eapli.ecafeteria.app.backoffice.console.presentation.administration;
 
 import eapli.ecafeteria.application.administration.SelectHeuristicController;
 import eapli.ecafeteria.domain.kitchen.Heuristic;
-import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.presentation.console.ShowMessageAction;
