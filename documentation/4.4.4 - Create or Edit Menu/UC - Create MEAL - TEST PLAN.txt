@@ -1,0 +1,10 @@
+TEST PLAN
+_______________________________
+CASO #4.4.4: Create Meal 
+_______________________________
+1. Fazer o login como chef/Password1.
+2. Escolher a opção Meals > Register new Meal.
+3. Inserir a data da refeição (meal date).
+4. Inserir o MealType.
+5. Inserir o dish para a refeição.
+6. Confirmar as atualizaçções efetuadas1 na Meal criada.

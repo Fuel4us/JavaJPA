@@ -1,0 +1,9 @@
+TEST PLAN
+_______________________________
+CASO #4.4.4: EDIT MENU
+_______________________________
+1. Fazer o login como chef/Password1.
+2. Escolher a opção MENUS> EDIT MENU
+3. ESCOLHER uma das opções, alterar nome, data ou editar meals.
+4. Alterar o escolhido anteriormente.
+5. Confirmar as atualizaçções efetuadas no MENU editado

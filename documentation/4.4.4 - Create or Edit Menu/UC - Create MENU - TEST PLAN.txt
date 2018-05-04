@@ -1,0 +1,9 @@
+TEST PLAN
+_______________________________
+CASO #4.4.4: Create MENU
+_______________________________
+1. Fazer o login como chef/Password1.
+2. Escolher a opção MENUS> Register new MENU
+3. Inserir as datas do MENU e o nome.
+4. Inserir as Meal no MENU.
+5. Confirmar as atualizaçções efetuadas no MENU criado.

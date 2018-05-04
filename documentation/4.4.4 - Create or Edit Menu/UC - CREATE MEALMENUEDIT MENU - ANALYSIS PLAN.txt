@@ -1,0 +1,21 @@
+___________
+ANÁLISE 
+_________
+
+Reunião com o cliente
+
+* Uma Meal é definido por uma data, um MealType e um dish.
+* Pode haver Meals com a mesma MealDate e MealType.
+	
+* Um Menu tem um periodo, data fim e data inicio, um nome e uma lista de Meals.
+* Uma Meal só pode estar exclusivamente num Menu.
+
+
+______________________
+
+REGRAS DE NEGÓCIO
+_____________________
+
+* Não podem haver menus com nomes iguais;
+* Não pode haver meals com mealdate, mealtype e dish iguais;
+______________________
