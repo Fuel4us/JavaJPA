@@ -33,7 +33,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
     
-    private NutritionalProfile nutritionalProfile;
+//    private NutritionalProfile nutritionalProfile;
 
     /**
      * cascade = CascadeType.NONE as the systemUser is part of another aggregate

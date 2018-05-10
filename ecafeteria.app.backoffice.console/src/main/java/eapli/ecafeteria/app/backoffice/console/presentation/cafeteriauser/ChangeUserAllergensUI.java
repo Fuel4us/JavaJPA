@@ -15,35 +15,20 @@ import eapli.framework.util.Console;
  *
  * @author pedromonteiro
  */
-public class EditNutritionalProfileUI extends AbstractUI {
+public class ChangeUserAllergensUI extends AbstractUI {
 
     EditNutritionalProfileController theController = new EditNutritionalProfileController();
     
 
     @Override
     protected boolean doShow() {
-        
-
-        System.out.println("1. Allergens");
-        System.out.println("0. Exit");
-
-        final int option = Console.readOption(1,1,0);
-        switch (option) {
-            case 1:
-                allergensOptions();
-                break;
-            default:
-                System.out.println("No valid option selected");
-                break;
-        }
-        
-        
+        allergensOptions();
         return false;
     }
 
     @Override
     public String headline() {
-        return "";
+        return "  ᑎᑌTᖇITIOᑎᗩᒪ ᑭᖇOᖴIᒪE  ";
     }
 
     private void allergensOptions() {
@@ -67,7 +52,7 @@ public class EditNutritionalProfileUI extends AbstractUI {
                 
             case 2:
                 final SelectWidget<Allergen> selectorAll = new SelectWidget<>("Choose the allergen",
-                this.theController.getUserAllergen(), new AllergensPrinter());
+                this.theController.getAllergens(), new AllergensPrinter());
                 
                 selectorAll.show();
                 final Allergen allergen_to_add = selectorAll.selectedElement();
