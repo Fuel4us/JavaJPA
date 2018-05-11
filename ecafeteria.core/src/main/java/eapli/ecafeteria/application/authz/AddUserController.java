@@ -7,6 +7,9 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.RoleType;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.SystemUserBuilder;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUserBuilder;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.framework.application.Controller;
@@ -21,6 +24,7 @@ import eapli.framework.util.DateTime;
 public class AddUserController implements Controller {
 
     private final UserRepository userRepository = PersistenceContext.repositories().users();
+    private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
 
     /**
      * Get existing RoleTypes available to the user.
@@ -44,10 +48,28 @@ public class AddUserController implements Controller {
         
         return this.userRepository.save(userBuilder.build());
     }
-
+    
+    private CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
+            String email, Set<RoleType> roles, Calendar createdOn, String mecanographicNumber, boolean activateUser)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        
+        SystemUser systemUser = addUser(username, password, firstName, lastName, email, roles, createdOn, activateUser);
+        
+        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
+        cafeteriaUserBuilder.withSystemUser(systemUser).withMecanographicNumber(mecanographicNumber);
+        
+        return this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
+    }
+    
     public SystemUser addUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
         return addUser(username, password, firstName, lastName, email, roles, DateTime.now(), activateUser);
+    }
+    
+    public CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
+            String email, Set<RoleType> roles, String mecanographicNumber, boolean activateUser)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        return addCafeteriaUser(username, password, firstName, lastName, email, roles, DateTime.now(), mecanographicNumber, activateUser);
     }
 }
