@@ -361,7 +361,7 @@ public class MainMenu extends AbstractUI {
 
     private Menu buildNutriProfileMenu() {
         final Menu menu = new Menu("Nutritional Profile > ");
-        menu.add(new MenuItem(CHANGE_ALLERGENS, "Add/Remove Allergens", 
+        menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens", 
                 () -> new ChangeUserAllergensAction().execute()));
                 
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));

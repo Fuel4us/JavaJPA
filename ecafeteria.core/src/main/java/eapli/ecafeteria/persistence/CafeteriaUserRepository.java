@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
@@ -29,4 +30,6 @@ public interface CafeteriaUserRepository extends DataRepository<CafeteriaUser, M
     Optional<CafeteriaUser> findByMecanographicNumber(MecanographicNumber number);
 
     public Iterable<CafeteriaUser> findAllActive();
+    
+    Optional<CafeteriaUser> findBySystemUser(SystemUser user);
 }
