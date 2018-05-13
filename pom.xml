@@ -30,7 +30,7 @@
     </modules>
 
     <dependencies>
-		<!-- JPA Provider (Hibernate) -->
+        <!-- JPA Provider (Hibernate) -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -41,19 +41,27 @@
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.2.Final</version>
         </dependency>
-		<!-- JPA Provider (EclipseLink) -->
-		<!-- 
-		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.jpa</artifactId>
-			<version>2.7.1</version>
-		</dependency>
-		-->
+        <!-- JPA Provider (EclipseLink) -->
+        <!-- 
+        <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                <version>2.7.1</version>
+        </dependency>
+        -->
         <dependency>
             <groupId>eapli</groupId>
             <artifactId>framework</artifactId>
             <version>3.5.0-RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <name>ecafeteria-2DB</name>
 </project>
