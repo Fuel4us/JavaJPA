@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import eapli.ecafeteria.application.dishes.RegisterDishController;
 import eapli.ecafeteria.domain.dishes.Allergen;
-import eapli.ecafeteria.domain.dishes.AllergensList;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.Material;
 import eapli.ecafeteria.persistence.AllergenRepository;
