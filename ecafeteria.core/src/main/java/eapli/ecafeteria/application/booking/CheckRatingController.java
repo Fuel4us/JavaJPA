@@ -39,7 +39,7 @@ public class CheckRatingController {
      * @param user User
      * @return Bookings
      */
-    private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
+private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
         return bookingRepository.findBookingsDeliveredByUser(user);
     }
     
