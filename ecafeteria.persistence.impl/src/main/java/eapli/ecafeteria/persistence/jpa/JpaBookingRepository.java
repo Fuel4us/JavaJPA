@@ -75,13 +75,16 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     @Override
-    public Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser) {
-         final Query q = entityManager().createQuery(""
+    public Iterable<Booking> listBookedMealsByCUser(CafeteriaUser user) {
+        entityManager().getTransaction().begin();
+        final Query q = entityManager().createQuery(""
                 + "SELECT e FROM Booking e "
-                + "WHERE e.user = 1 "
-                + "AND e.bookingState = 2 ");
-        q.setParameter(1, cafUser);
-        q.setParameter(2, BookingState.RESERVED);
+                + "WHERE e.user =:user "
+                + "AND e.bookingState =:bookingState ");
+        q.setParameter("user", user.id());
+        q.setParameter("bookingState", BookingState.RESERVED);
+        
+        entityManager().getTransaction().commit();
         return q.getResultList();
     }
 

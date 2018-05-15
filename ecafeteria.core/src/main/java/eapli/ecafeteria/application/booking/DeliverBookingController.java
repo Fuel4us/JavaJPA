@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 public class DeliverBookingController implements Controller {
    
     private final BookingRepository repositoryBooking = PersistenceContext.repositories().booking();
-    final DelieveryRepository deliveryRepo = PersistenceContext.repositories().delieveries();
+    private final DelieveryRepository deliveryRepo = PersistenceContext.repositories().delieveries();
     private final CafeteriaUserRepository repositoryUser = PersistenceContext.repositories().cafeteriaUsers();
     MecanographicNumber mecaNumber;
     Booking booking;
@@ -56,7 +56,7 @@ public class DeliverBookingController implements Controller {
     
     
     public boolean showBookedBookings(){
-        if(repositoryBooking.listBookedMealsByCUser(this.user) != null){
+       if(repositoryBooking.listBookedMealsByCUser(this.user) != null){
             Iterable <Booking> bookings = repositoryBooking.listBookedMealsByCUser(this.user);
             System.out.println("Your Bookings: \n");
             for(Booking booking : bookings){
@@ -66,7 +66,7 @@ public class DeliverBookingController implements Controller {
         } else {
             System.out.println("\n You currently have no booked bookings");
         }
-        return false;
+       return false;
     }
     
     
