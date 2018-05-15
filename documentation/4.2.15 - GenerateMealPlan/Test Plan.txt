@@ -1,0 +1,15 @@
+TEST PLAN
+
+#1 WHEN THERE ARE HEURISTICS AND PAST MEAL PLANS
+1. Login as Kitchen Manager
+2. Select Traceability > Generate Meal Plan
+3. Select an heuristic
+4. Shows a preview of next week's meal plan
+5. Confirm the action
+6. The use case ends
+
+#2 WHEN THERE ARE NO HEURISTICS AND/OR NO PAST MEAL PLANS
+1. Login as Kitchen Manager
+2. Select Traceability > Generate Meal Plan
+4. Shows a warning message
+5. The use case ends

@@ -1,0 +1,9 @@
+ANALYSIS
+
+BUSINESS RULES
+- At least two heuristics should be available
+- At least one week of past meal plans should be available
+
+UNIT TESTS
+- ensureHeuristicsAvailability()
+- ensurePastMealPlansAvailability()
