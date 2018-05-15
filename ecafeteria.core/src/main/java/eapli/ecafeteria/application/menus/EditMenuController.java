@@ -45,4 +45,8 @@ public class EditMenuController {
         return false;
     }
 
+    public void newStartDate(Menu menu, Date date) {
+        menu.newStartDate(date);
+    }
+
 }

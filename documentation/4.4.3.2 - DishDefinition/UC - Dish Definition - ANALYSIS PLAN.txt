@@ -1,0 +1,26 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+
+	Reunião com o cliente
+
+	* Um prato é definido por um tipo de prato, nome, preço e os alergénios que o compôem.
+	
+	* Um prato tem apenas um tipo de prato (ex. peixe, veggie, carne);
+	* Um prato é composto por alergénios (ex. glúten, crustáceos, lactose);
+	* Tem um preço, na maioria das vezes sempre igual, com exceções (por exemplo: picanha)-
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+
+	* Não podem haver pratos com nomes iguais;
+	* Não pode haver alergénios repetidos no mesmo prato;
+
+
+	______________________

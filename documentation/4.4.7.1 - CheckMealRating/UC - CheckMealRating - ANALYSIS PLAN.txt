@@ -1,0 +1,22 @@
+	___________
+
+	ANALYSIS 
+	____________
+
+
+	Meeting with the client
+
+	* A meal is composed by a dish, a meal type and a date;
+	* A rating is composed by a score, and a comment;
+
+
+	______________________
+
+	BUSINESS RULES
+	_____________________
+
+
+	* There cannot exist two equal meals;
+
+
+	______________________

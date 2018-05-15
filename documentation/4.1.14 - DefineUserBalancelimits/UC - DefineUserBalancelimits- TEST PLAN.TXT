@@ -1,0 +1,12 @@
+﻿	
+
+	TEST PLAN
+
+	_______________________________
+	Case #14: Define User balance limits
+	_______________________________
+
+	1. Login as CafeteriaUser
+	2. Choose option Settings > Set user alert limits
+	3. Enters a limit
+	4. Confirm user limit

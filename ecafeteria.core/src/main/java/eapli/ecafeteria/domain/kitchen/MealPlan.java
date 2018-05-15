@@ -1,7 +1,10 @@
 package eapli.ecafeteria.domain.kitchen;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.domain.ddd.AggregateRoot;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -21,11 +24,15 @@ public class MealPlan implements AggregateRoot<Long>{
     @ManyToOne
     private Menu menu;
     
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<MealPlanItemQuantity> itemQuantityList;
+    
     private boolean closed;
 
     public MealPlan(Menu menu) {
         this.menu = menu;
         this.closed = false; //no inicio esta aberto logo closed=false
+        this.itemQuantityList = new ArrayList<>();
     }
 
     public MealPlan(){}
@@ -40,6 +47,14 @@ public class MealPlan implements AggregateRoot<Long>{
 
     public boolean isClosed() {
         return closed;
+    }
+    
+    public void setDishNumber(List<MealPlanItemQuantity> itemQuantityList){
+        this.itemQuantityList = itemQuantityList;
+    }
+    
+    public List<MealPlanItemQuantity> getItemQuantityList(){
+        return itemQuantityList;
     }
     
     public static boolean changeHeuristicInUse(HeuristicConfiguration newHeuristic){

@@ -1,5 +1,6 @@
 package eapli.ecafeteria.persistence.jpa;
 
+import static eapli.ecafeteria.application.kitchen.Utilities.createCurrentDate;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
 import eapli.framework.util.Strings;
@@ -34,8 +35,8 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
     }
 
     @Override
-    public CanteenShift close(Calendar cal) {
-        Optional<CanteenShift> cs = this.findByDate(cal);
+    public CanteenShift close() {
+        Optional<CanteenShift> cs = this.findByCurrentDay();
         if (!cs.isPresent()) {
             return null;
         }
@@ -46,20 +47,9 @@ class JpaCanteenShiftRepository extends CafeteriaJpaRepositoryBase<CanteenShift,
         return cs.get();
     }
 
-    private Optional<CanteenShift> findByDate(Calendar cal) {
-        String canteenShiftDate;
+    private Optional<CanteenShift> findByCurrentDay() {
 
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        int day = cal.get(Calendar.DAY_OF_MONTH);
-
-        if (month <= 9) {
-            canteenShiftDate = Integer.toString(year) + "0" + Integer.toString(month) + Integer.toString(day);
-        } else {
-            canteenShiftDate = Integer.toString(year) + Integer.toString(month) + Integer.toString(day);
-        }
-
-        return matchOne("e.canteenShiftDate=:canteenShiftDate", "canteenShiftDate", canteenShiftDate);
+        return matchOne("e.canteenShiftDate=:canteenShiftDate", "canteenShiftDate", createCurrentDate());
     }
 
     @Override

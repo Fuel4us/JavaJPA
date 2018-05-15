@@ -18,5 +18,10 @@ public class JpaKitchenLimitRepository extends JpaAutoTxRepository<LimitConfigur
     public JpaKitchenLimitRepository(String persistenceUnitName) {
         super(persistenceUnitName);
     }
+
+    @Override
+    public LimitConfiguration first() {
+        return findAll().iterator().next();
+    }
     
 }

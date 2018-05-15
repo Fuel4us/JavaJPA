@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.domain.kitchen;
 
+import eapli.ecafeteria.domain.meals.Meal;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,12 +28,12 @@ public class MealPlanItemQuantity {
     
     private int itemQuantity;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private MealPlanItem item;
+    @OneToOne
+    private Meal meal;
     
-    public MealPlanItemQuantity(int itemQuantity, MealPlanItem item){
+    public MealPlanItemQuantity(int itemQuantity, Meal meal){
         this.itemQuantity = itemQuantity;
-        this.item = item;
+        this.meal = meal;
     }
     
     public MealPlanItemQuantity(){}

@@ -116,15 +116,15 @@ public interface RepositoryFactory {
     
     MealPlanRepository mealplans();
     
-    MealPlanItemRepository mealplanitems();
-    
     MealPlanItemQuantityRepository mealplanitemquantities();
     
     RatingRepository rating();
+    
+    CommentRepository comments();
 
     ShiftRepository shift();
     
-     AllergenRepository allergen();
+    AllergenRepository allergen();
 
     public DelieveryRepository delieveries();
 }

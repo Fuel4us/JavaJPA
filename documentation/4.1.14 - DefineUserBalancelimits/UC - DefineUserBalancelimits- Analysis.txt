@@ -1,0 +1,26 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+	Reunião com o cliente  em 
+
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+	The limit value for the balance needs to be above 0
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+	
+	* User needs to be logged in
+	* Can only change the limit value for the current logged in user
+	* User need to have the profile created
+	* The value for the limit needs to be valid(Number)

@@ -1,6 +1,7 @@
 //package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 //
 //import eapli.ecafeteria.application.dishes.ChangeDishController;
+//import eapli.ecafeteria.domain.dishes.Allergen;
 //import eapli.ecafeteria.domain.dishes.AllergensList;
 //import eapli.ecafeteria.domain.dishes.Dish;
 //import eapli.framework.application.Controller;
@@ -44,8 +45,10 @@
 //            final SelectWidget<Dish> selector = new SelectWidget<>("Dishes:", allDishes, new DishPrinter());
 //            selector.show();
 //            final Dish selectedDish = selector.selectedElement();
-//            System.out.println("Current allergens: " + selectedDish.allergens().getAllerg().toString());
-//
+//            
+//            final SelectWidget<Allergen> selectorAllerg = new SelectWidget<>("Allergens:", selectedDish.allergens());
+//            selectorAllerg.show();
+//            
 //            while (out != 0) {
 //                final String answer = Console.readLine("You want to insert (write 'insert') new allergens in this list, or create (write 'create') a new list of allergens?");
 //                if (answer.equalsIgnoreCase(ans1)) {

@@ -102,6 +102,7 @@ public class MainMenu extends AbstractUI {
     private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
     private static final int CHECK_BOOKINGS_BY_DATA = 8;
     private static final int CLOSE_MEAL_PLAN = 9;
+    private static final int GENERATE_MEAL_PLAN_OPTION = 10;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -278,9 +279,11 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CHECK_BOOKINGS_BY_DATA, "Check Bookings By Data", new CheckReservationsByDataAction()));
 
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
+        
+        menu.add(new MenuItem(GENERATE_MEAL_PLAN_OPTION, "Generate Meal Plan", new GenerateMealPlanAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-
+        
         return menu;
     }
 

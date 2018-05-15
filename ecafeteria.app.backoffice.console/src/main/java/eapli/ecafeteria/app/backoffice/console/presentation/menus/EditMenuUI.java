@@ -50,6 +50,7 @@ public class EditMenuUI extends AbstractUI {
         SelectWidget<Menu> selectorMenu = new SelectWidget<>("Menus Unpublished ", menusAvailables, new MenuPrinter());
         selectorMenu.show();
         if (selectorMenu.selectedOption() == 0) {
+            System.out.println("Saida com sucesso! \n\n");
             return true;
         }
         menu = selectorMenu.selectedElement();
@@ -103,7 +104,7 @@ public class EditMenuUI extends AbstractUI {
                     switch (decisaoData) {
                         case 1: {
                             try {
-                                alterarDataInicio();
+                                alterarDataInicio(decisaoData);
                             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                                 System.out.println("Erro no Acesso à dataBase.");
                             }
@@ -121,7 +122,7 @@ public class EditMenuUI extends AbstractUI {
 
                         case 3: {
                             try {
-                                alterarDataInicio();
+                                alterarDataInicio(decisaoData);
                                 alterarDataFim();
                             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                                 System.out.println("Erro no Acesso à dataBase.");
@@ -160,8 +161,9 @@ public class EditMenuUI extends AbstractUI {
                     System.out.printf("Você digitou uma operação inválida.");
             }
             System.out.println("PROCESSO GUARDADO COM SUCESSO!!!");
-        } while (decisao == 0);
+        } while (decisao != 0);
 
+        System.out.println("Saída com sucesso! \n\n");
         theMenuController.printerMenuInformations(menu);
         return true;
     }
@@ -171,19 +173,25 @@ public class EditMenuUI extends AbstractUI {
         return "Edit Meal";
     }
 
-    private void alterarDataInicio() throws DataConcurrencyException, DataIntegrityViolationException {
+    private void alterarDataInicio(int i) throws DataConcurrencyException, DataIntegrityViolationException {
+        menuDateBeg = null;
         do {
             s = new Scanner(System.in);
             System.out.println("Digite uma data para o início do Menu no seguinte formato --> dd/MM/yyyy: ");
             dataRecebida = s.nextLine();
             try {
                 aux = df.parse(dataRecebida);
-                if (theController.alterarDataBeg(menu, aux)) {
-                    menuDateBeg = aux;
-                    System.out.println("***DADO BEM INSERIDO***\n\n");
+                if (i == 3) {
+                    newStartDate();
                 } else {
-                    System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                    if (theController.alterarDataBeg(menu, aux)) {
+                        menuDateBeg = aux;
+                        System.out.println("***DADO BEM INSERIDO***\n\n");
+                    } else {
+                        System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                    }
                 }
+
             } catch (ParseException ex) {
                 System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
@@ -191,6 +199,7 @@ public class EditMenuUI extends AbstractUI {
     }
 
     private void alterarDataFim() throws DataConcurrencyException, DataIntegrityViolationException {
+        menuDateEnd = null;
         do {
             s = new Scanner(System.in);
             System.out.println("Digite uma data para o fim do Menu no seguinte formato --> dd/MM/yyyy: ");
@@ -210,11 +219,7 @@ public class EditMenuUI extends AbstractUI {
     }
 
     private void inserirMeals() {
-        List<String> vetInt = new ArrayList<>();
-        vetInt.add("Inserir Meals!");
-
-        final SelectWidget<String> selector = new SelectWidget<>("Inserir Meals:", vetInt);
-        selector.show();
+        System.out.println("\n###       INSERIR MEALS       ###\n");
 
         Iterable<Meal> mealsAvailables;
         SelectWidget<Meal> selectorMeal;
@@ -222,9 +227,14 @@ public class EditMenuUI extends AbstractUI {
 
         mealsAvailables = theMenuController.getAllMealsAvailablesToMenu(menu);
 
-        int selecao = selector.selectedOption();
-        while (selecao != 0 && mealsAvailables.iterator().hasNext()) {
+        int selecao = 1;
 
+        if (!mealsAvailables.iterator().hasNext()) {
+            System.out.println("###ATENÇÃO --->  Não possui meals registadas no período de tempo do Menu em questão!");
+            selecao = 0;
+        }
+
+        while (selecao != 0 && mealsAvailables.iterator().hasNext()) {
             selectorMeal = new SelectWidget<>("Meals Availables ", mealsAvailables, new MealPrinter());
             selectorMeal.show();
 
@@ -240,14 +250,16 @@ public class EditMenuUI extends AbstractUI {
             }
             selecao = selectorMeal.selectedOption();
         }
+
+        if (selecao == 0) {
+            System.out.println("Saída com sucesso!");
+        } else {
+            System.out.println("Não possui mais meals registadas no período de tempo do Menu em questão!");
+        }
     }
 
     private void eliminarMealsOfMenu() {
-        List<String> vetInt = new ArrayList<>();
-        vetInt.add("Eliminar Meals!");
-
-        final SelectWidget<String> selector = new SelectWidget<>("Eliminar Meals:", vetInt);
-        selector.show();
+        System.out.println("\n###       ELIMINAR MEALS       ###\n");
 
         Iterable<Meal> mealsOfMenu;
         SelectWidget<Meal> selectorMeal;
@@ -255,7 +267,13 @@ public class EditMenuUI extends AbstractUI {
 
         mealsOfMenu = theMenuController.getAllMealsOfMenu(menu);
 
-        int selecao = selector.selectedOption();
+        int selecao = 1;
+        
+         if (!mealsOfMenu.iterator().hasNext()) {
+            System.out.println("###ATENÇÃO --->  Não possui meals no Menu!");
+            selecao = 0;
+        }
+        
         while (selecao != 0 && mealsOfMenu.iterator().hasNext()) {
 
             selectorMeal = new SelectWidget<>("Meals Of Menu ", mealsOfMenu, new MealPrinter());
@@ -273,5 +291,17 @@ public class EditMenuUI extends AbstractUI {
             }
             selecao = selectorMeal.selectedOption();
         }
+
+        if (selecao == 0) {
+            System.out.println("Saída com sucesso!");
+        } else {
+            System.out.println("Não possui mais meals registadas no menu para eliminar!");
+        }
+    }
+
+    private void newStartDate() {
+        theController.newStartDate(menu, aux);
+        menuDateBeg = aux;
+        System.out.println("***DADO BEM INSERIDO***\n\n");
     }
 }

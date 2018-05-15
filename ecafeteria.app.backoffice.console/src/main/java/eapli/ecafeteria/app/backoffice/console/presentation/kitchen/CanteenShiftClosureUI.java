@@ -10,7 +10,7 @@ public class CanteenShiftClosureUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         if (controller.canteenShiftClosure() == true) {
-            System.out.println("The operation is over");
+            System.out.println("The operation is over, with success");
             return true;
         }
         System.out.println("The operation wasn't concluded");

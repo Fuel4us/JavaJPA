@@ -1,19 +1,15 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.dishes;
 
 import eapli.ecafeteria.application.dishes.RegisterDishController;
-import eapli.ecafeteria.domain.dishes.Allergens;
-import eapli.ecafeteria.domain.dishes.AllergensList;
+import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.kitchen.Material;
-import eapli.ecafeteria.persistence.AllergenRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Console;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,11 +51,13 @@ public class RegisterDishUI extends AbstractUI {
             newMaterialsList.add(ingredient);
             listIngredients.remove(ingredient);
             ingredient = selectMaterial(listIngredients);
-
         }
+        
+        Set<Allergen> allergList = getNewAllergenList();
+        
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
-                    price, getNewAllergenList(), newMaterialsList);
+                    price, allergList, newMaterialsList);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("You tried to enter a dish which already exists in the database.");
         }
@@ -84,12 +82,13 @@ public class RegisterDishUI extends AbstractUI {
         }
     }
 
-    public List<Allergens> getNewAllergenList() {
+    public Set<Allergen> getNewAllergenList() {
         int i = 1, flag = 0;
-        List<Allergens> newAllergList = new ArrayList<>();
-        List<Allergens> listAllerg = this.theController.getAllAllergens();
-        for (Allergens allerg : listAllerg) {
-            System.out.println(i + " - " + allerg.getDescription());
+        Set<Allergen> newAllergList = new HashSet<>();
+        List<Allergen> listAllerg = this.theController.getAllAllergens();
+        System.out.println("\n ALLERGEN LIST:");
+        for (Allergen allerg : listAllerg) {
+            System.out.println(" -> " + allerg.getDescription() + "(ID: " + i + ")");
             i++;
         }
         System.out.println("Enter 0 to exit!");
@@ -102,7 +101,11 @@ public class RegisterDishUI extends AbstractUI {
                     System.out.println("This allergen is already on the list!");
                 }
             } else {
-                flag = 1;
+                if (newAllergList.isEmpty()) {
+                    System.out.println("Select at least one allergen!");
+                } else {
+                    flag = 1;
+                }
             }
         }
         return newAllergList;

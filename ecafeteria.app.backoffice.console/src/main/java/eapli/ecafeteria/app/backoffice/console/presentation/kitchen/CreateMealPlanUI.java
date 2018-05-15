@@ -2,7 +2,6 @@ package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.CreateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
-import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
@@ -34,7 +33,7 @@ public class CreateMealPlanUI extends AbstractUI {
                     if(setDishQuantity()){
                         System.out.println("\nMeal plan saved successfully!");
                     }else{
-                        System.out.println("\nNOT POSSIBLE TO SAVE THE MEAL PLAN DUE TO LACK OF MEALS!");
+                        System.out.println("\nNOT POSSIBLE TO SAVE THE MEAL PLAN DUE TO LACK OF MEALS FOR THE CHOSEN MENU!");
                     }
                     break;
                 default:
@@ -82,7 +81,8 @@ public class CreateMealPlanUI extends AbstractUI {
         MealPlan mealPlan = controller.createMealPlan(selectedMenu);
         int quantity;
         
-        Set<Meal> list = mealPlan.getMenu().getMealList();
+        Set<Meal> list = controller.getMealList(mealPlan);
+        List<MealPlanItemQuantity> number = controller.getItemQuantityList(mealPlan);
         
         if (list.isEmpty()) {
             return false;
@@ -99,12 +99,9 @@ public class CreateMealPlanUI extends AbstractUI {
             System.out.printf("Number of dishes: ");
             quantity = input.nextInt();
             System.out.printf("\n");
+            MealPlanItemQuantity mpiq = controller.createMealPlanItemQuantity(quantity, meal);
+            number.add(mpiq);
             
-            MealPlanItem item = controller.createPlanItem(meal, mealPlan);
-            controller.saveMealPlanItem(item);
-            
-            MealPlanItemQuantity itemQuantity = controller.createItemQuantity(quantity, item);
-            controller.saveMealPlanItemQuantity(itemQuantity);
         }
         controller.saveMealPlan(mealPlan);
         

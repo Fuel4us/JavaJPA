@@ -13,5 +13,7 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author 1160629@isep.ipp.pt
  */
 public interface KitchenLimitRepository extends DataRepository<LimitConfiguration, Long>{
-
+    
+    public LimitConfiguration first();
+    
 }

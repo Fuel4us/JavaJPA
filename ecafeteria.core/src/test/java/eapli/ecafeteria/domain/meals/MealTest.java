@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.domain.meals;
 
-import eapli.ecafeteria.domain.dishes.Allergens;
-import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.dishes.DishType;
-import eapli.ecafeteria.domain.dishes.NutricionalInfo;
-import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.domain.meals.MealType;
+import eapli.ecafeteria.domain.menus.Menu;
+import eapli.ecafeteria.persistence.DishTypeRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.domain.Designation;
 import eapli.framework.domain.money.Money;
 import java.util.ArrayList;
@@ -30,8 +23,11 @@ import static org.junit.Assert.*;
 /**
  *
  * @author jreis22
+ * @EDIT Pedro Alves <1150372@isep.ipp.pt>
  */
 public class MealTest {
+
+    private DishType peixe;
 
     public MealTest() {
     }
@@ -46,10 +42,122 @@ public class MealTest {
 
     @Before
     public void setUp() {
+        peixe = new DishType("Peixe", "Peixe");
     }
 
     @After
     public void tearDown() {
+    }
+
+    @Test
+    public void testChangeDishTo() {
+        System.out.println("changeDishTo");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        boolean aux = meal.changeDishTo(d);
+
+        assertEquals(aux, true);
+    }
+
+    @Test
+    public void testChangeMealTypeTo() {
+        System.out.println("changeMealTypeTo");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        boolean aux = meal.changeMealTypeTo(MealType.LUNCH);
+
+        assertEquals(aux, true);
+        assertEquals(meal.getMealType(), MealType.LUNCH);
+    }
+
+    @Test
+    public void testChangeMealDateTo() {
+        System.out.println("changeMealDateTo");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        boolean aux = meal.changeMealDate(new Date(12, 12, 2018));
+
+        assertEquals(aux, true);
+    }
+
+    @Test
+    public void testInsertMenu() {
+        System.out.println("insertMenu");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Menu menu = new Menu(new Date(11, 12, 2018), new Date(12, 12, 2018));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        boolean aux = meal.insertMenu(menu);
+
+        assertEquals(aux, false);
+    }
+
+    @Test
+    public void testInsertMenu2() {
+        System.out.println("insertMenu");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Menu menu = new Menu(new Date(11, 12, 2018), new Date(13, 12, 2018));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(12, 12, 2018), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        boolean aux = meal.insertMenu(menu);
+
+        assertEquals(aux, true);
+    }
+
+    @Test
+    public void testMenuAtribuido() {
+        System.out.println("MenuAtribuido");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Menu menu = new Menu(new Date(11, 12, 2018), new Date(12, 12, 2018));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        meal.insertMenu(menu);
+
+        boolean aux = meal.menuAtribuído();
+
+        assertEquals(aux, false);
+    }
+
+    @Test
+    public void testMenuAtribuido2() {
+        System.out.println("MenuAtribuido");
+        final Designation name = Designation.valueOf("Test Change");
+        Dish dish = new Dish(peixe, name, Money.euros(5));
+
+        Menu menu = new Menu(new Date(11, 12, 2018), new Date(13, 12, 2018));
+
+        Meal meal = new Meal(MealType.DINNER, new Date(11, 12, 2018), dish);
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+
+        meal.insertMenu(menu);
+
+        boolean aux = meal.menuAtribuído();
+
+        assertEquals(aux, true);
     }
 
     /**
@@ -81,7 +189,7 @@ public class MealTest {
         Date date7 = new Date(2018, 4, 23);
         Date date8 = new Date(2018, 4, 25);
 
-        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"),  new Money(2.14, Currency.getInstance(Locale.GERMANY)));
+        Dish d = new Dish(new DishType("Carne", "n/a"), Designation.valueOf("Bacalhau"), new Money(2.14, Currency.getInstance(Locale.GERMANY)));
         Meal meal1 = new Meal(MealType.LUNCH, date1, d);
         Meal meal2 = new Meal(MealType.LUNCH, date2, d);
         Meal meal3 = new Meal(MealType.LUNCH, date3, d);
@@ -90,7 +198,7 @@ public class MealTest {
         Meal meal6 = new Meal(MealType.LUNCH, date6, d);
         Meal meal7 = new Meal(MealType.LUNCH, date7, d);
         Meal meal8 = new Meal(MealType.LUNCH, date8, d);
-        
+
         List<Meal> result = new ArrayList<>();
         result.add(meal1);
         result.add(meal2);

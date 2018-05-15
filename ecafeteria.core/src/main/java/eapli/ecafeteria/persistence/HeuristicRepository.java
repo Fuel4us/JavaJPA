@@ -9,4 +9,6 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface HeuristicRepository extends DataRepository<HeuristicConfiguration, Long> {
     
+    public HeuristicConfiguration last();
+    
 }

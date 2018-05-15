@@ -2,9 +2,15 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.persistence.POSRepository;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 
 class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements POSRepository {
@@ -26,9 +32,13 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
         POS pos = findPOSByID(id).get();
 
         if (!pos.isOpen()) {
-
             //abre POS
             if (pos.open()) {
+                try {
+                    this.save(pos);
+                } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+                    Logger.getLogger(JpaPOSRepository.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 return true;
             }
         }
@@ -36,17 +46,18 @@ class JpaPOSRepository extends CafeteriaJpaRepositoryBase<POS, Long> implements 
     }
 
     @Override
-    public boolean findOpenToClose() {
+    public List<POS> findOpenToClose() {
 
-        boolean verify = false;
+        List<POS> posList = new ArrayList<>();
 
         for (POS pos : findAll()) {
             if (pos.isOpen()) {
                 pos.close();
-                verify = true;
+                posList.add(pos);
             }
         }
-        return verify;
+        
+        return posList;
     }
 
 }

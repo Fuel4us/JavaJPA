@@ -5,13 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
+import eapli.ecafeteria.domain.booking.Comment;
 import eapli.framework.persistence.repositories.DataRepository;
-import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 
 /**
  *
- * @author Tiago Babo 1160760
+ * @author Hilario Coelho
  */
-public interface MealPlanItemRepository extends DataRepository<MealPlanItem, Long>{
+public interface CommentRepository extends DataRepository<Comment, Integer> {
     
 }

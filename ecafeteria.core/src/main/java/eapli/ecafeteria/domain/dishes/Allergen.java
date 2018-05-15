@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @author João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Allergens implements Serializable {
+public class Allergen implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,12 +22,12 @@ public class Allergens implements Serializable {
     private String acronym;
     private String description;
 
-    public Allergens(String acronym, String description) {
+    public Allergen(String acronym, String description) {
         this.acronym = acronym;
         this.description = description;
     }
 
-    public Allergens() {
+    public Allergen() {
     }
 
     public String getAcronym() {
@@ -61,7 +61,7 @@ public class Allergens implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Allergens other = (Allergens) obj;
+        final Allergen other = (Allergen) obj;
         if (!Objects.equals(this.acronym, other.acronym)) {
             return false;
         }
@@ -73,7 +73,7 @@ public class Allergens implements Serializable {
 
     @Override
     public String toString() {
-        return "Allergens{" + "acronym=" + acronym + ", description=" + description + '}';
+        return description + ";";
     }
 
 }

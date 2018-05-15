@@ -7,41 +7,67 @@ package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.domain.kitchen.Execution;
 import eapli.ecafeteria.domain.meals.Meal;
-import eapli.ecafeteria.persistence.ExecutionRepository;
-import eapli.ecafeteria.persistence.MealRepository;
-import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.ecafeteria.domain.meals.MealType;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Carlos Figueiredo (1140317)
  */
 public class RegisterMealsActuallyCookedController implements Controller {
-    
-    private final ExecutionRepository repository = PersistenceContext.repositories().execution();
-    private final MealRepository mRepository = PersistenceContext.repositories().meals();
-    
-    public Execution registerMealsActuallyMade(long mealCode, int cookedMeals) throws DataIntegrityViolationException, DataConcurrencyException {
+
+    List<Meal> mealList;
+    RegisterMealsActuallyCookedService service;
+
+    public RegisterMealsActuallyCookedController() {
+        service = new RegisterMealsActuallyCookedService();
+    }
+
+    public void setMealList(List<Meal> list) {
+        this.mealList = list;
+    }
+
+    public List<Meal> getAllMeals() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-        
-        Meal meal = mRepository.findById(mealCode).get();
-        final Execution mealsActuallyMade = new Execution(meal,cookedMeals);
-         return this.repository.save(mealsActuallyMade);
+        return service.getAllMeals();
+
     }
-    
-    public void listMeals(){
-        
-        for (Meal meal : mRepository.findAll()) {
-            System.out.println(meal.getId() + " - " + meal.toString());
-        }
+
+    public Execution registerMealsActuallyMade(long mealCode, int cookedMeals) throws DataConcurrencyException, DataIntegrityViolationException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.registerMealsActuallyMade(mealCode, cookedMeals);
     }
-    
-    public boolean checkedMeal(long mealCode){
-        return mRepository.findById(mealCode).isPresent();
+
+    public boolean checkedMeal(long mealCode) {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.checkedMeal(mealCode);
+    }
+
+    public List<Date> displayMealsByDate() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.displayMealsByDate(mealList);
+
+    }
+
+    public List<Dish> displayMealsByDish() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.displayMealsByDish(mealList);
+    }
+
+    public List<Meal> displayMealsByMeal() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.displayMealsByMeal(mealList);
+    }
+
+    public List<MealType> displayMealsByMealType() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
+        return service.displayMealsByMealType(mealList);
     }
 }
-     

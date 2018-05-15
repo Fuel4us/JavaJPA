@@ -5,21 +5,24 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
+ * @author joaotiagow
  */
 @Embeddable
 public class HeuristicA implements Heuristic {
     
-    public HeuristicA(){
-    }
+    private String name;
     
+    public HeuristicA(String name){
+        this.name = name;
+    }
+
     @Override
     public void doHeuristicLogic() {
         new ShowMessageAction("Under Development").execute();
     }
-
+    
     @Override
-    public String toString() {
-        return "Heuristic A";
+    public String toString(){
+        return this.name;
     }
 }

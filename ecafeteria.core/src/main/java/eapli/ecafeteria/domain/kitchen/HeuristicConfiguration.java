@@ -2,6 +2,8 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,16 +20,12 @@ public class HeuristicConfiguration implements AggregateRoot<Long>, Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Heuristic heuristic;
+    private Heuristic heuristicInUse;
     
     protected HeuristicConfiguration(){}
     
-    public HeuristicConfiguration(Heuristic heuristic) {
-        this.heuristic = heuristic;
-    }
-    
-    public Heuristic heuristic(){
-        return this.heuristic;
+    public HeuristicConfiguration(Heuristic heuristicInUse){
+        this.heuristicInUse = heuristicInUse;
     }
     
     @Override
@@ -42,6 +40,6 @@ public class HeuristicConfiguration implements AggregateRoot<Long>, Serializable
 
     @Override
     public String toString() {
-        return this.heuristic.toString();
+        return this.heuristicInUse.toString();
     }
 }

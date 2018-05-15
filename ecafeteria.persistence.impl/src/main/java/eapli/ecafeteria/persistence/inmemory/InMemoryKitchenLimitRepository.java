@@ -20,4 +20,8 @@ public class InMemoryKitchenLimitRepository extends InMemoryRepository<LimitConf
         return entity.id();
     }
     
+    @Override
+    public LimitConfiguration first() {
+        return findAll().iterator().next();
+    }
 }
