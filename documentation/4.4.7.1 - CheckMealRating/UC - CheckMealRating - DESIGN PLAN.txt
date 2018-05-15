@@ -3,8 +3,8 @@
 	DESIGN
 	_________
 
-	* Utilizar a estrutura base standard da aplicação baseada em camadas
+	* Use the standard structure based on layers
 
-   	Domain Classes:
-   	Controller: 
-   	Repository: 
+   	Domain Classes: CheckMealRatingUI, Rating, Meal, Booking
+   	Controller: CheckMealRatingController
+   	Repository: BookingRepository
