@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * @author João Pereira <1150478@isep.ipp.pt>
  */
-public class CheckMealRatingController implements Controller {
+public class CheckMealRatingsController implements Controller {
 
     private final BookingRepository repBooking = PersistenceContext.repositories().booking();
 

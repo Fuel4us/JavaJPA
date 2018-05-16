@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 /**
  *
  * @author Rúben - 1160998
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 public class Rating {

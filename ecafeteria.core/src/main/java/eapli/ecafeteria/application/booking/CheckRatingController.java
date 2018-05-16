@@ -21,43 +21,48 @@ import java.util.Optional;
  * @author Hilario Coelho
  */
 public class CheckRatingController {
+
     private final CafeteriaUserRepository userRepository = PersistenceContext.repositories().cafeteriaUsers();
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();
-    
+
     /**
      * Finds and returns an user by his username
+     *
      * @param username Username
      * @return User (if found)
-     * @throws DataConcurrencyException 
+     * @throws DataConcurrencyException
      */
     public Optional<CafeteriaUser> findUserByUsername(Username username) throws DataConcurrencyException {
         return userRepository.findByUsername(username);
     }
-    
+
     /**
      * Returns all bookings in Delivered State from an User
+     *
      * @param user User
      * @return Bookings
      */
-private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
+    private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
         return bookingRepository.findBookingsDeliveredByUser(user);
     }
-    
+
     /**
      * Returns all ratings from an User
+     *
      * @param user User
      * @return Ratings
      */
     public Iterable<Rating> getRatingsFromUser(CafeteriaUser user) {
         Iterable<Booking> bookings = getBookingsDeliveredFromUser(user);
         ArrayList<Rating> ratings = new ArrayList<>();
-        
-        for(Booking b : bookings) {
+
+        for (Booking b : bookings) {
             Rating r = b.getRating();
-            if(r != null)
+            if (r != null) {
                 ratings.add(r);
+            }
         }
-        
+
         return ratings;
     }
 }

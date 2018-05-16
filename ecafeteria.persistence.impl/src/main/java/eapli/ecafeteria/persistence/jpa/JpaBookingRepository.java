@@ -26,6 +26,7 @@ import javax.persistence.Query;
 /**
  *
  * @author Ana Mafalda Silva
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
@@ -174,7 +175,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
     /**
      * Returns all bookings for a meal
-     *
+     * João Pereira <1150478@isep.ipp.pt>
      * @param user User
      * @return List of bookings
      */
@@ -187,7 +188,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
     /**
      * Returns all bookings in delivered
-     *
+     * João Pereira <1150478@isep.ipp.pt>
      * @param user User
      * @return List of bookings
      */

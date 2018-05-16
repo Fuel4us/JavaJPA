@@ -13,6 +13,7 @@ import java.util.Optional;
 
 /**
  * Booking Repository
+ * changed by João Pereira <1150478@isep.ipp.pt>
  *
  */
 public interface BookingRepository extends DataRepository<Booking, Long> {
