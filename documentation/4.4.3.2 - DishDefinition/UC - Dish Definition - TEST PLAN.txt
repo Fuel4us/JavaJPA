@@ -1,4 +1,4 @@
-	
+﻿	
 
 	TEST PLAN
 
@@ -6,10 +6,10 @@
 	CASO #4.4.3.2: Dish Definition 
 	_______________________________
 
-	1. Fazer o login como chef/Password1
-	2. Escolher a opção Dishes > Register new Dish
-	3. Inserir o tipo de prato (dish type)
-	4. Inserir o nome do prato
-	5. Inserir o preço do prato
-	6. Escolher os alergénios que compõem o prato
-	7. Confirmar as atualizaçções efetuadas1 através de List Dishes (Dish  >  List Dish)
+	1. Log in with the credentials: user-> chef ; password-> Password1
+	2. Choose the option Dishes > Register new Dish
+	3. Insert the dish type
+	4. Insert the name of the dish
+	5. Insert the price of the dish
+	6. Choose the allergens that are within the dish
+	7. Confirm the information choosing the option Dish  >  List Dish

@@ -356,7 +356,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REGISTER_MEAL_OPTION, "Register Meals",
                 () -> new RegisterMealAction().execute()));
         
-        menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check a Meal Ratings", new CheckMealRatingsAction()));
+        menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check the Ratings of a Meal", new CheckMealRatingsAction()));
         
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
 
