@@ -87,10 +87,6 @@ public class RegisterMenuController {
         return mealsAvailables;
     }
 
-    public Optional<Menu> getMenuById(Menu menu) {
-        return menuRepository.findById(menu.id());
-    }
-
     public void printerMenuInformations(Menu menu) {
         Iterable<Meal> mealsOfMenu;
         mealsOfMenu = getAllMealsOfMenu(menu);
