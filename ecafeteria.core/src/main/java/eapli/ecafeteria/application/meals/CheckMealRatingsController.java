@@ -91,10 +91,10 @@ public class CheckMealRatingsController implements Controller {
         for (Booking book : getBookingsOfMeal(selectedMeal)) {
             if (book.getRating().getComment() != null) {
                 commentFlag++;
-                if (book.getRating().getComment().getResposta() == null) {
+                if (book.getRating().getComment().getAnswer() == null) {
                     comment = "* Comment number " + commentFlag + ":  " + book.getRating().getComment().getRealComment() + ";";
                 } else {
-                    comment = "* Comment number " + commentFlag + ":  \nComment: " + book.getRating().getComment().getRealComment() + ";\nAnswer: " + book.getRating().getComment().getResposta() + ";";
+                    comment = "* Comment number " + commentFlag + ":  \nComment: " + book.getRating().getComment().getRealComment() + ";\nAnswer: " + book.getRating().getComment().getAnswer() + ";";
                 }
             } else {
                 System.out.println("This rating has no comments.");
