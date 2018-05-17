@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 /**
  *
  * @author Mário Vaz
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 public class Booking implements AggregateRoot<String>, Serializable{
@@ -43,7 +44,7 @@ public class Booking implements AggregateRoot<String>, Serializable{
         this.id = user.id() + meal.toString();
         this.user = user;
         this.meal = meal;
-        this.bookingState = BookingState.RESERVED;
+        this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
     }
     

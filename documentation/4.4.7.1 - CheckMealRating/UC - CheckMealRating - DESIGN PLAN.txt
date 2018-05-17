@@ -1,0 +1,10 @@
+﻿	_________
+
+	DESIGN
+	_________
+
+	* Use the standard structure based on layers
+
+   	Domain Classes: CheckMealRatingUI, Rating, Meal, Booking
+   	Controller: CheckMealRatingController
+   	Repository: BookingRepository

@@ -1,0 +1,10 @@
+﻿	
+
+	TEST PLAN
+
+	_______________________________
+	USE CASE #4.4.7.1: Check Meal Rating
+	_______________________________
+
+	1. Log in with (***);
+	2. Choose the option (**)....

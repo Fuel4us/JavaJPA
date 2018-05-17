@@ -13,25 +13,45 @@ import javax.persistence.Id;
 /**
  *
  * @author Hilario Coelho
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 public class Comment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     private String comment;
     private String resposta;
-    
+
     public Comment() {
     }
-    
+
     public Comment(String comment) {
-         this.comment = comment;
+        this.comment = comment;
     }
-    
+
     public void setResposta(String resposta) {
         this.resposta = resposta;
+    }
+    
+    /**
+     * Returns the comment.
+     * Created by João Pereira <1150478@isep.ipp.pt>
+     * @return 
+     */
+    public String getRealComment() {
+        return comment;
+    }
+    
+    /**
+     * Returns the answer of the comment.
+     * Created by João Pereira <1150478@isep.ipp.pt>
+     * @return 
+     */
+    public String getResposta() {
+        return resposta;
     }
 
     @Override

@@ -14,16 +14,17 @@ import javax.persistence.OneToOne;
 /**
  *
  * @author Rúben - 1160998
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 public class Rating {
-     
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     private int score;
-    
+
     @OneToOne
     private Comment comment;
 
@@ -38,6 +39,16 @@ public class Rating {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public int getScore() {
+        return score;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+    
+    
 
     public int id() {
         return id;
