@@ -18,6 +18,9 @@
     <class>eapli.ecafeteria.domain.kitchen.MealLot</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>
     <class>eapli.ecafeteria.domain.meals.MealType</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlan</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlanItem</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity</class>
     <class>eapli.ecafeteria.domain.kitchen.HeuristicConfiguration</class>
     <class>eapli.ecafeteria.domain.booking.Rating</class>
     <class>eapli.ecafeteria.domain.kitchen.LimitConfiguration</class>
