@@ -12,15 +12,12 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-/**
- *
- * @author Hilario Coelho
- */
-public class CheckRatingController {
+public class CheckRatingController implements Controller{
 
     private final CafeteriaUserRepository userRepository = PersistenceContext.repositories().cafeteriaUsers();
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();

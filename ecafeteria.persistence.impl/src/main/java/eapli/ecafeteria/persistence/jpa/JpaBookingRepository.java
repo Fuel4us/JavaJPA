@@ -159,12 +159,6 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return (Iterable<Booking>) match("e.meal.mealType =:mealType AND e.meal.dish.dishType =:dishType AND e.bookingState =:bookingState", params);
     }
 
-    /**
-     * Returns all bookings in delivered state from an User
-     *
-     * @param user User
-     * @return List of bookings
-     */
     @Override
     public Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user) {
         Map<String, Object> params = new HashMap<>();

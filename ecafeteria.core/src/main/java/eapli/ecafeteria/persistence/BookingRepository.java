@@ -28,6 +28,12 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
 
     public Booking getNextBooking(Optional<CafeteriaUser> user, Date date);
 
+    /**
+     * Returns all bookings in delivered state from an User
+     *
+     * @param user User
+     * @return List of bookings
+     */
     Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user);
 
     Iterable<Booking> findBookingsDelivered();
