@@ -1,6 +1,5 @@
 package eapli.ecafeteria.domain.menus;
 
-import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.application.menus.RegisterMenuController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealRepository;
@@ -43,7 +42,7 @@ public class Menu implements Serializable {
     private boolean published;
 
     /**
-     * Construtor Completo.
+     * Complete builder.
      *
      * @param startDate
      * @param endDate
@@ -60,7 +59,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Construtor Parcial.
+     * Partial builder.
      *
      * @param startDate
      * @param endDate
@@ -76,14 +75,14 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Construtor vazio.
+     * Empty builder.
      */
     public Menu() {
         // for ORM only
     }
 
     /**
-     * Retorna o id do menu.
+     * Return id of menu.
      *
      * @return
      */
@@ -92,7 +91,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Retorna a data inicio do Menu.
+     * Return start date of Menu.
      *
      * @return
      */
@@ -101,7 +100,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Retorna a data fim do Menu.
+     * Return end date of Menu.
      *
      * @return
      */
@@ -110,7 +109,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Retorna true caso tenha sido publicado e false caso não tenha.
+     * Return true or false if it has been published and false if it has not.
      *
      * @return
      */
@@ -119,7 +118,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Método que retorna o name do Menu.
+     * Return name of menu.
      *
      * @return
      */
@@ -128,7 +127,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Método que altera o name do Menu.
+     * Edit name of Menu.
      *
      * @param name
      * @return
@@ -138,7 +137,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Método que altera o name do Menu.
+     * Edit name.
      *
      * @param name
      * @return
@@ -152,7 +151,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Altera a data inicio do Menu.
+     * Edit start date.
      *
      * @param date
      * @return
@@ -166,7 +165,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Altera a data inicio do Menu.
+     * Edit start date.
      *
      * @param date
      * @return
@@ -187,7 +186,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Altera a data fim do Menu.
+     * Edit end date.
      *
      * @param date
      * @return
@@ -197,7 +196,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Altera a data fim do Menu.
+     * Edit end date.
      *
      * @param date
      * @return
@@ -218,7 +217,7 @@ public class Menu implements Serializable {
     }
 
     /**
-     * Altera o estado de publição do menu.
+     * Edit state.
      *
      * @return
      */
@@ -238,6 +237,11 @@ public class Menu implements Serializable {
                 + ", endDate: " + data2;
     }
 
+    /**
+     * Return listMeals of that Menu.
+     *
+     * @return
+     */
     public Set<Meal> getMealList() {
         RegisterMenuController rmc = new RegisterMenuController();
         return (Set<Meal>) rmc.getAllMealsOfMenu(this);
