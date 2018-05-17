@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
@@ -15,17 +10,13 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Hilario Coelho
- */
 public class CheckRatingUI extends AbstractUI {
 
     private final CheckRatingController controller = new CheckRatingController();
     
     @Override
     protected boolean doShow() {
-        //tenta ir buscar o user atual
+        //try to fetch the current user
         SystemUser systemUser = AuthorizationService.session().authenticatedUser();
         Optional<CafeteriaUser> user = null;
         try {
