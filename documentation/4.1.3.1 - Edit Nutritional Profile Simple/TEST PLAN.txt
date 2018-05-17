@@ -1,0 +1,10 @@
+TEST PLAN
+
+1. Log in as .../Password1
+2. Choose option Edit Nutritional Profile Simple
+3. Choose:
+	a. Change max salt quantity
+		1. Insert max quantity quantity
+	b. Change max calorie quantity
+		1. Insert max calorie quantity
+4. Confirms changes with .....
