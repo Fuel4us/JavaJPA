@@ -29,23 +29,26 @@ public class AddUserUI extends AbstractUI {
     }
 
     @Override
-    protected boolean doShow() {
-        // FIXME avoid duplication with SignUpUI. reuse UserDataWidget from
-        // UtenteApp
-        final String username = Console.readLine("Username");
-        final String password = Console.readLine("Password");
-        final String firstName = Console.readLine("First Name");
-        final String lastName = Console.readLine("Last Name");
-        final String email = Console.readLine("E-Mail");
+    protected boolean doShow() {  
+        final UserDataWidget userData = new UserDataWidget();
+
+        userData.show();
 
         final Set<RoleType> roleTypes = new HashSet<>();
         boolean show;
         do {
             show = showRoles(roleTypes);
         } while (!show);
-
+        
+        String mecanographicNumber = null;
+        if(roleTypes.contains(RoleType.CAFETERIA_USER))
+            mecanographicNumber = Console.readLine("Mecanographic Number");
+        
         try {
-            this.theController.addUser(username, password, firstName, lastName, email, roleTypes, false);
+            if(mecanographicNumber == null)
+                this.theController.addUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, false);
+            else
+                this.theController.addCafeteriaUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, mecanographicNumber, false);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("That username is already in use.");
         }
@@ -64,11 +67,11 @@ public class AddUserUI extends AbstractUI {
         final Menu rolesMenu = new Menu();
         int counter = 0;
         rolesMenu.add(new MenuItem(counter++, "No Role", new ReturnAction()));
+        
         for (final RoleType roleType : getRoleTypes()) {
-            if (roleType != RoleType.CAFETERIA_USER) {
-                rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
-            }
+            rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
         }
+        
         return rolesMenu;
     }
 

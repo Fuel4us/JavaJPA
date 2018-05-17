@@ -36,7 +36,6 @@ public class DeliverBookingUI extends AbstractUI {
         boolean flag2;
         do {
             final String mecNum = Console.readLine("Input the mecanographic number:");
-            MecanographicNumber mn = new MecanographicNumber(mecNum + "");
             controller.cafetariaUserToSee(mecNum);
             controller.showBookedBookings();
             int choice = Console.readInteger("Please choose a booking: ");

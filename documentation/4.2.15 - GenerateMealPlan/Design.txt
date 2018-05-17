@@ -1,0 +1,7 @@
+DESIGN
+
+This use case is similar to CreateMealPlan, but the number of meals to cook is set automatically
+
+Domain class: MealPlan
+Controller: GenerateMealPlanController
+Repository: MealPlanRepository
