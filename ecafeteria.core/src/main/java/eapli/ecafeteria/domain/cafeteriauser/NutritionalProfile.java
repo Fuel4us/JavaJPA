@@ -5,10 +5,8 @@
  */
 package eapli.ecafeteria.domain.cafeteriauser;
 
-import com.sun.org.apache.xml.internal.security.encryption.AgreementMethod;
 import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.framework.domain.ddd.AggregateRoot;
-import eapli.framework.domain.ddd.ValueObject;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;

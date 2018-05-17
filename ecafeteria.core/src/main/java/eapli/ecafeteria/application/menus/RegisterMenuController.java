@@ -73,7 +73,7 @@ public class RegisterMenuController {
     public Iterable<Meal> getAllMealsOfMenu(Menu menu) {
         Set<Meal> mealsAvailables = new HashSet<>();
         allMeals = this.mealRepository.findAll();
-        
+
         if (allMeals == null) {
             return new HashSet<>();
         }
@@ -85,6 +85,10 @@ public class RegisterMenuController {
             }
         }
         return mealsAvailables;
+    }
+
+    public Optional<Menu> getMenuById(Menu menu) {
+        return menuRepository.findById(menu.id());
     }
 
     public void printerMenuInformations(Menu menu) {
