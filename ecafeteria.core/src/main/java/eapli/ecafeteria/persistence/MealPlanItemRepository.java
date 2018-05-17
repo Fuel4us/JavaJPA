@@ -5,16 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.movement.Movement;
-import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;
+import eapli.ecafeteria.domain.kitchen.MealPlanItem;
 
 /**
  *
- * @author Hernani Gil
+ * @author Tiago Babo 1160760
  */
-public interface MovementRepository extends DataRepository<Movement, Long>{
+public interface MealPlanItemRepository extends DataRepository<MealPlanItem, Long>{
     
-    Iterable<Movement> findAllByNIF(MecanographicNumber nif);
-
 }
