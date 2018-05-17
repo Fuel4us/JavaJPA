@@ -4,6 +4,7 @@
 package eapli.framework.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,5 +32,19 @@ public final class Collections {
 	    res.add(type);
 	}
 	return res;
+    }
+    
+    /**
+     * Tranforms an iterable in List.
+     * @param <T> Object Type
+     * @param iterable to transform in List
+     * @return the List
+     */
+    public static <T> List<T> iterableToList(Iterator<T> it) {
+        List<T> copy = new ArrayList<>();
+        while (it.hasNext()) {
+            copy.add(it.next());
+        }
+        return copy;
     }
 }
