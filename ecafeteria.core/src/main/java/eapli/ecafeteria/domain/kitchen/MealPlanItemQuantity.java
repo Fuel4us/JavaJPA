@@ -37,4 +37,12 @@ public class MealPlanItemQuantity {
     }
     
     public MealPlanItemQuantity(){}
+
+    public int getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
 }
