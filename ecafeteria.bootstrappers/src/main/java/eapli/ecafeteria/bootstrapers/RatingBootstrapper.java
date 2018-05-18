@@ -55,9 +55,9 @@ public class RatingBootstrapper implements Action{
         
         //rRepository.save(r1);
         //rRepository.save(r2);
-
-        //System.out.println(b1.getRating());
-        //System.out.println(b2.getRating());
+        
+        System.out.println(b1);
+        System.out.println(b2);
         
         bRepository.save(b1);
         bRepository.save(b2);
