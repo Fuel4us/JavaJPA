@@ -8,6 +8,7 @@ package eapli.ecafeteria.persistence.jpa;
 import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,5 +24,15 @@ public class JpaMovementRepository extends CafeteriaJpaRepositoryBase<Movement, 
         params.put("nif", nif);
 
         return match("e.nif = :nif", params);
+    }
+
+    @Override
+    public Iterable<Movement> findAllByNIFandDatePeriod(MecanographicNumber nif, Calendar periodBeginning, Calendar periodEnd) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("nif", nif);
+        params.put("beg", periodBeginning);
+        params.put("end", periodEnd);
+
+        return match("e.nif = :nif and e.date >= :beg and e.date <= :end", params);
     }
 }

@@ -8,6 +8,7 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Calendar;
 
 /**
  *
@@ -16,5 +17,6 @@ import eapli.framework.persistence.repositories.DataRepository;
 public interface MovementRepository extends DataRepository<Movement, Long>{
     
     Iterable<Movement> findAllByNIF(MecanographicNumber nif);
-
+    
+    Iterable<Movement> findAllByNIFandDatePeriod(MecanographicNumber nif, Calendar periodBeginning, Calendar periodEnd);
 }
