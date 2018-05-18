@@ -14,6 +14,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUser
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.ChangeUserAllergensAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.EditNutritionalProfileAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishNutricionalInfoAction;
@@ -60,9 +61,8 @@ public class MainMenu extends AbstractUI {
     private static final int EXIT_OPTION = 0;
     
     // SUBMENU NUTRITIONAL PROFILE
-    private static final int CHANGE_SAULT = 1;
-    private static final int CHANGE_CALORIES = 2;
-    private static final int CHANGE_ALLERGENS = 3;
+    private static final int CHANGE_SALT_CALORIES = 1;
+    private static final int CHANGE_ALLERGENS = 2;
 
     // USERS
     private static final int ADD_USER_OPTION = 1;
@@ -369,6 +369,8 @@ public class MainMenu extends AbstractUI {
 
     private Menu buildNutriProfileMenu() {
         final Menu menu = new Menu("Nutritional Profile > ");
+        menu.add(new MenuItem(CHANGE_SALT_CALORIES, "Salt and Calories", () -> new EditNutritionalProfileAction().execute()));
+        
         menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens", 
                 () -> new ChangeUserAllergensAction().execute()));
                 

@@ -43,6 +43,9 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @OneToOne(cascade = CascadeType.ALL)
     private NutritionalProfile nutritionalProfile;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Profile Profile;
+    
 
     public CafeteriaUser(SystemUser user, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null) {
@@ -51,6 +54,7 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
         this.nutritionalProfile = new NutritionalProfile();
+        this.Profile = new Profile();
     }
 
     protected CafeteriaUser() {
@@ -105,6 +109,15 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return nutritionalProfile;
     }
 
+    /**
+     * Gives access to the Profile
+     * @return Cafeteria User
+     */
+    public Profile accessProfile() {
+        return this.Profile;
+    }
+    
+    
     @Override
     public MecanographicNumber id() {
         return this.mecanographicNumber;

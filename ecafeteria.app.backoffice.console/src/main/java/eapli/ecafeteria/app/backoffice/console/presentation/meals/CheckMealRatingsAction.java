@@ -7,8 +7,13 @@ import eapli.framework.actions.Action;
  * @author João Pereira <1150478@isep.ipp.pt>
  */
 public class CheckMealRatingsAction implements Action {
-    
-     @Override
+
+    /**
+     * Starts the UI.
+     *
+     * @return
+     */
+    @Override
     public boolean execute() {
         return new CheckMealRatingsUI().show();
     }

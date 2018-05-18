@@ -29,19 +29,23 @@ public class RatingBootstrapper implements Action{
     
     public void register() throws DataIntegrityViolationException, DataConcurrencyException {
         
-        final CommentRepository cRepository = PersistenceContext.repositories().comments();
-        final RatingRepository rRepository = PersistenceContext.repositories().rating();
+        //final CommentRepository cRepository = PersistenceContext.repositories().comments();
+        //final RatingRepository rRepository = PersistenceContext.repositories().rating();
         final BookingRepository bRepository = PersistenceContext.repositories().booking();
         
         Iterator<Booking> bR = bRepository.findAll().iterator();
         Booking b1 = bR.next();
-        //System.out.println(b1);
+        System.out.println(b1);
         Booking b2 = bR.next();
-        //System.out.println(b2);
+        System.out.println(b2);
         
-        Iterator<Comment> iR = cRepository.findAll().iterator();
-        Comment c1 = iR.next();
-        Comment c2 = iR.next();
+        //comment made by a user
+        final Comment c1 = new Comment("comment1");
+        final Comment c2 = new Comment("comment2");
+        
+        //answer or reply made by the chef (menu manager)
+        c1.changeAnswer("answer1");
+        c2.changeAnswer("answer2");
         
         final Rating r1 = new Rating(2, c1);
         final Rating r2 = new Rating(4, c2);
@@ -49,14 +53,14 @@ public class RatingBootstrapper implements Action{
         b1.rating(r1);
         b2.rating(r2);
         
-        rRepository.save(r1);
-        rRepository.save(r2);
+        //rRepository.save(r1);
+        //rRepository.save(r2);
 
         //System.out.println(b1.getRating());
         //System.out.println(b2.getRating());
         
-        //bRepository.save(b1);
-        //bRepository.save(b2);
+        bRepository.save(b1);
+        bRepository.save(b2);
     }
     
 }

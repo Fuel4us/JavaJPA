@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
+package eapli.ecafeteria.application.booking;
 
 /**
  *
- * @author pedromonteiro
+ * @author joao reis (1160600)
  */
-class Allergens {
+public class CheckMovementsController {
     
 }
