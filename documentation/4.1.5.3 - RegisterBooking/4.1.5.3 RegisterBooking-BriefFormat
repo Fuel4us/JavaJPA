@@ -1,0 +1,62 @@
+4.1.5.3 - RegisterBooking :
+
+    In this version of the use case "RegisterBooking", it was added the 
+functionality of refreshing the users balance.
+
+
+##Brief Format
+The user starts the creation of the new booking.
+
+The system shows the meals for this weeks menu(To be decided by another use case).
+
+The user picks a meal to be booked(can only choose one at a time).
+
+The system shows the meal and asks for confirmation).
+
+The user confirms.
+
+The system refreshes the user balance and informs that the use case ended with success
+
+
+
+
+##Complex Format
+
+###Primary Author
+
+* User
+    
+
+###Interessed Parties and their interesses
+
+User: The user wants to book a meal for later consumption.
+
+
+###Pre-conditions
+
+###Post-conditions
+The booking is registered in the system.
+The users balance is refreshed.
+    
+
+###Primary flux
+1. The user starts the creation of the new booking..
+2. The system shows the meals for this weeks menu(To be decided by another use case).
+3. The user picks a meal to be booked(can only choose one at a time).
+4. The system shows the meal and asks for confirmation).
+5. The user confirms.
+6. The system refreshes the user balance and informs that the use case ended with success
+    
+
+###Extensions
+*a. the user cancels the use case
+
+1. the use case ends.
+
+5a. The user does not confirm
+
+1. O use case returns to the point "2"
+
+
+
+

@@ -28,8 +28,6 @@ public class Profile implements Serializable{
     @GeneratedValue
     private Long id;
     
-    @Column(name = "balance_limit")
-    @OneToOne(cascade = CascadeType.ALL)
     private int balanceLimit;
     
     protected Profile(){
