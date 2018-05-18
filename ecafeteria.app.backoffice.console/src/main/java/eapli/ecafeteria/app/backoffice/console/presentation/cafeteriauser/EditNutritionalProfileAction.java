@@ -5,10 +5,15 @@
  */
 package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
 
+import eapli.framework.actions.Action;
+
 /**
  *
- * @author pedromonteiro
+ * @author Tiago Babo (1160760)
  */
-class Allergens {
-    
+public class EditNutritionalProfileAction implements Action{
+    @Override
+    public boolean execute() {
+        return new ChangeUserAllergensUI().show();
+    }
 }

@@ -6,6 +6,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
 
 import eapli.ecafeteria.application.cafeteriauser.EditNutritionalProfileController;
+import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
@@ -18,8 +19,8 @@ public class EditNutritionalProfileUI extends AbstractUI{
     EditNutritionalProfileController controller = new EditNutritionalProfileController();
     
     /**
-     * 
-     * @return 
+     * Show UI
+     * @return false;
      */
     @Override
     protected boolean doShow() {
@@ -27,8 +28,8 @@ public class EditNutritionalProfileUI extends AbstractUI{
         return false;
     }
     /**
-     * 
-     * @return 
+     * Headline
+     * @return headline
      */
     @Override
     public String headline() {
@@ -36,19 +37,45 @@ public class EditNutritionalProfileUI extends AbstractUI{
     }
     
     /**
-     * 
+     * Menu options
+     * @return option
+     */
+    public int menuUI() {
+        System.out.println("");
+        System.out.println("1. Change salt max quantity");
+        System.out.println("2. Change salt calorie quantity");
+        System.out.println("0. Leave");
+        System.out.printf("OPTION: ");
+        int option = input.nextInt();
+
+        return option;
+    }
+    
+    /**
+     * Base menu for option choosing
      */
     public void mainMenu() {
         int option = 0;
 
         do {
             option = menuUI();
-
             switch (option) {
                 case 0:
-                    System.out.println("\n# END OF EDIT NUTRITIONAL PROFILE #");
+                    System.out.println("");
                     break;
                 case 1:
+                    if(changeSalt()){
+                        System.out.println("\nMax salt quantity changed successfully!");
+                    }else{
+                        System.out.println("\nNot possible to change max salt quantity!");
+                    }
+                    break;
+                case 2:
+                    if(changeCalorie()){
+                        System.out.println("\nMax salt quantity changed successfully!");
+                    }else{
+                        System.out.println("\nNot possible to change max salt quantity!");
+                    }
                     break;
                 default:
                     System.out.println("\nINVALID OPTION!");
@@ -57,17 +84,25 @@ public class EditNutritionalProfileUI extends AbstractUI{
         } while (option != 0);
     }
     
-    /**
-     * 
-     * @return 
-     */
-    public int menuUI() {
-        System.out.println("");
-        System.out.println("1. Edit nutritional profile");
-        System.out.println("0. Leave");
-        System.out.printf("OPTION: ");
-        int option = input.nextInt();
-
-        return option;
+    private boolean changeSalt(){
+        NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
+        
+        System.out.printf("\nEntry the new max salt quantity: ");
+        int maxSalt = input.nextInt();
+        
+        controller.savetMaxSaltQuantity(maxSalt);
+        
+        return true;
+    }
+    
+    private boolean changeCalorie(){
+        NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
+        
+        System.out.printf("\nEntry the new max calorie quantity: ");
+        int maxCalorie = input.nextInt();
+        
+        controller.saveMaxCalorieQuantity(maxCalorie);
+        
+        return true;
     }
 }

@@ -43,7 +43,7 @@ public class ShowAvailableMealsUI extends AbstractUI {
         Map<DishType, Integer> hashMap = controller.listAvailableMeals(mealType, dishTypes);
 
         hashMap.entrySet().forEach((entry) -> {
-            System.out.println(entry.getKey().id() + ": " + entry.getValue());
+            System.out.println(entry.getKey().id() + " : " + entry.getValue());
         });
 
         return false;
