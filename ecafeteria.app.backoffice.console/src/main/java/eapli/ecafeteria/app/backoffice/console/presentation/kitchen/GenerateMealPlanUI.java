@@ -16,21 +16,15 @@ public class GenerateMealPlanUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        if (controller.getAvailableHeuristics() == null) {
-            System.out.println("There are no available heuristics");
-            return false;
-        } else if (controller.getMealPlanHistory() == null) {
-            System.out.println("There are no past meal plans");
-            return false;
-        } else if (controller.getAvailableHeuristics() == null && controller.getMealPlanHistory() == null) {
-            System.out.println("There are no available heuristics and no past meal plans");
+        if (!controller.getAvailableHeuristics().iterator().hasNext() || !controller.getMealPlanHistory().iterator().hasNext()) {
+            System.out.println("There are no available heuristics and/or past meal plans");
             return false;
         }
 
         SelectWidget<HeuristicConfiguration> heuristicSelector = new SelectWidget<>("Heuristics:", controller.getAvailableHeuristics());
         heuristicSelector.show();
 
-        controller.generateMealPlan(controller.getSelectedHeuristic(heuristicSelector.selectedElement()).get());
+        controller.generateMealPlan(heuristicSelector.selectedElement());
 
         return true;
     }
