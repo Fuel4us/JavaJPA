@@ -1,6 +1,7 @@
 package eapli.ecafeteria.domain.booking;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Rating implements Serializable {
 
     private int score;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Comment comment;
 
     // for ORM
