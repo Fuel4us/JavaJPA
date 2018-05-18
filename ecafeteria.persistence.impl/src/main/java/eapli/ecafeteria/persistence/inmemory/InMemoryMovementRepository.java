@@ -24,7 +24,7 @@ public class InMemoryMovementRepository extends InMemoryRepositoryWithLongPK<Mov
 
     @Override
     public Iterable<Movement> findAllByNIFandDatePeriod(MecanographicNumber nif, Calendar periodBeginning, Calendar periodEnd) {
-        return match(e ->e.nif().equals(nif) && e.date().after(periodBeginning) && e.date().after(periodEnd));
+        return match(e ->e.nif().equals(nif) && e.date().after(periodBeginning) && e.date().before(periodEnd));
     }
     
 }
