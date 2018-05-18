@@ -16,16 +16,14 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static eapli.framework.util.Collections.iterableToList;
 
 /**
- *
+ * 
  * @author pedromonteiro
  */
 public class ChangeUserAllergensController implements Controller {
@@ -35,6 +33,9 @@ public class ChangeUserAllergensController implements Controller {
     private final AllergenRepository allergenRepo = PersistenceContext.repositories().allergen();
     private final CafeteriaUserRepository cafeteriaUserRepo = PersistenceContext.repositories().cafeteriaUsers();
 
+    /**
+     * Constructor
+     */
     public ChangeUserAllergensController() {
         SystemUser user = AuthorizationService.session().authenticatedUser();
         Optional<CafeteriaUser> optional = cafeteriaUserRepo.findBySystemUser(user);
@@ -44,6 +45,10 @@ public class ChangeUserAllergensController implements Controller {
         }
     }
 
+    /**
+     * Return all the allergens in the Repository.
+     * @return all allergens;
+     */
     public Iterable<Allergen> getAllergens() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         return allergenRepo.findAll();
@@ -52,12 +57,13 @@ public class ChangeUserAllergensController implements Controller {
     /**
      * Available Allergens for user to add (get all allergens execept user allergens)
      *
-     * @return
+     * @return user available allergens
      */
     public Iterable<Allergen> getAvailableAllergens() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
 
-        List<Allergen> availableAllergens = iterableToList(allergenRepo.findAll().iterator()); //At this pont available allergens = all allergens
+        List<Allergen> availableAllergens; //At this pont available allergens = all allergens
+        availableAllergens = iterableToList(allergenRepo.findAll().iterator());
         
         availableAllergens.removeAll(iterableToList(my_user.accessNutritionalProfile().userAllergens().iterator())); //Removes user allergens from all allergens
         
@@ -65,11 +71,20 @@ public class ChangeUserAllergensController implements Controller {
 
     }
 
+    /**
+     * Return the user allergens
+     * @return User allergens
+     */
     public Iterable<Allergen> getUserAllergen() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         return my_user.accessNutritionalProfile().userAllergens();
     }
 
+    /**
+     * Remove a requested allergen from users allergens.
+     * @param allergen allergen to remove
+     * @return true if removed, false if not
+     */
     public boolean removeAllergen(Allergen allergen) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         if (my_user.accessNutritionalProfile().removeAllergen(allergen)) {
@@ -82,6 +97,11 @@ public class ChangeUserAllergensController implements Controller {
         return false;
     }
 
+    /**
+     * Add an allergen to user's allergen
+     * @param allergen allergen to add 
+     * @return true if added, false if not
+     */
     public boolean addAllergen(Allergen allergen) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
 
@@ -96,18 +116,6 @@ public class ChangeUserAllergensController implements Controller {
         return false;
     }
 
-    /**
-     *
-     * @param <T>
-     * @param iter
-     * @return
-     */
-    private <T> List<T> iterableToList(Iterator<T> it) {
-        List<T> copy = new ArrayList<>();
-        while (it.hasNext()) {
-            copy.add(it.next());
-        }
-        return copy;
-    }
+    
 
 }

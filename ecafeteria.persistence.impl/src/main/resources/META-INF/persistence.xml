@@ -18,6 +18,9 @@
     <class>eapli.ecafeteria.domain.kitchen.MealLot</class>
     <class>eapli.ecafeteria.domain.meals.Meal</class>
     <class>eapli.ecafeteria.domain.meals.MealType</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlan</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlanItem</class>
+    <class>eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity</class>
     <class>eapli.ecafeteria.domain.kitchen.HeuristicConfiguration</class>
     <class>eapli.ecafeteria.domain.booking.Rating</class>
     <class>eapli.ecafeteria.domain.kitchen.LimitConfiguration</class>
@@ -26,13 +29,16 @@
     <class>eapli.ecafeteria.domain.movement.Movement</class>
     <class>eapli.ecafeteria.domain.kitchen.Execution</class>
     <class>eapli.ecafeteria.domain.dishes.Allergen</class>
-    <class>eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile</class>
     <class>eapli.ecafeteria.domain.kitchen.CanteenShift</class>
     <class>eapli.ecafeteria.domain.finance.WorkSession</class>
     <class>eapli.ecafeteria.domain.finance.POS</class>
     <class>eapli.ecafeteria.domain.delivery.Delievery</class>
     <class>eapli.ecafeteria.domain.finance.Shift</class>
     <class>eapli.ecafeteria.domain.booking.Comment</class>
+    <class>eapli.ecafeteria.domain.dishes.Allergens</class>
+    <class>eapli.ecafeteria.domain.finance.POSUser</class>
+    <class>eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile</class>
+    <class>eapli.ecafeteria.domain.cafeteriauser.Profile</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--

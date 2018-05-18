@@ -3,6 +3,7 @@ package eapli.ecafeteria.domain.cafeteriauser;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -33,13 +34,18 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
     
-    private NutritionalProfile nutritionalProfile;
-
     /**
      * cascade = CascadeType.NONE as the systemUser is part of another aggregate
      */
     @OneToOne()
     private SystemUser systemUser;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private NutritionalProfile nutritionalProfile;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Profile Profile;
+    
 
     public CafeteriaUser(SystemUser user, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null) {
@@ -47,6 +53,8 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         }
         this.systemUser = user;
         this.mecanographicNumber = mecanographicNumber;
+        this.nutritionalProfile = new NutritionalProfile();
+        this.Profile = new Profile();
     }
 
     protected CafeteriaUser() {
@@ -101,6 +109,15 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return nutritionalProfile;
     }
 
+    /**
+     * Gives access to the Profile
+     * @return Cafeteria User
+     */
+    public Profile accessProfile() {
+        return this.Profile;
+    }
+    
+    
     @Override
     public MecanographicNumber id() {
         return this.mecanographicNumber;

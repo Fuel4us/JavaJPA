@@ -1,0 +1,30 @@
+	___________
+
+	ANALYSIS 
+	____________
+
+
+	Client meeting
+
+	* The Canteen user uses the user application to check his movements in the last few days.
+	* the movements shown are only filtered by date and user (current user) only, movement type is not taken into account when filtering this movements
+
+
+
+	______________________
+
+	Business Rules
+	_____________________
+
+	
+	
+
+
+	______________________
+		
+	Unit tests
+	_____________________
+
+
+	
+	

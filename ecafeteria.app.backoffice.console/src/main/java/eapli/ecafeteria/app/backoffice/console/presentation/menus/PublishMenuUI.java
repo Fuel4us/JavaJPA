@@ -41,7 +41,7 @@ public class PublishMenuUI extends AbstractUI {
 
             String message = "No Menu was published!";
             if (done) {
-                message = "The Menu id " + theMenu.id() + " was published!";
+                message = "The Menu was published!";
             }
             System.out.println(message);
 

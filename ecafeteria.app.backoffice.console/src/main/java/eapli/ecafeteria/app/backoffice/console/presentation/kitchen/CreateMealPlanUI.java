@@ -19,6 +19,9 @@ public class CreateMealPlanUI extends AbstractUI {
     private final CreateMealPlanController controller = new CreateMealPlanController();
     private final Scanner input = new Scanner(System.in);
 
+    /**
+     * UI for the base menu
+     */
     public void mainMenu() {
         int option = 0;
 
@@ -43,6 +46,10 @@ public class CreateMealPlanUI extends AbstractUI {
         } while (option != 0);
     }
 
+    /**
+     * Menu options
+     * @return option
+     */
     public int menuUI() {
         System.out.println("");
         System.out.println("1. Create meal plan");
@@ -53,6 +60,10 @@ public class CreateMealPlanUI extends AbstractUI {
         return option;
     }
 
+    /**
+     * UI for choosing the menu
+     * @return 
+     */
     public Menu selectMenu() {
         List<Menu> menuList = controller.getExistingMenus();
         int opcao;
@@ -75,6 +86,10 @@ public class CreateMealPlanUI extends AbstractUI {
         return selectedMenu;
     }
 
+    /**
+     * UI for seting dish quantity for each meal
+     * @return 
+     */
     public boolean setDishQuantity() {
         Menu selectedMenu = selectMenu();
 
@@ -107,13 +122,21 @@ public class CreateMealPlanUI extends AbstractUI {
         
         return true;
     }
-
+    
+    /**
+     * Show UI
+     * @return 
+     */
     @Override
     public boolean doShow() {
         mainMenu();
         return true;
     }
 
+    /**
+     * Headline
+     * @return headline
+     */
     @Override
     public String headline() {
         return "CREATE MEAL PLAN";

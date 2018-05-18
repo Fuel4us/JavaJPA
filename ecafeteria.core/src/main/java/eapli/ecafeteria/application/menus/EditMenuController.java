@@ -17,8 +17,6 @@ public class EditMenuController {
 
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
 
-    private final MealRepository mealRepository = PersistenceContext.repositories().meals();
-
     public boolean alterarNome(Menu menu, String nome) throws DataIntegrityViolationException, DataConcurrencyException {
         if (menu.setName(Designation.valueOf(nome))) {
             this.menuRepository.save(menu);
