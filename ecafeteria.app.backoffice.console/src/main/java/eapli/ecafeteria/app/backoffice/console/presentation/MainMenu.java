@@ -32,6 +32,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.Registe
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.*;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.CheckMealRatingsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.RegisterMealAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.meals.ReplyMealRatingCommentsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.EditMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.PublishMenuUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.RegisterMenuAction;
@@ -95,6 +96,7 @@ public class MainMenu extends AbstractUI {
     //MEALS
     private static final int REGISTER_MEAL_OPTION = 12;
     private static final int CHECK_MEAL_RATING_OPTION = 13;
+    private static final int REPLY_COMMENT_OPTION = 14;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
@@ -357,6 +359,8 @@ public class MainMenu extends AbstractUI {
                 () -> new RegisterMealAction().execute()));
         
         menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check the Ratings of a Meal", new CheckMealRatingsAction()));
+
+        menu.add(new MenuItem(REPLY_COMMENT_OPTION, "Reply to comment from the Ratings of a Meal", new ReplyMealRatingCommentsAction()));
         
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
 
