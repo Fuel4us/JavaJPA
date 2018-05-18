@@ -22,21 +22,34 @@ import java.util.Set;
 
 /**
  *
- * @author Jorge Santos ajs@isep.ipp.pt
- */
-/**
- * Class changed by João Pereira_1150478
- *
- * @author João Pereira <1150478@isep.ipp.pt>
+ * @author Jorge Santos ajs@isep.ipp.pt Class changed by <1150478@isep.ipp.pt>
  */
 public class RegisterDishController implements Controller {
 
+    /**
+     * Instance variables.
+     *
+     */
     private final ListDishTypeService svc = new ListDishTypeService();
-
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
     private final MaterialRepository matRepository = PersistenceContext.repositories().materials();
     private final AllergenRepository allergRepository = PersistenceContext.repositories().allergen();
 
+    /**
+     * Method that does the register of a dish, with its characteristics passed
+     * by parameter.
+     *
+     * @param dishType
+     * @param name
+     * @param calories
+     * @param salt
+     * @param price
+     * @param allergList
+     * @param ingredientsList
+     * @return
+     * @throws DataIntegrityViolationException
+     * @throws DataConcurrencyException
+     */
     public Dish registerDish(final DishType dishType, final String name, final Integer calories, final Integer salt,
             final double price, Set<Allergen> allergList, Set<Material> ingredientsList) throws DataIntegrityViolationException, DataConcurrencyException {
 
@@ -48,10 +61,20 @@ public class RegisterDishController implements Controller {
         return this.dishRepository.save(newDish);
     }
 
+    /**
+     * Returns the dish types.
+     *
+     * @return
+     */
     public Iterable<DishType> dishTypes() {
         return this.svc.activeDishTypes();
     }
 
+    /**
+     * Returns the whole list of materials
+     *
+     * @return
+     */
     public List<Material> getAllMaterials() {
         List<Material> listIngredients = new ArrayList<>();
         for (Material mat : matRepository.findAll()) {
@@ -60,6 +83,11 @@ public class RegisterDishController implements Controller {
         return listIngredients;
     }
 
+    /**
+     * Returns a list of all the existing allergens.
+     *
+     * @return
+     */
     public List<Allergen> getAllAllergens() {
         List<Allergen> listAllergens = new ArrayList<>();
         for (Allergen allerg : allergRepository.findAll()) {

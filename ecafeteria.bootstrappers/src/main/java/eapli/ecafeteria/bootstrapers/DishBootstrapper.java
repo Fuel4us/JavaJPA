@@ -21,7 +21,11 @@ import java.util.Set;
  * @author mcn changed by João Pereira_1150478
  */
 public class DishBootstrapper implements Action {
-
+    
+    /**
+     * Execute method.
+     * @return 
+     */
     @Override
     public boolean execute() {
 
@@ -53,7 +57,7 @@ public class DishBootstrapper implements Action {
     }
 
     /**
-     *
+     * Method that registers a dish with its characteristics passed by parameter.
      */
     private void register(DishType dishType, String description, int cal, int salt, double price, Set<Allergen> allergens, Set<Material> ingredientsList) {
         final RegisterDishController controller = new RegisterDishController();

@@ -11,11 +11,23 @@ import java.util.Optional;
  */
 public class InMemoryAllergensRepository extends InMemoryRepository<Allergen, Long> implements AllergenRepository {
 
+    /**
+     * Method that finds the allergen with the id passed by parameter.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Optional<Allergen> findById(Long id) {
         return matchOne(e -> e.id().equals(id));
     }
 
+    /**
+     * Method that returns the id of the allergen passed by parameter.
+     *
+     * @param entity
+     * @return
+     */
     @Override
     protected Long newKeyFor(Allergen entity) {
         return entity.id();

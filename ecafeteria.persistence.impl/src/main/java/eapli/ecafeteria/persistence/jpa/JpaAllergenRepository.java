@@ -13,6 +13,12 @@ import java.util.Optional;
  */
 public class JpaAllergenRepository extends CafeteriaJpaRepositoryBase<Allergen, Long> implements AllergenRepository {
 
+    /**
+     * Method that returns the allergen with the id passed by parameter.
+     *
+     * @param id
+     * @return
+     */
     @Override
     public Optional<Allergen> findById(Long id) {
         final Map<String, Object> params = new HashMap<>();

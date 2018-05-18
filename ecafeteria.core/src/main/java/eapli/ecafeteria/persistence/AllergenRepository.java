@@ -10,5 +10,11 @@ import java.util.Optional;
  */
 public interface AllergenRepository extends DataRepository<Allergen, Long> {
 
+    /**
+     * Method that finds the allergen with the id passed by parameter.
+     *
+     * @param id
+     * @return
+     */
     Optional<Allergen> findById(Long id);
 }

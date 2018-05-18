@@ -10,9 +10,16 @@ import eapli.framework.presentation.console.SelectWidget;
  * @author João Pereira <1150478@isep.ipp.pt>
  */
 public class CheckMealRatingsUI extends AbstractUI {
-
+    
+    /**
+     * Instance variable.
+     */
     private final CheckMealRatingsController controller = new CheckMealRatingsController();
-
+    
+    /**
+     * Do Show.
+     * @return 
+     */
     @Override
     protected boolean doShow() {
 
@@ -40,7 +47,11 @@ public class CheckMealRatingsUI extends AbstractUI {
 
         return true;
     }
-
+    
+    /**
+     * HeadLine.
+     * @return 
+     */
     @Override
     public String headline() {
         return "Check meal rating";
