@@ -313,7 +313,7 @@ public class Meal implements Serializable {
     public String toString() {
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         String date = data.format(mealDate.getTime());
-        return "\nDish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
+        return "Dish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
     }
 
     public String toStringAll() {
