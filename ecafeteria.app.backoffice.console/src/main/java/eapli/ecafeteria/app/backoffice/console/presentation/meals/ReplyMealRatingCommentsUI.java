@@ -59,7 +59,7 @@ public class ReplyMealRatingCommentsUI {
                 System.out.println("\n## REPLY: ");
                 reply = scanner.nextLine();
                 System.out.println("\n");
-                b.getRating().getComment().setResposta(reply);
+                b.getRating().getComment().changeAnswer(reply);
                 controller.saveBooking(b);
             }
             return true;
