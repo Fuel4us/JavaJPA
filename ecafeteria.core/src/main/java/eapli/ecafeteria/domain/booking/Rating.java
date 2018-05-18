@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.domain.booking;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +13,11 @@ import javax.persistence.OneToOne;
  * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Rating {
+public class Rating implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
+    // ORM primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,12 +27,28 @@ public class Rating {
     @OneToOne
     private Comment comment;
 
+    // for ORM
     public Rating() {
     }
 
+    /**
+     * String comment for the general use (without specifying the answer of the menu manager)
+     * @param score
+     * @param comment
+     */
     public Rating(int score, String comment) {
         this.score = score;
         this.comment = new Comment(comment);
+    }
+    
+    /**
+     * Comment comment for comments with answer already
+     * @param score
+     * @param comment
+     */
+    public Rating(int score, Comment comment) {
+        this.score = score;
+        this.comment = comment;
     }
 
     public void setScore(int score) {
@@ -48,8 +63,6 @@ public class Rating {
         return comment;
     }
     
-    
-
     public int id() {
         return id;
     }

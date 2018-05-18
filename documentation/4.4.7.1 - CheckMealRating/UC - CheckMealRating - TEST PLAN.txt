@@ -6,5 +6,7 @@
 	USE CASE #4.4.7.1: Check Meal Rating
 	_______________________________
 
-	1. Log in with (***);
-	2. Choose the option (**)....
+	1. Log in with the credentials: user-> chef ; password-> Password1
+	2. Choose the option Meals > Check a Meal Ratings
+	3. Select the meal to see its ratings
+	4. If the choosen meal has ratings, check the information (number of ratings, average score and comments).

@@ -73,7 +73,7 @@ public class RegisterMenuController {
     public Iterable<Meal> getAllMealsOfMenu(Menu menu) {
         Set<Meal> mealsAvailables = new HashSet<>();
         allMeals = this.mealRepository.findAll();
-        
+
         if (allMeals == null) {
             return new HashSet<>();
         }

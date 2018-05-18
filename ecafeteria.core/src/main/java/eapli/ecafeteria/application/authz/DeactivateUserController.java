@@ -49,8 +49,6 @@ public class DeactivateUserController implements Controller {
             Logger.getLogger(DeactivateUserController.class.getName()).log(Level.SEVERE, null, arg_ex);
         }
         
-        if(this.cafetariaUserRepository.save(user)!=null && this.reasonRepo.save(r)!=null) return true;
-        
-        return false;
+        return this.cafetariaUserRepository.save(user)!=null && this.reasonRepo.save(r)!=null;
     }
 }

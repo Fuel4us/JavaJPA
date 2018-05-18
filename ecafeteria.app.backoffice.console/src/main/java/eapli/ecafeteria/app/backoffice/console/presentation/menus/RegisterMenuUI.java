@@ -64,6 +64,9 @@ public class RegisterMenuUI extends AbstractUI {
         return "Register Menu";
     }
 
+    /**
+     * Method to add a start date of the menu.
+     */
     private void inserirDataInicio() {
         do {
             s = new Scanner(System.in);
@@ -83,6 +86,9 @@ public class RegisterMenuUI extends AbstractUI {
         } while (menuDateBeg == null);
     }
 
+    /**
+     * Method to add a end date of the menu.
+     */
     private void inserirDataFim() {
         do {
             s = new Scanner(System.in);
@@ -102,6 +108,9 @@ public class RegisterMenuUI extends AbstractUI {
         } while (menuDateEnd == null);
     }
 
+    /**
+     * Method to add a name of the menu.
+     */
     private void inserirNome() {
         do {
             s = new Scanner(System.in);
@@ -110,6 +119,9 @@ public class RegisterMenuUI extends AbstractUI {
         } while (name == null || "".equals(name));
     }
 
+    /**
+     * Method to add meals of the menu.
+     */
     private void inserirMeals() {
         List<String> vetInt = new ArrayList<>();
         vetInt.add("Inserir Meals!");

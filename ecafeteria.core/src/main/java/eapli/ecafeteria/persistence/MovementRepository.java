@@ -16,4 +16,5 @@ import eapli.framework.persistence.repositories.DataRepository;
 public interface MovementRepository extends DataRepository<Movement, Long>{
     
     Iterable<Movement> findAllByNIF(MecanographicNumber nif);
+
 }

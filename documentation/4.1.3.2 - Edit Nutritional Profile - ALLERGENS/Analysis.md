@@ -1,0 +1,14 @@
+ANALYSIS
+# **UC 4.1.3.2** - edit nutricional profile **allergens**
+
+
+##Specifications
+    
+##Business Rule
+*
+
+##Unit Tests
+* There's no allergens in the general repository;
+* The user inserts a non-existing allergen;
+* The user try to add an allergen which is already included in their profile;
+* The user try to remove an allergen which is not included in their profile;

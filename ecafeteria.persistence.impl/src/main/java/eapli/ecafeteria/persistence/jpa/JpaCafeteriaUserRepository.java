@@ -1,6 +1,7 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.UserState;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
@@ -48,5 +49,12 @@ class JpaCafeteriaUserRepository extends JpaAutoTxRepository<CafeteriaUser, Meca
         return match("e.systemUser.state.type=:state", params);
         
 //        SELECT * FROM CAFETERIAUSER c, SYSTEMUSER s WHERE s.name = c.number AND s.type = 'ACCEPTED'
+    }
+
+    @Override
+    public Optional<CafeteriaUser> findBySystemUser(SystemUser user) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("user", user);
+        return matchOne("e.systemUser=:user", params);
     }
 }
