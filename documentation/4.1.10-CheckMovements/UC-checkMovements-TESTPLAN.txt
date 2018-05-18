@@ -1,0 +1,4 @@
+TEST PLAN
+
+1.Login
+2.Choose option bookings>list Movements

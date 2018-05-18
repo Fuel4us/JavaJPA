@@ -6,6 +6,7 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,43 +16,42 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author Mário Vaz
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * @author Mário Vaz changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Booking implements AggregateRoot<String>, Serializable{
+public class Booking implements AggregateRoot<String>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingID;
-    
+
     private String id;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private CafeteriaUser user;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Meal meal;
     private BookingState bookingState;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Rating rating;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bookingDate;
 
     public Booking() {
     }
-    
-    public Booking(CafeteriaUser user, Meal meal){
+
+    public Booking(CafeteriaUser user, Meal meal) {
         this.id = user.id() + meal.toString();
         this.user = user;
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
     }
-    
+
     public Date day() {
         return this.bookingDate;
     }
-    
+
     @Override
     public boolean sameAs(Object other) {
         return false;
@@ -60,21 +60,23 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public String id() {
         return this.id;
     }
-    
+
     public String bookingId() {
         return Long.toString(bookingID);
     }
 
-    public Meal getMeal(){ return this.meal;}
+    public Meal getMeal() {
+        return this.meal;
+    }
 
-    public BookingState getBookingState(){
+    public BookingState getBookingState() {
         return this.bookingState;
     }
-    
+
     public void changeState(BookingState newState) {
         this.bookingState = newState;
     }
-    
+
     public String sumaryList() {
         return String.format("%s", meal.toString());
     }
@@ -117,25 +119,23 @@ public class Booking implements AggregateRoot<String>, Serializable{
         }
         return Objects.equals(this.meal, other.meal);
     }
-    
-    
-    
+
     public boolean isReserved() {
         return bookingState.equals(BookingState.RESERVED);
     }
-    
+
     public boolean isCancelled() {
         return bookingState.equals(BookingState.CANCELED);
     }
-    
+
     public boolean isDelivered() {
         return bookingState.equals(BookingState.DELIVERED);
     }
-    
+
     public void rating(Rating rating) {
         this.rating = rating;
     }
-    
+
     public Rating getRating() {
         return this.rating;
     }

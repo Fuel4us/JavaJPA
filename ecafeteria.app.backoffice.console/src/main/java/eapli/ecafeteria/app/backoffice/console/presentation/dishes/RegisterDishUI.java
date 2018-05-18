@@ -28,6 +28,11 @@ public class RegisterDishUI extends AbstractUI {
         return this.theController;
     }
 
+    /**
+     * Do show.
+     *
+     * @return
+     */
     @Override
     protected boolean doShow() {
         final Iterable<DishType> dishTypes = this.theController.dishTypes();
@@ -52,9 +57,9 @@ public class RegisterDishUI extends AbstractUI {
             listIngredients.remove(ingredient);
             ingredient = selectMaterial(listIngredients);
         }
-        
+
         Set<Allergen> allergList = getNewAllergenList();
-        
+
         try {
             this.theController.registerDish(theDishType, name, nutricionalData.calories(), nutricionalData.salt(),
                     price, allergList, newMaterialsList);
@@ -65,6 +70,12 @@ public class RegisterDishUI extends AbstractUI {
         return false;
     }
 
+    /**
+     * Method that returns the selected material by the user.
+     *
+     * @param listIngredients
+     * @return
+     */
     public Material selectMaterial(List<Material> listIngredients) {
         for (int i = 0; i < listIngredients.size(); i++) {
             System.out.println(i + 1 + " - " + listIngredients.get(i).description());
@@ -82,6 +93,11 @@ public class RegisterDishUI extends AbstractUI {
         }
     }
 
+    /**
+     * Method that returns a set of the allergens selected by the user.
+     *
+     * @return
+     */
     public Set<Allergen> getNewAllergenList() {
         int i = 1, flag = 0;
         Set<Allergen> newAllergList = new HashSet<>();
@@ -111,6 +127,11 @@ public class RegisterDishUI extends AbstractUI {
         return newAllergList;
     }
 
+    /**
+     * HeadLine.
+     *
+     * @return
+     */
     @Override
     public String headline() {
         return "Register Dish";

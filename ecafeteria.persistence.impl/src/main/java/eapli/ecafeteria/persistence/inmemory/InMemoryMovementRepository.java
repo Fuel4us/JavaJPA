@@ -9,6 +9,7 @@ import eapli.ecafeteria.domain.movement.Movement;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.persistence.MovementRepository;
 import eapli.framework.persistence.repositories.impl.inmemory.InMemoryRepositoryWithLongPK;
+import java.util.Calendar;
 
 /**
  *
@@ -19,6 +20,11 @@ public class InMemoryMovementRepository extends InMemoryRepositoryWithLongPK<Mov
     @Override
     public Iterable<Movement> findAllByNIF(MecanographicNumber nif) {
         return match( e -> e.nif().number().equals(nif.number()));
+    }
+
+    @Override
+    public Iterable<Movement> findAllByNIFandDatePeriod(MecanographicNumber nif, Calendar periodBeginning, Calendar periodEnd) {
+        return match(e ->e.nif().equals(nif) && e.date().after(periodBeginning) && e.date().before(periodEnd));
     }
     
 }

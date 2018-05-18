@@ -13,31 +13,64 @@ import javax.persistence.Id;
 @Entity
 public class Allergen implements Serializable {
 
+    /**
+     * Instance variable that defines the serial version.
+     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Instance variable that defines the id of the allergen.
+     */
     @Id
     @GeneratedValue
     private Long id;
 
+    /**
+     * Instance variables that define the characteristics of the allergen.
+     */
     private String acronym;
     private String description;
 
+    /**
+     * Complete constructor of the class.
+     *
+     * @param acronym
+     * @param description
+     */
     public Allergen(String acronym, String description) {
         this.acronym = acronym;
         this.description = description;
     }
 
+    /**
+     * Empty constructor of the class.
+     */
     public Allergen() {
     }
 
+    /**
+     * Returns the acronym of the allergen.
+     *
+     * @return
+     */
     public String getAcronym() {
         return acronym;
     }
 
+    /**
+     * Returns the description of the allergen.
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
-    
+
+    /**
+     * Returns the id.
+     *
+     * @return
+     */
     public Long id() {
         return id;
     }
@@ -50,6 +83,12 @@ public class Allergen implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals method.
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -71,6 +110,11 @@ public class Allergen implements Serializable {
         return true;
     }
 
+    /**
+     * To String method.
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return description + ";";

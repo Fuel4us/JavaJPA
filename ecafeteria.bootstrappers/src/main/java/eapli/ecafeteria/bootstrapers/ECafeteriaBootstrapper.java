@@ -21,7 +21,7 @@ public class ECafeteriaBootstrapper implements Action {
         final Action[] actions = {new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), new DishTypesBootstrapper(), new AllergenBootstrapper(),
             new CafeteriaUserBootstrapper(), new MaterialsBootstrapper(), new DishBootstrapper(), new HeuristicBootstrapper(), new KitchenLimitBootstrapper(), new MealBootstrapper(),
             new BookingBootstrapper(), new LotBootstrapper(), new MealLotBootstrapper(), new MenuBootstrapper(), new ExecutionBootstrapper(), new POSBootstrapper(),
-            new WorkSessionBootstrapper(), new CanteenShiftBootstrapper(), new CommentBootstrapper(), new RatingBootstrapper()};
+            new WorkSessionBootstrapper(), new CanteenShiftBootstrapper(), new RatingBootstrapper(), new MealPlanBootstrapper()};
 
         authenticateSuperUser();
 
