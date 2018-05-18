@@ -75,4 +75,8 @@ public class Movement implements AggregateRoot<Long>, Serializable {
     public Money money(){
         return this.quantity;
     }
+    
+    public Calendar date() {
+        return this.date;
+    }
 }
