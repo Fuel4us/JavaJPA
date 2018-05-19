@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  *
- * @author Bernardo Carreira
+ * @author Bernardo Carreira 1150990
  */
 public class ReplyMealRatingCommentsController {
     
@@ -41,7 +41,7 @@ public class ReplyMealRatingCommentsController {
         return bookingRepository.findBookingsForMeal(meal);
     }
 
-    public void saveBooking(Booking b) throws DataConcurrencyException, DataIntegrityViolationException {
+    public void saveBooking(Booking b) throws DataConcurrencyException, DataIntegrityViolationException{
         bookingRepository.save(b);
     }
 

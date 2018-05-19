@@ -21,13 +21,34 @@ import java.util.Optional;
  */
 public class CheckBookingsForNextDaysController {
     
+    /**
+     * Booking repository
+     */
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();
+    
+    /**
+     * Cafeteria user repository
+     */
     private final CafeteriaUserRepository userRepository = PersistenceContext.repositories().cafeteriaUsers();
     
+    /**
+     * Returns the user that has the same username has the one indicated
+     * 
+     * @param username Username to determine user
+     * @return CafeteriaUser
+     * @throws DataConcurrencyException 
+     */
     public Optional<CafeteriaUser> findUserByUsername(Username username) throws DataConcurrencyException {
         return userRepository.findByUsername(username);
     }
     
+     /**
+     * Returns the list of bookings in reserved state for the next X days
+     *
+     * @param user User
+     * @param date Starting date to compare
+     * @return List of bookings
+     */
     public Iterable<Booking> findBookingsForNextDays(Optional <CafeteriaUser> user, Date date){
         return bookingRepository.checkBookingsForNextDays(user, date);
     }

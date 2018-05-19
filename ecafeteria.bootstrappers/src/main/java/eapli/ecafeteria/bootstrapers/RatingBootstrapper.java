@@ -49,7 +49,7 @@ public class RatingBootstrapper implements Action{
         
         final Rating r1 = new Rating(2, c1);
         final Rating r2 = new Rating(4, c2);
-        
+
         b1.rating(r1);
         b2.rating(r2);
         
