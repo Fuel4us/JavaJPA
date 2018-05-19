@@ -12,22 +12,9 @@ The user initialize the process of edit user nutritional profile. The system sho
 The system shows a success message;
 
 ###	SSD Short Format
-![UC2.jpg](./ssd.jpg)
+![UC4.1.3.2-SSD.jpg](./ssd.jpg)
 
 ##	LONG FORMAT
-
-### Main Actor
-* Cafeteria User
-
-### Stakeholders and their interests
-+ Cafeteria User: has the possibility of having a record about their nutritional limits;
-+ Chef: makes meals based on nutritional profiles;
-
-### Pre-condition
-+ The cafeteria user must be registered;
-
-### Post-conditions
-* The cafeteria user has an updated nutritional profile;
 
 ### Success Scenario (Basic Flow)
 1. The user initialize the process of edit user nutritional profile. 
@@ -37,18 +24,33 @@ The system shows a success message;
     
     4.1 Add allergen:
 
-        4.1.1 The system requests the allergen code;.
-        4.1.2 The cafeteria user inserts the allergen code;
+        4.1.1 The system requests the allergen;.
+        4.1.2 The cafeteria user inserts the allergen;
 
     4.2 Remove allergen:
 
-        4.2.1 The system requests the allergen code;
-        4.2.2 The cafeteria user inserts the allergen code;
+        4.2.1 The system requests the allergen;
+        4.2.2 The cafeteria user inserts the allergen;
+
+5. The system shows a message informing the sucess of the operation.
 
 ### Extensions
     a. The user requests the cancelation of the UC.
-    + The UC quits.
+        1.  The UC quits.
 
+    4.1.2 
+        a. The user already got the allergen in the List;
+            1. The system shows a message informing that was not possible to add the allergen;
+            2. Go to 1 (The user initialize the process of edit user nutritional profile);
+    
+    4.2
+        a. The list of user's allergen is empty;
+            1. The system shows a message showing that the user's allergen list is empty;
+            2. Go to 1 (The user initialize the process of edit user nutritional profile);
+        
+
+###	Sequence Diagram
+![UC4.1.3.2-SD.jpg](./sd.jpg)
 
 ### Ocurrence Frequence
 * Any time a Cafeteria User wants to change their nutritional profile.
@@ -62,7 +64,10 @@ The system shows a success message;
 + Allergens
 
 ### Envolved Repositories
-+ 
++ CafeteriaUser Repository;
++ NutritionalProfile Repository;
++ Allergen Repository;
++ NutritionalProfile_Allergen Repository;
 
 ###Controller
 + ChangeUserAllergensController

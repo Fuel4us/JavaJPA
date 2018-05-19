@@ -18,3 +18,10 @@ ANALYSIS
 
 ### Post-conditions
 * The cafeteria user has an updated nutritional profile;
+
+### Main Actor
+* Cafeteria User
+
+### Stakeholders and their interests
++ Cafeteria User: has the possibility of having a record about their nutritional limits;
++ Chef: makes meals based on nutritional profiles;
