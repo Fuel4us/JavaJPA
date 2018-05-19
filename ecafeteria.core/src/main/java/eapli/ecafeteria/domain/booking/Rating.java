@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -35,11 +35,11 @@ public class Rating implements Serializable {
     /**
      * Instance variable that defines the comments and/or answers of the rating.
      */
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.ALL)
     private Comment comment;
 
     /**
-     * Empty constructor of the class.
+     * Empty constructor of the class for the ORM.
      */
     public Rating() {
     }
@@ -76,7 +76,11 @@ public class Rating implements Serializable {
     public void setScore(int score) {
         this.score = score;
     }
-
+    
+    /**
+     * Returns the score.
+     * @return
+     */
     public int getScore() {
         return score;
     }

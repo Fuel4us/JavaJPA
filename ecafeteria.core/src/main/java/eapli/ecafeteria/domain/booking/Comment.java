@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.booking;
 
+import eapli.framework.domain.ddd.ValueObject;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,22 +13,37 @@ import javax.persistence.Id;
  * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Comment implements Serializable {
+public class Comment implements Serializable, ValueObject {
 
     private static final long serialVersionUID = 1L;
     
-    // ORM primary key
+    /**
+     * Variable that defines the id of the comment.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    
+    /**
+     * Instance variable that defines the comment made by the user.
+     */
     private String comment;
+    
+    /**
+     * Instance variable that defines the answer made by the menu manager.
+     */
     private String answer;
 
-    // for ORM
+    /**
+     * Empty constructor of the class for the ORM.
+     */
     public Comment() {
     }
 
+    /**
+     * Complete constructor of the class with the String comment.
+     * @param comment
+     */
     public Comment(String comment) {
         this.comment = comment;
     }
@@ -50,13 +66,17 @@ public class Comment implements Serializable {
     }
 
     /**
-     * 
+     * Changes or Set answer.
      * @param answer
      */
     public void changeAnswer(String answer) {
         this.answer = answer;
     }
 
+    /**
+     * Returns a brief description of the comment.
+     * @return
+     */
     @Override
     public String toString() {
         return "Comment{" + "comment=" + comment + ", resposta=" + answer + '}';
