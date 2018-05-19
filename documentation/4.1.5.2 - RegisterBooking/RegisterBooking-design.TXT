@@ -1,0 +1,67 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+   	Classes do domínio:  Meal, Dish, NutricionalInfo, CafeteriaUser, NutritionalProfile, Movement, Booking
+   	Controlador: RegisterBookingController
+   	Repository: MenuRepository, MealRepository, MovementsRepository, BookingRepository
+
+
+	Diagrama de Sequência - websequencediagrams.com source
+
+		title 4.1.5.2 - Register Booking
+
+		User->RegisterBookingUI:starts the new booking
+		RegisterBookingUI->*RegisterBookingController:create()
+		RegisterBookingUI->RegisterBookingController:getMeals()
+		RegisterBookingController->MenuRepository:menu = getMenu()
+		RegisterBookingController->MealRepository:menu.getMeals()
+		RegisterBookingUI->User:show meals
+
+		User->RegisterBookingUI:picks a meal
+		RegisterBookingUI->RegisterBookingController:pickMeal(mealNumber)
+		RegisterBookingController->MealRepository:meal = pickMealByNumber(meanlNumber)
+		RegisterBookingUI->RegisterBookingController:getDishNutritionalInfoSalt(meal)
+		RegisterBookingController->Meal:getDish()
+		Meal->Dish:nutricionalInfo()
+		Dish->NutricionalInfo:salt()
+		RegisterBookingUI->RegisterBookingController:getDishNutritionalInfoCalories(meal)
+		RegisterBookingController->Meal:getDish()
+		Meal->Dish:nutricionalInfo()
+		Dish->NutricionalInfo:calories()
+		RegisterBookingUI->RegisterBookingController:getDishWeeklyCaloricIntakeAfter(meal)
+		loop Booking b : checkBookingsForCurrentWeek(cu)
+		RegisterBookingController->RegisterBookingController:b.getMeal()
+		RegisterBookingController->Meal:getDish()
+		Meal->Dish:nutricionalInfo()
+		Dish->NutricionalInfo:calories()
+		end
+
+		RegisterBookingUI->RegisterBookingController:getAllergens(meal)
+		RegisterBookingController->Meal:getDish()
+		Meal->Dish:allergens()
+
+		RegisterBookingUI->RegisterBookingController:getAllergensUserIsAffectedBy(cu, meal)
+		RegisterBookingController->Meal:getDish()
+		Meal->Dish:allergens = allergens()
+
+		loop Allergen a : userAllergens
+		RegisterBookingController->CafeteriaUser:cu.accessNutritionalProfile()
+		CafeteriaUser->NutritionalProfile:userAllergens()
+		alt allergens.contains(a)
+			RegisterBookingController->RegisterBookingController: allergensUserIsAffectedBy.add(a)
+		end
+		end
+
+		RegisterBookingUI->User:The system shows the meal and nutritional and allergenic info
+
+		User->RegisterBookingUI:confirms
+		RegisterBookingUI->RegisterBookingController:registerBooking(cu, meal)
+		RegisterBookingController->*Movement:movement = new Movement(mn, MovementType.BOOKING, amount, currency)
+		RegisterBookingController->MovementsRepository: save(movement)
+		RegisterBookingController->*Booking:booking = new Booking(cu, meal)
+		RegisterBookingController->BookingRepository:save(booking)
+		RegisterBookingUI->User:informs of the success of the operation
