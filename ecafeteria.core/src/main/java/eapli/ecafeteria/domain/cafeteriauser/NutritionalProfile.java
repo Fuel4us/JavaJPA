@@ -6,7 +6,6 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.ecafeteria.domain.dishes.Allergen;
-import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +40,10 @@ public class NutritionalProfile implements  Serializable{
     }
     
     public boolean addAllergen(Allergen allergen){
-        return allergenList.add(allergen);
+        if(!allergenList.add(allergen)){
+            throw new IllegalArgumentException("The allergen already exist in user's list");
+        } 
+        return true;
     }
     
     public boolean removeAllergen(Allergen allergen){

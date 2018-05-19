@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static eapli.framework.util.Collections.iterableToList;
+import static eapli.framework.util.Collections.iteratorToList;
 
 /**
- * 
+ *
  * @author pedromonteiro
  */
 public class ChangeUserAllergensController implements Controller {
@@ -47,6 +47,7 @@ public class ChangeUserAllergensController implements Controller {
 
     /**
      * Return all the allergens in the Repository.
+     *
      * @return all allergens;
      */
     public Iterable<Allergen> getAllergens() {
@@ -59,63 +60,69 @@ public class ChangeUserAllergensController implements Controller {
      *
      * @return user available allergens
      */
+    /*
     public Iterable<Allergen> getAvailableAllergens() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
 
         List<Allergen> availableAllergens; //At this pont available allergens = all allergens
-        availableAllergens = iterableToList(allergenRepo.findAll().iterator());
+        availableAllergens = iteratorToList(allergenRepo.findAll().iterator());
         
-        availableAllergens.removeAll(iterableToList(my_user.accessNutritionalProfile().userAllergens().iterator())); //Removes user allergens from all allergens
+        availableAllergens.removeAll(iteratorToList(my_user.accessNutritionalProfile().userAllergens().iterator())); //Removes user allergens from all allergens
         
         return availableAllergens;
 
-    }
-
+    }*/
     /**
      * Return the user allergens
+     *
      * @return User allergens
      */
     public Iterable<Allergen> getUserAllergen() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
-        return my_user.accessNutritionalProfile().userAllergens();
+
+            return my_user.accessNutritionalProfile().userAllergens();
     }
 
     /**
      * Remove a requested allergen from users allergens.
+     *
      * @param allergen allergen to remove
      * @return true if removed, false if not
      */
     public boolean removeAllergen(Allergen allergen) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
-        if (my_user.accessNutritionalProfile().removeAllergen(allergen)) {
-            try {
+        try {
+            if (my_user.accessNutritionalProfile().removeAllergen(allergen)) {
                 return this.cafeteriaUserRepo.save(my_user) != null;
-            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                Logger.getLogger(ChangeUserAllergensController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } catch (DataConcurrencyException | DataIntegrityViolationException | NullPointerException ex) {
+            Logger.getLogger(ChangeUserAllergensController.class.getName()).log(Level.SEVERE, null, ex);
+
+        } 
         return false;
     }
 
     /**
      * Add an allergen to user's allergen
-     * @param allergen allergen to add 
+     *
+     * @param allergen allergen to add
      * @return true if added, false if not
      */
     public boolean addAllergen(Allergen allergen) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
+        try {
+            if (my_user.accessNutritionalProfile().addAllergen(allergen)) {
 
-        if (my_user.accessNutritionalProfile().addAllergen(allergen)) {
-            try {
                 return this.cafeteriaUserRepo.save(my_user) != null;
-            } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                Logger.getLogger(ChangeUserAllergensController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
 
+            }
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(ChangeUserAllergensController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(IllegalArgumentException ill_arg){
+            System.out.println(ill_arg.getMessage());
+        }
+        
         return false;
     }
-
-    
 
 }

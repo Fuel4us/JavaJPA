@@ -40,7 +40,7 @@ public final class Collections {
      * @param iterable to transform in List
      * @return the List
      */
-    public static <T> List<T> iterableToList(Iterator<T> it) {
+    public static <T> List<T> iteratorToList(Iterator<T> it) {
         List<T> copy = new ArrayList<>();
         while (it.hasNext()) {
             copy.add(it.next());
