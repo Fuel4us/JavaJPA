@@ -4,9 +4,7 @@ import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.Comment;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.persistence.BookingRepository;
-import eapli.ecafeteria.persistence.CommentRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
-import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
@@ -29,15 +27,11 @@ public class RatingBootstrapper implements Action{
     
     public void register() throws DataIntegrityViolationException, DataConcurrencyException {
         
-        //final CommentRepository cRepository = PersistenceContext.repositories().comments();
-        //final RatingRepository rRepository = PersistenceContext.repositories().rating();
         final BookingRepository bRepository = PersistenceContext.repositories().booking();
         
         Iterator<Booking> bR = bRepository.findAll().iterator();
         Booking b1 = bR.next();
-        System.out.println(b1);
         Booking b2 = bR.next();
-        System.out.println(b2);
         
         //comment made by a user
         final Comment c1 = new Comment("comment1");
@@ -45,19 +39,12 @@ public class RatingBootstrapper implements Action{
         
         //answer or reply made by the chef (menu manager)
         c1.changeAnswer("answer1");
-        c2.changeAnswer("answer2");
         
         final Rating r1 = new Rating(2, c1);
         final Rating r2 = new Rating(4, c2);
 
         b1.rating(r1);
         b2.rating(r2);
-        
-        //rRepository.save(r1);
-        //rRepository.save(r2);
-        
-        System.out.println(b1);
-        System.out.println(b2);
         
         bRepository.save(b1);
         bRepository.save(b2);
