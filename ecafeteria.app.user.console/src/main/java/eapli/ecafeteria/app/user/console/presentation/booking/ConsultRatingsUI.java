@@ -1,7 +1,7 @@
 package eapli.ecafeteria.app.user.console.presentation.booking;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
-import eapli.ecafeteria.application.booking.CheckRatingController;
+import eapli.ecafeteria.application.booking.ConsultRatingsController;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -10,9 +10,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CheckRatingUI extends AbstractUI {
+public class ConsultRatingsUI extends AbstractUI {
 
-    private final CheckRatingController controller = new CheckRatingController();
+    private final ConsultRatingsController controller = new ConsultRatingsController();
     
     @Override
     protected boolean doShow() {

@@ -12,7 +12,7 @@ import eapli.framework.persistence.DataConcurrencyException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class CheckRatingController implements Controller{
+public class ConsultRatingsController implements Controller{
 
     private final CafeteriaUserRepository userRepository = PersistenceContext.repositories().cafeteriaUsers();
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();
