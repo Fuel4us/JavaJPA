@@ -1,18 +1,27 @@
 ANALYSIS
 
-	SHORT FORMAT
+	UNIT TESTS
 	{
-		The user starts editing the nutritional profile. The system shows the options of editing: change max salt quantity or change max calorie quantity.
-		The user chooses to change the max salt quantity, and the system asks for the quantity. The user inserts the new max quantity. The systems informs success.
-		The user chooses to change the max calorie quantity, and the system asks for the quantity. The user inserts the new max quantity. The system informs success.
+		The user tries to insert a value for salt/calorie that is a non positive integer
 	}
-	
+
 	PRE-CONDITIONS
 	{
-	
+		The cafeteria user must be registered.
 	}
 	
 	POST-CONDITIONS
+	{
+		The cafeteria user has an updated nutritional profile.
 	}
 	
+	MAIN ACTOR
+	{
+		Cafeteria User
+	}
+
+	STAKEHOLDERS AND THEIR INTERESTS
+	{
+		Cafeteria User: has the possibility of having a record about their nutritional limits.
+		Chef: makes meals based on nutritional profiles.
 	}

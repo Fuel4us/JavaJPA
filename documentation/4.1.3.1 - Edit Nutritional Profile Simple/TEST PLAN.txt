@@ -1,10 +1,33 @@
 TEST PLAN
 
-1. Log in as .../Password1
-2. Choose option Edit Nutritional Profile Simple
-3. Choose:
-	a. Change max salt quantity
-		1. Insert max quantity quantity
-	b. Change max calorie quantity
-		1. Insert max calorie quantity
-4. Confirms changes with .....
+	TEST SUCESSFULL EDIT SALT QUANTITY
+		1. Login (i.e: username: 900330 password:Password1);
+		2. Chooses the option < NutritionalProfile >;
+		3. Chooses the option < Salt and Calories >;
+		4. Chooses the option < Change max salt quantity >;
+		5. (The system asks for the quantity) Inserts the max salt quantity;
+		6. The system shows a message informing that the quantity was successfully changed;
+
+	TEST SUCESSFULL EDIT CALORIE QUANTITY
+		1. Login (i.e: username: 900330 password:Password1);
+		2. Chooses the option < NutritionalProfile >;
+		3. Chooses the option < Salt and Calories >;
+		4. Chooses the option < Change max calorie quantity >;
+		5. (The system asks for the quantity) Inserts the max calorie quantity;
+		6. The system shows a message informing that the quantity was successfully changed;
+
+	TEST UNSUCESSFULL EDIT SALT QUANTITY
+		1. Login (i.e: username: 900330 password:Password1);
+		2. Chooses the option < NutritionalProfile >;
+		3. Chooses the option < Salt and Calories >;
+		4. Chooses the option < Change max salt quantity >;
+		5. (The system asks for the quantity) Inserts an invalid value for the salt quantity;
+		6. The system shows a message informing that it was not possible to change the salt quantity;
+
+	TEST UNSUCESSFULL EDIT CALORIE QUANTITY
+		1. Login (i.e: username: 900330 password:Password1);
+		2. Chooses the option < NutritionalProfile >;
+		3. Chooses the option < Salt and Calories >;
+		4. Chooses the option < Change max calorie quantity >;
+		5. (The system asks for the quantity) Inserts an invalid value for the calorie quantity;
+		6. The system shows a message informing that it was not possible to change the calorie quantity;

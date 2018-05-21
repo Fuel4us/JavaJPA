@@ -1,1 +1,28 @@
 DESIGN
+
+	SHORT FORMAT
+	{
+		The user starts editing the nutritional profile. The system shows the options of editing: change max salt quantity or change max calorie quantity.
+		The user chooses to change the max salt quantity, and the system asks for the quantity. The user inserts the new max quantity. The systems informs success.
+		The user chooses to change the max calorie quantity, and the system asks for the quantity. The user inserts the new max quantity. The system informs success.
+	}
+
+	ENVOLVED AGREGATE
+	{
+		User
+	}
+
+	ENVOLVED REPOSITORY
+	{
+		CafeteriaUser Repository
+	}
+	
+	CONTROLLER
+	{
+		ChangeUserAllergensController
+	}
+
+	UI
+	{
+		ChangeUserAllergensUI
+	}
