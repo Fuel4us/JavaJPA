@@ -16,14 +16,12 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static eapli.framework.util.Collections.iteratorToList;
 
 /**
- *
+ * Change User allergens Controller
  * @author pedromonteiro
  */
 public class ChangeUserAllergensController implements Controller {
@@ -54,24 +52,7 @@ public class ChangeUserAllergensController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         return allergenRepo.findAll();
     }
-
-    /**
-     * Available Allergens for user to add (get all allergens execept user allergens)
-     *
-     * @return user available allergens
-     */
-    /*
-    public Iterable<Allergen> getAvailableAllergens() {
-        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
-
-        List<Allergen> availableAllergens; //At this pont available allergens = all allergens
-        availableAllergens = iteratorToList(allergenRepo.findAll().iterator());
-        
-        availableAllergens.removeAll(iteratorToList(my_user.accessNutritionalProfile().userAllergens().iterator())); //Removes user allergens from all allergens
-        
-        return availableAllergens;
-
-    }*/
+    
     /**
      * Return the user allergens
      *
