@@ -14,6 +14,6 @@ import eapli.framework.actions.Action;
 public class EditNutritionalProfileAction implements Action{
     @Override
     public boolean execute() {
-        return new ChangeUserAllergensUI().show();
+        return new EditNutritionalProfileUI().show();
     }
 }
