@@ -40,6 +40,8 @@ public class NutritionalProfile implements  Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private final Set<Allergen> allergenList;
     
+    /* package */ Set<Allergen> iterator_allergens(){ return allergenList; } // For tests effect
+    
     protected NutritionalProfile(){
         allergenList = new HashSet<>();
         maxSaltQuantity = new Salt();
