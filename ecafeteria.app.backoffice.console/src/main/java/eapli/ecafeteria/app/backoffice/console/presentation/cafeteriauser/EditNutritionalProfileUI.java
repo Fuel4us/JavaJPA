@@ -6,7 +6,9 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
 
 import eapli.ecafeteria.application.cafeteriauser.EditNutritionalProfileController;
+import eapli.ecafeteria.domain.cafeteriauser.Calorie;
 import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile;
+import eapli.ecafeteria.domain.cafeteriauser.Salt;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
@@ -16,6 +18,10 @@ import java.util.Scanner;
  */
 public class EditNutritionalProfileUI extends AbstractUI{
     Scanner input = new Scanner(System.in);
+    
+    /**
+     * Instance of EditNutritionalProfileController
+     */
     EditNutritionalProfileController controller = new EditNutritionalProfileController();
     
     /**
@@ -94,7 +100,9 @@ public class EditNutritionalProfileUI extends AbstractUI{
         System.out.printf("\nEntry the new max salt quantity: ");
         int maxSalt = input.nextInt();
         
-        controller.savetMaxSaltQuantity(maxSalt);
+        controller.setMaxSaltQuantity(maxSalt);
+        
+        controller.saveMaxSaltQuantity(maxSalt);
         
         return true;
     }
@@ -108,6 +116,8 @@ public class EditNutritionalProfileUI extends AbstractUI{
         
         System.out.printf("\nEntry the new max calorie quantity: ");
         int maxCalorie = input.nextInt();
+        
+        controller.setMaxCalorieQuantity(maxCalorie);
         
         controller.saveMaxCalorieQuantity(maxCalorie);
         
