@@ -41,19 +41,7 @@ public class Salt implements ValueObject{
         maxSaltQuantity = -1;
     }
     
-    /**
-     * Gets the max salt quantity
-     * @return max salt quantity
-     */
-    public int getMaxSaltQuantity() {
+    public int saltQuantity(){
         return maxSaltQuantity;
-    }
-    
-    /**
-     * Sets the max salt quantity
-     * @param maxSaltQuantity 
-     */
-    public void setMaxSaltQuantity(int maxSaltQuantity) {
-        this.maxSaltQuantity = maxSaltQuantity;
     }
 }

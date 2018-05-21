@@ -67,7 +67,7 @@ public class EditNutritionalProfileController implements Controller{
             return false;
         }
         
-        currentUser.accessNutritionalProfile().setMaxSaltQuantity(maxSaltQuantity);
+        currentUser.accessNutritionalProfile().changeMaxSaltQuantity(maxSaltQuantity);
         return true;
     }
 
@@ -80,7 +80,7 @@ public class EditNutritionalProfileController implements Controller{
             return false;
         }
         
-        currentUser.accessNutritionalProfile().setMaxCalorieQuantity(maxCalorieQuantity);
+        currentUser.accessNutritionalProfile().changeMaxCalorieQuantity(maxCalorieQuantity);
         return true;
     }
     

@@ -40,20 +40,8 @@ public class Calorie implements ValueObject{
     protected Calorie(){
         maxCalorieQuantity = -1;
     }
-
-    /**
-     * Gets the max calorie quantity
-     * @return max calorie quantity
-     */
-    public int getMaxCalorieQuantity() {
-        return maxCalorieQuantity;
-    }
     
-    /**
-     * Sets the max calorie quantity
-     * @param maxCalorieQuantity 
-     */
-    public void setMaxCalorieQuantity(int maxCalorieQuantity) {
-        this.maxCalorieQuantity = maxCalorieQuantity;
+    public int calorieQuatity(){
+        return maxCalorieQuantity;
     }
 }

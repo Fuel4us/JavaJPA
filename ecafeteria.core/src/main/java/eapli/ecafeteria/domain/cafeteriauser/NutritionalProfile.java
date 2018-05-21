@@ -75,11 +75,19 @@ public class NutritionalProfile implements  Serializable{
         return allergenList;
     }
     
-    public void setMaxSaltQuantity(Salt maxSaltQuantity) {
+    public void changeMaxSaltQuantity(Salt maxSaltQuantity) {
         this.maxSaltQuantity = maxSaltQuantity;
     }
 
-    public void setMaxCalorieQuantity(Calorie maxCalorieQuantity) {
+    public void changeMaxCalorieQuantity(Calorie maxCalorieQuantity) {
         this.maxCalorieQuantity = maxCalorieQuantity;
+    }
+
+    public Salt getMaxSaltQuantity() {
+        return maxSaltQuantity;
+    }
+
+    public Calorie getMaxCalorieQuantity() {
+        return maxCalorieQuantity;
     }
 }
