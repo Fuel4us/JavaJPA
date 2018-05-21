@@ -3,6 +3,7 @@ package eapli.ecafeteria.bootstrapers;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.HeuristicA;
+import eapli.ecafeteria.domain.kitchen.HeuristicB;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -23,18 +24,20 @@ public class HeuristicBootstrapper implements Action {
         register();
         return true;
     }
-    
-    private void register(){
+
+    private void register() {
         try {
             final HeuristicRepository heuristicRepository = PersistenceContext.repositories().heuristics();
-            
+
             AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
-            
-            HeuristicConfiguration entity = new HeuristicConfiguration(new HeuristicA("Heuristic A"));
-            heuristicRepository.save(entity);
+
+            HeuristicConfiguration entityA = new HeuristicConfiguration(new HeuristicA("Last Available Week"));
+            heuristicRepository.save(entityA);
+            HeuristicConfiguration entityB = new HeuristicConfiguration(new HeuristicB("Average"));
+            heuristicRepository.save(entityB);
         } catch (final DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(KitchenLimitBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }
