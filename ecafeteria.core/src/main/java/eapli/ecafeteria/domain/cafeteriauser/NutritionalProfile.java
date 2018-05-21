@@ -30,6 +30,9 @@ public class NutritionalProfile implements  Serializable{
     @GeneratedValue
     private Long id;
     
+    private Salt maxSaltQuantity;
+    
+    private Calorie maxCalorieQuantity;
     
     @Column(name = "allergen_list")
     @OneToMany(cascade = CascadeType.ALL)
@@ -53,6 +56,12 @@ public class NutritionalProfile implements  Serializable{
     public Iterable<Allergen> userAllergens(){
         return allergenList;
     }
-
     
+    public void setMaxSaltQuantity(Salt maxSaltQuantity) {
+        this.maxSaltQuantity = maxSaltQuantity;
+    }
+
+    public void setMaxCalorieQuantity(Calorie maxCalorieQuantity) {
+        this.maxCalorieQuantity = maxCalorieQuantity;
+    }
 }
