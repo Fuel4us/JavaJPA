@@ -6,11 +6,13 @@
 package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.framework.domain.ddd.ValueObject;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author Tiago Babo (1160760)
  */
+@Embeddable
 public class Salt implements ValueObject{
     
     private static final long serialVersionUID = 1L;
@@ -30,6 +32,13 @@ public class Salt implements ValueObject{
         }
         
         this.maxSaltQuantity = maxSaltQuantity;
+    }
+    
+    /**
+     * Empty constructor for ORM
+     */
+    protected Salt(){
+        maxSaltQuantity = -1;
     }
     
     /**
