@@ -30,8 +30,10 @@ public class NutritionalProfile implements  Serializable{
     @GeneratedValue
     private Long id;
     
+    @Column(name = "max_salt_quantity")
     private Salt maxSaltQuantity;
     
+    @Column(name = "max_calorie_quantity")
     private Calorie maxCalorieQuantity;
     
     @Column(name = "allergen_list")

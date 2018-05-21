@@ -15,7 +15,11 @@ import eapli.ecafeteria.domain.cafeteriauser.Salt;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Controller for editing nutritional profile
@@ -53,23 +57,38 @@ public class EditNutritionalProfileController implements Controller{
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         return currentUser.accessNutritionalProfile();
     }
-    
-    public void saveMaxSaltQuantity(int maxSalt){
-        //GUARDAR NA BD
-    }
-    
-    public void saveMaxCalorieQuantity(int maxCalorie){
-        //GUARDAR NA BD
-    }
 
-    public void setMaxSaltQuantity(int maxSalt) {
-        Salt maxSaltQuantity = new Salt(maxSalt);
+    public boolean setMaxSaltQuantity(int maxSalt) {
+        Salt maxSaltQuantity;
+        
+        try {
+            maxSaltQuantity = new Salt(maxSalt);
+        }catch(IllegalArgumentException e){
+            return false;
+        }
+        
         currentUser.accessNutritionalProfile().setMaxSaltQuantity(maxSaltQuantity);
+        return true;
     }
 
-    public void setMaxCalorieQuantity(int maxCalorie) {
-        Calorie maxCalorieQuantity = new Calorie(maxCalorie);
+    public boolean setMaxCalorieQuantity(int maxCalorie) {
+        Calorie maxCalorieQuantity;
+        
+        try{
+            maxCalorieQuantity = new Calorie(maxCalorie);
+        }catch(IllegalArgumentException e){
+            return false;
+        }
+        
         currentUser.accessNutritionalProfile().setMaxCalorieQuantity(maxCalorieQuantity);
+        return true;
     }
     
+    public void saveEdit(){
+        try {
+            cafeteriaUserRepo.save(currentUser);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(EditNutritionalProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

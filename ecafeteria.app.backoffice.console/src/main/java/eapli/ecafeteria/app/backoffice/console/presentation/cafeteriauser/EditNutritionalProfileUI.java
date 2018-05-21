@@ -6,9 +6,7 @@
 package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
 
 import eapli.ecafeteria.application.cafeteriauser.EditNutritionalProfileController;
-import eapli.ecafeteria.domain.cafeteriauser.Calorie;
 import eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile;
-import eapli.ecafeteria.domain.cafeteriauser.Salt;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
@@ -48,8 +46,8 @@ public class EditNutritionalProfileUI extends AbstractUI{
      */
     public int menuUI() {
         System.out.println("");
-        System.out.println("1. Change salt max quantity");
-        System.out.println("2. Change salt calorie quantity");
+        System.out.println("1. Change max salt quantity");
+        System.out.println("2. Change max calorie quantity");
         System.out.println("0. Leave");
         System.out.printf("OPTION: ");
         int option = input.nextInt();
@@ -78,9 +76,9 @@ public class EditNutritionalProfileUI extends AbstractUI{
                     break;
                 case 2:
                     if(changeCalorie()){
-                        System.out.println("\nMax salt quantity changed successfully!");
+                        System.out.println("\nMax calorie quantity changed successfully!");
                     }else{
-                        System.out.println("\nNot possible to change max salt quantity!");
+                        System.out.println("\nNot possible to change max calorie quantity!");
                     }
                     break;
                 default:
@@ -100,9 +98,11 @@ public class EditNutritionalProfileUI extends AbstractUI{
         System.out.printf("\nEntry the new max salt quantity: ");
         int maxSalt = input.nextInt();
         
-        controller.setMaxSaltQuantity(maxSalt);
+        if(!controller.setMaxSaltQuantity(maxSalt)){
+            return false;
+        }
         
-        controller.saveMaxSaltQuantity(maxSalt);
+        controller.saveEdit();
         
         return true;
     }
@@ -117,9 +117,11 @@ public class EditNutritionalProfileUI extends AbstractUI{
         System.out.printf("\nEntry the new max calorie quantity: ");
         int maxCalorie = input.nextInt();
         
-        controller.setMaxCalorieQuantity(maxCalorie);
+        if(!controller.setMaxCalorieQuantity(maxCalorie)){
+            return false;
+        }
         
-        controller.saveMaxCalorieQuantity(maxCalorie);
+        controller.saveEdit();
         
         return true;
     }
