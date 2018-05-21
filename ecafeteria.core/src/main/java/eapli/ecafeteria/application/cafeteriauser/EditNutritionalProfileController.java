@@ -58,6 +58,11 @@ public class EditNutritionalProfileController implements Controller{
         return currentUser.accessNutritionalProfile();
     }
 
+    /**
+     * Sets the new max salt quantity
+     * @param maxSalt
+     * @return true if change; false if not changed
+     */
     public boolean setMaxSaltQuantity(int maxSalt) {
         Salt maxSaltQuantity;
         
@@ -71,6 +76,11 @@ public class EditNutritionalProfileController implements Controller{
         return true;
     }
 
+    /**
+     * Sets the new max calorie quantity
+     * @param maxCalorie
+     * @return true if change; false if not changed
+     */
     public boolean setMaxCalorieQuantity(int maxCalorie) {
         Calorie maxCalorieQuantity;
         
@@ -84,6 +94,9 @@ public class EditNutritionalProfileController implements Controller{
         return true;
     }
     
+    /**
+     * Saves changes to database
+     */
     public void saveEdit(){
         try {
             cafeteriaUserRepo.save(currentUser);

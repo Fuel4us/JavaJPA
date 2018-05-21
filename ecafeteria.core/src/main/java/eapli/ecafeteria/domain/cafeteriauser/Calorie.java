@@ -41,6 +41,10 @@ public class Calorie implements ValueObject{
         maxCalorieQuantity = -1;
     }
     
+    /**
+     * Method to get calorie quantity
+     * @return 
+     */
     public int calorieQuatity(){
         return maxCalorieQuantity;
     }
