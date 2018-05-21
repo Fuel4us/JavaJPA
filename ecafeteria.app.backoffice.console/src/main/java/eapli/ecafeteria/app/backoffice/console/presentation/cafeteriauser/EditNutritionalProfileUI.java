@@ -11,7 +11,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import java.util.Scanner;
 
 /**
- *
+ * UI for editing nutritional profile
  * @author Tiago Babo (1160760)
  */
 public class EditNutritionalProfileUI extends AbstractUI{
@@ -84,6 +84,10 @@ public class EditNutritionalProfileUI extends AbstractUI{
         } while (option != 0);
     }
     
+    /**
+     * UI for changing salt
+     * @return 
+     */
     private boolean changeSalt(){
         NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
         
@@ -95,6 +99,10 @@ public class EditNutritionalProfileUI extends AbstractUI{
         return true;
     }
     
+    /**
+     * UI for changing calories
+     * @return true
+     */
     private boolean changeCalorie(){
         NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
         
