@@ -42,6 +42,8 @@ public class NutritionalProfile implements  Serializable{
     
     protected NutritionalProfile(){
         allergenList = new HashSet<>();
+        maxSaltQuantity = new Salt();
+        maxCalorieQuantity = new Calorie();
     }
     
     /**
