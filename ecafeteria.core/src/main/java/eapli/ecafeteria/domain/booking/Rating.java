@@ -10,7 +10,8 @@ import javax.persistence.ManyToOne;
 
 /**
  *
- * @author Rúben - 1160998 changed by João Pereira <1150478@isep.ipp.pt>
+ * @author Rúben - 1160998 
+ * changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
 public class Rating implements Serializable {

@@ -38,18 +38,22 @@ public class BookingBootstrapper implements Action{
             final Meal meal3 = itMeals.next();
             
             final CafeteriaUser cu1 = repCU.findByUsername(new Username(TestDataConstants.USER_900330)).get();
+            final CafeteriaUser cu2 = repCU.findByUsername(new Username(TestDataConstants.USER_900332)).get();
             
             final ChargeCardController CC = new ChargeCardController();
             try {    
                 CC.selectUser(cu1.user().username());
                 CC.ChargeCard(100);
+                CC.selectUser(cu2.user().username());
+                CC.ChargeCard(90);
             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
                 Logger.getLogger(BookingBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            registerBooking(cu1,meal1);
+            registerBooking(cu1, meal1);
             registerBooking(cu1, meal2);
             registerBooking(cu1, meal3);
+            registerBooking(cu2, meal2);
             
             return true;
     }

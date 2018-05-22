@@ -1,0 +1,5 @@
+Description of the UC Check Meal Ratings:
+
+-----------------------------------------
+
+-> It allows the menu chef to check the ratings of a certain meal, just like the number of ratings of the meal, the average score and eventually its comments.
