@@ -1,10 +1,5 @@
 ANALYSIS
 
-	UNIT TESTS
-	{
-		The user tries to insert a value for salt/calorie that is a non positive integer
-	}
-
 	PRE-CONDITIONS
 	{
 		The cafeteria user must be registered.

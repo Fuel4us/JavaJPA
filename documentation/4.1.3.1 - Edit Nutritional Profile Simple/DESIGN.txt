@@ -3,8 +3,8 @@ DESIGN
 	SHORT FORMAT
 	{
 		The user starts editing the nutritional profile. The system shows the options of editing: change max salt quantity or change max calorie quantity.
-		The user chooses to change the max salt quantity, and the system asks for the quantity. The user inserts the new max quantity. The systems informs success.
-		The user chooses to change the max calorie quantity, and the system asks for the quantity. The user inserts the new max quantity. The system informs success.
+		The user chooses to change the max salt quantity, the system shows the previous value and asks for the new quantity. The user inserts the new max quantity. The systems informs success.
+		The user chooses to change the max calorie quantity, the system shows the previous value asks for the new quantity. The user inserts the new max quantity. The system informs success.
 	}
 
 	ENVOLVED AGREGATE
