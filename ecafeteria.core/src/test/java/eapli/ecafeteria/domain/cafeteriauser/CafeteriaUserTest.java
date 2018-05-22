@@ -19,8 +19,8 @@ import eapli.ecafeteria.domain.authz.SystemUser;
 public class CafeteriaUserTest {
 
 	private final String anEmail = "a@a.en";
-	private final String aMecanographicNumber = "abc";
-	private final String anotherMecanographicNumber = "xyz";
+	private final String aMecanographicNumber = "1600000";
+	private final String anotherMecanographicNumber = "1600001";
 
 	@Test
 	public void ensureCafeteriaUserEqualsPassesForTheSameMecanographicNumber() throws Exception {
@@ -28,11 +28,11 @@ public class CafeteriaUserTest {
 		roles.add(RoleType.ADMIN);
 
 		final CafeteriaUser aCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final CafeteriaUser anotherCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final boolean expected = aCafeteriaUser.equals(anotherCafeteriaUser);
@@ -73,7 +73,7 @@ public class CafeteriaUserTest {
 		roles.add(RoleType.ADMIN);
 
 		final CafeteriaUser aCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final Set<RoleType> systemUserRoles = new HashSet<>();
@@ -91,7 +91,7 @@ public class CafeteriaUserTest {
 		final Set<RoleType> roles = new HashSet<>();
 		roles.add(RoleType.ADMIN);
 		final CafeteriaUser aCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final boolean expected = aCafeteriaUser.sameAs(aCafeteriaUser);
@@ -121,11 +121,11 @@ public class CafeteriaUserTest {
 		final Set<RoleType> roles = new HashSet<>();
 		roles.add(RoleType.ADMIN);
 		final CafeteriaUser aCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("one-dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final CafeteriaUser anotherCafeteriaUser = new CafeteriaUserBuilder()
-				.withMecanographicNumber("DUMMY")
+				.withMecanographicNumber("1000001")
 				.withSystemUser(new SystemUser("two-dummy", "duMMy1", "dummy", "dummy", "a@b.ro", roles)).build();
 
 		final boolean expected = aCafeteriaUser.sameAs(anotherCafeteriaUser);
