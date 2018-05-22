@@ -17,7 +17,7 @@ public class CheckUserBalanceUI extends AbstractUI {
                     System.out.println("Bye have a great time!");
                     break;
                 case 1:
-                    //por implementar
+                    System.out.println("Por implementar calma babes");
                     break;
             }
         } while (option != 0);
