@@ -95,6 +95,24 @@ public class EditNutritionalProfileController implements Controller{
     }
     
     /**
+     * Gets the previous value of the salt quantity for reference
+     * @param nutriProfile
+     * @return previous salt calorie quantity
+     */
+    public int getPreviousMaxSaltQuantity(NutritionalProfile nutriProfile) {
+        return nutriProfile.getMaxSaltQuantity().saltQuantity();
+    }
+
+    /**
+     * Gets the previous value of the calorie quantity for reference
+     * @param nutriProfile
+     * @return previous max calorie quantity
+     */
+    public int getPreviousMaxCalorieQuantity(NutritionalProfile nutriProfile) {
+        return nutriProfile.getMaxCalorieQuantity().calorieQuatity();
+    }
+    
+    /**
      * Saves changes to database
      */
     public void saveEdit(){
