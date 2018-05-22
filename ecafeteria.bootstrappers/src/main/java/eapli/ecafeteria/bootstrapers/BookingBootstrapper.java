@@ -37,8 +37,8 @@ public class BookingBootstrapper implements Action{
             final Meal meal2 = itMeals.next();
             final Meal meal3 = itMeals.next();
             
-            final CafeteriaUser cu1 = repCU.findByUsername(new Username(TestDataConstants.USER_900330)).get();
-            final CafeteriaUser cu2 = repCU.findByUsername(new Username(TestDataConstants.USER_900332)).get();
+            final CafeteriaUser cu1 = repCU.findByUsername(new Username(TestDataConstants.USER_1000330)).get();
+            final CafeteriaUser cu2 = repCU.findByUsername(new Username(TestDataConstants.USER_1000332)).get();
             
             final ChargeCardController CC = new ChargeCardController();
             try {    
