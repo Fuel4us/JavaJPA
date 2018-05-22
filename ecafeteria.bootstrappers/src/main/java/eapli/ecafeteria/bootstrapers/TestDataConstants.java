@@ -17,8 +17,8 @@ public final class TestDataConstants {
     public static final String DISH_NAME_LENTILHAS_SALTEADAS = "lentilhas salteadas";
     public static final String DISH_NAME_TOFU_GRELHADO = "tofu grelhado";
 
-    public static final String USER_900330 = "900330";
-    public static final String USER_900332 = "900332";
+    public static final String USER_1000330 = "1000330";
+    public static final String USER_1000332 = "1000332";
 
     @SuppressWarnings("squid:S2068")
     public static final String PASSWORD1 = "Password1";
