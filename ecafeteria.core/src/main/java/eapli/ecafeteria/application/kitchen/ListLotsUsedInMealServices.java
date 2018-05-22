@@ -23,7 +23,7 @@ public class ListLotsUsedInMealServices {
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
     private final LotRepository lotRepository = PersistenceContext.repositories().lots();
 
-    public ListLotsUsedInMealServices() {
+    public ListLotsUsedInMealServices() { 
 
     }
 

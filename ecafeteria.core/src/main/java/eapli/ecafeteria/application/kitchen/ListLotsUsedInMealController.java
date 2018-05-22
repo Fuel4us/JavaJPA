@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.application.Controller;
 import java.util.List;
@@ -21,5 +22,10 @@ public class ListLotsUsedInMealController implements Controller {
     public List<Meal> getAllMeals() {
         return service.getAllMeals();
     }
+    
+        public List<Lot> getLotsByMeal(Meal meal) {
+        return service.getLotsFromMeal(meal);
+    }
+     
 
 }
