@@ -16,16 +16,14 @@ import java.util.List;
  */
 public class ListLotsUsedInMealController implements Controller {
 
-    
     private final ListLotsUsedInMealServices service = new ListLotsUsedInMealServices();
-    
+
     public List<Meal> getAllMeals() {
         return service.getAllMeals();
     }
-    
-        public List<Lot> getLotsByMeal(Meal meal) {
+
+    public List<Lot> getLotsByMeal(Meal meal) {
         return service.getLotsFromMeal(meal);
     }
-     
 
 }

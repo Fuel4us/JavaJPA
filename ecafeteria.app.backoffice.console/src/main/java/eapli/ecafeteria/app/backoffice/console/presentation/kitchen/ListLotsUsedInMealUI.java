@@ -9,13 +9,10 @@ import eapli.ecafeteria.application.kitchen.ListLotsUsedInMealController;
 import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.application.Controller;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -28,13 +25,13 @@ public class ListLotsUsedInMealUI extends AbstractUI {
     protected Controller controller() {
         return this.controller;
     }
-
+ 
     @Override
     protected boolean doShow() {
 
         Meal meal = selectMeal();
         List<Lot> listLotsByMeal = this.controller.getLotsByMeal(meal);
-        System.out.println(listLotsByMeal);
+        System.out.println("Lots Used in selected meal : " + listLotsByMeal);
 
         return false;
 
@@ -45,13 +42,13 @@ public class ListLotsUsedInMealUI extends AbstractUI {
         for (int i = 0; i < listMeals.size(); i++) {
             System.out.println(i + 1 + " - " + this.controller.getAllMeals().get(i));
         }
-        int selectMeal = Console.readInteger("Meal ID:");
+        int selectMeal = Console.readInteger("Choose Meal ID:");
         return listMeals.get(selectMeal - 1);
     }
 
     public Lot selectLot(List<Lot> listLotsByMeal) {
         if (listLotsByMeal.isEmpty()) {
-            System.out.println("Não existem lotes com ingredientes registados para esta refeição!");
+            System.out.println("There are no lots for this meal!");
         } else {
 
             for (int i = 0; i < listLotsByMeal.size(); i++) {
