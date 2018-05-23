@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  *
- * @author Pedro Alves 
+ * @author Pedro Alves
  */
 public class CheckRatingsController {
 
@@ -220,7 +220,6 @@ public class CheckRatingsController {
      */
     public List<Integer> getRatingsByMeal(Meal meal) {
         MealPlanItemQuantity mealPlan;
-        Optional<MealPlanItemQuantity> oMealPlanItemQuantity;
         int oQuantity;
 
         List<Integer> ratingsDate = new ArrayList<>();
@@ -241,9 +240,8 @@ public class CheckRatingsController {
                 }
             }
         }
-        oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
-        if (oMealPlanItemQuantity != null) {
-            mealPlan = mealPlanRepository.findByMeal(meal).get();
+        mealPlan = mealPlanRepository.findByMeal(meal);
+        if (mealPlan != null) {
             oQuantity = mealPlan.getItemQuantity();
             numPlaneado += oQuantity;
         }
@@ -264,7 +262,6 @@ public class CheckRatingsController {
      */
     private List<Integer> getRatings(List<Meal> listMeal) {
         MealPlanItemQuantity mealPlan;
-        Optional<MealPlanItemQuantity> oMealPlanItemQuantity;
         int oQuantity;
 
         List<Integer> ratingsDate = new ArrayList<>();
@@ -285,9 +282,8 @@ public class CheckRatingsController {
                     }
                 }
             }
-            oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
-            if (oMealPlanItemQuantity != null) {
-                mealPlan = mealPlanRepository.findByMeal(meal).get();
+            mealPlan = mealPlanRepository.findByMeal(meal);
+            if (mealPlan != null) {
                 oQuantity = mealPlan.getItemQuantity();
                 numPlaneado += oQuantity;
             }
@@ -311,11 +307,11 @@ public class CheckRatingsController {
         System.out.println("Meals Distribuidas : " + distribuidas);
         System.out.println("Meals Planeadas : " + planeadas);
         if (planeadas != 0) {
-            System.out.println("*** Foram reservadas " + ((reservadas*100 / planeadas)) + "% das refeições planeadas.");
-            System.out.println("*** Foram distribuidas " + ((distribuidas*100 / planeadas)) + "% das refeições planeadas.");
+            System.out.println("*** Foram reservadas " + ((reservadas * 100 / planeadas)) + "% das refeições planeadas.");
+            System.out.println("*** Foram distribuidas " + ((distribuidas * 100 / planeadas)) + "% das refeições planeadas.");
         }
         if (reservadas != 0) {
-            System.out.println("*** Foram distribuidas " + ((distribuidas*100 / reservadas)) + "% das refeições reservadas.");
+            System.out.println("*** Foram distribuidas " + ((distribuidas * 100 / reservadas)) + "% das refeições reservadas.");
         }
 
     }

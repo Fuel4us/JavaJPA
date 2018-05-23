@@ -16,5 +16,5 @@ import java.util.Optional;
  */
 public interface MealPlanItemQuantityRepository extends DataRepository<MealPlanItemQuantity, Long> {
 
-    Optional<MealPlanItemQuantity> findByMeal(Meal meal);
+    MealPlanItemQuantity findByMeal(Meal meal);
 }

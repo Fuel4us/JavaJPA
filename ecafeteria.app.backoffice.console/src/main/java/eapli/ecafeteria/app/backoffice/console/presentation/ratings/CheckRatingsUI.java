@@ -23,7 +23,7 @@ import java.util.Set;
 
 /**
  *
- * @author Pedro Alves 
+ * @author Pedro Alves
  */
 public class CheckRatingsUI extends AbstractUI {
 
