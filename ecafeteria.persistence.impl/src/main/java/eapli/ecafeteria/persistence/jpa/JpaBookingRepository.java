@@ -7,6 +7,8 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.Complaint;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -214,6 +216,24 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID=:ratingid WHERE BOOKINGID=:bookingid");
         query.setParameter("ratingid", rating.id());
         query.setParameter("bookingid", choosen.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+    
+    /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingComplaint(Booking booking, Complaint complaint) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
+        query.setParameter("complaintgid", complaint.id());
+        query.setParameter("bookingid", booking.bookingId());
         query.executeUpdate();
 
         entityManager().getTransaction().commit();
