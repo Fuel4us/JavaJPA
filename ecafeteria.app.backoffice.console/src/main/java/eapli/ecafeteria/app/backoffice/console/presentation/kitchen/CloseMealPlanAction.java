@@ -7,6 +7,10 @@ import eapli.framework.actions.Action;
  */
 public class CloseMealPlanAction implements Action {
 
+    /**
+     * method from Action that executes the Menu created in CloseMealPlanUI
+     * @return
+     */
     @Override
     public boolean execute() {
         return new CloseMealPlanUI().show();

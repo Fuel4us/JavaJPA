@@ -33,6 +33,11 @@ public class CloseMealPlanUI extends AbstractUI {
         return "Chose meal plan to close";
     }
 
+
+    /**
+     * Menu done in console to the customer
+     * @return
+     */
     public static int menu(){
         int option = -1;
         System.out.println("");

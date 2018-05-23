@@ -18,6 +18,11 @@ public class CloseMealPlanService {
     public CloseMealPlanService(){
     }
 
+    /**
+     * iterates mealPlans to transform in array list so it can be better manipulated
+     * and to list them
+     * @return list of mealplans
+     */
     public List<MealPlan> getAllMealPlans() {
         Iterable<MealPlan> mealPlans = repo.findAll();
         List<MealPlan> list = new ArrayList<>();
@@ -33,6 +38,10 @@ public class CloseMealPlanService {
         return list;
     }
 
+    /**
+     * This method gets the MealPlan lists and gives each one of them an option to help the user pick one.
+     * @return the meal choosen to close
+     */
     public MealPlan choseMealPlanToClose() {
         List<MealPlan> list = getAllMealPlans();
         MealPlan mealToClose = new MealPlan();
