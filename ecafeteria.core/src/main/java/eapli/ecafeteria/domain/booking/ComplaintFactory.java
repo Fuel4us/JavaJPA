@@ -46,11 +46,17 @@ public class ComplaintFactory { //Singleton
         return bookings;
     }
 
+    
     public void createComplaint(Booking booking, CafeteriaUser cafeteriaUser, Description description, ComplaintState state) throws DataConcurrencyException, DataIntegrityViolationException {
-        Complaint complaint = new Complaint(booking.getMeal(), cafeteriaUser, description, state);//meal clonado? meal do Complaint?
-
+        Complaint complaint = new Complaint(booking.getMeal(), cafeteriaUser, description, state);
+        Complaint aux = booking.Complaint();
+        
         complaint = complaintRepository.save(complaint);
         
         bookingRepository.updateBookingComplaint(booking, complaint);
+        
+        if(aux != null){
+            complaintRepository.delete(aux);
+        }
     }
 }

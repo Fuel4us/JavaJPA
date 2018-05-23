@@ -208,6 +208,19 @@ public class Booking implements AggregateRoot<String>, Serializable {
     public boolean isDelivered() {
         return bookingState.equals(BookingState.DELIVERED);
     }
+    
+    /**
+     *
+     * @return true if has Complaint.
+     */
+    public boolean hasComplaint() {
+        if(complaint == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
 
     /**
      * Changes the rating.

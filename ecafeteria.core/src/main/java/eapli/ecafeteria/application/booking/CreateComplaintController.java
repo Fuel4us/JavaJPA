@@ -34,8 +34,12 @@ public class CreateComplaintController implements Controller {
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();
     private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
     
-
-
+    /**
+     * Select an active CafeteriaUser by Username
+     * 
+     * @param username
+     * @return
+     */
     public boolean selectUser(Username username){ //boolean
         Optional<CafeteriaUser> OpCU = cafeteriaUserRepository.findByUsername(username);
         
@@ -50,12 +54,24 @@ public class CreateComplaintController implements Controller {
         }
     }
     
-    private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
+    /**
+     * Gets Bookings with BookingState DELIVERED
+     * 
+     * @return >
+     */
+    public Iterable<Booking> getBookingsDeliveredFromUser() {
         
-        return bookingRepository.findBookingsDeliveredByUser(user);
+        return bookingRepository.findBookingsDeliveredByUser(selectedUser);
     }
     
-    private void createComplaint(Booking booking, String text, ComplaintState state){
+    /**
+     * Creates Complain an saves in repository
+     * 
+     * @param booking
+     * @param text
+     * @param state
+     */
+    public void createComplaint(Booking booking, String text, ComplaintState state){
         Description description = new Description(text);
         
         complaintFactory = ComplaintFactory.getInstance();

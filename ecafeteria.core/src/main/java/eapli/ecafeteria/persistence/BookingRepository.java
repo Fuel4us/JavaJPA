@@ -58,7 +58,7 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user);
 
     public void updateBookingRating(Booking choosen, Rating rating);
-
+    
     public void updateBookingComplaint(Booking booking, Complaint complaint);
 
 }
