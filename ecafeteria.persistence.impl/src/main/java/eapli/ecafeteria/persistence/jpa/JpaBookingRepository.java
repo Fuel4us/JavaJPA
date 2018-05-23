@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.Complaint;
 import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
@@ -175,22 +176,6 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         params.put("bookingState", BookingState.DELIVERED);
         return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState", params);
     }
-    
-    /**
-     * Returns all bookings in delivered state from an User
-     * Hernâni Gil <1050475@isep.ipp.pt>
-     * @param user User 
-     * @param state ComplaintState
-     * @return List of bookings
-     */
-    @Override
-    public Iterable<Booking> findBookingsDeliveredByComplaintState(CafeteriaUser user, ComplaintState state) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("user", user);
-        params.put("bookingState", BookingState.DELIVERED);
-        params.put("complaintState", state);
-        return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState AND e.complaint.state = :complaintState", params);
-    }
 
     /**
      * Returns all bookings for a meal
@@ -231,6 +216,24 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         Query query = entityManager().createQuery("UPDATE Booking SET RATING_ID=:ratingid WHERE BOOKINGID=:bookingid");
         query.setParameter("ratingid", rating.id());
         query.setParameter("bookingid", choosen.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+    
+    /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingComplaint(Booking booking, Complaint complaint) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
+        query.setParameter("complaintgid", complaint.id());
+        query.setParameter("bookingid", booking.bookingId());
         query.executeUpdate();
 
         entityManager().getTransaction().commit();

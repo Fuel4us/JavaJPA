@@ -15,7 +15,11 @@ import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.ComplaintRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,15 +54,17 @@ public class CreateComplaintController implements Controller {
         return bookingRepository.findBookingsDeliveredByUser(user);
     }
     
-    private boolean createComplaint(Booking booking, String text){
+    private void createComplaint(Booking booking, String text){
         Description description = new Description(text);
         
         complaintFactory = ComplaintFactory.getInstance();
         
-        if(complaintFactory.createComplaint(booking, selectedUser, description)){
-            return true;
-        }else{
-            return false;
+        try {
+            complaintFactory.createComplaint(booking, selectedUser, description);
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(CreateComplaintController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(CreateComplaintController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

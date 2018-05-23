@@ -18,7 +18,7 @@ import javax.persistence.Embeddable;
 
 
 @Embeddable
-public class Description implements ValueObject, Serializable{
+public class Description implements Serializable, ValueObject {
     private String description;
     
     public Description(String description) {

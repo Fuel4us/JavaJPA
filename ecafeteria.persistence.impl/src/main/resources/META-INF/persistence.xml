@@ -39,6 +39,7 @@
     <class>eapli.ecafeteria.domain.finance.POSUser</class>
     <class>eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile</class>
     <class>eapli.ecafeteria.domain.cafeteriauser.Profile</class>
+    <class>eapli.ecafeteria.domain.booking.Complaint</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/ecafeteria"/>
       <!--
