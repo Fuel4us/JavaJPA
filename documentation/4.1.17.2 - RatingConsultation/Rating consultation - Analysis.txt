@@ -5,23 +5,22 @@ UC17 - Rating consultation
 	ANALYSIS 
 	____________
 	
-	No special client meeting to report that helped to achieve this uce case.
+	No special client meeting to report that helped to achieve this use case.
 	
-	______________________
+	_____________________
 
 	BUSINESS RULES
 	_____________________
 
 	None.
-	
 
 
-	______________________
+	_____________________
 		
 	UNIT TESTS
 	_____________________
 
 	The user that is loged in needs to have rated at lest one book, in delivered state, that he reserved.
-	If the menu manager didn't replay to the user's rating (of a booking), the rating appears in the same (but without the answer)
-	The commment and answer, in the rating, needs to ge not empty.
+	If the menu manager didn't reply to the user's rating (of a booking), the rating appears in the same (but without the answer).
+	The commment and answer, in the rating, needs to be not empty.
 	
