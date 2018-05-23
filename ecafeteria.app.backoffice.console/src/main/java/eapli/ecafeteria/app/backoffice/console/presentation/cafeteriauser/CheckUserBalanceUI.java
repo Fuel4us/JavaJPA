@@ -4,7 +4,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
 /**
- * @author Gonçalo Fonseca <1150503@isep.ipp.pt>
+ * @author Gonçalo Fonseca - 1150503@isep.ipp.pt
  */
 public class CheckUserBalanceUI extends AbstractUI {
     @Override
