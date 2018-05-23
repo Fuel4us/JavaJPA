@@ -131,7 +131,7 @@ public class MainMenu extends AbstractUI {
     private static final int REPORTING_DISHES_OPTION = 7;
     private static final int MENUS_OPTION = 8;
     private static final int MEAL_OPTION = 9;
-    private static final int CHANGE_NUTRI_PROFILE_OPTION = 2;
+    private static final int CHANGE_NUTRI_PROFILE_OPTION = 10;
 
     @Override
     public boolean show() {
