@@ -62,7 +62,7 @@ public class CheckMealRatingsController implements Controller {
      */
     public int getNumberOfRatings(Meal selectedMeal) {
         for (Booking booking : getBookingsOfMeal(selectedMeal)) {
-            if (booking.getRating() != null) {
+            if (booking.getRating(0) != null) {
                 System.out.println("One rating found on the booking with the id: " + booking.bookingId());
                 flag1++;
             } else {
@@ -84,8 +84,8 @@ public class CheckMealRatingsController implements Controller {
      */
     public double getAverage(Meal selectedMeal) {
         for (Booking book : getBookingsOfMeal(selectedMeal)) {
-            if (book.getRating() != null) {
-                average += book.getRating().getScore();
+            if (book.getRating(0) != null) {
+                average += book.getRating(0).getScore();
                 count++;
             }
         }
@@ -102,12 +102,12 @@ public class CheckMealRatingsController implements Controller {
      */
     public String getComments(Meal selectedMeal) {
         for (Booking book : getBookingsOfMeal(selectedMeal)) {
-            if (book.getRating() != null) {
-                if (book.getRating().getComment() != null) {
-                    if (book.getRating().getComment().getAnswer() == null) {
-                        comment += "\n      * Comment: " + book.getRating().getComment().getRealComment() + ";";
+            if (book.getRating(0) != null) {
+                if (book.getRating(0).getComment() != null) {
+                    if (book.getRating(0).getComment().getAnswer() == null) {
+                        comment += "\n      * Comment: " + book.getRating(0).getComment().getRealComment() + ";";
                     } else {
-                        comment += "\n      * Comment: " + book.getRating().getComment().getRealComment() + ";\n      * Answer: " + book.getRating().getComment().getAnswer() + ";";
+                        comment += "\n      * Comment: " + book.getRating(0).getComment().getRealComment() + ";\n      * Answer: " + book.getRating(0).getComment().getAnswer() + ";";
                     }
                 } else {
                     System.out.println("This rating has no comments.");

@@ -4,7 +4,9 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -13,7 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -53,8 +55,8 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     /**
      * Instance variable that defines the rating.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Rating rating;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Rating> listRatings;
 
     /**
      * Instance variable that defines the complaint.
@@ -223,23 +225,44 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     }
 
     /**
-     * Changes the rating.
+     * Adds the rating to a booking.
      *
      * @param rating
      */
-    public void changeRating(Rating rating) {
-        this.rating = rating;
+    public void addRating(Rating rating) {
+        this.listRatings.add(rating);
     }
 
     /**
-     * Gets the rating
+     * Gets the n rating
+     *
+     * @param number
+     * @return
+     */
+    public Rating getRating(int number) {
+        if(listRatings.isEmpty() || number < 0)
+            return null;
+        return this.listRatings.get(number);
+    }
+    
+    /**
+     * Gets all ratings from this booking.
      *
      * @return
      */
-    public Rating getRating() {
-        return this.rating;
+    public List<Rating> getAllRatings() {
+        List<Rating> listRatingAux = new ArrayList();
+        
+        if(listRatings.isEmpty())
+            return listRatingAux;
+        
+        for(Rating r : listRatings)
+            if(r != null)
+                listRatingAux.add(r);
+        
+        return listRatingAux;
     }
-
+    
     /**
      * Makes a complaint.
      *
@@ -264,7 +287,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
      */
     @Override
     public String toString() {
-        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + rating + '}';
+        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + listRatings + '}';
     }
 
     @Override

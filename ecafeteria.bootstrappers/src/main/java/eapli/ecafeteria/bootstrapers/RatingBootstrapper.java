@@ -39,17 +39,22 @@ public class RatingBootstrapper implements Action{
         //comment made by a user
         final Comment c1 = new Comment("Very spicy");
         final Comment c2 = new Comment("Nice food");
-        //final Comment c3 = new Comment("The best food");
+        final Comment c3 = new Comment("The best food");
+        final Comment c4 = new Comment("Average food");
         
         //answer or reply made by the chef (menu manager)
         c1.changeAnswer("Sorry, it was our mistake");
+        c3.changeAnswer("We are glad to hear that");
         
         final Rating r1 = new Rating(2, c1);
         final Rating r2 = new Rating(4, c2);
-        //final Rating r3 = new Rating(5, c3);
+        final Rating r3 = new Rating(5, c3);
+        final Rating r4 = new Rating(3, c4);
 
-        b1.changeRating(r1);
-        b2.changeRating(r2);
+        b1.addRating(r1);
+        b2.addRating(r2);
+        b2.addRating(r3);
+        b2.addRating(r4);
         
         bRepository.save(b1);
         bRepository.save(b2);
