@@ -39,7 +39,7 @@ public class Meal implements Serializable {
     private Menu menu;
 
     /**
-     * Complete constructor for a meal.
+     * Complete builder.
      *
      * @param mealType
      * @param mealDate
@@ -74,7 +74,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Constructor that copies the content of another meal.
+     * Builder that copies the content of another meal.
      *
      * Ver a melhor fomra para depois copiar meals.
      *
@@ -91,14 +91,14 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Empty Constructor.
+     * Empty builder..
      */
     public Meal() {
         // for ORM only
     }
 
     /**
-     * Método que retorna a data da Meal.
+     * Return Meal Date.
      *
      * @return variavel do tipo Date
      */
@@ -107,7 +107,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que retorna o dish que faz parte da refeição.
+     * Return Dish of Meal.
      *
      * @return Dish
      */
@@ -116,7 +116,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que retorno o tipo da Meal, neste caso se é LUNCH or DINNER.
+     * Return MealType.
      *
      * @return MealType
      */
@@ -125,7 +125,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que retorna o menu a que pertence esta meal.
+     * Return Menu.
      *
      * @return Menu
      */
@@ -134,7 +134,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que retorna o id que é definido na database h2 para esta Meal.
+     * Return id of Meal.
      *
      * @return Long
      */
@@ -143,7 +143,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que aktera o prato da meal.
+     * Edit dish of Meal,
      *
      * @param newDish
      * @return true or false.
@@ -153,7 +153,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que altera o prato da meal.
+     * Edit dish of Meal.
      *
      * @param dish
      * @return true or false.
@@ -167,7 +167,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que altera a mealType da meal.
+     * Edit MealType.
      *
      * @param newMealType
      * @return true or false
@@ -177,7 +177,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que altera a mealType da meal.
+     * Edit MealType.
      *
      * @param mealType
      * @return true or false
@@ -191,7 +191,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que altera o mealDate da meal.
+     * Edit MealDate.
      *
      * @param date
      * @return
@@ -201,7 +201,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que altera o mealDate da meal.
+     * Edit MealDate.
      *
      * @param date
      * @return
@@ -217,7 +217,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que atribui um menu à Meal em questão.
+     * Insert Menu
      *
      * @param menu
      * @return true or false
@@ -228,7 +228,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que atribui um menu à Meal em questão.
+     * Edit Menu of Meal.
      *
      * @param menu
      * @return true or false
@@ -247,7 +247,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que verifica se a meal é válida para o menu em questão.
+     * Method that checks if the meal is valid for the menu in question.
      *
      * @param menu
      * @return true or false
@@ -260,7 +260,7 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que retorna true caso a meal já tenha sido atribuída a um menu.
+     * Method that returns true if the meal has already been assigned to a menu.
      *
      * @return
      */
@@ -269,9 +269,6 @@ public class Meal implements Serializable {
     }
 
     @Override
-    /**
-     * Método que verifica se o objeto é o mesmo.
-     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -292,8 +289,8 @@ public class Meal implements Serializable {
     }
 
     /**
-     * Método que verifica se os objetos possuem o mesmo MealType, o mesmo Dish
-     * e a mesma MealDate.
+     * Method that checks if the objects have the same MealType, the same Dish
+     * and the same MealDate.
      *
      * @param other
      * @return true or false
@@ -316,7 +313,7 @@ public class Meal implements Serializable {
     public String toString() {
         SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
         String date = data.format(mealDate.getTime());
-        return "\nDish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
+        return "Dish: " + dish.name().toString() + " <--> Meal Type: " + mealType.toString() + " <-->Meal Date: " + date;
     }
 
     public String toStringAll() {

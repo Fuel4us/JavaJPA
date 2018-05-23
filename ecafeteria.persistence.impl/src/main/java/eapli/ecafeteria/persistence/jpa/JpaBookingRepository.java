@@ -31,7 +31,15 @@ import javax.persistence.Query;
  */
 class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
-    private final int NEXT_DAYS = 7, ONE_MORE_DAY = 1 * 24 * 60 * 60 * 1000;
+    /**
+     * Sets the limit for "next days" to 7 days
+     */
+    private final int NEXT_DAYS = 7;
+    
+    /**
+     * Adds a day in milliseconds
+     */
+    private final int ONE_MORE_DAY = 1 * 24 * 60 * 60 * 1000;
 
     public JpaBookingRepository() {
     }
@@ -160,12 +168,6 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         return (Iterable<Booking>) match("e.meal.mealType =:mealType AND e.meal.dish.dishType =:dishType AND e.bookingState =:bookingState", params);
     }
 
-    /**
-     * Returns all bookings in delivered state from an User
-     *
-     * @param user User
-     * @return List of bookings
-     */
     @Override
     public Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user) {
         Map<String, Object> params = new HashMap<>();
@@ -232,5 +234,36 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         query.executeUpdate();
 
         entityManager().getTransaction().commit();
+    }
+    
+    /**
+     * Return user's bookings for the current week.
+     * 
+     * @param user current user
+     * @return 
+     */
+    @Override
+    public Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user) {
+
+        Map<String, Object> params = new HashMap();
+        params.put("user", user);
+        params.put("bookingState", BookingState.RESERVED);
+
+        List<Booking> bookingList = new ArrayList();
+
+        Calendar cal = Calendar.getInstance();
+        
+        //to get the first day of this week
+        cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+        
+        for (int i = 0; i < 7; i++) {
+            params.put("date", new Date(cal.getTimeInMillis()));
+            bookingList.addAll(match("e.meal.mealDate = :date and e.user = :user and e.bookingState = :bookingState", params));
+
+            //+1 to that day
+            cal.add(Calendar.DATE, +1);
+        }
+
+        return bookingList;
     }
 }

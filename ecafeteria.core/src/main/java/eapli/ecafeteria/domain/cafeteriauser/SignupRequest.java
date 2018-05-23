@@ -9,10 +9,12 @@ import eapli.framework.util.DateTime;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -51,6 +53,7 @@ public class SignupRequest implements AggregateRoot<Username>, Serializable {
     private ApprovalStatus approvalStatus;
     @Temporal(TemporalType.DATE)
     private Calendar createdOn;
+    
 
     public SignupRequest(final String username, final String password, final String firstName, final String lastName,
             final String email, String mecanographicNumber) {

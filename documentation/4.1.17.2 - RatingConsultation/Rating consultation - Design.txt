@@ -1,0 +1,15 @@
+UC17 - Rating consultation
+
+	_________
+
+	DESIGN
+	_________
+
+	* Use the standard base structure of the layer-based application
+
+   	Domain Classes: CafeteriaUser, Booking, Rating, Comment
+   	Controller: CheckRatingController
+   	Repository: CafeteriaUserRepository, BookingRepository, RatingRepository
+
+
+	Sequence diagram - RatingConsultation.jpg

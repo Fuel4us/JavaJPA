@@ -1,0 +1,14 @@
+Register Booking:
+
+
+The user starts the new booking.
+
+The systems shows the Meals for this weeks menu that are NOT in 24h.
+
+The user chooses a number that represents a meal to be booked(can only choose one at once).
+
+The system shows the meal and nutritional info (salt and calories) of the dish and the user's weekly caloric intake after that meal. It also shows the allergenics of the dish and, if the user is sensible to any of it, it asks if the user really wants to proceed.
+
+The user confirms.
+
+The system informs of the success of the operation.

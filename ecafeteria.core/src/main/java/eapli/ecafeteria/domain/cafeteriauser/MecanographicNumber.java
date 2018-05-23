@@ -5,9 +5,15 @@
  */
 package eapli.ecafeteria.domain.cafeteriauser;
 
+import eapli.ecafeteria.domain.authz.Role;
+import static eapli.framework.domain.EmailAddress.VALID_EMAIL_ADDRESS_REGEX;
 import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.util.DateTime;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.persistence.Embeddable;
 
 /**
@@ -19,17 +25,25 @@ public class MecanographicNumber implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final Pattern VALID_EMPLOYEE_REGEX = Pattern.compile("F[0-9]{6}");
+    private static Pattern VALID_STUDENT_REGEX;
+    
     private String number;
 
     public MecanographicNumber(String mecanographicNumber) {
+        VALID_STUDENT_REGEX = Pattern.compile(createStudentRegex());
+        
         if (Strings.isNullOrEmpty(mecanographicNumber)) {
             throw new IllegalArgumentException("Mecanographic Number should neither be null nor empty");
         }
-        // FIXME validate invariants, i.e., mechanographic number regular
-        // expression
+        
+        if (!VALID_EMPLOYEE_REGEX.matcher(mecanographicNumber).find() && !VALID_STUDENT_REGEX.matcher(mecanographicNumber).find()) {
+            throw new IllegalArgumentException("Invalid Mecanographic Number");
+        }
+        
         this.number = mecanographicNumber;
     }
-
+    
     protected MecanographicNumber() {
         // for ORM
     }
@@ -59,5 +73,19 @@ public class MecanographicNumber implements ValueObject, Serializable {
     
     public String number(){
         return this.number;
+    }
+    
+    private String createStudentRegex(){
+        Integer thirdDigit = (DateTime.currentYear() % 100) / 10;
+        String regex = "(";
+        
+        for(int i = 0; i <= thirdDigit; i++){
+            if(i < thirdDigit)
+                regex += String.format("%s[0-9]|", i);
+            else
+                regex += String.format("%s[0-%s]", i, String.valueOf(DateTime.currentYear()).substring(3));
+        }
+        
+        return regex + ")[0-9]{5}";
     }
 }

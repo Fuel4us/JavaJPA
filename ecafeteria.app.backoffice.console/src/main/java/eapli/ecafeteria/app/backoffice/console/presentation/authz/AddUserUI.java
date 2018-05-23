@@ -2,6 +2,7 @@ package eapli.ecafeteria.app.backoffice.console.presentation.authz;
 
 import eapli.ecafeteria.application.authz.AddUserController;
 import eapli.ecafeteria.domain.authz.RoleType;
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
@@ -27,7 +28,11 @@ public class AddUserUI extends AbstractUI {
     protected Controller controller() {
         return this.theController;
     }
-
+    
+    /*
+        Cafeteria User é obrigatório pertencer às roles.
+        Negócio do número mecanográfico é à escolha.
+    */
     @Override
     protected boolean doShow() {  
         final UserDataWidget userData = new UserDataWidget();
@@ -36,19 +41,19 @@ public class AddUserUI extends AbstractUI {
 
         final Set<RoleType> roleTypes = new HashSet<>();
         boolean show;
+        int repeat;
         do {
-            show = showRoles(roleTypes);
-        } while (!show);
-        
-        String mecanographicNumber = null;
-        if(roleTypes.contains(RoleType.CAFETERIA_USER))
-            mecanographicNumber = Console.readLine("Mecanographic Number");
+            do {
+                show = showRoles(roleTypes);
+            } while (!show);
+            
+            repeat = Console.readInteger("\nPress 0 for exit. To continue press any other number.");
+        } while(repeat != 0);
+       
+        String mecanographicNumber = Console.readLine("Mecanographic Number");
         
         try {
-            if(mecanographicNumber == null)
-                this.theController.addUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, false);
-            else
-                this.theController.addCafeteriaUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, mecanographicNumber, false);
+            this.theController.addCafeteriaUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, mecanographicNumber, false);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
             System.out.println("That username is already in use.");
         }
@@ -69,7 +74,9 @@ public class AddUserUI extends AbstractUI {
         rolesMenu.add(new MenuItem(counter++, "No Role", new ReturnAction()));
         
         for (final RoleType roleType : getRoleTypes()) {
-            rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
+            if(!roleTypes.contains(roleType) && roleType != RoleType.CAFETERIA_USER) {
+                rolesMenu.add(new MenuItem(counter++, roleType.name(), () -> roleTypes.add(roleType)));
+            }
         }
         
         return rolesMenu;

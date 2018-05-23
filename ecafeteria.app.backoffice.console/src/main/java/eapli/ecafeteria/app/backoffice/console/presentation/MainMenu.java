@@ -13,6 +13,9 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.ChangeUserAllergensAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.CheckUserBalanceAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.EditNutritionalProfileAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishNutricionalInfoAction;
@@ -31,6 +34,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto.Registe
 import eapli.ecafeteria.app.backoffice.console.presentation.kitchen.*;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.CheckMealRatingsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.RegisterMealAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.meals.ReplyMealRatingCommentsAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.EditMenuAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.PublishMenuUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.menus.RegisterMenuAction;
@@ -56,12 +60,17 @@ import eapli.framework.presentation.console.VerticalSeparator;
 public class MainMenu extends AbstractUI {
 
     private static final int EXIT_OPTION = 0;
+    
+    // SUBMENU NUTRITIONAL PROFILE
+    private static final int CHANGE_SALT_CALORIES = 1;
+    private static final int CHANGE_ALLERGENS = 2;
 
     // USERS
     private static final int ADD_USER_OPTION = 1;
     private static final int LIST_USERS_OPTION = 2;
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
+    private static final int GET_USERS_BALANCE = 5;
 
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -89,6 +98,7 @@ public class MainMenu extends AbstractUI {
     //MEALS
     private static final int REGISTER_MEAL_OPTION = 12;
     private static final int CHECK_MEAL_RATING_OPTION = 13;
+    private static final int REPLY_COMMENT_OPTION = 14;
 
     // DISH PROPERTIES
     private static final int CHANGE_DISH_NUTRICIONAL_INFO_OPTION = 1;
@@ -102,9 +112,10 @@ public class MainMenu extends AbstractUI {
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
     private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
     private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
-    private static final int CHECK_BOOKINGS_BY_DATA = 8;
-    private static final int CLOSE_MEAL_PLAN = 9;
-    private static final int GENERATE_MEAL_PLAN_OPTION = 10;
+    private static final int LIST_LOTS_USED_IN_MEAL = 8;
+    private static final int CHECK_BOOKINGS_BY_DATA = 9;
+    private static final int CLOSE_MEAL_PLAN = 10;
+    private static final int GENERATE_MEAL_PLAN_OPTION = 11;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -120,6 +131,7 @@ public class MainMenu extends AbstractUI {
     private static final int REPORTING_DISHES_OPTION = 7;
     private static final int MENUS_OPTION = 8;
     private static final int MEAL_OPTION = 9;
+    private static final int CHANGE_NUTRI_PROFILE_OPTION = 10;
 
     @Override
     public boolean show() {
@@ -190,6 +202,13 @@ public class MainMenu extends AbstractUI {
                     new ShowVerticalSubMenuAction(mealMenu)));
             // reporting
         }
+        
+        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.CHANGE_NUTRI_PROFILE)){
+            final Menu changeNutriProfileMenu = buildNutriProfileMenu();
+            mainMenu.add(new SubMenu(CHANGE_NUTRI_PROFILE_OPTION,
+                    changeNutriProfileMenu,
+                    new ShowVerticalSubMenuAction(changeNutriProfileMenu)));
+        }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
@@ -215,6 +234,8 @@ public class MainMenu extends AbstractUI {
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
 
+        // users menu stuff that you can do
+
         menu.add(new MenuItem(ADD_USER_OPTION, "Add User", () -> new AddUserUI().show()));
         menu.add(new MenuItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction()));
         menu.add(new MenuItem(DEACTIVATE_USER_OPTION, "Deactivate User",
@@ -222,6 +243,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        menu.add(new MenuItem(GET_USERS_BALANCE, "Users balance", new CheckUserBalanceAction()));
 
         return menu;
     }
@@ -277,6 +299,8 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
 
         menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
+        
+        menu.add(new MenuItem(LIST_LOTS_USED_IN_MEAL, "List Lots Used In Meal", new ListLotsUsedInMealAction()));
 
         menu.add(new MenuItem(CHECK_BOOKINGS_BY_DATA, "Check Bookings By Data", new CheckReservationsByDataAction()));
 
@@ -342,8 +366,22 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REGISTER_MEAL_OPTION, "Register Meals",
                 () -> new RegisterMealAction().execute()));
         
-        menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check a Meal Ratings", new CheckMealRatingsAction()));
+        menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check the Ratings of a Meal", new CheckMealRatingsAction()));
+
+        menu.add(new MenuItem(REPLY_COMMENT_OPTION, "Reply to comment from the Ratings of a Meal", new ReplyMealRatingCommentsAction()));
         
+        menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
+
+        return menu;
+    }
+
+    private Menu buildNutriProfileMenu() {
+        final Menu menu = new Menu("Nutritional Profile > ");
+        menu.add(new MenuItem(CHANGE_SALT_CALORIES, "Salt and Calories", () -> new EditNutritionalProfileAction().execute()));
+        
+        menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens", 
+                () -> new ChangeUserAllergensAction().execute()));
+                
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
 
         return menu;

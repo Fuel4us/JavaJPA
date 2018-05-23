@@ -19,6 +19,13 @@ import java.util.Optional;
  */
 public interface BookingRepository extends DataRepository<Booking, Long> {
 
+     /**
+     * Returns the list of bookings in reserved state for the next X days
+     *
+     * @param currentUser User
+     * @param currentDate Starting date to compare
+     * @return List of bookings
+     */
     Iterable<Booking> checkBookingsForNextDays(Optional<CafeteriaUser> currentUser, Date currentDate);
 
     Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState reservationState);
@@ -29,6 +36,12 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
 
     public Booking getNextBooking(Optional<CafeteriaUser> user, Date date);
 
+    /**
+     * Returns all bookings in delivered state from an User
+     *
+     * @param user User
+     * @return List of bookings
+     */
     Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user);
     
     Iterable<Booking> findBookingsDeliveredByComplaintState(CafeteriaUser user, ComplaintState state);
@@ -36,6 +49,14 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     Iterable<Booking> findBookingsDelivered();
 
     Iterable<Booking> findBookingsForMeal(Meal meal);
+    
+    /**
+     * Return user's bookings for the current week.
+     * 
+     * @param user current user
+     * @return 
+     */
+    Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user);
 
     public void updateBookingRating(Booking choosen, Rating rating);
 

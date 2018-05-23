@@ -10,7 +10,7 @@ import java.util.Collection;
  *
  */
 public enum ActionRight {
-    ADMINISTER, SELECT_MEAL, MANAGE_KITCHEN, MANAGE_MENUS, SALE, MANAGE_DELIVERY,;
+    ADMINISTER, SELECT_MEAL, MANAGE_KITCHEN, MANAGE_MENUS, SALE, MANAGE_DELIVERY,CHANGE_NUTRI_PROFILE;
 
     /**
      * checks if this action right can be performed by a user with the specified
@@ -24,6 +24,9 @@ public enum ActionRight {
             return true;
         }
         if (this == SELECT_MEAL && roles.contains(RoleType.CAFETERIA_USER)) {
+            return true;
+        }
+        if(this == CHANGE_NUTRI_PROFILE && roles.contains(RoleType.CAFETERIA_USER)){
             return true;
         }
         if (this == MANAGE_KITCHEN && roles.contains(RoleType.KITCHEN_MANAGER)) {

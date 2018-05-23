@@ -13,4 +13,7 @@
 
 	Sequence Diagram
 
-
+	1.User inicialises the use case to define a balance limit
+	2.System ask for a balance limit
+	3.User inputs a valid limit
+	4.System informs the sucess of the operation

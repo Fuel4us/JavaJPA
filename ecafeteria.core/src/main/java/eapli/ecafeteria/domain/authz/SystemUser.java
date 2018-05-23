@@ -54,6 +54,7 @@ public class SystemUser implements AggregateRoot<Username>, DTOable, Visitable<G
 	private RoleSet roles;
 	@Temporal(TemporalType.DATE)
 	private Calendar createdOn;
+        
 	private UserState state;
 
 	public SystemUser(final String username, final String password, final String firstName, final String lastName,

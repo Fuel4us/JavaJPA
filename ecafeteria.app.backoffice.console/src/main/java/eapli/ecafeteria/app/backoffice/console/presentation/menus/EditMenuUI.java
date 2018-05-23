@@ -7,7 +7,6 @@ import eapli.ecafeteria.application.menus.PublishMenuController;
 import eapli.ecafeteria.application.menus.RegisterMenuController;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
-import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -173,6 +170,9 @@ public class EditMenuUI extends AbstractUI {
         return "Edit Meal";
     }
 
+    /**
+     * Method to edit the start date of the menu.
+     */
     private void alterarDataInicio(int i) throws DataConcurrencyException, DataIntegrityViolationException {
         menuDateBeg = null;
         do {
@@ -198,6 +198,9 @@ public class EditMenuUI extends AbstractUI {
         } while (menuDateBeg == null);
     }
 
+    /**
+     * Method to edit the end date of the menu.
+     */
     private void alterarDataFim() throws DataConcurrencyException, DataIntegrityViolationException {
         menuDateEnd = null;
         do {
@@ -218,6 +221,9 @@ public class EditMenuUI extends AbstractUI {
         } while (menuDateEnd == null);
     }
 
+    /**
+     * Method to insert meals to the menu.
+     */
     private void inserirMeals() {
         System.out.println("\n###       INSERIR MEALS       ###\n");
 
@@ -258,6 +264,9 @@ public class EditMenuUI extends AbstractUI {
         }
     }
 
+    /**
+     * Method to delete meals of the menu.
+     */
     private void eliminarMealsOfMenu() {
         System.out.println("\n###       ELIMINAR MEALS       ###\n");
 
@@ -268,12 +277,12 @@ public class EditMenuUI extends AbstractUI {
         mealsOfMenu = theMenuController.getAllMealsOfMenu(menu);
 
         int selecao = 1;
-        
-         if (!mealsOfMenu.iterator().hasNext()) {
+
+        if (!mealsOfMenu.iterator().hasNext()) {
             System.out.println("###ATENÇÃO --->  Não possui meals no Menu!");
             selecao = 0;
         }
-        
+
         while (selecao != 0 && mealsOfMenu.iterator().hasNext()) {
 
             selectorMeal = new SelectWidget<>("Meals Of Menu ", mealsOfMenu, new MealPrinter());
@@ -299,6 +308,9 @@ public class EditMenuUI extends AbstractUI {
         }
     }
 
+    /**
+     * Method that create a new Date.
+     */
     private void newStartDate() {
         theController.newStartDate(menu, aux);
         menuDateBeg = aux;

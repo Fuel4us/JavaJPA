@@ -1,0 +1,9 @@
+UC17 - Rating consultation
+	
+	____________________________
+	TEST PLAN
+	____________________________
+
+	1. Login with user/Password
+	2. Choose Bookings -> Check ratings
+	3. The Use Case is registered with success

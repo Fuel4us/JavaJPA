@@ -1,0 +1,13 @@
+	
+
+	TEST PLAN
+
+	_______________________________
+	UC #4.1.5.2 - Register Booking
+	_______________________________
+
+	1. Login with user/Password
+	2. Choose Bookings -> Book a meal
+	3. Choose a Meal from the list
+	4. IF the user is allergic to any of the allergenics it must confirms to continue
+	5. The user confirms and the booking is registered with success

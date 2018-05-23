@@ -1,0 +1,51 @@
+_________
+
+	DESIGN
+	_________
+
+
+   	Classes do domínio:  
+		User, CafeteriaUser,Movement
+
+   	Controlador: CheckMovementController
+   	Repository: MovementRepository
+
+
+	Sequence diagram - websequencediagrams.com source
+
+		title  Check movements
+
+	
+participant ":User" as user
+
+	participant ":Cafeteria user" as cafUser
+	participant ":CheckMovementsUI" as ui
+	
+participant ":CheckMovementsController" as controller
+	
+participant ":PersistenceContext" as pers
+	
+participant ":RepositoryFactory" as repfac
+	
+participant ":MovementRepository" as repomov
+	participant ":CafeteriaUserRepository" as cafUserRep
+	
+participant ":Movement" as mov 
+
+	
+	user->ui:Initiates the use case
+	ui-->controller: create()
+	
+controller->pers: repositories()
+	
+pers-->repfac: create()
+	controller->repfac:CafeteriaUsers()
+	controller->cafUserRep: findByUserName()
+	controller->cafUser:mecanographicNumber()
+	
+controller->repfac: movement()
+	
+repfac-->repomov:create()
+	
+controller->repomov:findByNifAndDate(nif, date)
+		
