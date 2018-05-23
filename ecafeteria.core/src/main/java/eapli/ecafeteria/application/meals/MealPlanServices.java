@@ -25,6 +25,6 @@ public class MealPlanServices {
     }
 
     public int findQuantityByMeal(Meal meal){
-        return mealPlanItemRepo.findByMeal(meal).get().getItemQuantity();
+        return mealPlanItemRepo.findByMeal(meal).getItemQuantity();
     }
 }
