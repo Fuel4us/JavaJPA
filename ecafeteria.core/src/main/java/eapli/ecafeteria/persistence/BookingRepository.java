@@ -32,12 +32,18 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     Iterable<Booking> findBookingByDate(MealType mealType, DishType dishType, BookingState reservationState);
 
     Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser);
+    
+    /** 
+     * Gets all booking from an User in Reserved State
+     * @param user User
+     * @return List of bookings
+     */
+    Iterable<Booking> getBookings(Optional<CafeteriaUser> user);
 
     public Booking getNextBooking(Optional<CafeteriaUser> user, Date date);
 
     /**
      * Returns all bookings in delivered state from an User
-     *
      * @param user User
      * @return List of bookings
      */

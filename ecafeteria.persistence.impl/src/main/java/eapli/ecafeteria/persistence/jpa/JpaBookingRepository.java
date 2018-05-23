@@ -69,6 +69,20 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         return bookingList;
     }
+    
+    /**
+     * Returns all bookings in delivered state from an User
+     * @param user User
+     * @return List of bookings
+     */
+    @Override
+    public Iterable<Booking> getBookings(Optional<CafeteriaUser> user) {
+        Map<String, Object> params = new HashMap();
+        params.put("user", user.get());
+        params.put("bookingState", BookingState.RESERVED);
+
+        return match("e.user = :user and e.bookingState = :bookingState", params);
+    }
 
     @Override
     public Booking getNextBooking(Optional<CafeteriaUser> user, Date date) {
