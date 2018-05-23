@@ -1,4 +1,4 @@
-package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
+package eapli.cafeteria.app.common.console.presentation.authz;
 
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;

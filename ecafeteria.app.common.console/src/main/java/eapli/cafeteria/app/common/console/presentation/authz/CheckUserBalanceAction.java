@@ -1,5 +1,6 @@
-package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
+package eapli.cafeteria.app.common.console.presentation.authz;
 
+import eapli.cafeteria.app.common.console.presentation.authz.CheckUserBalanceUI;
 import eapli.framework.actions.Action;
 
 /**
