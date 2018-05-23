@@ -8,7 +8,6 @@ package eapli.ecafeteria.bootstrapers;
 import eapli.ecafeteria.application.finance.ChargeCardController;
 import eapli.ecafeteria.application.booking.RegisterBookingController;
 import eapli.ecafeteria.domain.authz.Username;
-import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
@@ -21,6 +20,8 @@ import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author Leandro
  */
-public class BookingBootstrapper implements Action {
+public class BookingBootstrapper implements Action, Observer {
 
     final RegisterBookingController controller = new RegisterBookingController();
 
@@ -144,6 +145,11 @@ public class BookingBootstrapper implements Action {
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
