@@ -1,21 +1,25 @@
-package eapli.ecafeteria.application.booking;
+package eapli.ecafeteria.application.ratings;
 
 import eapli.ecafeteria.application.meals.ListMealService;
 import eapli.ecafeteria.application.menus.RegisterMenuController;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.dishes.Dish;
+import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
+import eapli.ecafeteria.persistence.MealPlanItemQuantityRepository;
 import eapli.ecafeteria.persistence.MealRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -28,6 +32,7 @@ public class CheckRatingsController {
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
     private final DishRepository dishRepository = PersistenceContext.repositories().dishes();
+    private final MealPlanItemQuantityRepository mealPlanRepository = PersistenceContext.repositories().mealplanitemquantities();
 
     private final ListMealService svc = new ListMealService();
 
@@ -91,7 +96,7 @@ public class CheckRatingsController {
      * @param date
      * @return
      */
-    public Set<Integer> getRatingsByDate(Date date) {
+    public List<Integer> getRatingsByDate(Date date) {
         List<Meal> listMeal = getAllMealsByDate(date);
 
         return getRatings(listMeal);
@@ -121,7 +126,7 @@ public class CheckRatingsController {
      * @param dish
      * @return
      */
-    public Set<Integer> getRatingsByDish(Dish dish) {
+    public List<Integer> getRatingsByDish(Dish dish) {
         List<Meal> listMeal = getAllMealsByDish(dish);
 
         return getRatings(listMeal);
@@ -151,7 +156,7 @@ public class CheckRatingsController {
      * @param mealType
      * @return
      */
-    public Set<Integer> getRatingsByMealType(MealType mealType) {
+    public List<Integer> getRatingsByMealType(MealType mealType) {
         List<Meal> listMeal = getAllMealsByMealType(mealType);
 
         return getRatings(listMeal);
@@ -181,7 +186,7 @@ public class CheckRatingsController {
      * @param menu
      * @return
      */
-    public Set<Integer> getRatingsByMenu(Menu menu) {
+    public List<Integer> getRatingsByMenu(Menu menu) {
         List<Meal> listMeal = (List<Meal>) getAllMealsByMenu(menu);
 
         return getRatings(listMeal);
@@ -204,8 +209,12 @@ public class CheckRatingsController {
      * @param meal
      * @return
      */
-    public Set<Integer> getRatingsByMeal(Meal meal) {
-        Set<Integer> ratingsDate = new HashSet<>();
+    public List<Integer> getRatingsByMeal(Meal meal) {
+        MealPlanItemQuantity mealPlan;
+        Optional<MealPlanItemQuantity> oMealPlanItemQuantity;
+        int oQuantity;
+
+        List<Integer> ratingsDate = new ArrayList<>();
 
         Iterable<Booking> bookingOfMeal;
         int numPlaneado = 0;
@@ -223,7 +232,12 @@ public class CheckRatingsController {
                 }
             }
         }
-        //falta ir buscar o numero planeado na cozinha
+//        oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
+//        if (oMealPlanItemQuantity != null) {
+//            mealPlan = mealPlanRepository.findByMeal(meal).get();
+//            oQuantity = mealPlan.getItemQuantity();
+//            numPlaneado += oQuantity;
+//        }
 
         ratingsDate.add(numReservado);
         ratingsDate.add(numDistribuido);
@@ -239,8 +253,12 @@ public class CheckRatingsController {
      * @param listMeal
      * @return
      */
-    private Set<Integer> getRatings(List<Meal> listMeal) {
-        Set<Integer> ratingsDate = new HashSet<>();
+    private List<Integer> getRatings(List<Meal> listMeal) {
+        MealPlanItemQuantity mealPlan;
+        Optional<MealPlanItemQuantity> oMealPlanItemQuantity;
+        int oQuantity;
+
+        List<Integer> ratingsDate = new ArrayList<>();
         Iterable<Booking> bookingOfMeal;
         int numPlaneado = 0;
         int numReservado = 0;
@@ -258,7 +276,12 @@ public class CheckRatingsController {
                     }
                 }
             }
-            //falta ir buscar o numero planeado na cozinha
+//            oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
+//            if (oMealPlanItemQuantity != null) {
+//                mealPlan = mealPlanRepository.findByMeal(meal).get();
+//                oQuantity = mealPlan.getItemQuantity();
+//                numPlaneado += oQuantity;
+//            }
         }
 
         ratingsDate.add(numReservado);
@@ -266,6 +289,26 @@ public class CheckRatingsController {
         ratingsDate.add(numPlaneado);
 
         return ratingsDate;
+    }
+
+    public void showRatings(List<Integer> ratingsByDate) {
+        Iterator it = ratingsByDate.iterator();
+        int reservadas = (int) it.next();
+        int distribuidas = (int) it.next();
+        int planeadas = (int) it.next();
+
+        System.out.println("        ------->Estatisticas<-------");
+        System.out.println("Meals Reservadas : " + reservadas);
+        System.out.println("Meals Distribuidas : " + distribuidas);
+        System.out.println("Meals Planeadas : " + planeadas);
+        if (planeadas != 0) {
+            System.out.println("*** Foram reservadas " + ((reservadas / planeadas) * 100) + "% das refeições planeadas.");
+            System.out.println("*** Foram distribuidas " + ((distribuidas / planeadas) * 100) + "% das refeições planeadas.");
+        }
+        if (reservadas != 0) {
+            System.out.println("*** Foram distribuidas " + ((distribuidas / reservadas) * 100) + "% das refeições reservadas.");
+        }
+
     }
 
 }
