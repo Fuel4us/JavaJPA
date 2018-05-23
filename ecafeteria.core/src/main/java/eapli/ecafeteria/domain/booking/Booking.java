@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -52,7 +53,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     /**
      * Instance variable that defines the rating.
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Rating rating;
 
     /**
@@ -226,7 +227,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
      *
      * @param rating
      */
-    public void rating(Rating rating) {
+    public void changeRating(Rating rating) {
         this.rating = rating;
     }
 
