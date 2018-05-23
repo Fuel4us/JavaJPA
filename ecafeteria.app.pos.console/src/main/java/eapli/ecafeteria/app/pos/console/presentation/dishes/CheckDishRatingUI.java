@@ -37,7 +37,6 @@ public class CheckDishRatingUI extends AbstractUI {
         /* change to DishPrinter */
         selector.show();
 
-        //ate aqui já vai!!
         final String dishName = (String) selector.selectedElement();
 
         Dish dish = null;

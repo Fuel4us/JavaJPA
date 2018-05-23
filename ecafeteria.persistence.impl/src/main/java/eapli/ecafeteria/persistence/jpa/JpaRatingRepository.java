@@ -28,8 +28,8 @@ public class JpaRatingRepository extends CafeteriaJpaRepositoryBase<Rating, Long
 
         entityManager().getTransaction().begin();
 
-        Query query = entityManager().createQuery("SELECT r.rating FROM RATING r, BOOKING b, "
-                + "MEAL m, DISH d WHERE r.ID = b.RATING_ID AND b.MEAL_ID = m.ID AND m.DISH_NAME = :dish");
+        Query query;
+        query = entityManager().createQuery("SELECT r FROM Booking b, Rating r , Meal m, Dish d WHERE r.id = b.rating.id AND b.meal.id = m.id AND m.dish.name = :dish");
         query.setParameter("dish", dish.name());
 
         return (Iterable<Rating>) query.getResultList();

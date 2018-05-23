@@ -47,10 +47,12 @@ public class CheckDishRatingController implements Controller {
 
         Map<Dish, Integer> map = new HashMap<>();
 
+        Iterable<Rating> ratings = ratingRepo.getRatingByDish(dish);
+
         int avg = 0;
         int numRatings = 0;
 
-        for (Rating r : ratingRepo.getRatingByDish(dish)) {
+        for (Rating r : ratings) {
             avg += r.getScore();
             numRatings++;
         }
