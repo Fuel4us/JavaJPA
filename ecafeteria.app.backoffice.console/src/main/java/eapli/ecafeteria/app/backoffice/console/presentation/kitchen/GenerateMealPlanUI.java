@@ -2,6 +2,7 @@ package eapli.ecafeteria.app.backoffice.console.presentation.kitchen;
 
 import eapli.ecafeteria.application.kitchen.GenerateMealPlanController;
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
+import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import java.util.Scanner;
@@ -21,10 +22,13 @@ public class GenerateMealPlanUI extends AbstractUI {
             return false;
         }
 
-        SelectWidget<HeuristicConfiguration> heuristicSelector = new SelectWidget<>("Heuristics:", controller.getAvailableHeuristics());
+        SelectWidget<Menu> menuSelector = new SelectWidget<>("MENUS", controller.getExistingMenus());
+        menuSelector.show();
+
+        SelectWidget<HeuristicConfiguration> heuristicSelector = new SelectWidget<>("HEURISTICS", controller.getAvailableHeuristics());
         heuristicSelector.show();
 
-        controller.generateMealPlan(heuristicSelector.selectedElement());
+        controller.generateMealPlan(menuSelector.selectedElement(), heuristicSelector.selectedElement());
 
         return true;
     }
