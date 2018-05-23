@@ -5,6 +5,7 @@
  */
 package eapli.ecafeteria.application.finance;
 
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.finance.POS;
 import eapli.ecafeteria.domain.finance.WorkSession;
 import eapli.ecafeteria.domain.kitchen.CanteenShift;
@@ -40,7 +41,7 @@ public class OpenPOSController implements Controller {
      * already openned
      */
     public boolean openPOS(Long posId) {
-        if (posRepository.openPOS(posId)) {
+        if (posRepository.openPOS(posId, AuthorizationService.session().authenticatedUser())) {
             //verificar se o shift da cantina esta aberto ou nao
 
             Optional<CanteenShift> canteenShift = canteenShiftRepository.findCurrentDayShift();

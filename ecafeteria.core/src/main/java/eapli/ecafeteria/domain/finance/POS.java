@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.finance;
 
+import eapli.ecafeteria.domain.authz.SystemUser;
 import static eapli.ecafeteria.domain.finance.POSState.CLOSED;
 import static eapli.ecafeteria.domain.finance.POSState.OPEN;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -22,6 +23,8 @@ public class POS implements AggregateRoot<Long>, Serializable{
     private Long id;
     @Version
     private Long version;
+    @OneToOne
+    private SystemUser cashier;
    
     private POSState posState;
     //ponham aqui os atributos que faltarem de acordo com o modelo de dominio
@@ -29,6 +32,7 @@ public class POS implements AggregateRoot<Long>, Serializable{
     public POS() {
         // for ORM
         this.posState = POSState.CLOSED;
+        this.cashier = null;
     }
     
     
@@ -51,6 +55,15 @@ public class POS implements AggregateRoot<Long>, Serializable{
     public POSState posState() {
         return this.posState;
     }
+
+    public SystemUser currentCashier() {
+        return cashier;
+    }
+    
+    public void setCashier(SystemUser cashier){
+        this.cashier = cashier;
+    }
+    
     
     @Override
     public int hashCode() {

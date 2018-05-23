@@ -17,6 +17,4 @@ import java.util.List;
 public interface DelieveryRepository extends DataRepository<Delievery, Long> {
 
     Delievery findByName(Designation name);
-
-    List<Delievery> findCurrentShiftDeliveries();
 }

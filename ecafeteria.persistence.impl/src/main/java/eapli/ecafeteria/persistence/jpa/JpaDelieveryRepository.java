@@ -30,38 +30,4 @@ public class JpaDelieveryRepository extends CafeteriaJpaRepositoryBase<Delievery
         return (matchOne("e.name.designation='" + name + "'")).get();
     }
 
-    @Override
-    public List<Delievery> findCurrentShiftDeliveries() {
-
-        //now
-        Date deliveryDate = DateTime.now().getTime();
-        Calendar now = DateTime.now();
-        MealType mealType = MealType.LUNCH;
-
-        //current mealtype
-        if (now.get(Calendar.HOUR_OF_DAY) > Shift.DINNER_INIT_HOUR) {
-            mealType = MealType.DINNER;
-        } else {
-            if (now.get(Calendar.HOUR_OF_DAY) == Shift.DINNER_INIT_HOUR) {
-                if (now.get(Calendar.MINUTE) > 0) {
-                    mealType = MealType.DINNER;
-                }
-            }
-        }
-
-        List<Delievery> deliveries = new ArrayList<>();
-
-        final Map<String, Object> params = new HashMap<>();
-        params.put("deliveryDate", deliveryDate);
-        params.put("mealType", mealType);
-
-        try {
-            deliveries.addAll(match("e.DeliveryDate = :deliveryDate AND e.booking.meal.mealtype = :mealType", params));
-
-        } catch (NoResultException e) {
-            return null;
-        }
-
-        return deliveries;
-    }
 }
