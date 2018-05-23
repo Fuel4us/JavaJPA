@@ -3,6 +3,7 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -29,6 +30,8 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     public Booking getNextBooking(Optional<CafeteriaUser> user, Date date);
 
     Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user);
+    
+    Iterable<Booking> findBookingsDeliveredByComplaintState(CafeteriaUser user, ComplaintState state);
 
     Iterable<Booking> findBookingsDelivered();
 

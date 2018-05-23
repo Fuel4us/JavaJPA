@@ -7,6 +7,7 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -171,6 +172,22 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         params.put("user", user);
         params.put("bookingState", BookingState.DELIVERED);
         return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState", params);
+    }
+    
+    /**
+     * Returns all bookings in delivered state from an User
+     * Hernâni Gil <1050475@isep.ipp.pt>
+     * @param user User 
+     * @param state ComplaintState
+     * @return List of bookings
+     */
+    @Override
+    public Iterable<Booking> findBookingsDeliveredByComplaintState(CafeteriaUser user, ComplaintState state) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("user", user);
+        params.put("bookingState", BookingState.DELIVERED);
+        params.put("complaintState", state);
+        return (Iterable<Booking>) match("e.user = :user AND e.bookingState = :bookingState AND e.complaint.state = :complaintState", params);
     }
 
     /**

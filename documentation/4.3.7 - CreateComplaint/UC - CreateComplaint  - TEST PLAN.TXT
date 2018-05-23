@@ -1,0 +1,12 @@
+﻿	
+
+	TEST PLAN
+
+	_______________________________
+	Case #14: Create Complaint
+	_______________________________
+
+	1. Login as Cashier
+	2. Choose the Booking with BookingState DELIVERED
+	3. Create a Complaint with all valid data
+	4. Confirm if Complaint is correctly saved in repository

@@ -33,6 +33,8 @@ public class Booking implements AggregateRoot<String>, Serializable{
     private BookingState bookingState;
     @OneToOne
     private Rating rating;
+    @OneToOne
+    private Complaint complaint;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bookingDate;
@@ -46,6 +48,7 @@ public class Booking implements AggregateRoot<String>, Serializable{
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
+        this.complaint = new Complaint(ComplaintState.WAITING);
     }
     
     public Date day() {
@@ -139,7 +142,19 @@ public class Booking implements AggregateRoot<String>, Serializable{
     public Rating getRating() {
         return this.rating;
     }
-
+    
+    public boolean createComplaint(Complaint complaint) {
+        if(complaint.state().equals(ComplaintState.WAITING)){
+            this.complaint = complaint;
+            return true;    
+        }
+        return false;
+    }
+    
+    public Complaint Complaint() {
+        return this.complaint;
+    }
+    
     @Override
     public String toString() {
         return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + rating + '}';

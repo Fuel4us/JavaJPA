@@ -1,0 +1,29 @@
+	___________
+
+	ANALYSIS
+	____________
+ 
+	The cashier has the option to register the complaint from a meal. The complaint has a description and 			identifies the meal(first it was dish, but the client decided to change) and the CafeteriaUser that made it. 	
+
+	______________________
+
+	BUSINESS RULES
+	_____________________
+
+	The cafeteriaUser can only make a complaint from a meal that was delivered to him and without Complaint.
+	The Complaint has two states: WAITING, AVAILABLE or ANONYMOUS para que quando no futuro houver um UC para 		ler os complaints.
+	WAITING - no complaint
+	AVAILABLE - complaint available and user can be known
+	ANONYMOUS - complaint available and user can't be known
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+	
+	* Cashier needs to be logged in
+	* BookingState related to the Complaint must be in Delivered state
+ 	* Booking must have no complaint already
+	* Booking must exist
+	* Verify if Complaint was persisted

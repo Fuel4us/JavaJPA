@@ -127,4 +127,7 @@ public interface RepositoryFactory {
     AllergenRepository allergen();
 
     public DelieveryRepository delieveries();
+
+    public ComplaintRepository complaint();
+
 }
