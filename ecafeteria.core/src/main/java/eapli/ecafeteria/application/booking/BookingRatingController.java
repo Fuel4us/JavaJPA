@@ -38,8 +38,7 @@ public class BookingRatingController implements Controller {
             Iterable<Booking> list = repBooking.findBookingsDeliveredByUser(user);
             ArrayList<Booking> res = new ArrayList<>();
             for(Booking b : list){
-                if(b.getRating() == null)
-                    res.add(b);
+                res.add(b);
             }
             return (Iterable<Booking>) res;
         }

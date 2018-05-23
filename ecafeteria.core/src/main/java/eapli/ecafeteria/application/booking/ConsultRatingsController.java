@@ -10,6 +10,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ConsultRatingsController implements Controller{
@@ -47,12 +48,13 @@ public class ConsultRatingsController implements Controller{
     public Iterable<Rating> getRatingsFromUser(CafeteriaUser user) {
         Iterable<Booking> bookings = getBookingsDeliveredFromUser(user);
         ArrayList<Rating> ratings = new ArrayList<>();
-
+        
         for (Booking b : bookings) {
-            Rating r = b.getRating();
-            if (r != null) {
-                ratings.add(r);
-            }
+            List<Rating> listRatingAux = b.getAllRatings();
+            
+            if(!listRatingAux.isEmpty())
+                for(Rating r : listRatingAux)
+                    ratings.add(r);
         }
 
         return ratings;
