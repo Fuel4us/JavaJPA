@@ -8,7 +8,6 @@ package eapli.ecafeteria.application.booking;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
-import eapli.ecafeteria.persistence.KitchenLimitRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
 /**
@@ -18,7 +17,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 public class BookingServices {
 
     private final BookingRepository bookingRepo = PersistenceContext.repositories().booking();
-
+    
     public BookingServices() {
 
     }
