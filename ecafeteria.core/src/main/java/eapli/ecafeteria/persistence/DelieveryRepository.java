@@ -8,12 +8,15 @@ package eapli.ecafeteria.persistence;
 import eapli.ecafeteria.domain.delivery.Delievery;
 import eapli.framework.domain.Designation;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.List;
 
 /**
  *
  * @author Ana Mafalda Silva
  */
-public interface DelieveryRepository extends DataRepository<Delievery, Long>{
-    
+public interface DelieveryRepository extends DataRepository<Delievery, Long> {
+
     Delievery findByName(Designation name);
+
+    List<Delievery> findCurrentShiftDeliveries();
 }

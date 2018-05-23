@@ -68,4 +68,10 @@ public class Delievery implements Serializable{
         this.id = id;
     }
 
+    public Booking getBooking() {
+        return booking;
+    }
+    
+    
+
 }

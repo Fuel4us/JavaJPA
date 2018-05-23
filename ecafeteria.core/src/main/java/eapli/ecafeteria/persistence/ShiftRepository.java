@@ -18,4 +18,6 @@ public interface ShiftRepository extends DataRepository<Shift, Long>{
     
     public boolean checkShift(Date shiftDate, MealType shiftMealType);
     
+    public boolean closeCurrentShift();
+    
 }

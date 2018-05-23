@@ -22,15 +22,14 @@ import javax.persistence.Temporal;
  * @author Josué Lapa
  */
 @Entity
-public class Shift implements AggregateRoot<Long>, Serializable{
-    
+public class Shift implements AggregateRoot<Long>, Serializable {
+
     private static final long serialVersionUID = 1L;
     //public  static final int LUNCH_INIT_HOUR = 12;
     //public  static final int LUNCH_END_HOUR = 15;
-    public  static final int DINNER_INIT_HOUR = 15;
+    public static final int DINNER_INIT_HOUR = 15;
     //public static final int DINNER_END_HOUR = 21;
-    
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -91,5 +90,13 @@ public class Shift implements AggregateRoot<Long>, Serializable{
         }
         return true;
     }
-    
+
+    public boolean close() {
+        if (this.shiftState == ShiftState.OPEN) {
+            this.shiftState = ShiftState.CLOSED;
+            return true;
+        }
+        return false;
+    }
+
 }
