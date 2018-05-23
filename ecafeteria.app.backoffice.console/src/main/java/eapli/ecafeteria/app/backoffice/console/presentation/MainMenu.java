@@ -14,6 +14,7 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUser
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.ChangeUserAllergensAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.CheckUserBalanceAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.EditNutritionalProfileAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
@@ -69,6 +70,7 @@ public class MainMenu extends AbstractUI {
     private static final int LIST_USERS_OPTION = 2;
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
+    private static final int GET_USERS_BALANCE = 5;
 
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -110,9 +112,10 @@ public class MainMenu extends AbstractUI {
     private static final int CREATE_MEAL_PLAN_OPTION = 5;
     private static final int REGISTER_MEALS_ACTUALLY_COOKED = 6;
     private static final int REGISTER_LOTS_USED_IN_MEAL = 7;
-    private static final int CHECK_BOOKINGS_BY_DATA = 8;
-    private static final int CLOSE_MEAL_PLAN = 9;
-    private static final int GENERATE_MEAL_PLAN_OPTION = 10;
+    private static final int LIST_LOTS_USED_IN_MEAL = 8;
+    private static final int CHECK_BOOKINGS_BY_DATA = 9;
+    private static final int CLOSE_MEAL_PLAN = 10;
+    private static final int GENERATE_MEAL_PLAN_OPTION = 11;
 
     // REPORTING
     private static final int REPORTING_DISHES_PER_DISHTYPE_OPTION = 1;
@@ -231,6 +234,8 @@ public class MainMenu extends AbstractUI {
     private Menu buildUsersMenu() {
         final Menu menu = new Menu("Users >");
 
+        // users menu stuff that you can do
+
         menu.add(new MenuItem(ADD_USER_OPTION, "Add User", () -> new AddUserUI().show()));
         menu.add(new MenuItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction()));
         menu.add(new MenuItem(DEACTIVATE_USER_OPTION, "Deactivate User",
@@ -238,6 +243,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
+        menu.add(new MenuItem(GET_USERS_BALANCE, "Users balance", new CheckUserBalanceAction()));
 
         return menu;
     }
@@ -293,6 +299,8 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
 
         menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
+        
+        menu.add(new MenuItem(LIST_LOTS_USED_IN_MEAL, "List Lots Used In Meal", new ListLotsUsedInMealAction()));
 
         menu.add(new MenuItem(CHECK_BOOKINGS_BY_DATA, "Check Bookings By Data", new CheckReservationsByDataAction()));
 

@@ -76,7 +76,7 @@ public class MecanographicNumber implements ValueObject, Serializable {
     }
     
     private String createStudentRegex(){
-        Integer thirdDigit = DateTime.currentYear()/100;
+        Integer thirdDigit = (DateTime.currentYear() % 100) / 10;
         String regex = "(";
         
         for(int i = 0; i <= thirdDigit; i++){
