@@ -95,7 +95,14 @@ public class EditNutritionalProfileUI extends AbstractUI{
     private boolean changeSalt(){
         NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
         
-        System.out.printf("\nPrevious max salt quantity: %d", controller.getPreviousMaxSaltQuantity(nutriProfile));
+        int previousQuantity = controller.getPreviousMaxSaltQuantity(nutriProfile);
+        
+        if(previousQuantity == -1){
+            System.out.print("\nMax salt hasn't been defined yet!");
+        }else{
+            System.out.printf("\nPrevious max salt quantity: %d", previousQuantity);
+        }
+        
         System.out.printf("\nEntry the new max salt quantity: ");
         int maxSalt = input.nextInt();
         
@@ -115,7 +122,14 @@ public class EditNutritionalProfileUI extends AbstractUI{
     private boolean changeCalorie(){
         NutritionalProfile nutriProfile = controller.getUserNutritionalProfile();
         
-        System.out.printf("\nPrevious max calorie quantity: %d", controller.getPreviousMaxCalorieQuantity(nutriProfile));
+        int previousQuantity = controller.getPreviousMaxCalorieQuantity(nutriProfile);
+        
+        if(previousQuantity == -1){
+            System.out.print("\nMax calorie hasn't been defined yet!");
+        }else{
+            System.out.printf("\nPrevious max calorie quantity: %d", previousQuantity);
+        }
+        
         System.out.printf("\nEntry the new max calorie quantity: ");
         int maxCalorie = input.nextInt();
         

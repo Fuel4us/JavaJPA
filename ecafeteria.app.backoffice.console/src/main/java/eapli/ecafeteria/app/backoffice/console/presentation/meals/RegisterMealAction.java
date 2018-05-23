@@ -4,7 +4,7 @@ import eapli.framework.actions.Action;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class RegisterMealAction implements Action {
 

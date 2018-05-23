@@ -21,15 +21,25 @@ import javax.persistence.OneToOne;
 public class Profile implements Serializable{
     
     private static final long serialVersionUID = 1L;
-    private final int DEFAULT_BALANCE_LIMIT = 0;
+    
+    /**
+     * Default value for the user balance limit
+     */
+    private static final double DEFAULT_BALANCE_LIMIT = 0.0;
     
     
     @Id
     @GeneratedValue
     private Long id;
     
-    private int balanceLimit;
+    /**
+     * User balance limit
+     */
+    private double balanceLimit;
     
+    /**
+     * Profile Constructor 
+     */
     protected Profile(){
         this.balanceLimit = DEFAULT_BALANCE_LIMIT;
     }
@@ -39,7 +49,7 @@ public class Profile implements Serializable{
      * @param balanceLimit new balance limit
      * @return True if a new balance is added, false if not
      */
-    public boolean addBalanceLimit(int balanceLimit){
+    public boolean addBalanceLimit(double balanceLimit){
         if(balanceLimit > 0){
             this.balanceLimit = balanceLimit;
             return true;
@@ -52,7 +62,7 @@ public class Profile implements Serializable{
      * Return the current user balance limit
      * @return Value of the current balance limit
      */
-    public int getBalanceLimit(){
+    public double getBalanceLimit(){
         return balanceLimit;
     }
     
