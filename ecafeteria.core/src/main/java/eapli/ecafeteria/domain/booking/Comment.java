@@ -1,6 +1,7 @@
 package eapli.ecafeteria.domain.booking;
 
 import eapli.framework.domain.ddd.ValueObject;
+import eapli.framework.util.Strings;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,6 +46,8 @@ public class Comment implements Serializable, ValueObject {
      * @param comment
      */
     public Comment(String comment) {
+        if(Strings.isNullOrEmpty(comment))
+            throw new IllegalArgumentException("Comment should neither be null nor empty");
         this.comment = comment;
     }
     
@@ -70,6 +73,8 @@ public class Comment implements Serializable, ValueObject {
      * @param answer
      */
     public void changeAnswer(String answer) {
+        if(Strings.isNullOrEmpty(answer))
+            throw new IllegalArgumentException("Answer should neither be null nor empty");
         this.answer = answer;
     }
 

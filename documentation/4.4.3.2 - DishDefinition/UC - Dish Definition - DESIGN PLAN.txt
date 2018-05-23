@@ -1,10 +1,10 @@
-	_________
+﻿	_________
 
 	DESIGN
 	_________
 
-	* Utilizar a estrutura base standard da aplicação baseada em camadas
+	* Use the standard structure based on layers.
 
-   	Classes do domínio:  Dish e suas classes associadas
-   	Controlador: RegisterDishController
+   	Domain classes:  Dish and its connected classes
+   	Controller: RegisterDishController
    	Repository: DishRepository

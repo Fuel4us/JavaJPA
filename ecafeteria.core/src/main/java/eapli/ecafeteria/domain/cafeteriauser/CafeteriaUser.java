@@ -26,27 +26,50 @@ import javax.persistence.Version;
 @Entity
 public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serializable {
 
+    /**
+     * Instance variable that defines the serial version.
+     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Instance variable that defines the version.
+     */
     @Version
     private Long version;
 
+    /**
+     * Variable that defines the mecanographic number of the cafeteria user.
+     */
     @EmbeddedId
     private MecanographicNumber mecanographicNumber;
     
     /**
      * cascade = CascadeType.NONE as the systemUser is part of another aggregate
      */
+    /**
+     * Instance variable that defines the System User of the cafeteria user.
+     */
     @OneToOne()
     private SystemUser systemUser;
     
+    /**
+     * Instance variable that defines the nutritional profile of the cafeteria user.
+     */
     @OneToOne(cascade = CascadeType.ALL)
     private NutritionalProfile nutritionalProfile;
 
+    /**
+     * Instance variable that defines the profile of the cafeteria user.
+     */
     @OneToOne(cascade = CascadeType.ALL)
     private Profile Profile;
     
-
+    /**
+     * Complete constructor of the class.
+     * 
+     * @param user
+     * @param mecanographicNumber
+     */
     public CafeteriaUser(SystemUser user, MecanographicNumber mecanographicNumber) {
         if (mecanographicNumber == null || user == null) {
             throw new IllegalArgumentException();
@@ -57,10 +80,17 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         this.Profile = new Profile();
     }
 
+    
+    /**
+     * Empty constructor of the class for the ORM.
+     */
     protected CafeteriaUser() {
-        // for ORM only
     }
 
+    /**
+     * Returns the system user.
+     * @return
+     */
     public SystemUser user() {
         return this.systemUser;
     }
@@ -97,12 +127,16 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
                 && this.systemUser.sameAs(that.systemUser));
     }
 
+    /**
+     * Returns the mecanographic number
+     * @return
+     */
     public MecanographicNumber mecanographicNumber() {
         return id();
     }
     
     /**
-     *
+     * Returns the nutritional profile
      * @return
      */
     public NutritionalProfile accessNutritionalProfile(){
@@ -123,6 +157,10 @@ public class CafeteriaUser implements AggregateRoot<MecanographicNumber>, Serial
         return this.mecanographicNumber;
     }
 
+    /**
+     *
+     * @return String with toString of parameter systemUser
+     */
     @Override
     public String toString() {
         return systemUser.toString();

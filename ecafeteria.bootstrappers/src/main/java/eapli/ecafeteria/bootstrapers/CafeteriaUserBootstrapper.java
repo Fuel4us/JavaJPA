@@ -21,9 +21,9 @@ public class CafeteriaUserBootstrapper implements Action {
 
     @Override
     public boolean execute() {
-        signupAndApprove("900330", "Password1", "John", "Smith", "john@smith.com", "900330", true);
-        signupAndApprove("900331", "Password1", "Mary", "Smith", "mary@smith.com", "900331", false);
-        signupAndApprove("900332", "Password1", "Mary", "Jane", "mary@jane.com", "900332", true);
+        signupAndApprove("1000330", "Password1", "John", "Smith", "john@smith.com", "1000330", true);
+        signupAndApprove("1000331", "Password1", "Mary", "Smith", "mary@smith.com", "1000331", false);
+        signupAndApprove("1000332", "Password1", "Mary", "Jane", "mary@jane.com", "1000332", true);
 
         return true;
     }

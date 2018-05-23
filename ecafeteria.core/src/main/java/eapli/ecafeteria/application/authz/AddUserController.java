@@ -49,18 +49,6 @@ public class AddUserController implements Controller {
         return this.userRepository.save(userBuilder.build());
     }
     
-    private CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
-            String email, Set<RoleType> roles, Calendar createdOn, String mecanographicNumber, boolean activateUser)
-            throws DataIntegrityViolationException, DataConcurrencyException {
-        
-        SystemUser systemUser = addUser(username, password, firstName, lastName, email, roles, createdOn, activateUser);
-        
-        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
-        cafeteriaUserBuilder.withSystemUser(systemUser).withMecanographicNumber(mecanographicNumber);
-        
-        return this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
-    }
-    
     public SystemUser addUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
@@ -70,6 +58,17 @@ public class AddUserController implements Controller {
     public CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, String mecanographicNumber, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
-        return addCafeteriaUser(username, password, firstName, lastName, email, roles, DateTime.now(), mecanographicNumber, activateUser);
+        return addCafeteriaUser(username, password, firstName, lastName, email, roles, DateTime.now(), mecanographicNumber, false);
+    }
+    
+    private CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
+            String email, Set<RoleType> roles, Calendar createdOn, String mecanographicNumber, boolean activateUser)
+            throws DataIntegrityViolationException, DataConcurrencyException {
+        
+        final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
+        cafeteriaUserBuilder.withMecanographicNumber(mecanographicNumber)
+                .withSystemUser(addUser(username, password, firstName, lastName, email, roles, createdOn, activateUser));
+        
+        return this.cafeteriaUserRepository.save(cafeteriaUserBuilder.build());
     }
 }

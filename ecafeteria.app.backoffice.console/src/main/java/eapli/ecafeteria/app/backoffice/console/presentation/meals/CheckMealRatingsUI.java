@@ -28,7 +28,7 @@ public class CheckMealRatingsUI extends AbstractUI {
             return true;
         }
 
-        final SelectWidget<Meal> selector = new SelectWidget<>("Select one meal to see the rating:", controller.getMealsOfBookings());
+        final SelectWidget<Meal> selector = new SelectWidget<>("\n-> Select one meal to see its ratings:\n", controller.getMealsOfBookings());
         selector.show();
         final Meal selectedMeal = selector.selectedElement();
 

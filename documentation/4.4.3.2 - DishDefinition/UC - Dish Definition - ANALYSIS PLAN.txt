@@ -1,26 +1,26 @@
-	___________
+﻿	___________
 
-	ANÁLISE 
+	ANALYSIS
 	____________
 
 
-	Reunião com o cliente
+	Meeting with the client
 
-	* Um prato é definido por um tipo de prato, nome, preço e os alergénios que o compôem.
+	* A dish is defined by its dish type, name, price and allergens.
 	
-	* Um prato tem apenas um tipo de prato (ex. peixe, veggie, carne);
-	* Um prato é composto por alergénios (ex. glúten, crustáceos, lactose);
-	* Tem um preço, na maioria das vezes sempre igual, com exceções (por exemplo: picanha)-
+	* A dish has only one dish type (example: fish, meat, veggie).
+	* A dish is composed by allergens. (example: gluten, lactose).
+	* A dish has always the same price, but can exist exceptions.
 
 
 	______________________
 
-	REGRAS DE NEGÓCIO
+	BUSINESS RULES
 	_____________________
 
 
-	* Não podem haver pratos com nomes iguais;
-	* Não pode haver alergénios repetidos no mesmo prato;
+	* There can not exist different dishes with all the same charecteristics.
+	* There can not exist repeated allergens on the same dish.
 
 
 	______________________

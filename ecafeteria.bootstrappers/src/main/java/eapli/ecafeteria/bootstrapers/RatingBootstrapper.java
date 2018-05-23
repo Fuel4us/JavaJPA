@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * changed by João Pereira <1150478@isep.ipp.pt>
+ */
 public class RatingBootstrapper implements Action{
 
     @Override
@@ -29,22 +32,22 @@ public class RatingBootstrapper implements Action{
         
         final BookingRepository bRepository = PersistenceContext.repositories().booking();
         
-        Iterator<Booking> bR = bRepository.findAll().iterator();
+        Iterator<Booking> bR = bRepository.findBookingsDelivered().iterator();
         Booking b1 = bR.next();
         Booking b2 = bR.next();
         
         //comment made by a user
-        final Comment c1 = new Comment("comment1");
-        final Comment c2 = new Comment("comment2");
+        final Comment c1 = new Comment("Very spicy");
+        final Comment c2 = new Comment("Nice food");
         
         //answer or reply made by the chef (menu manager)
-        c1.changeAnswer("answer1");
+        c1.changeAnswer("Sorry, it was our mistake");
         
         final Rating r1 = new Rating(2, c1);
         final Rating r2 = new Rating(4, c2);
 
         b1.rating(r1);
-        b2.rating(r2);
+        b2.rating(r2); 
         
         bRepository.save(b1);
         bRepository.save(b2);

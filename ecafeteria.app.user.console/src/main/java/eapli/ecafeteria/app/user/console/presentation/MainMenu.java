@@ -11,6 +11,7 @@ import eapli.ecafeteria.app.user.console.presentation.booking.CheckBookingsForNe
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckMenuUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckNextBookingUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.ConsultRatingsUI;
+import eapli.ecafeteria.app.user.console.presentation.booking.DefineUserBalancelimitsUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.RegisterBookingUI;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.framework.actions.ReturnAction;
@@ -119,8 +120,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private Menu buildAdminSettingsMenu() {
         final Menu menu = new Menu("Settings >");
 
-        menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit",
-                new ShowMessageAction("Not implemented yet")));
+        menu.add(new MenuItem(SET_USER_ALERT_LIMIT_OPTION, "Set users' alert limit", () -> new DefineUserBalancelimitsUI().show()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;
