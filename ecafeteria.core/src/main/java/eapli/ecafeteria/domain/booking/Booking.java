@@ -6,6 +6,8 @@ import eapli.framework.domain.ddd.AggregateRoot;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ import javax.persistence.Temporal;
  * @author Mário Vaz changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Booking implements AggregateRoot<String>, Serializable {
+public class Booking implements AggregateRoot<String>, Observable,Serializable {
 
     
     @Id
@@ -249,4 +251,16 @@ public class Booking implements AggregateRoot<String>, Serializable {
     public String toString() {
         return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + rating + '}';
     }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
 }
