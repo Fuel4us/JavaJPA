@@ -46,9 +46,9 @@ public class DefineUserBalancelimitsController implements Controller{
     }
     
     /**
-     * 
-     * @param limit
-     * @return 
+     * Method responsable to change the user balance limit in the profile
+     * @param limit new balance limit
+     * @return if it was seted
      */
     public boolean setUserBalanceLimit(double limit){
         //Buiseness rule
@@ -66,8 +66,8 @@ public class DefineUserBalancelimitsController implements Controller{
     }
     
     /**
-     * 
-     * @return 
+     * Saves the updates in the database
+     * @return If it was saved
      */
     public boolean saveUserBalanceLimit(){
         try {
