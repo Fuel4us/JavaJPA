@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class CheckRatingsController {
 
@@ -187,7 +187,16 @@ public class CheckRatingsController {
      * @return
      */
     public List<Integer> getRatingsByMenu(Menu menu) {
-        List<Meal> listMeal = (List<Meal>) getAllMealsByMenu(menu);
+        Iterator itMeals = getAllMealsByMenu(menu).iterator();
+        List<Meal> listMeal = new ArrayList<>();
+        Meal meal;
+
+        while (itMeals.hasNext()) {
+            meal = (Meal) itMeals.next();
+            if (meal != null) {
+                listMeal.add(meal);
+            }
+        }
 
         return getRatings(listMeal);
     }
@@ -232,12 +241,12 @@ public class CheckRatingsController {
                 }
             }
         }
-//        oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
-//        if (oMealPlanItemQuantity != null) {
-//            mealPlan = mealPlanRepository.findByMeal(meal).get();
-//            oQuantity = mealPlan.getItemQuantity();
-//            numPlaneado += oQuantity;
-//        }
+        oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
+        if (oMealPlanItemQuantity != null) {
+            mealPlan = mealPlanRepository.findByMeal(meal).get();
+            oQuantity = mealPlan.getItemQuantity();
+            numPlaneado += oQuantity;
+        }
 
         ratingsDate.add(numReservado);
         ratingsDate.add(numDistribuido);
@@ -276,12 +285,12 @@ public class CheckRatingsController {
                     }
                 }
             }
-//            oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
-//            if (oMealPlanItemQuantity != null) {
-//                mealPlan = mealPlanRepository.findByMeal(meal).get();
-//                oQuantity = mealPlan.getItemQuantity();
-//                numPlaneado += oQuantity;
-//            }
+            oMealPlanItemQuantity = mealPlanRepository.findByMeal(meal);
+            if (oMealPlanItemQuantity != null) {
+                mealPlan = mealPlanRepository.findByMeal(meal).get();
+                oQuantity = mealPlan.getItemQuantity();
+                numPlaneado += oQuantity;
+            }
         }
 
         ratingsDate.add(numReservado);
@@ -302,11 +311,11 @@ public class CheckRatingsController {
         System.out.println("Meals Distribuidas : " + distribuidas);
         System.out.println("Meals Planeadas : " + planeadas);
         if (planeadas != 0) {
-            System.out.println("*** Foram reservadas " + ((reservadas / planeadas) * 100) + "% das refeições planeadas.");
-            System.out.println("*** Foram distribuidas " + ((distribuidas / planeadas) * 100) + "% das refeições planeadas.");
+            System.out.println("*** Foram reservadas " + ((reservadas*100 / planeadas)) + "% das refeições planeadas.");
+            System.out.println("*** Foram distribuidas " + ((distribuidas*100 / planeadas)) + "% das refeições planeadas.");
         }
         if (reservadas != 0) {
-            System.out.println("*** Foram distribuidas " + ((distribuidas / reservadas) * 100) + "% das refeições reservadas.");
+            System.out.println("*** Foram distribuidas " + ((distribuidas*100 / reservadas)) + "% das refeições reservadas.");
         }
 
     }

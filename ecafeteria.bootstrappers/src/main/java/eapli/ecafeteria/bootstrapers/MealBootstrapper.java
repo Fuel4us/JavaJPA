@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class MealBootstrapper implements Action {
 

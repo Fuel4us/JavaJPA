@@ -1,4 +1,4 @@
-package ratings;
+package eapli.ecafeteria.app.backoffice.console.presentation.ratings;
 
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.DishPrinter;
 import eapli.ecafeteria.app.backoffice.console.presentation.meals.MealPrinter;
@@ -10,6 +10,7 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
+import eapli.framework.util.DateTime;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ import java.util.Set;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class CheckRatingsUI extends AbstractUI {
 
@@ -30,7 +31,6 @@ public class CheckRatingsUI extends AbstractUI {
 
     Scanner s;
     String dataRecebida;
-    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     Date aux;
     Date aux2;
 
@@ -38,8 +38,6 @@ public class CheckRatingsUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        df.setLenient(false);
-
         List<String> vetorDecisao = new ArrayList<>();
         vetorDecisao.add("Rating By Menu!");
         vetorDecisao.add("Rating By Meal!");
@@ -90,19 +88,22 @@ public class CheckRatingsUI extends AbstractUI {
     }
 
     private void ratingsByDate() {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        df.setLenient(false);
+
         do {
             s = new Scanner(System.in);
             System.out.println("Digite uma data para fazermos a estatistica desse mesmo dia, no seguinte formato --> dd/MM/yyyy: ");
             dataRecebida = s.nextLine();
             try {
                 aux = df.parse(dataRecebida);
-                if (aux.after(new Date())) {
+                if (aux.before(new Date())) {
                     aux2 = aux;
                     System.out.println("### Rating by date : " + aux.toString());
                     theController.showRatings(theController.getRatingsByDate(aux));
                 } else {
                     aux2 = null;
-                    System.out.println("ATENÇÃO!!! A data tem de ser de um dia anterior ao atual!");
+                    System.out.println("ATENÇÃO!!! A data tem de ser de pelo menos um dia anterior ao atual!");
                 }
             } catch (ParseException ex) {
                 aux2 = null;

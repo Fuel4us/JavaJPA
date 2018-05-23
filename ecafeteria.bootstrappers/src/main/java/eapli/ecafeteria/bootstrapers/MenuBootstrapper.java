@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class MenuBootstrapper implements Action {
 
@@ -58,6 +58,7 @@ public class MenuBootstrapper implements Action {
         try {
             for (Object meal : iter) {
                 controllerMeal.updateMeal((Meal) meal, menu);
+                controllerMeal.updateMenuState(menu, true);
             }
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);

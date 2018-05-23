@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 /**
  *
  * @author Bernardo Carreira
- * @EDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @EDIT Pedro Alves 1150372@isep.ipp.pt
  */
 @Entity
 public class Menu implements Serializable {

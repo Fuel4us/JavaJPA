@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
 /**
  *
  * @author Bernardo Carreira
- * @authorEDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @authorEDIT Pedro Alves 1150372@isep.ipp.pt
  */
 @Entity
 public class Meal implements Serializable {
