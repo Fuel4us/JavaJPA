@@ -19,7 +19,7 @@ import javax.persistence.Query;
 /**
  *
  * @author Bernardo Carreira
- * @EDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @EDIT Pedro Alves 1150372@isep.ipp.pt
  */
 public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
@@ -91,5 +91,17 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
         params.put("dateEnd", end);
 
         return match("e.mealDate >= :dateStart and e.mealDate <= :dateEnd", params);
+    }
+
+    @Override
+    public void updateMenuState(Menu menu, boolean b) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Menu SET PUBLISHED=:menuState WHERE ID=:menuID");
+        query.setParameter("menuState", true);
+        query.setParameter("menuID", menu.id());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
     }
 }

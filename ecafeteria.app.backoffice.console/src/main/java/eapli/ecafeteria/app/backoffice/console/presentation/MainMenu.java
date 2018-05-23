@@ -51,7 +51,7 @@ import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
-import ratings.CheckRatingsAction;
+import eapli.ecafeteria.app.backoffice.console.presentation.ratings.CheckRatingsAction;
 
 /**
  * TODO split this class in more specialized classes for each menu

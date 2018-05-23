@@ -5,7 +5,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 
 /**
- * @author Gonçalo Fonseca <1150503@isep.ipp.pt>
+ * @author Gonçalo Fonseca - 1150503@isep.ipp.pt
  */
 public class CloseMealPlanUI extends AbstractUI {
 
@@ -33,6 +33,11 @@ public class CloseMealPlanUI extends AbstractUI {
         return "Chose meal plan to close";
     }
 
+
+    /**
+     * Menu done in console to the customer
+     * @return
+     */
     public static int menu(){
         int option = -1;
         System.out.println("");

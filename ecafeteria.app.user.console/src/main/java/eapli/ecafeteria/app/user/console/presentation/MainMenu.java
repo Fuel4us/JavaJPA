@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.user.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.app.user.console.presentation.booking.BookingRatingAction;
+import eapli.ecafeteria.app.user.console.presentation.booking.CancelBookingUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckBookingsForNextDaysUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckMenuUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckNextBookingUI;
@@ -46,6 +47,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int CHECK_NEXT_BOOKING = 5;
     private static final int CHECK_MENU = 6;
     private static final int CONSULT_RATINGS = 7;
+    private static final int CANCEL_BOOKING = 8;
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
@@ -113,6 +115,7 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(CHECK_NEXT_BOOKING, "Check nextBooking", () -> new CheckNextBookingUI().show()));
         menu.add(new MenuItem(CHECK_MENU, "Check Menu for this week (or for next week)", () -> new CheckMenuUI().show()));
         menu.add(new MenuItem(CONSULT_RATINGS, "Consult ratings", () -> new ConsultRatingsUI().show()));
+        menu.add(new MenuItem(CANCEL_BOOKING, "Cancel Booking", () -> new CancelBookingUI().show()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

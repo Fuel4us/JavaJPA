@@ -21,7 +21,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class EditMenuUI extends AbstractUI {
 

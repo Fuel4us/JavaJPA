@@ -32,4 +32,6 @@ public interface MealRepository extends DataRepository<Meal, Long> {
     Iterable<Meal> findAllMealsAvailables(Menu menu);
     
     Iterable<Meal> findByDatePeriod(Date start, Date end);
+
+    public void updateMenuState(Menu menu, boolean b);
 }

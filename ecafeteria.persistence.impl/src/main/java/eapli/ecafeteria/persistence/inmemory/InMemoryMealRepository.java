@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  *
  * @author Bernardo Carreira
- * @EDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @EDIT Pedro Alves 
  */
 public class InMemoryMealRepository extends InMemoryRepository<Meal, Long> implements MealRepository {
 
@@ -58,6 +58,11 @@ public class InMemoryMealRepository extends InMemoryRepository<Meal, Long> imple
 
     @Override
     public Iterable<Meal> findByDatePeriod(Date start, Date end) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void updateMenuState(Menu menu, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

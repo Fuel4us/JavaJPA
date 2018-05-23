@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class EditMenuController {
 

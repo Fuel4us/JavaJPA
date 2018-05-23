@@ -44,7 +44,7 @@ public class ReplyMealRatingCommentsUI extends AbstractUI {
         List<Booking> commentedBookingList = new ArrayList<>();
 
         for (Booking booking : bookingList) {
-            if (booking.getRating() != null && booking.getRating().getComment() != null) {
+            if (booking.getRating(0) != null && booking.getRating(0).getComment() != null) {
                 commentedBookingList.add(booking);
             }
         }
@@ -59,12 +59,12 @@ public class ReplyMealRatingCommentsUI extends AbstractUI {
                 System.out.println("\n##");
                 System.out.println("\n##" + b.getMeal().toString());
                 System.out.println("\n##");
-                System.out.println("\n##" + b.getRating().getComment());
+                System.out.println("\n##" + b.getRating(0).getComment());
                 System.out.println("\n##");
                 System.out.println("\n## REPLY: ");
                 reply = scanner.nextLine();
                 System.out.println("\n");
-                b.getRating().getComment().changeAnswer(reply);
+                b.getRating(0).getComment().changeAnswer(reply);
 
                 try {
                     controller.saveBooking(b);

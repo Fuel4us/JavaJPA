@@ -34,7 +34,6 @@
     <class>eapli.ecafeteria.domain.finance.POS</class>
     <class>eapli.ecafeteria.domain.delivery.Delievery</class>
     <class>eapli.ecafeteria.domain.finance.Shift</class>
-    <class>eapli.ecafeteria.domain.booking.Comment</class>
     <class>eapli.ecafeteria.domain.dishes.Allergens</class>
     <class>eapli.ecafeteria.domain.finance.POSUser</class>
     <class>eapli.ecafeteria.domain.cafeteriauser.NutritionalProfile</class>
