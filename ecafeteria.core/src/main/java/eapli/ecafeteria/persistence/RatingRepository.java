@@ -6,12 +6,16 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.booking.Rating;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  * Rating Repository
+ *
  * @author ruben
  */
-public interface RatingRepository extends DataRepository<Rating, Long>{
-    
+public interface RatingRepository extends DataRepository<Rating, Long> {
+
+    Iterable<Rating> getRatingByDish(Dish dish);
+
 }

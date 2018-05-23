@@ -5,13 +5,13 @@
  */
 package eapli.ecafeteria.persistence;
 
-import eapli.ecafeteria.domain.booking.Comment;
+import eapli.ecafeteria.domain.booking.Complaint;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
  *
- * @author Hilario Coelho
+ * @author Hernani Gil
  */
-public interface CommentRepository extends DataRepository<Comment, Integer> {
+public interface ComplaintRepository extends DataRepository<Complaint, Long> {
     
 }

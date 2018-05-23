@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class MenuBootstrapper implements Action {
 
@@ -29,6 +29,9 @@ public class MenuBootstrapper implements Action {
         Date date1 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 1).getTime();
         Date date2 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 3, 1).getTime();
         Date date3 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 6, 1).getTime();
+
+        Date date4 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime();
+        Date date5 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 14).getTime();
 
         registerMenu(date1, date2, "Menu01");
         Iterable it = controller.getAllMealsAvailablesToMenu(menu);
@@ -45,6 +48,17 @@ public class MenuBootstrapper implements Action {
         try {
             for (Object meal : itr) {
                 controllerMeal.updateMeal((Meal) meal, menu);
+            }
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        registerMenu(date4, date5, "MenuBooking");
+        Iterable iter = controller.getAllMealsAvailablesToMenu(menu);
+        try {
+            for (Object meal : iter) {
+                controllerMeal.updateMeal((Meal) meal, menu);
+                controllerMeal.updateMenuState(menu, true);
             }
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);

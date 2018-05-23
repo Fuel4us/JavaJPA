@@ -7,6 +7,8 @@ package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
+import eapli.ecafeteria.domain.booking.Complaint;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.dishes.DishType;
@@ -25,8 +27,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Ana Mafalda Silva
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * @author Ana Mafalda Silva changed by João Pereira <1150478@isep.ipp.pt>
  */
 class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
@@ -34,7 +35,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
      * Sets the limit for "next days" to 7 days
      */
     private final int NEXT_DAYS = 7;
-    
+
     /**
      * Adds a day in milliseconds
      */
@@ -68,6 +69,20 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         }
 
         return bookingList;
+    }
+    
+    /**
+     * Returns all bookings in delivered state from an User
+     * @param user User
+     * @return List of bookings
+     */
+    @Override
+    public Iterable<Booking> getBookings(Optional<CafeteriaUser> user) {
+        Map<String, Object> params = new HashMap();
+        params.put("user", user.get());
+        params.put("bookingState", BookingState.RESERVED);
+
+        return match("e.user = :user and e.bookingState = :bookingState", params);
     }
 
     @Override
@@ -176,8 +191,8 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings for a meal
-     * João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings for a meal João Pereira <1150478@isep.ipp.pt>
+     *
      * @param user User
      * @return List of bookings
      */
@@ -189,8 +204,8 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings in delivered
-     * João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings in delivered João Pereira <1150478@isep.ipp.pt>
+     *
      * @param user User
      * @return List of bookings
      */
@@ -218,12 +233,66 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         entityManager().getTransaction().commit();
     }
+
+    /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingComplaint(Booking booking, Complaint complaint) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
+        query.setParameter("complaintgid", complaint.id());
+        query.setParameter("bookingid", booking.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+
+    /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingStateDelivered(Booking booking) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET BOOKINGSTATE=:bookingState WHERE BOOKINGID=:bookingid");
+        query.setParameter("bookingState", 1);
+        query.setParameter("bookingid", booking.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
     
+     /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingStateCanceled(Booking booking) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET BOOKINGSTATE=:bookingState WHERE BOOKINGID=:bookingid");
+        query.setParameter("bookingState", 2);
+        query.setParameter("bookingid", booking.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+
     /**
      * Return user's bookings for the current week.
-     * 
+     *
      * @param user current user
-     * @return 
+     * @return
      */
     @Override
     public Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user) {
@@ -235,10 +304,10 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         List<Booking> bookingList = new ArrayList();
 
         Calendar cal = Calendar.getInstance();
-        
+
         //to get the first day of this week
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        
+
         for (int i = 0; i < 7; i++) {
             params.put("date", new Date(cal.getTimeInMillis()));
             bookingList.addAll(match("e.meal.mealDate = :date and e.user = :user and e.bookingState = :bookingState", params));

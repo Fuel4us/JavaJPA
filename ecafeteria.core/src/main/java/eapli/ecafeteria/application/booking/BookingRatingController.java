@@ -13,7 +13,6 @@ import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
-import eapli.ecafeteria.persistence.CommentRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.ecafeteria.persistence.RatingRepository;
 import eapli.framework.application.Controller;
@@ -31,7 +30,7 @@ public class BookingRatingController implements Controller {
     private final RatingRepository repRating = PersistenceContext.repositories().rating();
     private final BookingRepository repBooking = PersistenceContext.repositories().booking();
     private final CafeteriaUserRepository repCafeteriaUser = PersistenceContext.repositories().cafeteriaUsers();
-    private final CommentRepository repComment = PersistenceContext.repositories().comments();
+    //private final CommentRepository repComment = PersistenceContext.repositories().comments();
 
     public Iterable<Booking> getBookingsForRating(Optional<CafeteriaUser> optUser) {
         if(optUser.isPresent()){
@@ -58,15 +57,7 @@ public class BookingRatingController implements Controller {
     }
 
     public void createRating(Booking choosen, int score, String comment) throws DataConcurrencyException, DataIntegrityViolationException {
-        Rating rating = new Rating();
-        rating.setScore(score);
-        
-        if(!comment.equalsIgnoreCase("")) {
-            Comment obj_com = new Comment(comment);
-            obj_com = repComment.save(obj_com);
-        
-            rating.setComment(obj_com);
-        }
+        Rating rating = new Rating(score, comment);
         
         rating = repRating.save(rating);
         

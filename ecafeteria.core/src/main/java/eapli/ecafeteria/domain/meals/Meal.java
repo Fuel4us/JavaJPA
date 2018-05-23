@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
+import javafx.beans.InvalidationListener;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ import javax.persistence.Temporal;
 /**
  *
  * @author Bernardo Carreira
- * @authorEDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @authorEDIT Pedro Alves 1150372@isep.ipp.pt
  */
 @Entity
 public class Meal implements Serializable {
@@ -343,4 +344,5 @@ public class Meal implements Serializable {
             }
         };
     }
+
 }

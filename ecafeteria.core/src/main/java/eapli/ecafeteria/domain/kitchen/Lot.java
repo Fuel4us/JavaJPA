@@ -98,7 +98,7 @@ public class Lot implements AggregateRoot<Integer>, Serializable {
 
     @Override
     public String toString() {
-        return "MealLot{" + "ID: " + pk + ", Código do lote: " + lotCode + ", Ingrediente= " + getIngredient() + ", Quantidade=" + quantity + '}';
+        return "MealLot { " + "ID: " + pk + ", Lot Code: " + lotCode + ", Ingredient: " + getIngredient() + ", Quantity: " + quantity  + '}' + "\n";
     }
 
     public String toString2() {
@@ -106,6 +106,6 @@ public class Lot implements AggregateRoot<Integer>, Serializable {
     }
     
     public String toString3(){
-        return "Material:" + getIngredient().description() + "\nQuantity:" + quantity;
+        return "Material: " + getIngredient().description() + "\nQuantity: " + quantity +"\n";
     }
 }

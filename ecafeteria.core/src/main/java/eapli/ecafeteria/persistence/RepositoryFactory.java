@@ -119,12 +119,13 @@ public interface RepositoryFactory {
     MealPlanItemQuantityRepository mealplanitemquantities();
     
     RatingRepository rating();
-    
-    CommentRepository comments();
 
     ShiftRepository shift();
     
     AllergenRepository allergen();
 
     public DelieveryRepository delieveries();
+
+    public ComplaintRepository complaint();
+
 }
