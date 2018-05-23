@@ -6,14 +6,43 @@
 package eapli.ecafeteria.persistence.jpa;
 
 import eapli.ecafeteria.domain.booking.Rating;
+import eapli.ecafeteria.domain.dishes.Dish;
 import eapli.ecafeteria.persistence.RatingRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  *
  * @author ruben
  */
-public class JpaRatingRepository extends CafeteriaJpaRepositoryBase<Rating, Long> implements RatingRepository{
+public class JpaRatingRepository extends CafeteriaJpaRepositoryBase<Rating, Long> implements RatingRepository {
+
     public JpaRatingRepository() {
     }
-    
+
+    @Override
+    public Iterable<Rating> getRatingByDish(Dish dish) {
+
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("SELECT r.rating FROM RATING r, BOOKING b, "
+                + "MEAL m, DISH d WHERE r.ID = b.RATING_ID AND b.MEAL_ID = m.ID AND m.DISH_NAME = :dish");
+        query.setParameter("dish", dish.name());
+
+        return (Iterable<Rating>) query.getResultList();
+    }
+//    public Iterable<Rating> getRatingByDish(Dish dish) {
+//        final Map<String, Object> params = new HashMap<>();
+//        params.put("dish", dish);
+//
+//        try {
+//            return match("e.dish = :dish", params);
+//        } catch (NoResultException e) {
+//            return null;
+//        }
+//
+//    }
 }
