@@ -13,7 +13,6 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.util.Console;
 import java.util.List;
 
-
 /**
  *
  * @author Carlos Figueiredo (1140317)
@@ -25,13 +24,14 @@ public class ListLotsUsedInMealUI extends AbstractUI {
     protected Controller controller() {
         return this.controller;
     }
- 
+
     @Override
     protected boolean doShow() {
 
+        System.out.println("Select your meal : \n");
         Meal meal = selectMeal();
         List<Lot> listLotsByMeal = this.controller.getLotsByMeal(meal);
-        System.out.println("Lots Used in selected meal : " + listLotsByMeal);
+        System.out.println("Lots Used in selected meal : \n" + listLotsByMeal);
 
         return false;
 
@@ -44,26 +44,6 @@ public class ListLotsUsedInMealUI extends AbstractUI {
         }
         int selectMeal = Console.readInteger("Choose Meal ID:");
         return listMeals.get(selectMeal - 1);
-    }
-
-    public Lot selectLot(List<Lot> listLotsByMeal) {
-        if (listLotsByMeal.isEmpty()) {
-            System.out.println("There are no lots for this meal!");
-        } else {
-
-            for (int i = 0; i < listLotsByMeal.size(); i++) {
-                System.out.println(i + 1 + " - " + listLotsByMeal.get(i).toString3());
-            }
-            int selectLot = Console.readInteger("Lot ID:");
-            while (selectLot <= 0 || selectLot > listLotsByMeal.size()) {
-                System.out.println("ID Inválido!!!");
-                selectLot = Console.readInteger("Lot ID:");
-            }
-            if (selectLot != 0 && !listLotsByMeal.isEmpty()) {
-                return listLotsByMeal.get(selectLot - 1);
-            }
-        }
-        return new Lot(0, null, 0);
     }
 
     @Override
