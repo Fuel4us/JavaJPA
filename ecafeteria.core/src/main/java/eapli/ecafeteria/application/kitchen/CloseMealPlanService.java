@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Gonçalo Fonseca <1150503@isep.ipp.pt>
+ * @author Gonçalo Fonseca - 1150503@isep.ipp.pt
  */
 public class CloseMealPlanService {
 
