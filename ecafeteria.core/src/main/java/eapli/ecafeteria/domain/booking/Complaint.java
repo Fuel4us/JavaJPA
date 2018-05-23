@@ -47,10 +47,11 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
         //ORM
     }
     
-    public Complaint(Meal meal, CafeteriaUser cafeteriaUser, Description description){
+    public Complaint(Meal meal, CafeteriaUser cafeteriaUser, Description description, ComplaintState state){
         this.meal = meal;
         this.cafeteriaUser = cafeteriaUser;
         this.description = description;
+        this.complaintState = state;
     }
     
     public Complaint(ComplaintState state){
@@ -60,6 +61,7 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
     public ComplaintState state(){
         return complaintState;
     }
+    
 
     @Override
     public boolean sameAs(Object other) {

@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.booking;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.ComplaintFactory;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Description;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.BookingRepository;
@@ -54,13 +55,13 @@ public class CreateComplaintController implements Controller {
         return bookingRepository.findBookingsDeliveredByUser(user);
     }
     
-    private void createComplaint(Booking booking, String text){
+    private void createComplaint(Booking booking, String text, ComplaintState state){
         Description description = new Description(text);
         
         complaintFactory = ComplaintFactory.getInstance();
         
         try {
-            complaintFactory.createComplaint(booking, selectedUser, description);
+            complaintFactory.createComplaint(booking, selectedUser, description, state);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(CreateComplaintController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {
