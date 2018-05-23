@@ -153,7 +153,7 @@ public class LotTest {
     public void testToString() {
         System.out.println("toString");
         Lot instance = new Lot();
-        String expResult = "MealLot{ID: null, Código do lote: 0, Ingrediente= null, Quantidade=0}";
+        String expResult = "MealLot { ID: null, Lot Code: 0, Ingredient: null, Quantity: 0}\n";
         String result = instance.toString();
         assertEquals(expResult, result);
         
