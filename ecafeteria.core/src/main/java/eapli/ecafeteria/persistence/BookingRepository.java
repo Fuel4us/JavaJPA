@@ -14,13 +14,12 @@ import java.util.Date;
 import java.util.Optional;
 
 /**
- * Booking Repository
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * Booking Repository changed by João Pereira <1150478@isep.ipp.pt>
  *
  */
 public interface BookingRepository extends DataRepository<Booking, Long> {
 
-     /**
+    /**
      * Returns the list of bookings in reserved state for the next X days
      *
      * @param currentUser User
@@ -48,17 +47,21 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     Iterable<Booking> findBookingsDelivered();
 
     Iterable<Booking> findBookingsForMeal(Meal meal);
-    
+
     /**
      * Return user's bookings for the current week.
-     * 
+     *
      * @param user current user
-     * @return 
+     * @return
      */
     Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user);
 
     public void updateBookingRating(Booking choosen, Rating rating);
 
     public void updateBookingComplaint(Booking booking, Complaint complaint);
+
+    public void updateBookingStateCanceled(Booking booking);
+
+    public void updateBookingStateDelivered(Booking booking);
 
 }

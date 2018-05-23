@@ -21,7 +21,6 @@ import javax.persistence.Temporal;
 @Entity
 public class Booking implements AggregateRoot<String>, Serializable {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookingID;
@@ -30,30 +29,30 @@ public class Booking implements AggregateRoot<String>, Serializable {
      * Variable that defines the id of the booking.
      */
     private String id;
-    
+
     /**
      * Instance variable that defines the cafeteria user.
      */
     @OneToOne(cascade = CascadeType.ALL)
     private CafeteriaUser user;
-    
+
     /**
      * Instance variable that defines the meal.
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Meal meal;
-    
+
     /**
      * Instance variable that defines the booking state.
      */
     private BookingState bookingState;
-    
+
     /**
      * Instance variable that defines the rating.
      */
     @OneToOne(cascade = CascadeType.ALL)
     private Rating rating;
-    
+
     /**
      * Instance variable that defines the complaint.
      */
@@ -74,7 +73,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Complete constructor of the class.
-     * 
+     *
      * @param user
      * @param meal
      */
@@ -86,15 +85,23 @@ public class Booking implements AggregateRoot<String>, Serializable {
         this.bookingDate = new Date();
     }
 
+    public Booking(CafeteriaUser user, Meal meal, Date time) {
+        this.id = user.id() + meal.toString();
+        this.user = user;
+        this.meal = meal;
+        this.bookingState = BookingState.RESERVED;
+        this.bookingDate = time;
+    }
+
     /**
      * Returns the day.
+     *
      * @return
      */
     public Date day() {
         return this.bookingDate;
     }
 
-    
     @Override
     public boolean sameAs(Object other) {
         return false;
@@ -107,6 +114,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Returns the id of the booking.
+     *
      * @return
      */
     public String bookingId() {
@@ -115,6 +123,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Returns the meal of the booking.
+     *
      * @return
      */
     public Meal getMeal() {
@@ -123,6 +132,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Returns the state of the booking.
+     *
      * @return
      */
     public BookingState getBookingState() {
@@ -130,8 +140,8 @@ public class Booking implements AggregateRoot<String>, Serializable {
     }
 
     /**
-     * Changes the current state of the booking. 
-     * 
+     * Changes the current state of the booking.
+     *
      * @param newState
      */
     public void changeState(BookingState newState) {
@@ -139,7 +149,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
     }
 
     /**
-     * 
+     *
      * @return one String containing information regarding the meal.
      */
     public String sumaryList() {
@@ -211,6 +221,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Changes the rating.
+     *
      * @param rating
      */
     public void rating(Rating rating) {
@@ -219,6 +230,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Gets the rating
+     *
      * @return
      */
     public Rating getRating() {
@@ -227,6 +239,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Makes a complaint.
+     *
      * @param complaint
      */
     public void createComplaint(Complaint complaint) {
@@ -235,6 +248,7 @@ public class Booking implements AggregateRoot<String>, Serializable {
 
     /**
      * Gets the complaint.
+     *
      * @return
      */
     public Complaint Complaint() {
