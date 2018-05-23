@@ -13,7 +13,7 @@ import java.util.Optional;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class InMemoryMenuRepository extends InMemoryRepository<Menu, Long> implements MenuRepository {
 

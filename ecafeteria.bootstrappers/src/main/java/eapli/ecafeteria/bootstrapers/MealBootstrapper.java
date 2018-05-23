@@ -18,19 +18,19 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
-public class MealBootstrapper implements Action{
+public class MealBootstrapper implements Action {
 
     private final MenuRepository menuRepository = PersistenceContext.repositories().menus();
-    
+
     @Override
     public boolean execute() {
         final DishRepository repDish = PersistenceContext.repositories().dishes();
         final Dish dish1 = repDish.findByName(Designation.valueOf(TestDataConstants.DISH_NAME_PICANHA)).get();
         final Dish dish2 = repDish.findByName(Designation.valueOf(TestDataConstants.DISH_NAME_BACALHAU_A_BRAZ)).get();
-//        Optional<Menu> findById = menuRepository.findById(Long.getLong("26"));
-        
+        final Dish dish3 = repDish.findByName(Designation.valueOf(TestDataConstants.DISH_NAME_TOFU_GRELHADO)).get();
+
         registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 1).getTime());
         registerMeal(dish1, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 5).getTime());
         registerMeal(dish2, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 9).getTime());
@@ -45,13 +45,18 @@ public class MealBootstrapper implements Action{
         registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 5).getTime());
         registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 20).getTime());
         registerMeal(dish2, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth(), 20).getTime());
-        
+
+        registerMeal(dish3, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime());
+        registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime());
+        registerMeal(dish1, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 13).getTime());
+        registerMeal(dish2, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 14).getTime());
+
         return true;
     }
-    
-    private void registerMeal(Dish dish , MealType mealType,Date date){
+
+    private void registerMeal(Dish dish, MealType mealType, Date date) {
         final RegisterMealController controller = new RegisterMealController();
-        
+
         try {
             controller.registerMeal(mealType, date, dish);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {

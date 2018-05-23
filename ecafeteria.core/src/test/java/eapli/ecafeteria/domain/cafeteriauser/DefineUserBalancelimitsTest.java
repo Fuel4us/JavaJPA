@@ -15,8 +15,14 @@ import org.junit.Test;
  */
 public class DefineUserBalancelimitsTest {
     
+    /**
+     * Main profile for testing
+     */
     private Profile profile;
     
+    /**
+     * Set up for the testing
+     */
     @Before
     public void setUp() {
         profile = new Profile();
