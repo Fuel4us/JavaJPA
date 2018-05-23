@@ -1,0 +1,21 @@
+UC 4.5.4.2 - Register User
+
+Business Rule
+    Student Mecanographic Number: First two numbers represents 
+    Employee Mecanographic Number: First letter is a F and then 6 numbers F[0-9]{6}
+
+Unit Tests
+    - Mecanographic Number is null or empty: Throws an IllegalArgumentException as expected;
+    - Mecanographic Number valid: Pass on test as expected;
+    - Employee Mecanographic Number with a different letter: Throws an IllegalArgumentException as expected;
+    - Student Mecanographic Number with first two numbers out of range: Throws an IllegalArgumentException as expected;
+    - Employee and Student Mecanographic Numbers with less characters than needed: Throws an IllegalArgumentException as expected;
+
+Pre-condition
+    Administrator must be registered;
+
+Post-conditions
+    The cafeteria user must be saved in the database;
+
+Main Actor
+    Administrator

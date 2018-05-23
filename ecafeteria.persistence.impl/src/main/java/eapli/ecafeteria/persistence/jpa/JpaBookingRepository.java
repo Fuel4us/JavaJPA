@@ -27,8 +27,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Ana Mafalda Silva
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * @author Ana Mafalda Silva changed by João Pereira <1150478@isep.ipp.pt>
  */
 class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
@@ -36,7 +35,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
      * Sets the limit for "next days" to 7 days
      */
     private final int NEXT_DAYS = 7;
-    
+
     /**
      * Adds a day in milliseconds
      */
@@ -178,8 +177,8 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings for a meal
-     * João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings for a meal João Pereira <1150478@isep.ipp.pt>
+     *
      * @param user User
      * @return List of bookings
      */
@@ -191,8 +190,8 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings in delivered
-     * João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings in delivered João Pereira <1150478@isep.ipp.pt>
+     *
      * @param user User
      * @return List of bookings
      */
@@ -220,7 +219,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         entityManager().getTransaction().commit();
     }
-    
+
     /**
      * Updates a booking to set a Complaint
      *
@@ -238,12 +237,48 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         entityManager().getTransaction().commit();
     }
+
+    /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingStateDelivered(Booking booking) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET BOOKINGSTATE=:bookingState WHERE BOOKINGID=:bookingid");
+        query.setParameter("bookingState", 1);
+        query.setParameter("bookingid", booking.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
     
+     /**
+     * Updates a booking to set a Complaint
+     *
+     * @param booking Booking
+     * @param complaint Complaint
+     */
+    @Override
+    public void updateBookingStateCanceled(Booking booking) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Booking SET BOOKINGSTATE=:bookingState WHERE BOOKINGID=:bookingid");
+        query.setParameter("bookingState", 2);
+        query.setParameter("bookingid", booking.bookingId());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+
     /**
      * Return user's bookings for the current week.
-     * 
+     *
      * @param user current user
-     * @return 
+     * @return
      */
     @Override
     public Iterable<Booking> checkBookingsForCurrentWeek(CafeteriaUser user) {
@@ -255,10 +290,10 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         List<Booking> bookingList = new ArrayList();
 
         Calendar cal = Calendar.getInstance();
-        
+
         //to get the first day of this week
         cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
-        
+
         for (int i = 0; i < 7; i++) {
             params.put("date", new Date(cal.getTimeInMillis()));
             bookingList.addAll(match("e.meal.mealDate = :date and e.user = :user and e.bookingState = :bookingState", params));
