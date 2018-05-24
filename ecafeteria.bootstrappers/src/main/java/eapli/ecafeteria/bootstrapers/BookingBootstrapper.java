@@ -88,13 +88,9 @@ public class BookingBootstrapper implements Action{
             controller.deliveredBooking(repBook.findOne(Long.parseLong("12")).get());
 
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.canceledBooking(repBook.findOne(Long.parseLong("13")).get());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("14")).get());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("15")).get());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("16")).get());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
