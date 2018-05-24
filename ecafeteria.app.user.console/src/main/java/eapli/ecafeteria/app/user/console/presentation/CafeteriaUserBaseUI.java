@@ -14,16 +14,18 @@ import eapli.ecafeteria.domain.authz.Role;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.exceptions.UnauthorizedException;
 import eapli.framework.presentation.console.AbstractUI;
+import java.util.Observable;
 import java.util.Observer;
 
 /**
  *
  * @author mcn
  */
-public abstract class CafeteriaUserBaseUI extends AbstractUI {
+public abstract class CafeteriaUserBaseUI extends AbstractUI{
 
     private BookingServices bookingServices;
-
+    
+    
     protected abstract CafeteriaUserBaseController controller();
 
     public String showBalance() {
@@ -43,16 +45,5 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
         drawFormBorder();
     }
 
-    public void initializateObservers() {
-        
-        bookingServices = new BookingServices();
-        final SystemUser currentUser = AuthorizationService.session().authenticatedUser();
-        try {
-            AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-        } catch (UnauthorizedException ex) {
 
-        }
-        BookingWatchDog bookingWatchDog = new BookingWatchDog();
-        bookingWatchDog.addObserver((Observer) currentUser);
-    }
 }
