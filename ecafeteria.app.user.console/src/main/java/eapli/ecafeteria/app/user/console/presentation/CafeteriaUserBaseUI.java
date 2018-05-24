@@ -13,6 +13,9 @@ import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.authz.Role;
 import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.authz.exceptions.UnauthorizedException;
+import eapli.ecafeteria.domain.movement.BalanceService;
+import eapli.ecafeteria.persistence.CafeteriaUserRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.presentation.console.AbstractUI;
 import java.util.Observer;
 
@@ -21,13 +24,14 @@ import java.util.Observer;
  * @author mcn
  */
 public abstract class CafeteriaUserBaseUI extends AbstractUI {
+    private final CafeteriaUserRepository repCafeteriaUser = PersistenceContext.repositories().cafeteriaUsers();
 
     private BookingServices bookingServices;
 
     protected abstract CafeteriaUserBaseController controller();
 
     public String showBalance() {
-        return "CURRENT BALANCE OF YOUR USERCARD: " + controller().balance().toString();
+        return "CURRENT BALANCE OF YOUR USERCARD: " + BalanceService.balance(repCafeteriaUser.findBySystemUser(AuthorizationService.session().authenticatedUser()).get().mecanographicNumber());
     }
 
     @Override

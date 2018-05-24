@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.booking;
 
+import eapli.ecafeteria.application.booking.BalanceAlertController;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Observable;
 import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.persistence.Temporal;
  * @author Mário Vaz changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Booking implements AggregateRoot<String>, Observable,Serializable {
+public class Booking extends Observable implements AggregateRoot<String>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,6 +89,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
+        initializeObserver();
     }
 
     public Booking(CafeteriaUser user, Meal meal, Date time) {
@@ -96,6 +98,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
         this.bookingDate = time;
+        initializeObserver();
     }
 
     /**
@@ -293,6 +296,11 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     public Complaint Complaint() {
         return this.complaint;
     }
+    
+    public void initializeObserver() {
+        addObserver(new BalanceAlertController());
+        setChanged();
+    }
 
     /**
      *
@@ -302,16 +310,4 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     public String toString() {
         return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + listRatings + '}';
     }
-
-    @Override
-    public void addListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
 }

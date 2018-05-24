@@ -96,6 +96,8 @@ public class RegisterBookingController {
                 Booking booking = new Booking(cu, meal);
 
                 repBooking.save(booking);
+                
+                booking.notifyObservers(cu);
 
                 return true;
             } else {
