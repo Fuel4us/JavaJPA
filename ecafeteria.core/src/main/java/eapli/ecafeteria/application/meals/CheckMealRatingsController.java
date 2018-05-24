@@ -63,7 +63,7 @@ public class CheckMealRatingsController implements Controller {
      */
     public int getNumberOfRatings(Meal selectedMeal) {
         for (Booking booking : getBookingsOfMeal(selectedMeal)) {
-            if (booking.getAllRatings() != null) {
+            if (booking.getAllRatings().size() != 0) {
                 for (Rating rate : booking.getAllRatings()) {
                     System.out.println("One rating found on the booking with the id: " + booking.bookingId());
                     flag1++;
@@ -87,7 +87,7 @@ public class CheckMealRatingsController implements Controller {
      */
     public double getAverage(Meal selectedMeal) {
         for (Booking booking : getBookingsOfMeal(selectedMeal)) {
-            if (booking.getAllRatings() != null) {
+            if (booking.getAllRatings().size() != 0) {
                 for (Rating rate : booking.getAllRatings()) {
                     average += rate.getScore();
                     count++;
@@ -107,7 +107,7 @@ public class CheckMealRatingsController implements Controller {
      */
     public String getComments(Meal selectedMeal) {
         for (Booking book : getBookingsOfMeal(selectedMeal)) {
-            if (book.getAllRatings() != null) {
+            if (book.getAllRatings().size() != 0) {
                 for (Rating rate : book.getAllRatings()) {
                     if (book.getRating(0).getComment() != null) {
                         if (book.getRating(0).getComment().getAnswer() == null) {
@@ -118,7 +118,7 @@ public class CheckMealRatingsController implements Controller {
                     }
                 }
             } else {
-                System.out.println("This rating has no comments.");
+                System.out.println("\nThe booking with the id" + book.bookingId() + "has no comments.");
             }
         }
 
