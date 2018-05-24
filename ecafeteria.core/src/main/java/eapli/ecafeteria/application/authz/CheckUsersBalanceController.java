@@ -8,6 +8,9 @@ import eapli.ecafeteria.domain.movement.BalanceService;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.swing.text.html.parser.Entity;
 import java.text.DecimalFormat;
 import java.util.Optional;
 
@@ -26,12 +29,20 @@ public class CheckUsersBalanceController {
      * @return
      */
     public CafeteriaUser findCafetariaUser(Username username) {
-        Optional<CafeteriaUser> opCU = cafeteriaUser.findByUsername(username);
-        if(opCU.isPresent()) {
-            return opCU.get();
-        } else {
-            return null;
+
+        try {
+            Optional<CafeteriaUser> opCU = cafeteriaUser.findByUsername(username);
+            if (opCU.isPresent()) {
+                return opCU.get();
+            } else {
+                return null;
+            }
+
+        } catch (NoResultException e){
+            System.out.println("\nBe sure you are logged in as a regular user!");
         }
+
+        return null;
     }
 
     /**
@@ -42,7 +53,6 @@ public class CheckUsersBalanceController {
     public MecanographicNumber getUsersMecanographicNumber(CafeteriaUser cafeteriaUser) {
 
         if (cafeteriaUser == null) {
-            System.out.println("User is null");
             return new MecanographicNumber(null);
         }
 
@@ -55,8 +65,28 @@ public class CheckUsersBalanceController {
      * Final method to get the balance
      */
     public void getUserBalance () {
-        double amount = BalanceService.balance(getUsersMecanographicNumber(cu));
-        // decimal format to only show 2 digits after decimal
-        System.out.println("\nO teu saldo é de " +new DecimalFormat("##.##").format(amount)+ "€");
+        try {
+
+            MecanographicNumber mu = getUsersMecanographicNumber(cu);
+
+            double amount = BalanceService.balance(mu);
+
+            // decimal format to only show 2 digits after decimal
+            System.out.println("\nYour balance is " +new DecimalFormat("##.##").format(amount)+ "€");
+
+            if (amount > 100) {
+                System.out.println("\nSomeone is loaded righ here....");
+            } else if(amount < 0){
+                System.out.println("\nDude set your priorities straight ...");
+            } else if(amount == 0) {
+                System.out.println("\nDeposit!!!!!!");
+            }
+
+        } catch (Exception e) {
+            System.out.println("\nMecanographic number is not valid or doesn't exist please change users or call administration!");
+
+        }
+
+
     }
 }
