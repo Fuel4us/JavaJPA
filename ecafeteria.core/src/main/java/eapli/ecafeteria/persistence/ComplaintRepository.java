@@ -6,6 +6,8 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.booking.Complaint;
+import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.persistence.repositories.DataRepository;
 
 /**
@@ -14,4 +16,11 @@ import eapli.framework.persistence.repositories.DataRepository;
  */
 public interface ComplaintRepository extends DataRepository<Complaint, Long> {
     
+    /**
+     * Removes a Complaint from ComplaintRepository
+     *
+     * @param complaint Complaint
+     * @return
+     */
+    public void RemoveComplaint(Complaint complaint);
 }

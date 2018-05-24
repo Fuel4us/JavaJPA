@@ -39,18 +39,28 @@ public class ComplaintFactory { //Singleton
         return instance;
     }
 
-    public Iterable<Booking> findBookingWithDeliveredStateNoComplaints(CafeteriaUser selectedUser) {
-
-        Iterable<Booking> bookings = bookingRepository.findBookingsDeliveredByUser(selectedUser);
-
-        return bookings;
-    }
-
-    public void createComplaint(Booking booking, CafeteriaUser cafeteriaUser, Description description) throws DataConcurrencyException, DataIntegrityViolationException {
-        Complaint complaint = new Complaint(booking.getMeal(), cafeteriaUser, description);//meal clonado? meal do Complaint?
-
+    /**
+     * Create a Complaint and stores in repository. If the booking has already a complaint
+     * the old one is deleted from the ComplaintRepository. Booking complaint is updated in
+     * BookingRepository
+     *
+     * @param booking Booking
+     * @param cafeteriaUser CafeteriaUser
+     * @param description Description
+     * @param state ComplaintState
+     * @return
+     */
+    
+    public void createComplaint(Booking booking, CafeteriaUser cafeteriaUser, Description description, ComplaintState state) throws DataConcurrencyException, DataIntegrityViolationException {
+        Complaint complaint = new Complaint(booking.getMeal(), cafeteriaUser, description, state);
+        Complaint aux = booking.Complaint();
+        
         complaint = complaintRepository.save(complaint);
         
         bookingRepository.updateBookingComplaint(booking, complaint);
+        
+        if(aux != null){
+            complaintRepository.delete(aux);
+        }
     }
 }

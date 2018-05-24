@@ -1,0 +1,12 @@
+TEST PLAN
+
+
+
+1-Login
+
+2-Choose Option : Tracability
+3-Chose Option : List Lots Used In Meal
+3-Select Any Meal
+
+If the output is a list of lots used in the select meal - Use case Sucess
+Any Other scenario - Use case fail

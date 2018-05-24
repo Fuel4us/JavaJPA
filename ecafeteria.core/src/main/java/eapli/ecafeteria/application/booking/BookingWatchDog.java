@@ -6,7 +6,9 @@
 package eapli.ecafeteria.application.booking;
 
 import eapli.ecafeteria.application.administration.KitchenLimitsServices;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.meals.MealPlanServices;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.meals.Meal;
 import java.util.Observable;
@@ -22,14 +24,17 @@ public class BookingWatchDog extends Observable implements Observer {
     private KitchenLimitsServices kitchenLimitsServices = new KitchenLimitsServices();
     private MealPlanServices mealPlanServices = new MealPlanServices();
 
+    private Booking booking;
     private int numberOfMeal = 0;
     private int numberOfBookingByMeal = 0;
     private double yellowLimit = 0;
     private double redLimit = 0;
 
     public void getNumberOfBookingByMeal(Meal meal) {
-        for (Booking booking : bookingServices.findByMeal(meal)) {
-            numberOfBookingByMeal++;
+        for (Booking booking1 : bookingServices.findByMeal(meal)) {
+            if (booking1.isReserved()) {
+                numberOfBookingByMeal++;
+            }
         }
     }
 
@@ -46,13 +51,18 @@ public class BookingWatchDog extends Observable implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object o1) {
+    public void update(Observable bookingWatchDog, Object booking1) {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS);
+
         if ((numberOfBookingByMeal / numberOfMeal) * 100 > yellowLimit && (numberOfBookingByMeal / numberOfMeal) * 100 < redLimit) {
+            System.out.println("YELLOW ALERT: " + yellowLimit + " PASSED.");
             setChanged();
-            notifyObservers("As reservas ultrapassaram o limite amarelo de " + yellowLimit + "%.");
+            notifyObservers();
         } else if ((numberOfBookingByMeal / numberOfMeal) * 100 > redLimit) {
+            System.out.println("RED ALERT" + redLimit + " PASSED.");
             setChanged();
-            notifyObservers("As reservas ultrapassaram o limite vermelho de " + redLimit + "%.");
+            notifyObservers();
         }
     }
+
 }

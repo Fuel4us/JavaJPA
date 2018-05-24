@@ -28,20 +28,26 @@ public class CheckDishRatingUI extends AbstractUI {
     protected boolean doShow() {
 
         // show list of dishes
-        final Iterable<Dish> dishes = this.controller.listDishes();
+        Iterable<Dish> dishes = this.controller.listDishes();
 
-        final SelectWidget selector = new SelectWidget(BORDER, dishes);
+        Iterable<String> dishNames = this.controller.listNameDishes();
+
+        SelectWidget selector = new SelectWidget(BORDER, dishNames);
 
         /* change to DishPrinter */
         selector.show();
 
-        final Dish dish = (Dish) selector.selectedElement();
+        final String dishName = (String) selector.selectedElement();
 
-        Map<Dish, Integer> map = controller.getRatingPerDish(dish);
+        for (Dish dish : dishes) {
+            if (dishName.equals(dish.name().toString())) {
+                Map<Dish, Integer> map = controller.getRatingPerDish(dish);
 
-        map.entrySet().forEach((entry) -> {
-            System.out.println(entry.getKey().id() + " : " + entry.getValue());
-        });
+                map.entrySet().forEach((entry) -> {
+                    System.out.println(entry.getKey().id() + " : " + entry.getValue());
+                });
+            }
+        }
 
         return false;
     }

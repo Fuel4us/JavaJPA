@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.booking;
 
+import eapli.ecafeteria.application.booking.BalanceAlertController;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -8,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import java.util.Observable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ import javax.persistence.Temporal;
  * @author Mário Vaz changed by João Pereira <1150478@isep.ipp.pt>
  */
 @Entity
-public class Booking implements AggregateRoot<String>, Observable,Serializable {
+public class Booking extends Observable implements AggregateRoot<String>, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -88,6 +88,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
+        initializeObserver();
     }
 
     public Booking(CafeteriaUser user, Meal meal, Date time) {
@@ -96,6 +97,7 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
         this.bookingDate = time;
+        initializeObserver();
     }
 
     /**
@@ -151,6 +153,10 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
      */
     public void changeState(BookingState newState) {
         this.bookingState = newState;
+        if(newState.equals(BookingState.RESERVED)){
+            setChanged();
+            notifyObservers();
+        }
     }
 
     /**
@@ -225,6 +231,18 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     }
 
     /**
+     *
+     * @return true if has Complaint.
+     */
+    public boolean hasComplaint() {
+        if (complaint == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
      * Adds the rating to a booking.
      *
      * @param rating
@@ -240,11 +258,12 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
      * @return
      */
     public Rating getRating(int number) {
-        if(listRatings.isEmpty() || number < 0)
+        if (listRatings.isEmpty() || number < 0) {
             return null;
+        }
         return this.listRatings.get(number);
     }
-    
+
     /**
      * Gets all ratings from this booking.
      *
@@ -252,17 +271,20 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
      */
     public List<Rating> getAllRatings() {
         List<Rating> listRatingAux = new ArrayList();
-        
-        if(listRatings.isEmpty())
+
+        if (listRatings.isEmpty()) {
             return listRatingAux;
-        
-        for(Rating r : listRatings)
-            if(r != null)
+        }
+
+        for (Rating r : listRatings) {
+            if (r != null) {
                 listRatingAux.add(r);
-        
+            }
+        }
+
         return listRatingAux;
     }
-    
+
     /**
      * Makes a complaint.
      *
@@ -280,6 +302,11 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
     public Complaint Complaint() {
         return this.complaint;
     }
+    
+    public void initializeObserver() {
+        addObserver(new BalanceAlertController());
+        setChanged();
+    }
 
     /**
      *
@@ -290,15 +317,4 @@ public class Booking implements AggregateRoot<String>, Observable,Serializable {
         return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + listRatings + '}';
     }
 
-    @Override
-    public void addListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
 }

@@ -1,0 +1,34 @@
+Design
+UC 4.5.2.2 - Register User
+
+Envolved Agregates:
+    - User
+
+Envolved Repositories:
+    - CafeteriaUser Repository;
+    - User Repository;
+
+Controller:
+    - AddUserController;
+
+UI:
+    - AddUserUI;
+
+Opened Questions:
+    - A CafeteriaUser is always created, however it can have more roles or not;
+
+Test Plan:
+    - Add User Successfully:
+        1. Admin enters in the system (Username: admin; Password: Password1)
+        2. Chooses the option < Users >
+        3. Chooses the option < Add User >
+        4. Enters the information asked (Username, Password, First Name, Last Name, Email, Roles and Mecanographic Number);
+        5. System validates the information and save in the DB.
+        6. System shows successful message;
+
+    - Add User Unsuccessfully:
+        1. Admin enters in the system (Username: admin; Password: Password1)
+        2. Chooses the option < Users >
+        3. Chooses the option < Add User >
+        4. Enters the information asked (Username, Password, First Name, Last Name, Email, Roles and Mecanographic Number);
+        5. System checks that Mecanographic Number doesn't respect business rules;

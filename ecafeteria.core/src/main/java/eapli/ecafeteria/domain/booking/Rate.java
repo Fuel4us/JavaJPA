@@ -11,8 +11,16 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Rate implements Serializable, ValueObject{
     
+    /*
+    * Minimum value accepted to the score of the Rating.
+    */
     private static final int MIN_VAL = 1;
+    
+    /*
+    * Maximum value accepted to the score of the Rating.
+    */
     private static final int MAX_VAL = 5;
+    
     private static final long serialVersionUID = 1L;
     
     

@@ -1,0 +1,22 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+	The limit value for the balance needs to be above 0
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+	
+	* User needs to be logged in
+	* User need to have the profile created

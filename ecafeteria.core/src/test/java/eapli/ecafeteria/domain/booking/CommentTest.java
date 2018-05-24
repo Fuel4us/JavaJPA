@@ -1,9 +1,5 @@
 package eapli.ecafeteria.domain.booking;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,64 +9,72 @@ import static org.junit.Assert.*;
  */
 public class CommentTest {
     
-    public CommentTest() {
+    //same values than in Comment
+    private static final String INITIAL_ANSWER = "there is no answer yet!";
+    
+    /**
+     * Test of Comment can not be Null, of class Comment.
+     */
+    @Test
+    public void ensureCommentIsNotNull() {
+        System.out.println("-Ensure comment is not null");
+        
+        try{
+            Comment c = new Comment(null);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
     
-    @BeforeClass
-    public static void setUpClass() {
+    /**
+     * Test of Comment can not be empty, of class Comment.
+     */
+    @Test
+    public void ensureCommentIsNotEmpty() {
+        System.out.println("-Ensure comment is not empty");
+        
+        try{
+            Comment c = new Comment("");
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
     
-    @AfterClass
-    public static void tearDownClass() {
+    /**
+     * Test of DefaultReplay constant, of class Comment.
+     */
+    @Test
+    public void ensureDefaultReplayIsRight() {
+        System.out.println("-Ensure default replay is right");
+        
+        Comment c = new Comment("Comment");
+        String expResult = c.getAnswer();
+        assertEquals(expResult, INITIAL_ANSWER);
     }
     
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of getRealComment method, of class Comment.
      */
     @Test
-    public void testGetRealComment() {
-        System.out.println("getRealComment");
-//        Comment instance = new Comment();
-//        String expResult = "";
-//        String result = instance.getRealComment();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void ensureGetRealCommentWorks() {
+        System.out.println("-Ensure getRealComment Works");
+        String expResult = "Comment";
+        Comment c = new Comment(expResult);
+        String result = c.getRealComment();
+        assertEquals(expResult, result);
     }
 
     /**
-     * Test of getAnswer method, of class Comment.
+     * Test of getAnswer and changeAnswer methods, of class Comment.
      */
     @Test
-    public void testGetAnswer() {
-        System.out.println("getAnswer");
-//        Comment instance = new Comment();
-//        String expResult = "";
-//        String result = instance.getAnswer();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of changeAnswer method, of class Comment.
-     */
-    @Test
-    public void testChangeAnswer() {
-        System.out.println("changeAnswer");
-//        String answer = "";
-//        Comment instance = new Comment();
-//        instance.changeAnswer(answer);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void ensureGetAndChangeAnswerWorks() {
+        System.out.println("-Ensure getAnswer and changeAnswer Works");
+        String expResult = "Answer";
+        Comment c = new Comment("Comment");
+        c.changeAnswer(expResult);
+        String result = c.getAnswer();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -79,12 +83,11 @@ public class CommentTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-//        Comment instance = new Comment();
-//        String expResult = "";
-//        String result = instance.toString();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        String comment = "Comment";
+        Comment c = new Comment(comment);
+        String expResult = "Comment{" + ", comment=" + comment + ", answer=" + INITIAL_ANSWER + '}';
+        String result = c.toString();
+        assertEquals(expResult, result);
     }
     
 }

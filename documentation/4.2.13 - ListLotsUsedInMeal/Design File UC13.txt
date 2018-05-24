@@ -1,0 +1,14 @@
+Controlladores utilizados :
+
+	ECAFETERIA.CORE :
+
+		*> eapli.ecafeteria.application.kitchen.ListLotsUsedInMealController
+		*> eapli.ecafeteria.application.kitchen.ListLotsUsedInMealServices
+
+Repositorios acedidos :
+
+	ECAFETERIA.CORE :
+	
+		*>MealLotRepository
+		*>LotRepository
+		*>MealRepository

@@ -57,7 +57,4 @@ public class Description implements Serializable, ValueObject {
         return this.description;
     }
     
-    public String number(){
-        return this.description;
-    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.application.cafeteriauser;
 
 import eapli.ecafeteria.application.authz.AuthorizationService;
@@ -16,12 +11,13 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.application.Controller;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Change User allergens Controller
+ * Change User allergens Controller.
  * @author pedromonteiro
  */
 public class ChangeUserAllergensController implements Controller {
@@ -42,6 +38,7 @@ public class ChangeUserAllergensController implements Controller {
             this.my_user = optional.get();
         }
     }
+    
 
     /**
      * Return all the allergens in the Repository.
@@ -50,7 +47,12 @@ public class ChangeUserAllergensController implements Controller {
      */
     public Iterable<Allergen> getAllergens() {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
-        return allergenRepo.findAll();
+        
+        Iterable<Allergen> all_allergen = allergenRepo.findAll();
+        
+        if(!all_allergen.iterator().hasNext()) throw new NoSuchElementException("There is no Allergens in the general repository");
+        
+        return all_allergen;
     }
     
     /**
@@ -84,7 +86,7 @@ public class ChangeUserAllergensController implements Controller {
     }
 
     /**
-     * Add an allergen to user's allergen
+     * Add an allergen to user's allergens
      *
      * @param allergen allergen to add
      * @return true if added, false if not
@@ -93,9 +95,7 @@ public class ChangeUserAllergensController implements Controller {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.CHANGE_NUTRI_PROFILE);
         try {
             if (my_user.accessNutritionalProfile().addAllergen(allergen)) {
-
                 return this.cafeteriaUserRepo.save(my_user) != null;
-
             }
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(ChangeUserAllergensController.class.getName()).log(Level.SEVERE, null, ex);

@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  *
  * @author PRP
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  */
 public class ChangeDishController implements Controller {
 
@@ -56,7 +56,7 @@ public class ChangeDishController implements Controller {
     
     /**
      * Changes the allergen info.
-     * changed by João Pereira <1150478@isep.ipp.pt>
+     * changed by @João Pereira_1150478@isep.ipp.pt
      * @param dish
      * @param newAllergens
      * @return

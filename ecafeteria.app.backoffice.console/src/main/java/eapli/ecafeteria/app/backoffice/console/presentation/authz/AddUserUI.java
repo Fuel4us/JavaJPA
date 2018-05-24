@@ -29,10 +29,6 @@ public class AddUserUI extends AbstractUI {
         return this.theController;
     }
     
-    /*
-        Cafeteria User é obrigatório pertencer às roles.
-        Negócio do número mecanográfico é à escolha.
-    */
     @Override
     protected boolean doShow() {  
         final UserDataWidget userData = new UserDataWidget();
@@ -55,7 +51,9 @@ public class AddUserUI extends AbstractUI {
         try {
             this.theController.addCafeteriaUser(userData.username(), userData.password(), userData.firstName(), userData.lastName(), userData.email(), roleTypes, mecanographicNumber, false);
         } catch (final DataIntegrityViolationException | DataConcurrencyException e) {
-            System.out.println("That username is already in use.");
+            System.out.println("That mecanographic number/username is already in use.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Mecanographic Number doesn't follow the rules");
         }
 
         return false;

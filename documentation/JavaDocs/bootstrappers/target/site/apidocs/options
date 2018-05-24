@@ -1,0 +1,24 @@
+-classpath
+'/Users/joaotiagow/.m2/repository/org/eclipse/persistence/javax.persistence/2.1.0/javax.persistence-2.1.0.jar:/Users/joaotiagow/.m2/repository/org/jboss/spec/javax/transaction/jboss-transaction-api_1.2_spec/1.0.1.Final/jboss-transaction-api_1.2_spec-1.0.1.Final.jar:/Users/joaotiagow/.m2/repository/eapli/ecafeteria/core/1.3.0-SNAPSHOT/core-1.3.0-SNAPSHOT.jar:/Users/joaotiagow/.m2/repository/antlr/antlr/2.7.7/antlr-2.7.7.jar:/Users/joaotiagow/.m2/repository/eapli/framework/3.5.0-RELEASE/framework-3.5.0-RELEASE.jar:/Users/joaotiagow/.m2/repository/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar:/Users/joaotiagow/.m2/repository/org/jboss/jandex/2.0.3.Final/jandex-2.0.3.Final.jar:/Users/joaotiagow/.m2/repository/org/opentest4j/opentest4j/1.1.0/opentest4j-1.1.0.jar:/Users/joaotiagow/.m2/repository/org/junit/platform/junit-platform-commons/1.2.0/junit-platform-commons-1.2.0.jar:/Users/joaotiagow/.m2/repository/org/hibernate/javax/persistence/hibernate-jpa-2.1-api/1.0.2.Final/hibernate-jpa-2.1-api-1.0.2.Final.jar:/Users/joaotiagow/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:/Users/joaotiagow/.m2/repository/org/hibernate/common/hibernate-commons-annotations/5.0.1.Final/hibernate-commons-annotations-5.0.1.Final.jar:/Users/joaotiagow/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.2.0/junit-jupiter-api-5.2.0.jar:/Users/joaotiagow/.m2/repository/org/javassist/javassist/3.22.0-GA/javassist-3.22.0-GA.jar:/Users/joaotiagow/.m2/repository/org/hibernate/hibernate-core/5.2.15.Final/hibernate-core-5.2.15.Final.jar:/Users/joaotiagow/.m2/repository/com/fasterxml/classmate/1.3.0/classmate-1.3.0.jar:/Users/joaotiagow/.m2/repository/org/jboss/logging/jboss-logging/3.3.1.Final/jboss-logging-3.3.1.Final.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/Users/joaotiagow/BitBucket/ecafeteria2018-2db/ecafeteria.bootstrappers/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2018. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/Users/joaotiagow/BitBucket/ecafeteria2018-2db/ecafeteria.bootstrappers/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'ecafeteria.bootstrapper 1.3.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/javase/8/docs/api' '/Users/joaotiagow/BitBucket/ecafeteria2018-2db/ecafeteria.bootstrappers/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'ecafeteria.bootstrapper 1.3.0-SNAPSHOT API'

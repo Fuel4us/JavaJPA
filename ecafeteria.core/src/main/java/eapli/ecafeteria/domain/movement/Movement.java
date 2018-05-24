@@ -24,29 +24,30 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class Movement implements AggregateRoot<Long>, Serializable {
+
     @Id
     @GeneratedValue
     private Long id;
-    
-    @Embedded    
+
+    @Embedded
     private MecanographicNumber nif;
-    
+
     @Embedded
     private Money quantity;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar date;
     private MovementType movementType;
-    
+
     protected Movement() {
         //ORM
     }
-    
-    public Movement(MecanographicNumber nif, MovementType movementType, double quantityDouble, Currency currency){
+
+    public Movement(MecanographicNumber nif, MovementType movementType, double quantityDouble, Currency currency) {
         this.nif = nif;
         this.movementType = movementType;
         this.quantity = new Money(quantityDouble, currency);
-        this.date= DateTime.now();
+        this.date = DateTime.now();
     }
 
     @Override
@@ -63,19 +64,23 @@ public class Movement implements AggregateRoot<Long>, Serializable {
     public Long id() {
         return this.id;
     }
-    
-    public MovementType type(){
+
+    public String toString() {
+        return "Id: " + id + "          Date: " + date.getTime() + "          Movement Type: " + movementType.toString() + "          Quantity: " + quantity.toString() + "          Nif: " + nif;
+    }
+
+    public MovementType type() {
         return this.movementType;
     }
-    
-    public MecanographicNumber nif(){
+
+    public MecanographicNumber nif() {
         return this.nif;
     }
 
-    public Money money(){
+    public Money money() {
         return this.quantity;
     }
-    
+
     public Calendar date() {
         return this.date;
     }

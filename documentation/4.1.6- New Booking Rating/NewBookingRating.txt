@@ -1,0 +1,7 @@
+UC6 - New Booking Rating
+
+The user starts the new rating.
+The system provides a list of the meals available for rating.
+The user chooses a meal.
+The system asks for a rating of 1 to 5 and a comment (optional).
+The user provides his rating and the system indicates the success of the operation.

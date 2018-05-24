@@ -10,10 +10,9 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import eapli.framework.util.DateTime;
+
+import java.util.*;
 import javax.persistence.Query;
 
 /**
@@ -94,6 +93,13 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
     }
 
     @Override
+    public Iterable<Meal> findMealByDate(Date date) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mealDate",date);
+        return match("e.mealDate = :mealDate",params);
+    }
+
+    @Override
     public void updateMenuState(Menu menu, boolean b) {
         entityManager().getTransaction().begin();
 
@@ -104,4 +110,6 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
 
         entityManager().getTransaction().commit();
     }
+
+
 }

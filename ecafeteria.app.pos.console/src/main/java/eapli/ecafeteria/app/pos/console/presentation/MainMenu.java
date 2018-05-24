@@ -7,6 +7,7 @@ package eapli.ecafeteria.app.pos.console.presentation;
 
 import eapli.cafeteria.app.common.console.presentation.MyUserMenu;
 import eapli.ecafeteria.Application;
+import eapli.ecafeteria.app.pos.console.presentation.booking.CreateComplaintAction;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
@@ -49,6 +50,7 @@ public class MainMenu extends AbstractUI {
     private static final int CREATE_SHIFT = 5;
     private static final int CHECK_DISH_RATING = 6;
     private static final int CLOSE_POS = 7;
+    private static final int CREATE_COMPLAINT = 8;
 
     @Override
     public boolean show() {
@@ -110,6 +112,7 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(CREATE_SHIFT, "Create Shift", new OpenShiftAction()));
         menu.add(new MenuItem(CHECK_DISH_RATING, "Check Dish Rating", new CheckDishRatingAction()));
         menu.add(new MenuItem(CLOSE_POS, "Close POS Service", new ClosePOSServiceAction()));
+        menu.add(new MenuItem(CREATE_COMPLAINT, "Create Complaint", new CreateComplaintAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
 
         return menu;

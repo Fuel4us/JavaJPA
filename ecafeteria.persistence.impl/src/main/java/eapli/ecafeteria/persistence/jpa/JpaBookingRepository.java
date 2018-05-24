@@ -27,7 +27,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Ana Mafalda Silva changed by João Pereira <1150478@isep.ipp.pt>
+ * @author Ana Mafalda Silva changed by @João Pereira_1150478@isep.ipp.pt
  */
 class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> implements BookingRepository {
 
@@ -191,7 +191,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings for a meal João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings for a meal @João Pereira_1150478@isep.ipp.pt
      *
      * @param user User
      * @return List of bookings
@@ -204,7 +204,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     }
 
     /**
-     * Returns all bookings in delivered João Pereira <1150478@isep.ipp.pt>
+     * Returns all bookings in delivered @João Pereira_1150478@isep.ipp.pt
      *
      * @param user User
      * @return List of bookings
@@ -243,9 +243,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     @Override
     public void updateBookingComplaint(Booking booking, Complaint complaint) {
         entityManager().getTransaction().begin();
-
+        
         Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
-        query.setParameter("complaintgid", complaint.id());
+        query.setParameter("complaintid", complaint.id());
         query.setParameter("bookingid", booking.bookingId());
         query.executeUpdate();
 

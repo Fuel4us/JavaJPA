@@ -13,9 +13,6 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.AddUserUI;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.ChangeUserAllergensAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.CheckUserBalanceAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.EditNutritionalProfileAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ChangeDishNutricionalInfoAction;
@@ -62,16 +59,12 @@ public class MainMenu extends AbstractUI {
 
     private static final int EXIT_OPTION = 0;
 
-    // SUBMENU NUTRITIONAL PROFILE
-    private static final int CHANGE_SALT_CALORIES = 1;
-    private static final int CHANGE_ALLERGENS = 2;
 
     // USERS
     private static final int ADD_USER_OPTION = 1;
     private static final int LIST_USERS_OPTION = 2;
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
-    private static final int GET_USERS_BALANCE = 5;
 
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -132,7 +125,7 @@ public class MainMenu extends AbstractUI {
     private static final int REPORTING_DISHES_OPTION = 7;
     private static final int MENUS_OPTION = 8;
     private static final int MEAL_OPTION = 9;
-    private static final int CHANGE_NUTRI_PROFILE_OPTION = 10;
+//    private static final int CHANGE_NUTRI_PROFILE_OPTION = 10;
     private static final int RATING_OPTION = 11;
 
     @Override
@@ -153,9 +146,12 @@ public class MainMenu extends AbstractUI {
         } else {
             renderer = new VerticalMenuRenderer(menu);
         }
+        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS)){
+           
+        }
         return renderer.show();
     }
-
+    
     @Override
     public String headline() {
         return "eCafeteria Back Office [@" + AuthorizationService.session().authenticatedUser().id()
@@ -208,12 +204,6 @@ public class MainMenu extends AbstractUI {
             // reporting
         }
 
-        if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.CHANGE_NUTRI_PROFILE)) {
-            final Menu changeNutriProfileMenu = buildNutriProfileMenu();
-            mainMenu.add(new SubMenu(CHANGE_NUTRI_PROFILE_OPTION,
-                    changeNutriProfileMenu,
-                    new ShowVerticalSubMenuAction(changeNutriProfileMenu)));
-        }
 
         if (!Application.settings().isMenuLayoutHorizontal()) {
             mainMenu.add(VerticalSeparator.separator());
@@ -247,7 +237,6 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        menu.add(new MenuItem(GET_USERS_BALANCE, "Users balance", new CheckUserBalanceAction()));
 
         return menu;
     }
@@ -379,17 +368,6 @@ public class MainMenu extends AbstractUI {
         return menu;
     }
 
-    private Menu buildNutriProfileMenu() {
-        final Menu menu = new Menu("Nutritional Profile > ");
-        menu.add(new MenuItem(CHANGE_SALT_CALORIES, "Salt and Calories", () -> new EditNutritionalProfileAction().execute()));
-
-        menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens",
-                () -> new ChangeUserAllergensAction().execute()));
-
-        menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
-
-        return menu;
-    }
 
     private Menu builRatingMenu() {
         final Menu menu = new Menu("Ratings >");
