@@ -1,4 +1,4 @@
-UC6 - New Meal Rating
+UC6 - New Booking Rating
 
 The user starts the new rating.
 The system provides a list of the meals available for rating.

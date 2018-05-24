@@ -1,0 +1,17 @@
+﻿	
+
+	TEST PLAN
+
+	_______________________________
+	Case #13: Show alert for low balance
+	_______________________________
+
+	1. Login as CafeteriaUser
+	2. Choose option Booking->Book a meal
+	3. Choose a meal
+	4. Check user balance on end of use case
+	5. Choose option Settings > Set user alert limits
+	6. Enter a value a bit inferior to the balance
+	7. Confirm user limit
+	8. Choose option Booking->Book a meal
+	9. Choose a meal
