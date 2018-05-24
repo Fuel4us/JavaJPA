@@ -10,9 +10,9 @@ package eapli.ecafeteria.domain.booking;
  * @author Ana Mafalda Silva
  */
 public enum BookingState {
-    RESERVED, DELIVERED, CANCELED;
+    RESERVED, DELIVERED, CANCELED, NOT_DELIVERED;
     
      public static BookingState[] BookingStateValues() {
-        return new BookingState[]{RESERVED, DELIVERED, CANCELED};
+        return new BookingState[]{RESERVED, DELIVERED, CANCELED, NOT_DELIVERED};
     }
 }

@@ -43,13 +43,13 @@ public class ClosePOSServiceUI extends AbstractUI{
             if (theController.closeCurrentPOS()) {
                 System.out.println("The current POS is now closed\n");
                 
-                System.out.println("Delivery Summary: \n\n" + theController.deliverySummary() + "\n");
+                System.out.println("\nDelivery Summary: \n\n" + theController.deliverySummary() + "\n");
                 
-                System.out.println("Meals Not Delivered: \n\n");
+                System.out.println("\nMeals Not Delivered: \n\n");
                 
-                for(Booking b : theController.unusedBookedMeals()){
-                    System.out.println(b.toString() + "\n");
-                }
+//                for(Booking b : theController.unusedBookedMeals()){
+//                    System.out.println(b.toString() + "\n");
+//                }
 
                 // logout
                 if (new LoginAction(ActionRight.SALE).execute()) {
