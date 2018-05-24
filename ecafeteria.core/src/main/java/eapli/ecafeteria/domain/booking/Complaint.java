@@ -57,10 +57,6 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
         this.complaintDate = DateTime.now();
     }
     
-    public Complaint(ComplaintState state){
-        this.complaintState = ComplaintState.WAITING;
-    }
-    
     public ComplaintState state(){
         return complaintState;
     }
@@ -81,8 +77,8 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
         }
 
         final Complaint that = (Complaint) other;
-        return meal.getId().equals(that.meal.getId())
-                && cafeteriaUser.equals(that.cafeteriaUser);
+        return meal.equals(that.meal)
+                && cafeteriaUser.equals(that.cafeteriaUser) && description.equals(that.description);
     }
 
     @Override
@@ -93,9 +89,6 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -103,12 +96,13 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
             return false;
         }
         final Complaint other = (Complaint) obj;
-        if (!Objects.equals(this.meal.getId(), other.meal.getId())) {
+        if (!Objects.equals(this.meal, other.meal)) {
             return false;
         }
         if (!Objects.equals(this.cafeteriaUser, other.cafeteriaUser)) {
             return false;
         }
+  
         return true;
     }
 
@@ -121,7 +115,7 @@ public class Complaint implements AggregateRoot<Long>, Serializable{
             cafeteriaUserString = cafeteriaUser.mecanographicNumber().toString();
         }
         
-        return "Complaint{" + "id=" + id + ", meal=" + meal + ", cafeteriaUser=" + cafeteriaUserString + ", description=" + description + ", complaintDate=" + complaintDate + '}';
+        return "Complaint{" + "id=" + id + ", meal=" + meal + ", cafeteriaUser=" + cafeteriaUserString + ", description=" + description + '}';
     }
     
     

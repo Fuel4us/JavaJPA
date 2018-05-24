@@ -15,5 +15,12 @@ import eapli.framework.persistence.repositories.DataRepository;
  * @author Hernani Gil
  */
 public interface ComplaintRepository extends DataRepository<Complaint, Long> {
+    
+    /**
+     * Removes a Complaint from ComplaintRepository
+     *
+     * @param complaint Complaint
+     * @return
+     */
     public void RemoveComplaint(Complaint complaint);
 }

@@ -10,9 +10,9 @@ package eapli.ecafeteria.domain.booking;
  * @author Hernani Gil
  */
 public enum ComplaintState {
-    WAITING, AVAILABLE, ANONYMOUS;
+    AVAILABLE, ANONYMOUS;
     
      public static ComplaintState[] ComplaintStateValues() {
-        return new ComplaintState[]{WAITING, AVAILABLE, ANONYMOUS};
+        return new ComplaintState[]{AVAILABLE, ANONYMOUS};
     }
 }

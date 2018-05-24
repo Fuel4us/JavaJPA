@@ -46,6 +46,17 @@ public class ComplaintFactory { //Singleton
         return bookings;
     }
 
+    /**
+     * Create a Complaint and stores in repository. If the booking has already a complaint
+     * the old one is deleted from the ComplaintRepository. Booking complaint is updated in
+     * BookingRepository
+     *
+     * @param booking Booking
+     * @param cafeteriaUser CafeteriaUser
+     * @param description Description
+     * @param state ComplaintState
+     * @return
+     */
     
     public void createComplaint(Booking booking, CafeteriaUser cafeteriaUser, Description description, ComplaintState state) throws DataConcurrencyException, DataIntegrityViolationException {
         Complaint complaint = new Complaint(booking.getMeal(), cafeteriaUser, description, state);

@@ -23,6 +23,13 @@ public class JpaComplaintRepository extends CafeteriaJpaRepositoryBase<Complaint
 
     }
     
+    
+    /**
+     * Removes a Complaint from ComplaintRepository
+     *
+     * @param complaint Complaint
+     * @return
+     */
     @Override
     public void RemoveComplaint(Complaint complaint) {
         if (this.entityManager().contains(complaint)) {
