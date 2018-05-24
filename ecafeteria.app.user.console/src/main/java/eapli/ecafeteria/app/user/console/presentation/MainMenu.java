@@ -80,7 +80,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     public boolean doShow() {
         final Menu menu = buildMainMenu();
         final MenuRenderer renderer = new VerticalMenuRenderer(menu);
-        this.initializateObservers();
+        //this.initializateObservers();
         return renderer.show();
     }
 
