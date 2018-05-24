@@ -1,0 +1,12 @@
+eapli.ecafeteria.app.backoffice.console
+eapli.ecafeteria.app.backoffice.console.presentation
+eapli.ecafeteria.app.backoffice.console.presentation.administration
+eapli.ecafeteria.app.backoffice.console.presentation.authz
+eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser
+eapli.ecafeteria.app.backoffice.console.presentation.dishes
+eapli.ecafeteria.app.backoffice.console.presentation.dishes.reporting
+eapli.ecafeteria.app.backoffice.console.presentation.dishesviadto
+eapli.ecafeteria.app.backoffice.console.presentation.kitchen
+eapli.ecafeteria.app.backoffice.console.presentation.meals
+eapli.ecafeteria.app.backoffice.console.presentation.menus
+eapli.ecafeteria.app.backoffice.console.presentation.ratings
