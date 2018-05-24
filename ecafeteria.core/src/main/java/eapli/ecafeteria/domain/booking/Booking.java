@@ -97,8 +97,7 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
         this.bookingDate = time;
-        setChanged();
-        notifyObservers();
+        initializeObserver();
     }
 
     /**
