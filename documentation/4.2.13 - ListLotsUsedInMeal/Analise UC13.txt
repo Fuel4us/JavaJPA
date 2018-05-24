@@ -1,0 +1,26 @@
+ANALISE UC 13
+
+ENUNCIADO{
+
+-Listar lotes usados em refeição 
+	*> permite consultar que lotes de matéria prima foram utilizados numa dada refeição.
+
+	}
+
+PRÉ REQUISITOS{
+
+	*>Existencia de meals com os respetivos lotes associados
+
+		}
+
+REQUISITOS{
+
+	*> Listar todos os lotes referentes a uma determinada refeição
+
+	  }
+
+PÓS REQUISITOS{
+
+	*> ---------- <*
+
+		}	

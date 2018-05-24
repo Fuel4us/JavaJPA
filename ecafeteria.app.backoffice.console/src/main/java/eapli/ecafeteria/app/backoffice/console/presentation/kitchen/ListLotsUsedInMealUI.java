@@ -25,6 +25,10 @@ public class ListLotsUsedInMealUI extends AbstractUI {
         return this.controller;
     }
 
+    /**
+     * core method from UI class
+     * @return 
+     */
     @Override
     protected boolean doShow() {
 
@@ -37,6 +41,10 @@ public class ListLotsUsedInMealUI extends AbstractUI {
 
     }
 
+    /**
+     * select a meal from all meals method
+     * @return selected meal
+     */
     public Meal selectMeal() {
         List<Meal> listMeals = this.controller.getAllMeals();
         for (int i = 0; i < listMeals.size(); i++) {
@@ -46,6 +54,10 @@ public class ListLotsUsedInMealUI extends AbstractUI {
         return listMeals.get(selectMeal - 1);
     }
 
+    /**
+     * headline
+     * @return String
+     */
     @Override
     public String headline() {
         return "List Lots Used in Meal";

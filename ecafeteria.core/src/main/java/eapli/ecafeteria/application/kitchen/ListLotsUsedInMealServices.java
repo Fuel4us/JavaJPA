@@ -20,13 +20,27 @@ import java.util.List;
  */
 public class ListLotsUsedInMealServices {
 
+    /**
+     *  meal repository variable
+     */
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
+    
+    /**: 
+     *lot repository variable
+     */
     private final LotRepository lotRepository = PersistenceContext.repositories().lots();
 
+    /**
+     * empty contructor for ORM efects
+     */
     public ListLotsUsedInMealServices() { 
 
     }
 
+    /**
+     * Save all meals in arraylist
+     * @return listMeals
+     */
     public List<Meal> getAllMeals() {
         List<Meal> listMeals = new ArrayList<>();
         for (Meal meal : mealRepository.findAll()) {
@@ -35,6 +49,11 @@ public class ListLotsUsedInMealServices {
         return listMeals;
     }
 
+    /**
+     * save all lots in arraylist
+     * @param meal
+     * @return listLots
+     */
     public List<Lot> getLotsFromMeal(Meal meal) {
         List<Lot> listLots = new ArrayList<>();
         for (Lot lot : lotRepository.findAll()) {

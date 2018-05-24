@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.application.kitchen;
 
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.kitchen.Lot;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.application.Controller;
@@ -18,11 +20,22 @@ public class ListLotsUsedInMealController implements Controller {
 
     private final ListLotsUsedInMealServices service = new ListLotsUsedInMealServices();
 
+    /**
+     * controller for getAllMeals method
+     * @return 
+     */
     public List<Meal> getAllMeals() {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
         return service.getAllMeals();
     }
 
+    /**
+     * controller for getLotsFromMeal method
+     * @param meal
+     * @return 
+     */
     public List<Lot> getLotsByMeal(Meal meal) {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
         return service.getLotsFromMeal(meal);
     }
 
