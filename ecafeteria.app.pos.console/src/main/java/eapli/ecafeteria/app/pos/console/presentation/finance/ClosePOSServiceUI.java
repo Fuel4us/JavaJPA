@@ -5,8 +5,6 @@ package eapli.ecafeteria.app.pos.console.presentation.finance;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import eapli.cafeteria.app.common.console.presentation.authz.LoginAction;
 import eapli.ecafeteria.app.pos.console.presentation.MainMenu;
 import eapli.ecafeteria.application.finance.ClosePOSServiceController;
@@ -24,7 +22,8 @@ import java.util.logging.Logger;
  *
  * @author Josué Lapa
  */
-public class ClosePOSServiceUI extends AbstractUI{
+public class ClosePOSServiceUI extends AbstractUI {
+
     private final ClosePOSServiceController theController = new ClosePOSServiceController();
 
     protected Controller controller() {
@@ -42,14 +41,14 @@ public class ClosePOSServiceUI extends AbstractUI{
         try {
             if (theController.closeCurrentPOS()) {
                 System.out.println("The current POS is now closed\n");
-                
+
                 System.out.println("\nDelivery Summary: \n\n" + theController.deliverySummary() + "\n");
-                
+
                 System.out.println("\nMeals Not Delivered: \n\n");
-                
-//                for(Booking b : theController.unusedBookedMeals()){
-//                    System.out.println(b.toString() + "\n");
-//                }
+
+                for (Booking b : theController.unusedBookedMeals()) {
+                    System.out.println(b.toString() + "\n");
+                }
 
                 // logout
                 if (new LoginAction(ActionRight.SALE).execute()) {
@@ -57,11 +56,10 @@ public class ClosePOSServiceUI extends AbstractUI{
                     menu.mainLoop();
                     System.exit(0);
                 }
-            }else{
+            } else {
                 System.out.println("POS already closed!\n");
             }
-            
-            
+
         } catch (Exception e) {
             Logger.getLogger(OpenPOSUI.class.getName()).log(Level.SEVERE, null, e);
         }
