@@ -32,6 +32,8 @@ public class MenuBootstrapper implements Action {
 
         Date date4 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime();
         Date date5 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 14).getTime();
+        Date date6 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() , 23).getTime();
+        Date date7 = DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth(), 24).getTime();
 
         registerMenu(date1, date2, "Menu01");
         Iterable it = controller.getAllMealsAvailablesToMenu(menu);
@@ -65,6 +67,15 @@ public class MenuBootstrapper implements Action {
         }
 
         registerMenu(date1, date3, "Menu03");
+        registerMenu(date6,date7,"Menu04");
+        Iterable iterable = controller.getAllMealsAvailablesToMenu(menu);
+        try {
+            for (Object meal : iterable) {
+                controllerMeal.updateMeal((Meal) meal, menu);
+            }
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(MenuBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
