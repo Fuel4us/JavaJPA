@@ -1,0 +1,8 @@
+TEST PLAN
+_______________________________
+CASO #4.4.9: Check Raitings 
+_______________________________
+1. Fazer o login como chef/Password1.
+2. Escolher a opção Raitings > Raitings.
+3. Escolher a opção.
+4. Selecionar o dado pretendido ou inserir uma data.
