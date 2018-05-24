@@ -77,6 +77,7 @@ public class ClosePOSServiceController implements Controller{
         for(Booking b : bookingRepository.findBookingByDate(mealType, BookingState.RESERVED)){
             if(!deliveredList.contains(b)){
                 unusedList.add(b);
+                bookingRepository.markBookingAsNotDelivered(b);
             }
         }
         
