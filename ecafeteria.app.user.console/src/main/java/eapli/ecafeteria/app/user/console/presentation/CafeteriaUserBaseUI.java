@@ -49,9 +49,11 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI implements Observer
         BookingWatchDog bookingWatchdog = new BookingWatchDog();
         Booking booking = new Booking();
         Observable obsBooking = booking;
-        obsBooking.addObserver(this);
-        obsBooking.addObserver(bookingWatchdog);
+        obsBooking.addObserver(this); //Add an observer to the observable booking
+        obsBooking.addObserver(bookingWatchdog); //Add an observer to the observable booking
         booking.changeState(BookingState.RESERVED);
+        
+        
     }
 
     @Override

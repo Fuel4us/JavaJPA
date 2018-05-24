@@ -15,7 +15,9 @@ import eapli.ecafeteria.app.user.console.presentation.booking.CheckNextBookingUI
 import eapli.ecafeteria.app.user.console.presentation.booking.ConsultRatingsUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.DefineUserBalancelimitsUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.RegisterBookingUI;
+import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
+import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.framework.actions.ReturnAction;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.Menu;
