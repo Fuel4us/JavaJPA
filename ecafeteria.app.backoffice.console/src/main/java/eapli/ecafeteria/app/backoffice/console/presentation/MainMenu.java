@@ -52,6 +52,9 @@ import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
 import eapli.ecafeteria.app.backoffice.console.presentation.ratings.CheckRatingsAction;
 import eapli.ecafeteria.application.booking.BookingWatchDog;
+import eapli.ecafeteria.domain.booking.Booking;
+import eapli.ecafeteria.domain.booking.BookingState;
+import java.util.Observable;
 
 /**
  * TODO split this class in more specialized classes for each menu
@@ -152,13 +155,9 @@ public class MainMenu extends AbstractUI {
         } else {
             renderer = new VerticalMenuRenderer(menu);
         }
-        /*if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS)){
-            final BookingLimitAlertUI bookingAlertUI = new BookingLimitAlertUI();
-            final BookingWatchDog bookingWatchdog = new BookingWatchDog();
-            bookingWatchdog.addObserver(bookingAlertUI);
-            bookingAlertUI.headline();
-            bookingAlertUI.update(bookingWatchdog, bookingAlertUI);
-        }*/
+        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS)){
+           
+        }
         return renderer.show();
     }
     
