@@ -12,7 +12,7 @@ import javax.persistence.Id;
 /**
  *
  * @author Rúben - 1160998 
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  * changed by Pedro Vieira 1160634
  */
 @Entity

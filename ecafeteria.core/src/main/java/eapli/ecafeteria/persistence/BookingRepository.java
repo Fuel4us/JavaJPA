@@ -4,7 +4,6 @@ import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
 import eapli.ecafeteria.domain.booking.Complaint;
-import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
@@ -14,7 +13,7 @@ import java.util.Date;
 import java.util.Optional;
 
 /**
- * Booking Repository changed by João Pereira <1150478@isep.ipp.pt>
+ * Booking Repository changed by @João Pereira_1150478@isep.ipp.pt
  *
  */
 public interface BookingRepository extends DataRepository<Booking, Long> {

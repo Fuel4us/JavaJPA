@@ -1,0 +1,15 @@
+___________
+ANÁLISE 
+_________
+
+Reunião com o cliente
+
+* Uma Raiting só pode ser feita em meals e menus que já tenham passado, ou seja que a data(ultima data do menu) seja inferior à data atual.
+* Reservas entregues contam como reservadas.
+______________________
+
+REGRAS DE NEGÓCIO
+_____________________
+
+* Não podem haver raitings de datas futuras;
+______________________
