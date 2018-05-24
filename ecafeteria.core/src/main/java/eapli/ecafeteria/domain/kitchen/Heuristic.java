@@ -11,5 +11,5 @@ public interface Heuristic extends Serializable {
 
     public void doHeuristicLogic();
 
-    public List<MealPlanItemQuantity> returnMealPlanItemQuantityList();
+    public List<MealPlanItemQuantity> generateNumberOfDishes();
 }
