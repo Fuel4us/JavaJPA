@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eapli.ecafeteria.domain.cafeteriauser;
 
 import eapli.ecafeteria.domain.dishes.Allergen;
@@ -17,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- *
+ * Nutritinal Profile contains all the information about an user Nutritional Profile.
+ * This includes: The user's allergens list, salt max quantity and calories max quantity.
  * @author pedromonteiro
  */
 @Entity
@@ -40,7 +36,7 @@ public class NutritionalProfile implements  Serializable{
     @OneToMany(cascade = CascadeType.ALL)
     private final Set<Allergen> allergenList;
     
-    /* package */ Set<Allergen> iterator_allergens(){ return allergenList; } // For tests effect
+    /* package */ Set<Allergen> listAllergens(){ return allergenList; } // For tests effect
     
     protected NutritionalProfile(){
         allergenList = new HashSet<>();

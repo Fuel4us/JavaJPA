@@ -38,6 +38,11 @@ The system shows a success message;
     a. The user requests the cancelation of the UC.
         1.  The UC quits.
 
+    3.1
+        a. The general Allergens Repository is empty;
+            1. The system shows a message informing that the Allergens Repsoitory is empty;
+            2. Go to 5.
+
     4.1.2 
         a. The user already got the allergen in the List;
             1. The system shows a message informing that was not possible to add the allergen;

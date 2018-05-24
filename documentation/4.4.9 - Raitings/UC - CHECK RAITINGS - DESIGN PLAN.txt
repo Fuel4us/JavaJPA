@@ -1,0 +1,9 @@
+_________
+
+DESIGN
+_________
+
+* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+   Controlador: CheckRaitingsController
+   Repository: MealRepository, MenuRepository, DishRepository, BookingRepository, MealTypeRepository

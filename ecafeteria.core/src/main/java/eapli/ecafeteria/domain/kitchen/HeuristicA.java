@@ -1,12 +1,12 @@
 package eapli.ecafeteria.domain.kitchen;
 
-import eapli.ecafeteria.application.kitchen.GenerateMealPlanController;
-import java.util.ArrayList;
+import eapli.ecafeteria.persistence.MealPlanRepository;
+import eapli.ecafeteria.persistence.PersistenceContext;
 import java.util.List;
 import javax.persistence.Embeddable;
 
 /**
- * LastAvailableWeek - Copies the number of meals from last week
+ * Most recent - Copies the number of meals from most recent meal plan
  *
  * @author Tiago João Santos Rios, 1161292@isep.ipp.pt
  * @author Gonçalo Silva (1161140)
@@ -15,7 +15,6 @@ import javax.persistence.Embeddable;
 public class HeuristicA implements Heuristic {
 
     private String name;
-    private GenerateMealPlanController controller;
 
     public HeuristicA(String name) {
         this.name = name;
@@ -23,18 +22,14 @@ public class HeuristicA implements Heuristic {
 
     @Override
     public void doHeuristicLogic() {
-        List<MealPlanItemQuantity> mealPlanItemQuantityList = new ArrayList<>();
-
-        //Criar método para ir buscar apenas a última mealPlan / última semana
-        for (MealPlan mealPlan : controller.getMealPlanHistory()) {
-            mealPlanItemQuantityList = mealPlan.getItemQuantityList();
-        }
-
-        returnToController(mealPlanItemQuantityList);
+        generateNumberOfDishes();
     }
 
-    public List<MealPlanItemQuantity> returnToController(List<MealPlanItemQuantity> mealPlanItemQuantityList) {
-        return mealPlanItemQuantityList;
+    @Override
+    public List<MealPlanItemQuantity> generateNumberOfDishes() {
+        MealPlanRepository repository = PersistenceContext.repositories().mealplans();
+
+        return repository.getLastMealPlan().getItemQuantityList();
     }
 
     @Override

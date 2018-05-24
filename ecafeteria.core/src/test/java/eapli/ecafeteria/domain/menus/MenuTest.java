@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 public class MenuTest {
 

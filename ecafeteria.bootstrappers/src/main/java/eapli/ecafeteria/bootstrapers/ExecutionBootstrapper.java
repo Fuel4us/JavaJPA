@@ -14,7 +14,10 @@ import eapli.framework.actions.Action;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -28,16 +31,23 @@ public class ExecutionBootstrapper implements Action {
             final MealRepository mealRepository = PersistenceContext.repositories().meals();
 
 
+
             Iterator<Meal> it = mealRepository.findAll().iterator();
-            final Meal meal1 = it.next();
-            final Meal meal2 = it.next();
-            final Meal meal3 = it.next();
-            Execution execution1= new Execution(meal1,40);
-            Execution execution2 = new Execution(meal2,60);
-            Execution execution3 = new Execution(meal3,100);
-            register(execution1);
-            register(execution2);
-            register(execution3);
+
+            Random random = new Random();
+            int low = 70;
+            int high = 110;
+            while(it.hasNext()){
+                Execution execution = new Execution(it.next(),random.nextInt(high-low)+low);
+                execution.getPicked().setPickedQuantity(random.nextInt(70));
+                register(execution);
+
+            }
+
+            /*execution4.getPicked().setPickedQuantity(40);
+            execution5.getPicked().setPickedQuantity(60);
+            execution6.getPicked().setPickedQuantity(85);*/
+
         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
             return false;
         }

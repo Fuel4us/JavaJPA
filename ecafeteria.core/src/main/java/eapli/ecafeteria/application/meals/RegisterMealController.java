@@ -80,4 +80,8 @@ public class RegisterMealController implements Controller {
         return meal.toString();
     }
 
+    public void updateMenuState(Menu menu, boolean b) {
+       mealRepository.updateMenuState(menu, b);
+    }
+
 }

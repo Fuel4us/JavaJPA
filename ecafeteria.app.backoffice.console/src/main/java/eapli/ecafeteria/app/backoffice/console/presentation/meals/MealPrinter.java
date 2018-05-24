@@ -5,7 +5,7 @@ import eapli.framework.visitor.Visitor;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 1150372@isep.ipp.pt
  */
 @SuppressWarnings("squid:S106")
 public class MealPrinter implements Visitor<Meal> {

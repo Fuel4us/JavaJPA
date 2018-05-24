@@ -15,8 +15,15 @@ import eapli.framework.util.Console;
  */
 public class DefineUserBalancelimitsUI extends AbstractUI{
 
+    /**
+     * DefineUserBalanceLimit controller for the use case
+     */
     private final DefineUserBalancelimitsController controller = new DefineUserBalancelimitsController();
     
+    /**
+     * 
+     * @return 
+     */
     @Override
     protected boolean doShow() {
         boolean repeat, saved;
@@ -46,6 +53,10 @@ public class DefineUserBalancelimitsUI extends AbstractUI{
         return true;
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
     public String headline() {
         return "Define User Balance limits";
