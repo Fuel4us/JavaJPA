@@ -12,6 +12,7 @@ import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,12 +62,12 @@ public class GenerateMealPlanController {
     public MealPlan generateMealPlan(Menu menu, HeuristicConfiguration heuristic) {
         MealPlan mealPlan = new MealPlan(menu);
 
-        List<MealPlanItemQuantity> mealPlanItemQuantityList = heuristic.getHeuristicInUse().generateNumberOfDishes();
+        Iterator<MealPlanItemQuantity> mealPlanItemQuantityList = heuristic.getHeuristicInUse().generateNumberOfDishes().iterator();
         List<MealPlanItemQuantity> newMealPlanItemQuantityList = new ArrayList<>();
 
         for (Meal meal : mealPlan.getMenu().getMealList()) {
-            for (MealPlanItemQuantity mealPlanItemQuantity : mealPlanItemQuantityList) {
-                MealPlanItemQuantity newMealPlanItemQuantity = new MealPlanItemQuantity(mealPlanItemQuantity.getItemQuantity(), meal);
+            if (mealPlanItemQuantityList.hasNext()) {
+                MealPlanItemQuantity newMealPlanItemQuantity = new MealPlanItemQuantity(mealPlanItemQuantityList.next().getItemQuantity(), meal);
                 newMealPlanItemQuantityList.add(newMealPlanItemQuantity);
             }
         }
