@@ -39,7 +39,7 @@ public class CanteenShiftClosureService {
                 int mealsActuallyDone = executionRepository.getMealActuallyServed(meal);
 
                 execution = it.iterator().next();
-                execution.getLeftover().setQuantity(mealsActuallyDone - mealsPicked);
+                execution.getNotPicked().setNotPickedQuantity(mealsActuallyDone-mealsPicked);
                 try {
                     executionRepository.save(execution);
                 } catch (DataConcurrencyException e) {
