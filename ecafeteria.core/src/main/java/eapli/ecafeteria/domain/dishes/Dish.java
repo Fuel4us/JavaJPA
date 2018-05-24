@@ -17,7 +17,6 @@ import eapli.framework.domain.Designation;
 import eapli.framework.domain.ddd.AggregateRoot;
 import eapli.framework.domain.money.Money;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 
 /**
@@ -25,7 +24,7 @@ import javax.persistence.ManyToMany;
  *
  * @author Jorge Santos ajs@isep.ipp.pt
  *
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  */
 @Entity
 @SqlResultSetMapping(name = "DishesPerCaloricCategoryMapping", classes = @ConstructorResult(targetClass = DishesPerCaloricCategory.class, columns = {

@@ -5,10 +5,6 @@
  */
 package eapli.ecafeteria.domain.booking;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,64 +14,61 @@ import static org.junit.Assert.*;
  */
 public class RateTest {
     
-    public RateTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    //same values than in Rate
+    private static final int MIN_VAL = 1;
+    private static final int MAX_VAL = 5;
+
+    /**
+     * Test of Rate can not be below minimum value constant, of class Rate.
+     */
+    @Test
+    public void ensureCannotRateBelowMinimumValue() {
+        System.out.println("-Ensure cannot rate below minimum value");
+        
+        try{
+            Rate r = new Rate(MIN_VAL - 1);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
     }
 
+    /**
+     * Test of Rate can not be above maximum value constant, of class Rate.
+     */
+    @Test
+    public void ensureCannotRateAboveMaximumValue() {
+        System.out.println("-Ensure cannot rate above maximum value");
+        
+        try{
+            Rate r = new Rate(MAX_VAL + 1);
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * Test of getScore method, of class Rate.
      */
     @Test
-    public void testGetScore() {
-        System.out.println("getScore");
-//        Rate instance = new Rate();
-//        int expResult = 0;
-//        int result = instance.getScore();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void ensureGetScoreWorks() {
+        System.out.println("-Ensure getScore works");
+        int expResult = 2;
+        Rate r = new Rate(expResult);
+        int result = r.getScore();
+        assertEquals(result, expResult);
     }
-
-    /**
-     * Test of changeScore method, of class Rate.
-     */
-    @Test
-    public void testChangeScore() {
-        System.out.println("changeScore");
-//        int score = 0;
-//        Rate instance = new Rate();
-//        instance.changeScore(score);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of toString method, of class Rate.
      */
     @Test
-    public void testToString() {
-        System.out.println("toString");
-//        Rate instance = new Rate();
-//        String expResult = "";
-//        String result = instance.toString();
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+    public void ensureToStringWorks() {
+        System.out.println("-Ensure toString Works");
+        int score = 1;
+        String expResult = "Rate{" + "score=" + score + '}';
+        Rate r = new Rate(score);
+        String result = r.toString();
+        assertEquals(result, expResult);
     }
     
 }

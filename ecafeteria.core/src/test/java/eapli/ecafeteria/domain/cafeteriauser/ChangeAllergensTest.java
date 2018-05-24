@@ -25,6 +25,9 @@ public class ChangeAllergensTest {
 
     @Mock
     private NutritionalProfile profile_mock;
+    /*@Mock
+     private AllergenRepository allergensRepo;
+    */
     
     private List<Allergen> allergensList;
     private Set<Allergen> allergensSet;
@@ -41,6 +44,8 @@ public class ChangeAllergensTest {
         allergensList.add(new Allergen("al2", "allergen 2"));
         allergensList.add(new Allergen("al3", "allergen 3"));
         allergensList.add(new Allergen("al4", "allergen 4"));
+        
+        
         
         //For Unit tests
         profile_unit = new NutritionalProfile();
@@ -114,6 +119,20 @@ public class ChangeAllergensTest {
 
         verify(profile_mock, atLeast(1)).removeAllergen(Mockito.any(Allergen.class));
     }
+    
+    /**
+     * Test if an expection is thrown when the Allergen's list in repository is empty
+     */
+    /* @Test
+    (expected = NoSuchElementException.class)
+    public void ensureThrowExceptionWhenAllergensRepoIsEmpty(){
+        System.out.println("Ensure that an exception is thrown when the allergens repository is empty");
+        
+        if(!allergensRepo.findAll().iterator().hasNext()) throw new NoSuchElementException("There is no Allergens in the general repository");
+        
+        
+        verify(allergensRepo, atLeast(1)).findAll();
+    }*/
 
     /**
      * Test to verify if an allergen is in the allergen list, then that allergen cannot be added.
@@ -183,7 +202,7 @@ public class ChangeAllergensTest {
      * Test we cannot remove an allergen if the list is empty.
      */
     @Test
-    public void ensureCannotRemoveAnAllergenIfListEmpty() {
+    public void ensureCannotRemoveAnAllergenIfListEmptyUnit() {
         System.out.println("Ensure Cannot remove an Allergen if list is empty Unit Test");
 
         Allergen allergen = new Allergen("al1", "allergen 1");

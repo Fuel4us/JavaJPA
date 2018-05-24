@@ -8,12 +8,15 @@ import javax.persistence.Embeddable;
 /**
  *
  * @author Hilario Coelho
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  * changed by Pedro Vieira 1160634
  */
 @Embeddable
 public class Comment implements Serializable, ValueObject {
 
+    /*
+    * The default answer, before the menu manager reply
+    */
     private static final String INITIAL_ANSWER = "there is no answer yet!";
     private static final long serialVersionUID = 1L;
     
@@ -46,7 +49,7 @@ public class Comment implements Serializable, ValueObject {
     
     /**
      * Returns the comment.
-     * Created by João Pereira <1150478@isep.ipp.pt>
+     * Created by @João Pereira_1150478@isep.ipp.pt
      * @return 
      */
     public String getRealComment() {

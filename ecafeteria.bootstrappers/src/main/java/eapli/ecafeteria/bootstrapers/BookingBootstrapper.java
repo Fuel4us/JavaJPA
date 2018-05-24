@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author Leandro
  */
-public class BookingBootstrapper implements Action, Observer {
+public class BookingBootstrapper implements Action{
 
     final RegisterBookingController controller = new RegisterBookingController();
 
@@ -88,13 +88,9 @@ public class BookingBootstrapper implements Action, Observer {
             controller.deliveredBooking(repBook.findOne(Long.parseLong("12")).get());
 
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.canceledBooking(repBook.findOne(Long.parseLong("13")).get());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("14")).get());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("15")).get());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
-            controller.deliveredBooking(repBook.findOne(Long.parseLong("16")).get());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
             registerBooking(cu1, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
             registerBooking(cu2, meal48.get(), DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 1).getTime());
@@ -142,14 +138,11 @@ public class BookingBootstrapper implements Action, Observer {
 
         try {
             controller.registerBooking(cu1, meal3, time);
+            
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

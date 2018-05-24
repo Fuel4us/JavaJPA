@@ -1,4 +1,4 @@
-UC 4.5.4.2 - Register User
+UC 4.5.2.2 - Register User
 
 Business Rule
     Student Mecanographic Number: First two numbers represents 

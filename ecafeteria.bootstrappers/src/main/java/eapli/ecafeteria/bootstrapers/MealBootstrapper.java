@@ -12,6 +12,8 @@ import eapli.framework.domain.Designation;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.util.DateTime;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,10 +48,15 @@ public class MealBootstrapper implements Action {
         registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() + 1, 20).getTime());
         registerMeal(dish2, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth(), 20).getTime());
 
+
         registerMeal(dish3, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime());
         registerMeal(dish1, MealType.LUNCH, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 12).getTime());
         registerMeal(dish1, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 13).getTime());
         registerMeal(dish2, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(), DateTime.currentMonth() - 1, 14).getTime());
+
+        registerMeal(dish1, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(),DateTime.currentMonth(), 24).getTime());
+        registerMeal(dish2, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(),DateTime.currentMonth(), 24).getTime());
+        registerMeal(dish3, MealType.DINNER, DateTime.newCalendar(DateTime.currentYear(),DateTime.currentMonth(), 24).getTime());
 
         return true;
     }
