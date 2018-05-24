@@ -39,7 +39,7 @@ public class ComplaintFactory { //Singleton
         return instance;
     }
 
-    public Iterable<Booking> findBookingWithDeliveredStateNoComplaints(CafeteriaUser selectedUser) {
+    public Iterable<Booking> findBookingWithDeliveredState(CafeteriaUser selectedUser) {
 
         Iterable<Booking> bookings = bookingRepository.findBookingsDeliveredByUser(selectedUser);
 

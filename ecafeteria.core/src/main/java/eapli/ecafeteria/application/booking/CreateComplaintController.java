@@ -61,7 +61,7 @@ public class CreateComplaintController implements Controller {
      */
     public Iterable<Booking> getBookingsDeliveredFromUser() {
         
-        return bookingRepository.findBookingsDeliveredByUser(selectedUser);
+        return complaintFactory.findBookingWithDeliveredState(selectedUser);
     }
     
     /**
