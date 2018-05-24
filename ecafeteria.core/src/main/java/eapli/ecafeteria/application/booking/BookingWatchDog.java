@@ -50,21 +50,19 @@ public class BookingWatchDog extends Observable implements Observer {
         redLimit = kitchenLimitsServices.findRedLimit();
     }
 
-    public void display() {
+    @Override
+    public void update(Observable bookingWatchDog, Object booking1) {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS);
-        
+
         if ((numberOfBookingByMeal / numberOfMeal) * 100 > yellowLimit && (numberOfBookingByMeal / numberOfMeal) * 100 < redLimit) {
+            System.out.println("YELLOW ALERT: " + yellowLimit + " PASSED.");
+            setChanged();
             notifyObservers();
-            System.out.println("YELLOW ALERT" + yellowLimit);
         } else if ((numberOfBookingByMeal / numberOfMeal) * 100 > redLimit) {
+            System.out.println("RED ALERT" + redLimit + " PASSED.");
+            setChanged();
             notifyObservers();
-            System.out.println("RED ALERT" + redLimit);
         }
     }
 
-    @Override
-    public void update(Observable bookingWatchDog, Object booking) {
-        this.booking = (Booking) booking;
-        display();
-    }
 }
