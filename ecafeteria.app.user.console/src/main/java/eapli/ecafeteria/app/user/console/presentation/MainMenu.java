@@ -10,6 +10,7 @@ import eapli.ecafeteria.app.user.console.presentation.booking.BookingRatingActio
 import eapli.ecafeteria.app.user.console.presentation.booking.CancelBookingUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckBookingsForNextDaysUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckMenuUI;
+import eapli.ecafeteria.app.user.console.presentation.booking.CheckMovementsUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.CheckNextBookingUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.ConsultRatingsUI;
 import eapli.ecafeteria.app.user.console.presentation.booking.DefineUserBalancelimitsUI;
@@ -48,6 +49,7 @@ class MainMenu extends CafeteriaUserBaseUI {
     private static final int CHECK_MENU = 6;
     private static final int CONSULT_RATINGS = 7;
     private static final int CANCEL_BOOKING = 8;
+    private static final int CHECK_MOVEMENTS = 9;
 
     // ACCOUNT MENU
     private static final int LIST_MOVEMENTS_OPTION = 1;
@@ -116,6 +118,7 @@ class MainMenu extends CafeteriaUserBaseUI {
         menu.add(new MenuItem(CHECK_MENU, "Check Menu for this week (or for next week)", () -> new CheckMenuUI().show()));
         menu.add(new MenuItem(CONSULT_RATINGS, "Consult ratings", () -> new ConsultRatingsUI().show()));
         menu.add(new MenuItem(CANCEL_BOOKING, "Cancel Booking", () -> new CancelBookingUI().show()));
+        menu.add(new MenuItem(CHECK_MOVEMENTS, "Check movements from the last days", () -> new CheckMovementsUI().show()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
         return menu;
     }

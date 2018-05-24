@@ -1,5 +1,6 @@
 package eapli.ecafeteria.domain.booking;
 
+import eapli.ecafeteria.application.booking.BalanceAlertController;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -87,6 +88,7 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
+        initializeObserver();
     }
 
     public Booking(CafeteriaUser user, Meal meal, Date time) {
@@ -300,6 +302,11 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
      */
     public Complaint Complaint() {
         return this.complaint;
+    }
+    
+    public void initializeObserver() {
+        addObserver(new BalanceAlertController());
+        setChanged();
     }
 
     /**
