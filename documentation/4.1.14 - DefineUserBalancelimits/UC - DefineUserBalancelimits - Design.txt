@@ -3,11 +3,14 @@
 	DESIGN
 	_________
 
-	* Utilizar a estrutura base standard da aplicação baseada em camadas
+   	Domain classes:  
+		CafeteriaUser,
+		Profile wich beling in CafeteriaUser
+			-OneToOne relation
+			-cascade All
 
-
-   	Domain classes:  CafeteriaUser, Profile
    	Controller: DefineUserBalanceLimitsController
+
    	Repository: CafeteriaUserRepository
 
 
