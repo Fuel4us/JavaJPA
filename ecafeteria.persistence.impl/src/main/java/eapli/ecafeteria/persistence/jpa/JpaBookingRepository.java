@@ -243,9 +243,9 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     @Override
     public void updateBookingComplaint(Booking booking, Complaint complaint) {
         entityManager().getTransaction().begin();
-
+        
         Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
-        query.setParameter("complaintgid", complaint.id());
+        query.setParameter("complaintid", complaint.id());
         query.setParameter("bookingid", booking.bookingId());
         query.executeUpdate();
 

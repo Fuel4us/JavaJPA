@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.booking;
 import eapli.ecafeteria.domain.authz.Username;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.ComplaintFactory;
+import eapli.ecafeteria.domain.booking.ComplaintState;
 import eapli.ecafeteria.domain.booking.Description;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.persistence.BookingRepository;
@@ -33,8 +34,12 @@ public class CreateComplaintController implements Controller {
     private final BookingRepository bookingRepository = PersistenceContext.repositories().booking();
     private final CafeteriaUserRepository cafeteriaUserRepository = PersistenceContext.repositories().cafeteriaUsers();
     
-
-
+    /**
+     * Select an active CafeteriaUser by Username
+     * 
+     * @param username
+     * @return
+     */
     public boolean selectUser(Username username){ //boolean
         Optional<CafeteriaUser> OpCU = cafeteriaUserRepository.findByUsername(username);
         
@@ -49,18 +54,30 @@ public class CreateComplaintController implements Controller {
         }
     }
     
-    private Iterable<Booking> getBookingsDeliveredFromUser(CafeteriaUser user) {
+    /**
+     * Gets Bookings with BookingState DELIVERED
+     * 
+     * @return >
+     */
+    public Iterable<Booking> getBookingsDeliveredFromUser() {
         
-        return bookingRepository.findBookingsDeliveredByUser(user);
+        return bookingRepository.findBookingsDeliveredByUser(selectedUser);
     }
     
-    private void createComplaint(Booking booking, String text){
+    /**
+     * Creates Complain an saves in repository
+     * 
+     * @param booking
+     * @param text
+     * @param state
+     */
+    public void createComplaint(Booking booking, String text, ComplaintState state){
         Description description = new Description(text);
         
         complaintFactory = ComplaintFactory.getInstance();
         
         try {
-            complaintFactory.createComplaint(booking, selectedUser, description);
+            complaintFactory.createComplaint(booking, selectedUser, description, state);
         } catch (DataConcurrencyException ex) {
             Logger.getLogger(CreateComplaintController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DataIntegrityViolationException ex) {

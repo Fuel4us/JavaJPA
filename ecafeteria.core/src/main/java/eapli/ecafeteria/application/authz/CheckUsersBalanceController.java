@@ -34,6 +34,11 @@ public class CheckUsersBalanceController {
         }
     }
 
+    /**
+     * Method to get the mecanographic number so I can get userbalance
+     * @param cafeteriaUser
+     * @return
+     */
     public MecanographicNumber getUsersMecanographicNumber(CafeteriaUser cafeteriaUser) {
 
         if (cafeteriaUser == null) {
@@ -46,8 +51,12 @@ public class CheckUsersBalanceController {
         return mecanographicNumber;
     }
 
+    /**
+     * Final method to get the balance
+     */
     public void getUserBalance () {
         double amount = BalanceService.balance(getUsersMecanographicNumber(cu));
+        // decimal format to only show 2 digits after decimal
         System.out.println("\nO teu saldo é de " +new DecimalFormat("##.##").format(amount)+ "€");
     }
 }
