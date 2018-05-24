@@ -70,7 +70,7 @@ public class RegisterMenuUI extends AbstractUI {
     private void inserirDataInicio() {
         do {
             s = new Scanner(System.in);
-            System.out.println("Digite uma data para o início do Menu no seguinte formato --> dd/MM/yyyy: ");
+            System.out.println("Digite uma data para o inicio do Menu no seguinte formato --> dd/MM/yyyy: ");
             dataRecebida = s.nextLine();
             try {
                 aux = df.parse(dataRecebida);
@@ -78,10 +78,10 @@ public class RegisterMenuUI extends AbstractUI {
                     menuDateBeg = aux;
                     System.out.println("***DADO BEM INSERIDO***\n\n");
                 } else {
-                    System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                    System.out.println("ATENCAO!!! A data inicio do menu tem de ser antes da data fim do menu.");
                 }
             } catch (ParseException ex) {
-                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (menuDateBeg == null);
     }
@@ -100,10 +100,10 @@ public class RegisterMenuUI extends AbstractUI {
                     menuDateEnd = aux;
                     System.out.println("***DADO BEM INSERIDO***\n\n");
                 } else {
-                    System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                    System.out.println("ATENCAO!!! A data inicio do menu tem de ser antes da data fim do menu.");
                 }
             } catch (ParseException ex) {
-                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (menuDateEnd == null);
     }

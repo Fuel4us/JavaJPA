@@ -48,7 +48,7 @@ public class RegisterMealUI extends AbstractUI {
                 mealDate = aux;
                 System.out.println("***DADO BEM INSERIDO***\n\n");
             } catch (ParseException ex) {
-                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (mealDate == null);
 
@@ -63,7 +63,7 @@ public class RegisterMealUI extends AbstractUI {
                 mealType = selectorMealType.selectedElement();
                 System.out.println("***DADO BEM INSERIDO***\n\n");
             } else {
-                System.out.println("\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n");
+                System.out.println("\n#########       SELECIONE UMA OPCAO VALIDA      #########\n");
                 selectorMealType.show();
             }
         } while (mealType == null);
@@ -79,7 +79,7 @@ public class RegisterMealUI extends AbstractUI {
                     dish = selectorDish.selectedElement();
                     System.out.println("***DADO BEM INSERIDO***\n\n");
                 } else {
-                    System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n\n");
+                    System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VALIDA      #########\n\n");
                     selectorDish.show();
                 }
             } while (dish == null);
@@ -94,7 +94,7 @@ public class RegisterMealUI extends AbstractUI {
                 return false;
             }
         }
-        System.out.println("ERRO!! Não existem dishes para serem selecionadas. MEAL não REGISTADA");
+        System.out.println("ERRO!! Nao existem dishes para serem selecionadas. MEAL nao REGISTADA");
         return false;
     }
 
