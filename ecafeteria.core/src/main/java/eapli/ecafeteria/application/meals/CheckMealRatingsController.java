@@ -1,6 +1,7 @@
 package eapli.ecafeteria.application.meals;
 
 import eapli.ecafeteria.domain.booking.Booking;
+import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
@@ -10,12 +11,12 @@ import java.util.Set;
 
 /**
  *
- * @author João Pereira <1150478@isep.ipp.pt>
+ * @author @João Pereira_1150478@isep.ipp.pt
  */
 public class CheckMealRatingsController implements Controller {
 
     private final BookingRepository repBooking = PersistenceContext.repositories().booking();
-    private int count = 0, flag1 = 0, flag2 = 0, commentFlag = 0;
+    private int count = 0, flag1 = 0, flag2 = 0, numRatings = 0;
     private double average = 0;
     private String comment = " ";
 
@@ -62,9 +63,11 @@ public class CheckMealRatingsController implements Controller {
      */
     public int getNumberOfRatings(Meal selectedMeal) {
         for (Booking booking : getBookingsOfMeal(selectedMeal)) {
-            if (booking.getRating() != null) {
-                System.out.println("One rating found on the booking with the id: " + booking.bookingId());
-                flag1++;
+            if (booking.getAllRatings().size() != 0) {
+                for (Rating rate : booking.getAllRatings()) {
+                    System.out.println("One rating found on the booking with the id: " + booking.bookingId());
+                    flag1++;
+                }
             } else {
                 System.out.println("There are no ratings on booking with the id: " + booking.bookingId());
                 flag2 = 0;
@@ -83,10 +86,12 @@ public class CheckMealRatingsController implements Controller {
      * @return
      */
     public double getAverage(Meal selectedMeal) {
-        for (Booking book : getBookingsOfMeal(selectedMeal)) {
-            if (book.getRating() != null) {
-                average += book.getRating().getScore();
-                count++;
+        for (Booking booking : getBookingsOfMeal(selectedMeal)) {
+            if (booking.getAllRatings().size() != 0) {
+                for (Rating rate : booking.getAllRatings()) {
+                    average += rate.getScore();
+                    count++;
+                }
             }
         }
         average /= count;
@@ -102,18 +107,21 @@ public class CheckMealRatingsController implements Controller {
      */
     public String getComments(Meal selectedMeal) {
         for (Booking book : getBookingsOfMeal(selectedMeal)) {
-            if (book.getRating() != null) {
-                if (book.getRating().getComment() != null) {
-                    if (book.getRating().getComment().getAnswer() == null) {
-                        comment += "\n      * Comment: " + book.getRating().getComment().getRealComment() + ";";
-                    } else {
-                        comment += "\n      * Comment: " + book.getRating().getComment().getRealComment() + ";\n      * Answer: " + book.getRating().getComment().getAnswer() + ";";
+            if (book.getAllRatings().size() != 0) {
+                for (Rating rate : book.getAllRatings()) {
+                    if (book.getRating(0).getComment() != null) {
+                        if (book.getRating(0).getComment().getAnswer() == null) {
+                            comment += "\n\n      * Comment: " + rate.getComment().getRealComment() + ";";
+                        } else {
+                            comment += "\n\n      * Comment: " + rate.getComment().getRealComment() + ";\n      * Answer: " + rate.getComment().getAnswer() + ";";
+                        }
                     }
-                } else {
-                    System.out.println("This rating has no comments.");
                 }
+            } else {
+                System.out.println("\nThe booking with the id" + book.bookingId() + "has no comments.");
             }
         }
+
         return comment;
     }
 

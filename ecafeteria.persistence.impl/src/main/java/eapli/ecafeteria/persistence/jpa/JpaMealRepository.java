@@ -10,16 +10,15 @@ import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.MealRepository;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import eapli.framework.util.DateTime;
+
+import java.util.*;
 import javax.persistence.Query;
 
 /**
  *
  * @author Bernardo Carreira
- * @EDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @EDIT Pedro Alves 1150372@isep.ipp.pt
  */
 public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> implements MealRepository {
 
@@ -92,4 +91,25 @@ public class JpaMealRepository extends CafeteriaJpaRepositoryBase<Meal, Long> im
 
         return match("e.mealDate >= :dateStart and e.mealDate <= :dateEnd", params);
     }
+
+    @Override
+    public Iterable<Meal> findMealByDate(Date date) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mealDate",date);
+        return match("e.mealDate = :mealDate",params);
+    }
+
+    @Override
+    public void updateMenuState(Menu menu, boolean b) {
+        entityManager().getTransaction().begin();
+
+        Query query = entityManager().createQuery("UPDATE Menu SET PUBLISHED=:menuState WHERE ID=:menuID");
+        query.setParameter("menuState", true);
+        query.setParameter("menuID", menu.id());
+        query.executeUpdate();
+
+        entityManager().getTransaction().commit();
+    }
+
+
 }

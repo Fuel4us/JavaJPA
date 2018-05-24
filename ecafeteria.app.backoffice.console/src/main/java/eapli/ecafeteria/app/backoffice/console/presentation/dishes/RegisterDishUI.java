@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @author Jorge Santos ajs@isep.ipp.pt
  *
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  */
 public class RegisterDishUI extends AbstractUI {
 

@@ -4,7 +4,7 @@ import eapli.ecafeteria.Application;
 import eapli.ecafeteria.persistence.AllergenRepository;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CanteenShiftRepository;
-import eapli.ecafeteria.persistence.CommentRepository;
+import eapli.ecafeteria.persistence.ComplaintRepository;
 import eapli.ecafeteria.persistence.DelieveryRepository;
 import eapli.ecafeteria.persistence.DishReportingRepository;
 import eapli.ecafeteria.persistence.DishRepository;
@@ -27,11 +27,8 @@ import eapli.ecafeteria.persistence.ShiftRepository;
 import eapli.ecafeteria.persistence.SignupRequestRepository;
 import eapli.ecafeteria.persistence.UserRepository;
 import eapli.ecafeteria.persistence.WorkSessionRepository;
-import eapli.framework.persistence.DataConcurrencyException;
-import eapli.framework.persistence.DataIntegrityViolationException;
 import eapli.framework.persistence.repositories.TransactionalContext;
 import eapli.framework.persistence.repositories.impl.jpa.JpaAutoTxRepository;
-import java.util.Optional;
 
 /**
  *
@@ -190,8 +187,8 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public CommentRepository comments() {
-        return new JpaCommentRepository();
+    public ComplaintRepository complaint() {
+        return new JpaComplaintRepository(); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

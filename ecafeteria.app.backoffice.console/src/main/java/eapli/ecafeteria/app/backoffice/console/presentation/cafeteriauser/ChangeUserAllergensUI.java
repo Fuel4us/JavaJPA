@@ -12,9 +12,10 @@ import eapli.framework.presentation.console.SelectWidget;
 import eapli.framework.util.Collections;
 import eapli.framework.util.Console;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
- *
+ * Change User Allergens UI
  * @author pedromonteiro
  */
 public class ChangeUserAllergensUI extends AbstractUI {
@@ -68,9 +69,19 @@ public class ChangeUserAllergensUI extends AbstractUI {
 
     private void addAllergen() {
 
+        Iterable<Allergen> all_allergen;
+        
+        try{
+        all_allergen = this.theController.getAllergens();
+        }catch(NoSuchElementException ex){
+            System.out.println("\n\n"+ex.getMessage()+"\n\n");
+            return;
+        }
+        
         final SelectWidget<Allergen> selectorAll = new SelectWidget<>("Choose the allergen",
-                this.theController.getAllergens(), new AllergensPrinter());
+                all_allergen, new AllergensPrinter());
         selectorAll.show();
+        
         final Allergen allergen_to_add = selectorAll.selectedElement();
 
         if (allergen_to_add == null) {
@@ -101,11 +112,12 @@ public class ChangeUserAllergensUI extends AbstractUI {
     }
 
     private boolean allergensEmpty(List<Allergen> allergens_list) {
-        if (allergens_list.isEmpty() || allergens_list == null) {
+        if (allergens_list.isEmpty()) {
             System.out.println("\n\nThe user didn't add allergens yet!\n\n");
             return true;
         }
         return false;
     }
+    
 
 }

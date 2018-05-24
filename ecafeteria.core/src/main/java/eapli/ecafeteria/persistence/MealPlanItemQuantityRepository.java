@@ -6,12 +6,15 @@
 package eapli.ecafeteria.persistence;
 
 import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.persistence.repositories.DataRepository;
+import java.util.Optional;
 
 /**
  *
  * @author Tiago Babo 1160760
  */
-public interface MealPlanItemQuantityRepository extends DataRepository<MealPlanItemQuantity, Long>{
-    
+public interface MealPlanItemQuantityRepository extends DataRepository<MealPlanItemQuantity, Long> {
+
+    MealPlanItemQuantity findByMeal(Meal meal);
 }

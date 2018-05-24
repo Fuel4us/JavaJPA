@@ -5,7 +5,7 @@ import eapli.framework.visitor.Visitor;
 
 /**
  *
- * @author Pedro Alves <1150372@isep.ipp.pt>
+ * @author Pedro Alves 
  */
 @SuppressWarnings("squid:S106")
 public class MenuPrinter implements Visitor<Menu> {

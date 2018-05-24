@@ -14,7 +14,6 @@ import eapli.ecafeteria.app.backoffice.console.presentation.authz.DeactivateUser
 import eapli.ecafeteria.app.backoffice.console.presentation.authz.ListUsersAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.AcceptRefuseSignupRequestAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.ChangeUserAllergensAction;
-import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.CheckUserBalanceAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser.EditNutritionalProfileAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishAction;
 import eapli.ecafeteria.app.backoffice.console.presentation.dishes.ActivateDeactivateDishTypeAction;
@@ -51,6 +50,11 @@ import eapli.framework.presentation.console.ShowVerticalSubMenuAction;
 import eapli.framework.presentation.console.SubMenu;
 import eapli.framework.presentation.console.VerticalMenuRenderer;
 import eapli.framework.presentation.console.VerticalSeparator;
+import eapli.ecafeteria.app.backoffice.console.presentation.ratings.CheckRatingsAction;
+import eapli.ecafeteria.application.booking.BookingWatchDog;
+import eapli.ecafeteria.domain.booking.Booking;
+import eapli.ecafeteria.domain.booking.BookingState;
+import java.util.Observable;
 
 /**
  * TODO split this class in more specialized classes for each menu
@@ -60,7 +64,7 @@ import eapli.framework.presentation.console.VerticalSeparator;
 public class MainMenu extends AbstractUI {
 
     private static final int EXIT_OPTION = 0;
-    
+
     // SUBMENU NUTRITIONAL PROFILE
     private static final int CHANGE_SALT_CALORIES = 1;
     private static final int CHANGE_ALLERGENS = 2;
@@ -70,7 +74,6 @@ public class MainMenu extends AbstractUI {
     private static final int LIST_USERS_OPTION = 2;
     private static final int DEACTIVATE_USER_OPTION = 3;
     private static final int ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION = 4;
-    private static final int GET_USERS_BALANCE = 5;
 
     // SETTINGS
     private static final int SET_KITCHEN_ALERT_LIMIT_OPTION = 1;
@@ -132,6 +135,7 @@ public class MainMenu extends AbstractUI {
     private static final int MENUS_OPTION = 8;
     private static final int MEAL_OPTION = 9;
     private static final int CHANGE_NUTRI_PROFILE_OPTION = 10;
+    private static final int RATING_OPTION = 11;
 
     @Override
     public boolean show() {
@@ -151,9 +155,12 @@ public class MainMenu extends AbstractUI {
         } else {
             renderer = new VerticalMenuRenderer(menu);
         }
+        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.MANAGE_KITCHEN, ActionRight.MANAGE_MENUS)){
+           
+        }
         return renderer.show();
     }
-
+    
     @Override
     public String headline() {
         return "eCafeteria Back Office [@" + AuthorizationService.session().authenticatedUser().id()
@@ -200,10 +207,13 @@ public class MainMenu extends AbstractUI {
             final Menu mealMenu = builMealMenu();
             mainMenu.add(new SubMenu(MEAL_OPTION, mealMenu,
                     new ShowVerticalSubMenuAction(mealMenu)));
+            final Menu ratingMenu = builRatingMenu();
+            mainMenu.add(new SubMenu(RATING_OPTION, ratingMenu,
+                    new ShowVerticalSubMenuAction(ratingMenu)));
             // reporting
         }
-        
-        if(AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.CHANGE_NUTRI_PROFILE)){
+
+        if (AuthorizationService.session().authenticatedUser().isAuthorizedTo(ActionRight.CHANGE_NUTRI_PROFILE)) {
             final Menu changeNutriProfileMenu = buildNutriProfileMenu();
             mainMenu.add(new SubMenu(CHANGE_NUTRI_PROFILE_OPTION,
                     changeNutriProfileMenu,
@@ -235,7 +245,6 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Users >");
 
         // users menu stuff that you can do
-
         menu.add(new MenuItem(ADD_USER_OPTION, "Add User", () -> new AddUserUI().show()));
         menu.add(new MenuItem(LIST_USERS_OPTION, "List all Users", new ListUsersAction()));
         menu.add(new MenuItem(DEACTIVATE_USER_OPTION, "Deactivate User",
@@ -243,7 +252,6 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(ACCEPT_REFUSE_SIGNUP_REQUEST_OPTION, "Accept/Refuse Signup Request",
                 new AcceptRefuseSignupRequestAction()));
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        menu.add(new MenuItem(GET_USERS_BALANCE, "Users balance", new CheckUserBalanceAction()));
 
         return menu;
     }
@@ -299,17 +307,17 @@ public class MainMenu extends AbstractUI {
         menu.add(new MenuItem(REGISTER_MEALS_ACTUALLY_COOKED, "Register Meals Actually Cooked", new RegisterMealsActuallyCookedAction()));
 
         menu.add(new MenuItem(REGISTER_LOTS_USED_IN_MEAL, "Register Lots Used In Meal", new RegisterLotsUsedInMealAction()));
-        
+
         menu.add(new MenuItem(LIST_LOTS_USED_IN_MEAL, "List Lots Used In Meal", new ListLotsUsedInMealAction()));
 
         menu.add(new MenuItem(CHECK_BOOKINGS_BY_DATA, "Check Bookings By Data", new CheckReservationsByDataAction()));
 
         menu.add(new MenuItem(CLOSE_MEAL_PLAN, "Close meal plan", new CloseMealPlanAction()));
-        
+
         menu.add(new MenuItem(GENERATE_MEAL_PLAN_OPTION, "Generate Meal Plan", new GenerateMealPlanAction()));
 
         menu.add(new MenuItem(EXIT_OPTION, "Return ", new ReturnAction()));
-        
+
         return menu;
     }
 
@@ -352,7 +360,7 @@ public class MainMenu extends AbstractUI {
 
         menu.add(new MenuItem(REGISTER_MENU_OPTION, "Register Menu",
                 () -> new RegisterMenuAction().execute()));
-        
+
         menu.add(new MenuItem(EDIT_MENU_OPTION, "Edit Menu",
                 () -> new EditMenuAction().execute()));
 
@@ -365,11 +373,11 @@ public class MainMenu extends AbstractUI {
         final Menu menu = new Menu("Meals >");
         menu.add(new MenuItem(REGISTER_MEAL_OPTION, "Register Meals",
                 () -> new RegisterMealAction().execute()));
-        
+
         menu.add(new MenuItem(CHECK_MEAL_RATING_OPTION, "Check the Ratings of a Meal", new CheckMealRatingsAction()));
 
         menu.add(new MenuItem(REPLY_COMMENT_OPTION, "Reply to comment from the Ratings of a Meal", new ReplyMealRatingCommentsAction()));
-        
+
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
 
         return menu;
@@ -378,12 +386,20 @@ public class MainMenu extends AbstractUI {
     private Menu buildNutriProfileMenu() {
         final Menu menu = new Menu("Nutritional Profile > ");
         menu.add(new MenuItem(CHANGE_SALT_CALORIES, "Salt and Calories", () -> new EditNutritionalProfileAction().execute()));
-        
-        menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens", 
+
+        menu.add(new MenuItem(CHANGE_ALLERGENS, "Allergens",
                 () -> new ChangeUserAllergensAction().execute()));
-                
+
         menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
 
+        return menu;
+    }
+
+    private Menu builRatingMenu() {
+        final Menu menu = new Menu("Ratings >");
+        menu.add(new MenuItem(1, "Ratings", () -> new CheckRatingsAction().execute()));
+
+        menu.add(new MenuItem(EXIT_OPTION, "Return", new ReturnAction()));
         return menu;
     }
 }

@@ -3,6 +3,7 @@ package eapli.ecafeteria.app.user.console.presentation.booking;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.booking.ConsultRatingsController;
 import eapli.ecafeteria.domain.authz.SystemUser;
+import eapli.ecafeteria.domain.booking.Rating;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.framework.persistence.DataConcurrencyException;
 import eapli.framework.presentation.console.AbstractUI;
@@ -27,14 +28,18 @@ public class ConsultRatingsUI extends AbstractUI {
         
         if(!user.isPresent())
             System.out.println("User not found");
-        else
-            System.out.println(controller.getRatingsFromUser(user.get()));
+        else{
+            Iterable<Rating> listRatings = controller.getRatingsFromUser(user.get());
+            
+            for(Rating r : listRatings)
+                System.out.println(r);
+        }
         
         return true;
     }
 
     @Override
     public String headline() {
-        return "Check ratings";
+        return "Consult ratings";
     }
 }

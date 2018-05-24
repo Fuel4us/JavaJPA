@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author jreis22
- * @EDIT Pedro Alves <1150372@isep.ipp.pt>
+ * @EDIT Pedro Alves 
  */
 public class MealTest {
 

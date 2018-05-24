@@ -37,9 +37,9 @@ public class AddUserController implements Controller {
 
     public SystemUser addUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, Calendar createdOn, boolean activateUser)
-            throws DataIntegrityViolationException, DataConcurrencyException {
+            throws DataIntegrityViolationException, DataConcurrencyException, IllegalArgumentException {
         AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
-
+        
         final SystemUserBuilder userBuilder = new SystemUserBuilder();
         userBuilder.withUsername(username).withPassword(password).withFirstName(firstName)
                 .withLastName(lastName).withEmail(email).withCreatedOn(createdOn).withRoles(roles);
@@ -63,7 +63,8 @@ public class AddUserController implements Controller {
     
     private CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, Calendar createdOn, String mecanographicNumber, boolean activateUser)
-            throws DataIntegrityViolationException, DataConcurrencyException {
+            throws DataIntegrityViolationException, DataConcurrencyException, IllegalArgumentException {
+        AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
         
         final CafeteriaUserBuilder cafeteriaUserBuilder = new CafeteriaUserBuilder();
         cafeteriaUserBuilder.withMecanographicNumber(mecanographicNumber)
