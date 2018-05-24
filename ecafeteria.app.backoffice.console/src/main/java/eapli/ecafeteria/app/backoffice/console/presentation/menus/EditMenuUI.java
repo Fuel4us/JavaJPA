@@ -59,7 +59,7 @@ public class EditMenuUI extends AbstractUI {
         vetorDecisao.add("Alterar Meals!");
 
         List<String> vetorDatas = new ArrayList<>();
-        vetorDatas.add("Alterar Data Início Apenas!");
+        vetorDatas.add("Alterar Data Inicio Apenas!");
         vetorDatas.add("Alterar Data Fim Apenas!");
         vetorDatas.add("Alterar Ambas As Datas!");
 
@@ -72,7 +72,7 @@ public class EditMenuUI extends AbstractUI {
         int decisaoMeal;
 
         do {
-            SelectWidget<String> selectorEdit = new SelectWidget<>("\n\n\n###     Pretende alterar o quê?     ###", vetorDecisao);
+            SelectWidget<String> selectorEdit = new SelectWidget<>("\n\n\n###     Pretende alterar o que?     ###", vetorDecisao);
             selectorEdit.show();
             decisao = selectorEdit.selectedOption();
 
@@ -88,14 +88,14 @@ public class EditMenuUI extends AbstractUI {
                                 break;
                             }
                         } catch (DataIntegrityViolationException | DataConcurrencyException ex) {
-                            System.out.println("Erro no Acesso à dataBase.");
+                            System.out.println("Erro no Acesso a dataBase.");
                         }
                     }
-                    System.out.println("NOME INVÁLIDO");
+                    System.out.println("NOME INVALIDO");
                     break;
 
                 case 2:
-                    SelectWidget<String> selectorEditData = new SelectWidget<>("\n\n###     Pretende alterar o quê?     ###", vetorDatas);
+                    SelectWidget<String> selectorEditData = new SelectWidget<>("\n\n###     Pretende alterar o que?     ###", vetorDatas);
                     selectorEditData.show();
                     decisaoData = selectorEditData.selectedOption();
                     switch (decisaoData) {
@@ -103,7 +103,7 @@ public class EditMenuUI extends AbstractUI {
                             try {
                                 alterarDataInicio(decisaoData);
                             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                                System.out.println("Erro no Acesso à dataBase.");
+                                System.out.println("Erro no Acesso a dataBase.");
                             }
                         }
                         break;
@@ -112,7 +112,7 @@ public class EditMenuUI extends AbstractUI {
                             try {
                                 alterarDataFim();
                             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                                System.out.println("Erro no Acesso à dataBase.");
+                                System.out.println("Erro no Acesso a dataBase.");
                             }
                         }
                         break;
@@ -122,20 +122,20 @@ public class EditMenuUI extends AbstractUI {
                                 alterarDataInicio(decisaoData);
                                 alterarDataFim();
                             } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
-                                System.out.println("Erro no Acesso à dataBase.");
+                                System.out.println("Erro no Acesso a dataBase.");
                             }
                         }
 
                         break;
                         case 0:
-                            System.out.println("Processo Concluído Com Sucesso.");
+                            System.out.println("Processo Concluido Com Sucesso.");
                         default:
-                            System.out.println("Você digitou uma operação inválida.");
+                            System.out.println("Voce digitou uma operacao invalida.");
                     }
                     break;
 
                 case 3:
-                    SelectWidget<String> selectorEditMeals = new SelectWidget<>("\n\n###     Pretende fazer o quê?     ###", vetorMeals);
+                    SelectWidget<String> selectorEditMeals = new SelectWidget<>("\n\n###     Pretende fazer o que?     ###", vetorMeals);
                     selectorEditMeals.show();
                     decisaoMeal = selectorEditMeals.selectedOption();
                     switch (decisaoMeal) {
@@ -146,21 +146,21 @@ public class EditMenuUI extends AbstractUI {
                             eliminarMealsOfMenu();
                             break;
                         case 0:
-                            System.out.println("Processo Concluído Com Sucesso.");
+                            System.out.println("Processo Concluido Com Sucesso.");
                         default:
-                            System.out.println("Você digitou uma operação inválida.");
+                            System.out.println("Voce digitou uma operacao invalida.");
                     }
                     break;
                 case 0:
-                    System.out.println("Processo Concluído Com Sucesso.");
+                    System.out.println("Processo Concluido Com Sucesso.");
                     break;
                 default:
-                    System.out.printf("Você digitou uma operação inválida.");
+                    System.out.printf("Voce digitou uma operacao invalida.");
             }
             System.out.println("PROCESSO GUARDADO COM SUCESSO!!!");
         } while (decisao != 0);
 
-        System.out.println("Saída com sucesso! \n\n");
+        System.out.println("Saida com sucesso! \n\n");
         theMenuController.printerMenuInformations(menu);
         return true;
     }
@@ -177,7 +177,7 @@ public class EditMenuUI extends AbstractUI {
         menuDateBeg = null;
         do {
             s = new Scanner(System.in);
-            System.out.println("Digite uma data para o início do Menu no seguinte formato --> dd/MM/yyyy: ");
+            System.out.println("Digite uma data para o inicio do Menu no seguinte formato --> dd/MM/yyyy: ");
             dataRecebida = s.nextLine();
             try {
                 aux = df.parse(dataRecebida);
@@ -188,12 +188,12 @@ public class EditMenuUI extends AbstractUI {
                         menuDateBeg = aux;
                         System.out.println("***DADO BEM INSERIDO***\n\n");
                     } else {
-                        System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                        System.out.println("ATENCAO!!! A data inicio do menu tem de ser antes da data fim do menu.");
                     }
                 }
 
             } catch (ParseException ex) {
-                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (menuDateBeg == null);
     }
@@ -213,10 +213,10 @@ public class EditMenuUI extends AbstractUI {
                     menuDateEnd = aux;
                     System.out.println("***DADO BEM INSERIDO***\n\n");
                 } else {
-                    System.out.println("ATENÇÃO!!! A data inicio do menu tem de ser antes da data fim do menu.");
+                    System.out.println("ATENCAO!!! A data inicio do menu tem de ser antes da data fim do menu.");
                 }
             } catch (ParseException ex) {
-                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (menuDateEnd == null);
     }
@@ -236,7 +236,7 @@ public class EditMenuUI extends AbstractUI {
         int selecao = 1;
 
         if (!mealsAvailables.iterator().hasNext()) {
-            System.out.println("###ATENÇÃO --->  Não possui meals registadas no período de tempo do Menu em questão!");
+            System.out.println("###ATENCAO --->  Nao possui meals registadas no periodo de tempo do Menu em questao!");
             selecao = 0;
         }
 
@@ -258,9 +258,9 @@ public class EditMenuUI extends AbstractUI {
         }
 
         if (selecao == 0) {
-            System.out.println("Saída com sucesso!");
+            System.out.println("Saida com sucesso!");
         } else {
-            System.out.println("Não possui mais meals registadas no período de tempo do Menu em questão!");
+            System.out.println("Nao possui mais meals registadas no periodo de tempo do Menu em questao!");
         }
     }
 
@@ -279,7 +279,7 @@ public class EditMenuUI extends AbstractUI {
         int selecao = 1;
 
         if (!mealsOfMenu.iterator().hasNext()) {
-            System.out.println("###ATENÇÃO --->  Não possui meals no Menu!");
+            System.out.println("###ATENCAO --->  Nao possui meals no Menu!");
             selecao = 0;
         }
 
@@ -302,9 +302,9 @@ public class EditMenuUI extends AbstractUI {
         }
 
         if (selecao == 0) {
-            System.out.println("Saída com sucesso!");
+            System.out.println("Saida com sucesso!");
         } else {
-            System.out.println("Não possui mais meals registadas no menu para eliminar!");
+            System.out.println("Nao possui mais meals registadas no menu para eliminar!");
         }
     }
 
