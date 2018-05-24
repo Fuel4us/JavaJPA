@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
-import javafx.beans.InvalidationListener;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -98,7 +97,8 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
         this.bookingDate = time;
-        initializeObserver();
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -154,6 +154,10 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
      */
     public void changeState(BookingState newState) {
         this.bookingState = newState;
+        if(newState.equals(BookingState.RESERVED)){
+            setChanged();
+            notifyObservers();
+        }
     }
 
     /**
@@ -226,19 +230,18 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
     public boolean isDelivered() {
         return bookingState.equals(BookingState.DELIVERED);
     }
-    
+
     /**
      *
      * @return true if has Complaint.
      */
     public boolean hasComplaint() {
-        if(complaint == null){
+        if (complaint == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-    
 
     /**
      * Adds the rating to a booking.
@@ -256,11 +259,12 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
      * @return
      */
     public Rating getRating(int number) {
-        if(listRatings.isEmpty() || number < 0)
+        if (listRatings.isEmpty() || number < 0) {
             return null;
+        }
         return this.listRatings.get(number);
     }
-    
+
     /**
      * Gets all ratings from this booking.
      *
@@ -268,17 +272,20 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
      */
     public List<Rating> getAllRatings() {
         List<Rating> listRatingAux = new ArrayList();
-        
-        if(listRatings.isEmpty())
+
+        if (listRatings.isEmpty()) {
             return listRatingAux;
-        
-        for(Rating r : listRatings)
-            if(r != null)
+        }
+
+        for (Rating r : listRatings) {
+            if (r != null) {
                 listRatingAux.add(r);
-        
+            }
+        }
+
         return listRatingAux;
     }
-    
+
     /**
      * Makes a complaint.
      *
@@ -310,4 +317,5 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
     public String toString() {
         return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + listRatings + '}';
     }
+
 }

@@ -8,16 +8,10 @@ package eapli.ecafeteria.app.user.console.presentation;
 import eapli.ecafeteria.application.cafeteriauser.CafeteriaUserBaseController;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.application.booking.BookingServices;
-import eapli.ecafeteria.application.booking.BookingWatchDog;
-import eapli.ecafeteria.domain.authz.ActionRight;
-import eapli.ecafeteria.domain.authz.Role;
-import eapli.ecafeteria.domain.authz.SystemUser;
-import eapli.ecafeteria.domain.authz.exceptions.UnauthorizedException;
 import eapli.ecafeteria.domain.movement.BalanceService;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 import eapli.framework.presentation.console.AbstractUI;
-import java.util.Observer;
 
 /**
  *
@@ -27,7 +21,8 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
     private final CafeteriaUserRepository repCafeteriaUser = PersistenceContext.repositories().cafeteriaUsers();
 
     private BookingServices bookingServices;
-
+    
+    
     protected abstract CafeteriaUserBaseController controller();
 
     public String showBalance() {
@@ -45,18 +40,5 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI {
         final String titleBorder = BORDER.substring(0, 2) + " " + title;
         System.out.println(titleBorder);
         drawFormBorder();
-    }
-
-    public void initializateObservers() {
-        
-        bookingServices = new BookingServices();
-        final SystemUser currentUser = AuthorizationService.session().authenticatedUser();
-        try {
-            AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.MANAGE_KITCHEN);
-        } catch (UnauthorizedException ex) {
-
-        }
-        BookingWatchDog bookingWatchDog = new BookingWatchDog();
-        bookingWatchDog.addObserver((Observer) currentUser);
     }
 }
