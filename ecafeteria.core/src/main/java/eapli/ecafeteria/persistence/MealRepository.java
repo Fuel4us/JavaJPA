@@ -11,6 +11,7 @@ import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.framework.persistence.repositories.DataRepository;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,6 +33,8 @@ public interface MealRepository extends DataRepository<Meal, Long> {
     Iterable<Meal> findAllMealsAvailables(Menu menu);
     
     Iterable<Meal> findByDatePeriod(Date start, Date end);
+
+    Iterable<Meal> findMealByDate(Date date);
 
     public void updateMenuState(Menu menu, boolean b);
 }
