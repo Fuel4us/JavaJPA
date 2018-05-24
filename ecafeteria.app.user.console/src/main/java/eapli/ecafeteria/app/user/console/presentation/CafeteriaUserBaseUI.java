@@ -21,7 +21,7 @@ import java.util.Observer;
  *
  * @author mcn
  */
-public abstract class CafeteriaUserBaseUI extends AbstractUI{
+public abstract class CafeteriaUserBaseUI extends AbstractUI {
 
     private BookingServices bookingServices;
     
@@ -44,6 +44,4 @@ public abstract class CafeteriaUserBaseUI extends AbstractUI{
         System.out.println(titleBorder);
         drawFormBorder();
     }
-
-
 }

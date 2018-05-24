@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author Leandro
  */
-public class BookingBootstrapper implements Action, Observer {
+public class BookingBootstrapper implements Action{
 
     final RegisterBookingController controller = new RegisterBookingController();
 
@@ -142,14 +142,11 @@ public class BookingBootstrapper implements Action, Observer {
 
         try {
             controller.registerBooking(cu1, meal3, time);
+            
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
             Logger.getLogger(MealBootstrapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
