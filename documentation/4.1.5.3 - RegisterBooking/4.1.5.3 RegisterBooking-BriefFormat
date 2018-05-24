@@ -7,11 +7,12 @@ functionality of refreshing the users balance.
 ##Brief Format
 The user starts the creation of the new booking.
 
-The system shows the meals for this weeks menu(To be decided by another use case).
+The system shows the meals for this weeks menu that are NOT in 24h.
 
-The user picks a meal to be booked(can only choose one at a time).
+The user chooses a number that represents a meal to be booked(can only choose one at once).
 
-The system shows the meal and asks for confirmation).
+The system shows the meal and nutritional info (salt and calories) of the dish and the user's weekly caloric intake after that meal. 
+It also shows the allergenics of the dish and, if the user is sensible to any of it, it asks if the user really wants to proceed.
 
 The user confirms.
 
@@ -40,10 +41,11 @@ The users balance is refreshed.
     
 
 ###Primary flux
-1. The user starts the creation of the new booking..
-2. The system shows the meals for this weeks menu(To be decided by another use case).
-3. The user picks a meal to be booked(can only choose one at a time).
-4. The system shows the meal and asks for confirmation).
+1. The user starts the creation of the new booking.
+2. The system shows the meals for this weeks menu that are NOT in 24h.
+3. The user chooses a number that represents a meal to be booked(can only choose one at once).
+4. The system shows the meal and nutritional info (salt and calories) of the dish and the user's weekly caloric intake after that meal. 
+It also shows the allergenics of the dish and, if the user is sensible to any of it, it asks if the user really wants to proceed.
 5. The user confirms.
 6. The system refreshes the user balance and informs that the use case ended with success
     

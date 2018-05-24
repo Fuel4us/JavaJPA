@@ -35,6 +35,11 @@ participant ":Movement" as mov
 	
 	user->ui:Initiates the use case
 	ui-->controller: create()
+	ui-->user:asks for beginning date
+	
+user->ui:inserts date 
+	
+ui->controller:showMovements(date)
 	
 controller->pers: repositories()
 	
