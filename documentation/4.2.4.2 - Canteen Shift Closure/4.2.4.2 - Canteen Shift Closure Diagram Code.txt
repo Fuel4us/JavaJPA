@@ -1,0 +1,37 @@
+title Canteen Shift Closure
+
+User->CanteenShiftClosureUI: Begins "Canteen Shift Closure"
+
+CanteenShiftClosureUI-->CanteenShiftClosureController: create()
+
+CanteenShiftClosureUI->CanteenShiftClosureController:canteenShiftClosure()
+
+CanteenShiftClosureController->POSRepository:findOpenToClose()
+
+POSRepository->POSRepository:findOpenToClose()
+
+CanteenShiftClosureController->CanteenShiftRepository:close(Date d)
+
+CanteenShiftRepository->CanteenShiftRepository:close(Date d)
+
+CanteenShiftClosureController-->CanteenShiftClosureService:create()
+
+CanteenShiftClosureController->CanteenShiftClosureService:saveNotPickedQuantity()
+
+CanteenShiftClosureService->MealRepository: mealList = findMealByDate(Date d)
+
+loop
+
+CanteenShiftClosureService->ExecutionRepository:execution = getExecutionByMeal(meal)
+
+CanteenShiftClosureService->ExecutionRepository:int i = getPickedMeals(meal)
+
+CanteenShiftClosureService->ExecutionRepository:int j= getMealsActuallyServed(meal)
+
+CanteenShiftClosureService->execution Execution:setNotPickedQuantity(j-i)
+
+CanteenShiftClosureService->ExecutionRepository:save(execution)
+
+end
+
+CanteenShiftClosureUI-->User:Informs the success of the operation

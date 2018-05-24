@@ -1,0 +1,4 @@
+The kitchen manager starts this use case. 
+The system closes the POS that are open, then closes the canteen shift.
+Saves how many meals were done but Not Picked. 
+Informs the sucess of the operation.
