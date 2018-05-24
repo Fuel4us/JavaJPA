@@ -1,0 +1,16 @@
+	_________
+
+	DESIGN
+	_________
+
+   	Domain classes:  
+		Booking
+
+   	Controller: BalanceAlertController
+
+
+	Sequence Diagram
+
+	1.User inicialises the use case to register a booking
+	2.System checks if balance is below balance limit, and if so, shows an alert.
+	
