@@ -5,6 +5,8 @@
  */
 package eapli.ecafeteria.persistence.jpa;
 
+import eapli.ecafeteria.application.authz.AuthorizationService;
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.booking.Booking;
 import eapli.ecafeteria.domain.booking.BookingState;
 import eapli.ecafeteria.domain.booking.Complaint;
@@ -15,6 +17,8 @@ import eapli.ecafeteria.domain.dishes.DishType;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -23,6 +27,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 
 /**
@@ -70,9 +76,10 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         return bookingList;
     }
-    
+
     /**
      * Returns all bookings in delivered state from an User
+     *
      * @param user User
      * @return List of bookings
      */
@@ -181,6 +188,14 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         params.put("bookingState", bookingState);
         return (Iterable<Booking>) match("e.meal.mealType =:mealType AND e.meal.dish.dishType =:dishType AND e.bookingState =:bookingState", params);
     }
+    
+    @Override
+    public Iterable<Booking> findBookingByDate(MealType mealType, BookingState bookingState) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("mealType", mealType);
+        params.put("bookingState", bookingState);
+        return (Iterable<Booking>) match("e.meal.mealType =:mealType AND e.bookingState =:bookingState", params);
+    }
 
     @Override
     public Iterable<Booking> findBookingsDeliveredByUser(CafeteriaUser user) {
@@ -243,7 +258,7 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
     @Override
     public void updateBookingComplaint(Booking booking, Complaint complaint) {
         entityManager().getTransaction().begin();
-        
+
         Query query = entityManager().createQuery("UPDATE Booking SET COMPLAINT_ID=:complaintid WHERE BOOKINGID=:bookingid");
         query.setParameter("complaintid", complaint.id());
         query.setParameter("bookingid", booking.bookingId());
@@ -269,8 +284,8 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
 
         entityManager().getTransaction().commit();
     }
-    
-     /**
+
+    /**
      * Updates a booking to set a Complaint
      *
      * @param booking Booking
@@ -317,5 +332,38 @@ class JpaBookingRepository extends CafeteriaJpaRepositoryBase<Booking, Long> imp
         }
 
         return bookingList;
+    }
+
+    public Iterable<Booking> findCurrentCashierDeliveredBookings(Date currentDate, MealType mealType) {
+
+        List<Booking> bookingList = new ArrayList();
+
+        Map<String, Object> params = new HashMap();
+
+        SystemUser cashier = AuthorizationService.session().authenticatedUser();
+
+        params.put("cashier", cashier);
+        params.put("bookingState", BookingState.DELIVERED);
+        params.put("currentDate", currentDate);
+        params.put("mealType", mealType);
+
+        bookingList.addAll(match("e.meal.mealDate = :date and e.cashier = :cashier and e.bookingState = :bookingState and e.mea.mealType = :mealType", params));
+
+        return bookingList;
+    }
+
+    public void markBookingAsNotDelivered(Booking booking) {
+
+        Optional<Booking> bookingToMark = this.findOne(Long.valueOf(booking.id()));
+
+        bookingToMark.get().markAsNotDelivered();
+
+        try {
+            this.save(bookingToMark.get());
+        } catch (DataConcurrencyException ex) {
+            Logger.getLogger(JpaBookingRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataIntegrityViolationException ex) {
+            Logger.getLogger(JpaBookingRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

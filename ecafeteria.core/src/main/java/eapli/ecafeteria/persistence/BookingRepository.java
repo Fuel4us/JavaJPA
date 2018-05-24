@@ -30,6 +30,7 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     Iterable<Booking> findBookingByUserAndDate(Optional<CafeteriaUser> user, MealType mealType, BookingState reservationState);
 
     Iterable<Booking> findBookingByDate(MealType mealType, DishType dishType, BookingState reservationState);
+    Iterable<Booking> findBookingByDate(MealType mealType, BookingState reservationState);
 
     Iterable<Booking> listBookedMealsByCUser(CafeteriaUser cafUser);
     
@@ -68,5 +69,9 @@ public interface BookingRepository extends DataRepository<Booking, Long> {
     public void updateBookingStateCanceled(Booking booking);
 
     public void updateBookingStateDelivered(Booking booking);
+    
+    Iterable<Booking> findCurrentCashierDeliveredBookings(Date currentDate, MealType mealType);
+    
+    void markBookingAsNotDelivered(Booking booking);
 
 }

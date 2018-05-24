@@ -1,6 +1,7 @@
 package eapli.ecafeteria.domain.booking;
 
 import eapli.ecafeteria.application.booking.BalanceAlertController;
+import eapli.ecafeteria.domain.authz.SystemUser;
 import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
@@ -69,6 +70,12 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
      */
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bookingDate;
+    
+    /**
+     * Instance variable that defines the cashier responsible for the meal delivery
+     */
+    @OneToOne
+    private SystemUser deliveryCashier;
 
     /**
      * Empty constructor of the class for the ORM.
@@ -88,6 +95,7 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         this.meal = meal;
         this.bookingState = BookingState.DELIVERED;
         this.bookingDate = new Date();
+        this.deliveryCashier = null;
         initializeObserver();
     }
 
@@ -97,6 +105,7 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         this.meal = meal;
         this.bookingState = BookingState.RESERVED;
         this.bookingDate = time;
+        this.deliveryCashier = null;
         initializeObserver();
     }
 
@@ -308,13 +317,18 @@ public class Booking extends Observable implements AggregateRoot<String>, Serial
         setChanged();
     }
 
+    public void markAsNotDelivered(){
+        this.bookingState = BookingState.NOT_DELIVERED;
+    }
+
+
     /**
      *
      * @return String with all parameters of the booking
      */
     @Override
     public String toString() {
-        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", rating=" + listRatings + '}';
+        return "Booking{" + "bookingID=" + bookingID + ", id=" + id + ", user=" + user + ", meal=" + meal + ", bookingState=" + bookingState + ", listRatings=" + listRatings + ", complaint=" + complaint + ", bookingDate=" + bookingDate + ", deliveryCashier=" + deliveryCashier + '}';
     }
 
 }

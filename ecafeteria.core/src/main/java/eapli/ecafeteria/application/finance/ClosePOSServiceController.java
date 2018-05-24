@@ -8,6 +8,7 @@ package eapli.ecafeteria.application.finance;
 import eapli.ecafeteria.application.authz.AuthorizationService;
 import eapli.ecafeteria.domain.authz.ActionRight;
 import eapli.ecafeteria.domain.booking.Booking;
+import eapli.ecafeteria.domain.booking.BookingState;
 import eapli.ecafeteria.domain.finance.Shift;
 import eapli.ecafeteria.domain.meals.MealType;
 import eapli.ecafeteria.persistence.BookingRepository;
@@ -52,10 +53,28 @@ public class ClosePOSServiceController implements Controller{
     //efetivar as vendas das reservas nao consumidas dessa caixa
     public List<Booking> unusedBookedMeals(){
         
+                List<Booking> list = new ArrayList<>();
+        
+        //now
+        Date deliveryDate = DateTime.now().getTime();
+        Calendar now = DateTime.now();
+        MealType mealType = MealType.LUNCH;
+
+        //current mealtype
+        if (now.get(Calendar.HOUR_OF_DAY) > Shift.DINNER_INIT_HOUR) {
+            mealType = MealType.DINNER;
+        } else {
+            if (now.get(Calendar.HOUR_OF_DAY) == Shift.DINNER_INIT_HOUR) {
+                if (now.get(Calendar.MINUTE) > 0) {
+                    mealType = MealType.DINNER;
+                }
+            }
+        }
+        
         List<Booking> deliveredList = currentCashierDeliveredBookings();
         List<Booking> unusedList = new ArrayList<>();
         
-        for(Booking b : bookingRepository.listBookedMealsByCUser(cafeteriaUserRepository.findBySystemUser(AuthorizationService.session().authenticatedUser()).get())){
+        for(Booking b : bookingRepository.findBookingByDate(mealType, BookingState.RESERVED)){
             if(!deliveredList.contains(b)){
                 unusedList.add(b);
             }
@@ -84,10 +103,8 @@ public class ClosePOSServiceController implements Controller{
             }
         }
 
-        for(Booking b : bookingRepository.findBookingsDelivered()){
-            if(b.day().equals(deliveryDate) && b.getMeal().getMealType().equals(mealType)){
-                list.add(b);
-            }
+        for(Booking b : bookingRepository.findCurrentCashierDeliveredBookings(deliveryDate, mealType)){
+                list.add(b);         
         }
         
         return list;
