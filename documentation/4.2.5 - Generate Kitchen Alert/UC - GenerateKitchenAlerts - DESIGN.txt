@@ -1,0 +1,47 @@
+	_________
+
+	DESIGN
+	_________
+
+	* Utilizar a estrutura base standard da aplicação baseada em camadas
+
+
+   	Classes do domínio:  Booking
+   	Controlador: BookingWatchDog
+   	Repository: KitchenLimitRepository, MealPlanItemQuantityRepository, BookingRepository
+
+
+	Diagrama de Sequência - websequencediagrams.com source
+
+		title SD - Generate Kitchen Alert
+    
+        participant ":MainMenu" as mm
+		participant ":CafeteriaUserBaseUI" as cui
+		participant ":BookingWatchDog" as bwd
+		participant ":MealPlanServices" as mps
+		participant ":KitchenLimitsServices" as kls
+		participant ":BookingServices" as bs
+		participant ":PersistenceContext" as pc
+		participant ":RepositoryFactory" as rf
+		participant ":MealPlanItemQuantityRepository" as mprepo
+		participant ":KitchenLimitRepository" as klrepo
+		participant ":BookingRepository" as brepo
+		participant ":Booking" as booking
+
+		mm->cui:initializateObservers()
+		cui->bwd:new BookingWatchDog()
+		bwd->mps:new MealPlanServices()
+	    mps->pc:repositories()
+		pc->rf:mealplanitemquantities()
+		rf-->mps:MealPlanItemQuantityRepository()
+		bwd->kls:new KitchenLimitsServices()
+		kls->pc:repositories()
+		pc->rf:kitchenlimits()
+		rf-->kls: KitchenLimitRepository()
+		bwd->bs: new BookingServices()
+		bs->pc:repositories()
+		pc->rf:booking()
+		rf-->bs:BookingRepository()
+		cui->booking:new Booking()
+		cui->cui:addObserver(this)
+		cui->bwd:addObserver(bookingWatchDog)

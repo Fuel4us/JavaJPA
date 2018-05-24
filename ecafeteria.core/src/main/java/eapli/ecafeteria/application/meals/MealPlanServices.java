@@ -5,10 +5,8 @@
  */
 package eapli.ecafeteria.application.meals;
 
-import eapli.ecafeteria.domain.kitchen.MealPlan;
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.persistence.MealPlanItemQuantityRepository;
-import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
 
 /**
@@ -17,7 +15,6 @@ import eapli.ecafeteria.persistence.PersistenceContext;
  */
 public class MealPlanServices {
 
-    private final MealPlanRepository mealPlanRepo = PersistenceContext.repositories().mealplans();
     private final MealPlanItemQuantityRepository mealPlanItemRepo = PersistenceContext.repositories().mealplanitemquantities();
     
     public MealPlanServices() {

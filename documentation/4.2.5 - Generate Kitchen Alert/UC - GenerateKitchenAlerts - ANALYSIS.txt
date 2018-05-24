@@ -1,0 +1,30 @@
+	___________
+
+	ANÁLISE 
+	____________
+
+	Reunião com o cliente  em 2017.05.18
+
+	* O Booking (Observable) alerta o BookingWatchDog sobre a mudança
+	* O BookingWatchDog (Observable) alerta os Observers sobre a mudança (CafeteriaUserBaseUI - Observer)
+	* A CafeteriaUserBaseUI gera o alerta para o Gestor de Menus e Gestor de Cozinha
+
+
+
+
+	______________________
+
+	REGRAS DE NEGÓCIO
+	_____________________
+
+	* O alerta é gerado caso as reservas sobre uma refeição ultrapassem o limite amarelo ou vermelho que se encontram já definidos na base de dados.
+	* Apenas o Gestor de Menus e Gestor de Cozinha devem ser notificados.
+
+
+
+	______________________
+		
+	TESTES UNITÁRIOS
+	_____________________
+
+	
