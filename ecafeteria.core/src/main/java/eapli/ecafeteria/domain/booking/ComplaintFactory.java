@@ -39,13 +39,6 @@ public class ComplaintFactory { //Singleton
         return instance;
     }
 
-    public Iterable<Booking> findBookingWithDeliveredState(CafeteriaUser selectedUser) {
-
-        Iterable<Booking> bookings = bookingRepository.findBookingsDeliveredByUser(selectedUser);
-
-        return bookings;
-    }
-
     /**
      * Create a Complaint and stores in repository. If the booking has already a complaint
      * the old one is deleted from the ComplaintRepository. Booking complaint is updated in

@@ -60,8 +60,7 @@ public class CreateComplaintController implements Controller {
      * @return >
      */
     public Iterable<Booking> getBookingsDeliveredFromUser() {
-        
-        return complaintFactory.findBookingWithDeliveredState(selectedUser);
+        return bookingRepository.findBookingsDeliveredByUser(selectedUser);
     }
     
     /**
