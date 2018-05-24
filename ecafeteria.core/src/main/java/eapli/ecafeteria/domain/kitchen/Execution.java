@@ -24,7 +24,7 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
 
     //ORM primary key
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pk;
 
     //Business id
@@ -32,7 +32,9 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
 
 
     private Leftover leftover;
+
     private Picked picked;
+
     private NotPicked notPicked;
 
     @OneToOne
@@ -47,6 +49,8 @@ this.leftover=new Leftover();
         this.cookedMeals = cookedMeals;
         this.meal=meal;
         this.leftover=new Leftover();
+        this.picked= new Picked(0);
+        this.notPicked= new NotPicked(0);
     }
 
     public Picked getPicked() {
