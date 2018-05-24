@@ -25,7 +25,7 @@ public class MecanographicNumber implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Pattern VALID_EMPLOYEE_REGEX = Pattern.compile("F[0-9]{6}");
+    private static final Pattern VALID_EMPLOYEE_REGEX = Pattern.compile("^F[0-9]{6}$");
     private static Pattern VALID_STUDENT_REGEX;
     
     private String number;
@@ -77,7 +77,7 @@ public class MecanographicNumber implements ValueObject, Serializable {
     
     private String createStudentRegex(){
         Integer thirdDigit = (DateTime.currentYear() % 100) / 10;
-        String regex = "(";
+        String regex = "^(";
         
         for(int i = 0; i <= thirdDigit; i++){
             if(i < thirdDigit)
@@ -86,6 +86,6 @@ public class MecanographicNumber implements ValueObject, Serializable {
                 regex += String.format("%s[0-%s]", i, String.valueOf(DateTime.currentYear()).substring(3));
         }
         
-        return regex + ")[0-9]{5}";
+        return regex + ")[0-9]{5}$";
     }
 }
