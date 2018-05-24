@@ -15,6 +15,7 @@ import eapli.ecafeteria.domain.cafeteriauser.CafeteriaUser;
 import eapli.ecafeteria.domain.cafeteriauser.MecanographicNumber;
 import eapli.ecafeteria.domain.dishes.Allergen;
 import eapli.ecafeteria.domain.meals.Meal;
+import eapli.ecafeteria.domain.movement.MovementFactory;
 import eapli.ecafeteria.persistence.BookingRepository;
 import eapli.ecafeteria.persistence.CafeteriaUserRepository;
 import eapli.ecafeteria.persistence.MealRepository;
@@ -89,8 +90,9 @@ public class RegisterBookingController {
             Calendar currentDateCalendar = DateTime.dateToCalendar(CurrentDate);
 
             if (moreThanDay == true && DateTime.isBefore(currentDateCalendar, mealDateCalendar)) {
-                Movement movement = new Movement(mn, MovementType.BOOKING, amount, currency);
-                repMovements.save(movement);
+                MovementFactory movFac = new MovementFactory(mn, MovementType.BOOKING, amount);
+                movFac.createMovement();
+                movFac.saveMovement();
 
                 //More then 24 hours
                 Booking booking = new Booking(cu, meal);
@@ -104,7 +106,7 @@ public class RegisterBookingController {
                 return false;
             }
         }
-
+        System.out.println("The users currency is not enough for this booking");
         return false;
     }
 
