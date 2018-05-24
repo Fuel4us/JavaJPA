@@ -28,7 +28,7 @@ import eapli.framework.persistence.DataIntegrityViolationException;
  *
  * @author SOU03408
  * 
- * changed by João Pereira <1150478@isep.ipp.pt>
+ * changed by @João Pereira_1150478@isep.ipp.pt
  */
 public class RegisterDishViaDTOController implements Controller {
 

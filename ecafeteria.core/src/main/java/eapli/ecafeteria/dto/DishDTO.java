@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * a pure DTO for dishes
  *
- * @author SOU03408 changed by João Pereira <1150478@isep.ipp.pt>
+ * @author SOU03408 changed by @João Pereira_1150478@isep.ipp.pt
  */
 @SuppressWarnings("squid:ClassVariableVisibilityCheck")
 public class DishDTO implements DTO {
