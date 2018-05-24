@@ -12,6 +12,9 @@ public class NotPicked {
     }
 
 
+    public NotPicked(){
+        this.notPickedQuantity=0;
+    }
 
 
 
