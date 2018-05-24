@@ -3,8 +3,9 @@ TEST PLAN
 #1 WHEN THERE ARE HEURISTICS AND PAST MEAL PLANS
 1. Login as Kitchen Manager
 2. Select Traceability > Generate Meal Plan
+4. Select a menu
 3. Select an heuristic
-4. Shows a preview of next week's meal plan
+4. Shows a preview of meal plan
 5. Confirm the action
 6. The use case ends
 
