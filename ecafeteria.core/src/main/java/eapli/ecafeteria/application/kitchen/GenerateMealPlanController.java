@@ -58,7 +58,7 @@ public class GenerateMealPlanController {
      * @param heuristic selected heuristic
      * @param menu meal plan's menu
      */
-    public void generateMealPlan(Menu menu, HeuristicConfiguration heuristic) {
+    public MealPlan generateMealPlan(Menu menu, HeuristicConfiguration heuristic) {
         MealPlan mealPlan = new MealPlan(menu);
 
         List<MealPlanItemQuantity> mealPlanItemQuantityList = heuristic.getHeuristicInUse().generateNumberOfDishes();
@@ -73,6 +73,15 @@ public class GenerateMealPlanController {
 
         mealPlan.setDishNumber(newMealPlanItemQuantityList);
 
+        return mealPlan;
+    }
+
+    /**
+     * Saves the meal plan to the repository
+     *
+     * @param mealPlan meal plan to save
+     */
+    public void saveMealPlan(MealPlan mealPlan) {
         try {
             mealPlanRepository.save(mealPlan);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {

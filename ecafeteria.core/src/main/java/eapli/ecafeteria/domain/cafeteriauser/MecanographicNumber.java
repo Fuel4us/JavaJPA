@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates and open the template
- * in the editor.
- */
 package eapli.ecafeteria.domain.cafeteriauser;
 
-import eapli.ecafeteria.domain.authz.Role;
-import static eapli.framework.domain.EmailAddress.VALID_EMAIL_ADDRESS_REGEX;
 import eapli.framework.domain.ddd.ValueObject;
 import eapli.framework.util.DateTime;
 import eapli.framework.util.Strings;
 import java.io.Serializable;
-import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.persistence.Embeddable;
 
@@ -24,8 +15,17 @@ import javax.persistence.Embeddable;
 public class MecanographicNumber implements ValueObject, Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
+    /**
+     * Pattern constant with Employee's regex
+     * Business Rule: Starts with a F and then has 6 digits
+     */
     private static final Pattern VALID_EMPLOYEE_REGEX = Pattern.compile("^F[0-9]{6}$");
+    
+    /**
+     * Pattern constant with Student's regex
+     * Business Rule: The first two digits represents signing year and then has 5 more digits
+     */
     private static Pattern VALID_STUDENT_REGEX;
     
     private String number;
@@ -75,6 +75,12 @@ public class MecanographicNumber implements ValueObject, Serializable {
         return this.number;
     }
     
+    /**
+     * Method that will create a new student's regex everytime that constructor is called
+     * This will allow the application to have a limit of signing year (Present year)
+     * 
+     * @return Regex's string
+     */
     private String createStudentRegex(){
         Integer thirdDigit = (DateTime.currentYear() % 100) / 10;
         String regex = "^(";

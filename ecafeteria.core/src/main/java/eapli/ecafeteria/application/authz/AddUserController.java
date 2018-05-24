@@ -34,7 +34,21 @@ public class AddUserController implements Controller {
     public RoleType[] getRoleTypes() {
         return RoleType.nonUserValues();
     }
-
+    
+    /**
+     * Method that will create and persist a new System User
+     * @param username SystemUser's username
+     * @param password SystemUser's password
+     * @param firstName SystemUser's first name
+     * @param lastName SystemUser's last name
+     * @param email SystemUser's email
+     * @param roles SystemUser's roles
+     * @param createdOn SystemUser's date of creation
+     * @param activateUser False value is always passed
+     * @return CafeteriaUser's object with all the information set.
+     * @throws DataIntegrityViolationException - Exception called when the Primary Key is repeated
+     * @throws DataConcurrencyException - Exception called when database cannot update the object 
+     */
     public SystemUser addUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, Calendar createdOn, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException, IllegalArgumentException {
@@ -55,6 +69,20 @@ public class AddUserController implements Controller {
         return addUser(username, password, firstName, lastName, email, roles, DateTime.now(), activateUser);
     }
     
+    /**
+     * Method that calls the private one which will create and persist a new Cafeteria User if data is valid.
+     * @param username CafeteriaUser's username
+     * @param password CafeteriaUser's password
+     * @param firstName CafeteriaUser's first name
+     * @param lastName CafeteriaUser's last name
+     * @param email CafeteriaUser's email
+     * @param roles CafeteriaUser's roles
+     * @param mecanographicNumber CafeteriaUser's mecanographic number
+     * @param activateUser False value is always passed
+     * @return CafeteriaUser's object with all the information set.
+     * @throws DataIntegrityViolationException - Exception called when the Primary Key is repeated
+     * @throws DataConcurrencyException - Exception called when database cannot update the object
+     */
     public CafeteriaUser addCafeteriaUser(String username, String password, String firstName, String lastName,
             String email, Set<RoleType> roles, String mecanographicNumber, boolean activateUser)
             throws DataIntegrityViolationException, DataConcurrencyException {
