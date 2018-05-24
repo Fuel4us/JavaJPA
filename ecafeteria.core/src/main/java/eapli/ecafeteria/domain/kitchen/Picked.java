@@ -11,6 +11,10 @@ public class Picked {
         this.pickedQuantity = pickedQuantity;
     }
 
+    public Picked(){
+        this.pickedQuantity=0;
+    }
+
     public int getPickedQuantity() {
         return pickedQuantity;
     }
