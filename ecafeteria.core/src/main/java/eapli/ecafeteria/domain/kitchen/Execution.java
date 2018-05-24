@@ -7,12 +7,11 @@ package eapli.ecafeteria.domain.kitchen;
 
 import eapli.ecafeteria.domain.meals.Meal;
 import eapli.framework.domain.ddd.AggregateRoot;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -30,17 +29,40 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
 
     //Business id
     private int cookedMeals;
+
+
+    private Leftover leftover;
+    private Picked picked;
+    private NotPicked notPicked;
+
     @OneToOne
     private Meal meal;
 
     //for ORM
     protected Execution() {
-
+this.leftover=new Leftover();
     }
 
     public Execution(Meal meal,int cookedMeals) {
         this.cookedMeals = cookedMeals;
         this.meal=meal;
+        this.leftover=new Leftover();
+    }
+
+    public Picked getPicked() {
+        return picked;
+    }
+
+    public void setPicked(Picked picked) {
+        this.picked = picked;
+    }
+
+    public NotPicked getNotPicked() {
+        return notPicked;
+    }
+
+    public void setNotPicked(NotPicked notPicked) {
+        this.notPicked = notPicked;
     }
 
     public Meal getMeal() {
@@ -51,29 +73,27 @@ public class Execution implements AggregateRoot<Integer>, Serializable {
         return cookedMeals;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.cookedMeals;
-        return hash;
+    public Leftover getLeftover(){
+        return this.leftover;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Execution other = (Execution) obj;
-        if (this.cookedMeals != other.cookedMeals) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Execution execution = (Execution) o;
+        return cookedMeals == execution.cookedMeals &&
+                Objects.equals(pk, execution.pk) &&
+                Objects.equals(leftover, execution.leftover) &&
+                Objects.equals(picked, execution.picked) &&
+                Objects.equals(notPicked, execution.notPicked) &&
+                Objects.equals(meal, execution.meal);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(pk, cookedMeals, leftover, picked, notPicked, meal);
     }
 
     @Override
