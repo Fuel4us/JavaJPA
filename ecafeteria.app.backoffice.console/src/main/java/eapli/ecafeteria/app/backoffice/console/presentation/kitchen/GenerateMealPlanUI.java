@@ -17,8 +17,14 @@ public class GenerateMealPlanUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        if (!controller.getAvailableHeuristics().iterator().hasNext() || !controller.getMealPlanHistory().iterator().hasNext()) {
-            System.out.println("There are no available heuristics and/or past meal plans");
+        if (!controller.getAvailableHeuristics().iterator().hasNext()) {
+            System.out.println("There are no available heuristics");
+            return false;
+        } else if (!controller.getMealPlanHistory().iterator().hasNext()) {
+            System.out.println("There are no past meal plans");
+            return false;
+        } else if (!controller.getExistingMenus().iterator().hasNext()) {
+            System.out.println("There are no existing menus");
             return false;
         }
 

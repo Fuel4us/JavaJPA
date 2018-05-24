@@ -2,11 +2,19 @@ package eapli.ecafeteria.application.kitchen;
 
 import eapli.ecafeteria.domain.kitchen.HeuristicConfiguration;
 import eapli.ecafeteria.domain.kitchen.MealPlan;
+import eapli.ecafeteria.domain.kitchen.MealPlanItemQuantity;
+import eapli.ecafeteria.domain.meals.Meal;
 import eapli.ecafeteria.domain.menus.Menu;
 import eapli.ecafeteria.persistence.HeuristicRepository;
 import eapli.ecafeteria.persistence.MealPlanRepository;
 import eapli.ecafeteria.persistence.MenuRepository;
 import eapli.ecafeteria.persistence.PersistenceContext;
+import eapli.framework.persistence.DataConcurrencyException;
+import eapli.framework.persistence.DataIntegrityViolationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Gonçalo Silva (1161140)
@@ -50,14 +58,25 @@ public class GenerateMealPlanController {
      * @param heuristic selected heuristic
      * @param menu meal plan's menu
      */
-    public MealPlan generateMealPlan(Menu menu, HeuristicConfiguration heuristic) {
+    public void generateMealPlan(Menu menu, HeuristicConfiguration heuristic) {
         MealPlan mealPlan = new MealPlan(menu);
 
-        //NullPointerException
-        heuristic.getHeuristicInUse().doHeuristicLogic();
+        List<MealPlanItemQuantity> mealPlanItemQuantityList = heuristic.getHeuristicInUse().generateNumberOfDishes();
+        List<MealPlanItemQuantity> newMealPlanItemQuantityList = new ArrayList<>();
 
-        mealPlan.setDishNumber(heuristic.getHeuristicInUse().returnMealPlanItemQuantityList());
+        for (Meal meal : mealPlan.getMenu().getMealList()) {
+            for (MealPlanItemQuantity mealPlanItemQuantity : mealPlanItemQuantityList) {
+                MealPlanItemQuantity newMealPlanItemQuantity = new MealPlanItemQuantity(mealPlanItemQuantity.getItemQuantity(), meal);
+                newMealPlanItemQuantityList.add(newMealPlanItemQuantity);
+            }
+        }
 
-        return mealPlan;
+        mealPlan.setDishNumber(newMealPlanItemQuantityList);
+
+        try {
+            mealPlanRepository.save(mealPlan);
+        } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
+            Logger.getLogger(GenerateMealPlanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
