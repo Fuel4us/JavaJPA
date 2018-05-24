@@ -49,7 +49,7 @@ public class CheckRatingsUI extends AbstractUI {
 
         do {
 
-            SelectWidget<String> selectorEdit = new SelectWidget<>("\n\n\n###     Pretende alterar o que?     ###", vetorDecisao);
+            SelectWidget<String> selectorEdit = new SelectWidget<>("\n\n\n###     Pretende alterar o quê?     ###", vetorDecisao);
             selectorEdit.show();
             decisao = selectorEdit.selectedOption();
 
@@ -72,10 +72,10 @@ public class CheckRatingsUI extends AbstractUI {
                     ratingsByDate();
                     break;
                 case 0:
-                    System.out.println("Processo Concluido Com Sucesso.");
+                    System.out.println("Processo Concluído Com Sucesso.");
                     break;
                 default:
-                    System.out.printf("Voce digitou uma operacao invalida.");
+                    System.out.printf("Você digitou uma operação inválida.");
             }
         } while (decisao != 0);
 
@@ -103,11 +103,11 @@ public class CheckRatingsUI extends AbstractUI {
                     theController.showRatings(theController.getRatingsByDate(aux));
                 } else {
                     aux2 = null;
-                    System.out.println("ATENCAO!!! A data tem de ser de pelo menos um dia anterior ao atual!");
+                    System.out.println("ATENÇÃO!!! A data tem de ser de pelo menos um dia anterior ao atual!");
                 }
             } catch (ParseException ex) {
                 aux2 = null;
-                System.out.println("#########   FORMATO INVALIDO ou DATA INVALIDA  #########\n#########  INSIRA NOVAMENTE  #########");
+                System.out.println("#########   FORMATO INVÀLIDO ou DATA INVÀLIDA  #########\n#########  INSIRA NOVAMENTE  #########");
             }
         } while (aux == null);
     }
@@ -128,7 +128,7 @@ public class CheckRatingsUI extends AbstractUI {
                         System.out.println("Saida com sucesso");
                         break;
                     } else {
-                        System.out.println("\n\n#########       SELECIONE UMA OPCAO VALIDA      #########\n\n");
+                        System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n\n");
                         selectorDish.show();
                     }
                 }
@@ -152,7 +152,7 @@ public class CheckRatingsUI extends AbstractUI {
                         System.out.println("Saida com sucesso");
                         break;
                     } else {
-                        System.out.println("\n\n#########       SELECIONE UMA OPCAO VALIDA      #########\n\n");
+                        System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n\n");
                         selectorMealType.show();
                     }
                 }
@@ -176,7 +176,7 @@ public class CheckRatingsUI extends AbstractUI {
                         System.out.println("Saida com sucesso");
                         break;
                     } else {
-                        System.out.println("\n\n#########       SELECIONE UMA OPCAO VALIDA      #########\n\n");
+                        System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n\n");
                         selectorMeal.show();
                     }
                 }
@@ -201,7 +201,7 @@ public class CheckRatingsUI extends AbstractUI {
                         System.out.println("Saida com sucesso");
                         break;
                     } else {
-                        System.out.println("\n\n#########       SELECIONE UMA OPCAO VALIDA      #########\n\n");
+                        System.out.println("\n\n#########       SELECIONE UMA OPÇÂO VÁLIDA      #########\n\n");
                         selectorMenu.show();
                     }
 
