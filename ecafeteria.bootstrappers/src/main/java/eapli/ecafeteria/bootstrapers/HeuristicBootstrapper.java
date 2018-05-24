@@ -31,7 +31,7 @@ public class HeuristicBootstrapper implements Action {
 
             AuthorizationService.ensurePermissionOfLoggedInUser(ActionRight.ADMINISTER);
 
-            HeuristicConfiguration entityA = new HeuristicConfiguration(new HeuristicA("Last Available Week"));
+            HeuristicConfiguration entityA = new HeuristicConfiguration(new HeuristicA("Most recent"));
             heuristicRepository.save(entityA);
             HeuristicConfiguration entityB = new HeuristicConfiguration(new HeuristicB("Average"));
             heuristicRepository.save(entityB);
