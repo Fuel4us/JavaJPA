@@ -1,0 +1,32 @@
+	___________
+
+	ANALYSIS 
+	____________
+
+	Client meeting
+
+	* Bookings must be made until 24 hours the day before.
+	* If the user is sensitive to any of the allergens it should be warned and must confirm to continue.
+        * The users balance must be updated after the successfull register of the booking.
+	______________________
+
+	BUSINESS RULES
+	_____________________
+
+	
+
+
+
+	______________________
+		
+	UNIT TESTS
+	_____________________
+
+	* User needs to be logged in
+	* User can only pick one meal at the same time
+	* Bookings must be made until 24 hours the day before
+	* Allergens of the dish must be shown
+	* If the user is sensitive to any of the allergens it should be warned
+	* The nutritional information of the meal should be shown
+	* Weekly calorie consumption should be shown and calculated with this new meal
+        * If the users balance can't afford the meal, then hje should be notified

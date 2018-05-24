@@ -1,0 +1,17 @@
+TEST PLAN
+
+	_______________________________
+	UC #4.1.5.2 - Register Booking
+	_______________________________
+
+
+
+       Test1 - To test the method "public boolean registerBooking(CafeteriaUser cu, Meal meal)"
+       Objective: Create a test that has a user try to book a meal that he can't afford.
+       ExpectedResult: The method should return false and print a message that informs why it happened.
+
+       Test2 - To test the method "public boolean registerBooking(CafeteriaUser cu, Meal meal)"
+       Objective: Create a test that has a user try to book a meal that he can afford.
+       ExpectedResult: The method should return true.
+
+
