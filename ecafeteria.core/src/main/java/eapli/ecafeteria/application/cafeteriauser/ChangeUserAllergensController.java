@@ -86,7 +86,7 @@ public class ChangeUserAllergensController implements Controller {
     }
 
     /**
-     * Add an allergen to user's allergen
+     * Add an allergen to user's allergens
      *
      * @param allergen allergen to add
      * @return true if added, false if not

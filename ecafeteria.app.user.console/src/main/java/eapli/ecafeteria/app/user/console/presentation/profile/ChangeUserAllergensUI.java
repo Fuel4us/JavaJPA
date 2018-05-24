@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eapli.ecafeteria.app.backoffice.console.presentation.cafeteriauser;
+package eapli.ecafeteria.app.user.console.presentation.profile;
 
 import eapli.ecafeteria.application.cafeteriauser.ChangeUserAllergensController;
 import eapli.ecafeteria.domain.dishes.Allergen;
