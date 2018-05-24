@@ -100,7 +100,7 @@ public class RegisterBookingController {
                 repBooking.save(booking);
                 
                 booking.notifyObservers(cu);
-
+                System.out.println("Your currency has been decremented by: "+amount);    
                 return true;
             } else {
                 return false;
