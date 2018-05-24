@@ -26,6 +26,7 @@ public class CanteenShiftClosureController implements Controller {
     private final ExecutionRepository executionRepository = PersistenceContext.repositories().execution();
     private final MealRepository mealRepository = PersistenceContext.repositories().meals();
     private final MealPlanItemQuantityRepository mealPlanItemQuantityRepository = PersistenceContext.repositories().mealplanitemquantities();
+    private CanteenShiftClosureService service = new CanteenShiftClosureService();
 
     /**
      * It does not return false if there are no open POS 
@@ -55,24 +56,7 @@ public class CanteenShiftClosureController implements Controller {
         
         try {
 
-            Date date = new java.sql.Date(Calendar.getInstance().getTimeInMillis());
-
-           
-            for (Meal meal:
-                 mealRepository.findMealByDate(date)) {
-                Execution execution;
-                Iterable<Execution>it = executionRepository.getExecutionByMeal(meal);
-                if(!it.iterator().hasNext()){
-                    System.out.println("Execution of the meal not found");
-                }else {
-                    int mealsPicked = executionRepository.getPickedMeals(meal);
-                    int mealsActuallyDone = executionRepository.getMealActuallyServed(meal);
-
-                    execution = it.iterator().next();
-                    execution.getLeftover().setQuantity(mealsActuallyDone - mealsPicked);
-                    executionRepository.save(execution);
-                }
-            }
+            service.saveNotPickedQuantity();
 
             csRepository.save(currentCanteenShift);
         } catch (DataConcurrencyException | DataIntegrityViolationException ex) {
