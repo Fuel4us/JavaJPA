@@ -194,4 +194,23 @@ public class MenuTest {
         assertEquals(expResult, result);
     }
 
+    @Test
+    public void testePublishMenu() {
+        System.out.println("publishMenu");
+        Menu instance = new Menu(date1, date2, name);
+        boolean expResullt = true;
+        boolean result = instance.publishMenu();
+        assertEquals(expResullt, result);
+    }
+    
+    @Test
+    public void testePublishMenu2() {
+        System.out.println("publishMenu");
+        Menu instance = new Menu(date1, date2, name);
+        boolean expResullt = false;
+        instance.publishMenu();
+        boolean result = instance.publishMenu();
+        assertEquals(expResullt, result);
+    }
+    
 }
