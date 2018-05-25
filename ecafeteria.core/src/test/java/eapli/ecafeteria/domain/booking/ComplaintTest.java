@@ -162,7 +162,8 @@ public class ComplaintTest {
         Description description = new Description("teste");
         instance = new Complaint(meal, cafeteriaUser, description, ComplaintState.ANONYMOUS);
         
-        String expResult = "Complaint{id=0, meal=Dish: Test Change <--> Meal Type: DINNER <-->Meal Date: 24/05/2018, cafeteriaUser=1000330, description=teste}";
+        String expResult = "Complaint{id=0, meal=Dish: Test Change <--> Meal Type: DINNER <-->Meal Date: 25/05/2018, cafeteriaUser=1000330, description=teste}";
+        
         String result = instance.toString();
         assertEquals(expResult, result);
     }
